@@ -32,7 +32,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <span className="text-navy-600 text-sm">Mortgage Calculator <span className="text-navy-700">(coming soon)</span></span>
+                <Link href="/calculators/mortgage" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Mortgage Calculator
+                </Link>
               </li>
               <li>
                 <span className="text-navy-600 text-sm">Compound Interest <span className="text-navy-700">(coming soon)</span></span>
@@ -63,6 +65,7 @@ export default function Footer() {
             © {currentYear} FinanceHub. For informational purposes only — not financial advice.
           </p>
           <div className="flex gap-4">
+            <Link href="/how-it-works" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">How it works</Link>
             <Link href="#" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">Privacy</Link>
             <Link href="#" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">Terms</Link>
           </div>
