@@ -4,13 +4,7 @@ export interface SavedCalculation {
   id: string
   name: string
   type: string
-  inputs: {
-    loanAmount: string
-    interestRate: string
-    loanTerm: string
-    termUnit: 'years' | 'months'
-    startDate: string
-  }
+  inputs: Record<string, string>
   summary: {
     monthlyPayment: number
     totalPayment: number

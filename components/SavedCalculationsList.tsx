@@ -59,14 +59,26 @@ export default function SavedCalculationsList({
     <div className="space-y-4">
       {calculations.map((calc) => {
         const { inputs, summary } = calc
-        const loadUrl = `/calculators/loan-amortization?amount=${inputs.loanAmount}&rate=${inputs.interestRate}&term=${inputs.loanTerm}&unit=${inputs.termUnit}&start=${inputs.startDate}`
+        const loadUrl = calc.type === 'mortgage'
+          ? `/calculators/mortgage?homePrice=${inputs.homePrice}&down=${inputs.down}&downType=${inputs.downType}&rate=${inputs.rate}&term=${inputs.term}&tax=${inputs.tax}&insurance=${inputs.insurance}&pmi=${inputs.pmi}&hoa=${inputs.hoa}`
+          : `/calculators/loan-amortization?amount=${inputs.loanAmount}&rate=${inputs.interestRate}&term=${inputs.loanTerm}&unit=${inputs.termUnit}&start=${inputs.startDate}`
+
+        const isMortgage = calc.type === 'mortgage'
+        const thirdLabel = isMortgage ? 'Home Price' : 'Loan Amount'
+        const thirdValue = isMortgage
+          ? parseFloat((inputs.homePrice ?? '0').replace(/,/g, ''))
+          : parseFloat((inputs.loanAmount ?? '0').replace(/,/g, ''))
 
         return (
           <div key={calc.id} className="bg-white rounded-xl border border-slate-100 shadow-card p-5">
             <div className="flex items-start justify-between gap-4 mb-4">
               <div>
                 <h3 className="font-semibold text-navy-900">{calc.name}</h3>
-                <p className="text-xs text-slate-400 mt-0.5">Saved {formatDate(calc.created_at)}</p>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <span className="text-xs text-slate-400">{formatDate(calc.created_at)}</span>
+                  <span className="text-xs text-slate-300">·</span>
+                  <span className="text-xs text-slate-400 capitalize">{calc.type.replace('-', ' ')}</span>
+                </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 <Link
@@ -98,9 +110,9 @@ export default function SavedCalculationsList({
                 </p>
               </div>
               <div>
-                <p className="text-xs text-slate-500 mb-0.5">Loan Amount</p>
+                <p className="text-xs text-slate-500 mb-0.5">{thirdLabel}</p>
                 <p className="font-semibold text-navy-700 tabular-nums">
-                  {formatCurrency(parseFloat(inputs.loanAmount.replace(/,/g, '')))}
+                  {formatCurrency(thirdValue)}
                 </p>
               </div>
             </div>
