@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
+import AmortizationCharts from './AmortizationCharts'
 
 interface AmortizationRow {
   payment: number
@@ -279,6 +280,9 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
               accent="amber"
             />
           </div>
+
+          {/* Charts */}
+          <AmortizationCharts schedule={results.schedule} />
 
           {/* Interest vs principal bar */}
           <div className="bg-white rounded-xl shadow-card border border-slate-100 p-6">

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
+import AmortizationCharts from './AmortizationCharts'
 
 interface AmortizationRow {
   payment: number
@@ -393,6 +394,13 @@ export default function MortgageCalc({ user, initialValues }: Props) {
               ))}
             </div>
           </div>
+
+          {/* Charts */}
+          <AmortizationCharts
+            schedule={results.schedule}
+            homePrice={homePriceNum}
+            downPayment={downPaymentNum}
+          />
 
           {/* Summary cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
