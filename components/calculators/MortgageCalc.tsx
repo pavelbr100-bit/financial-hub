@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
 import AmortizationCharts from './AmortizationCharts'
+import { buildSchedule } from '@/lib/calculators/mortgage'
 
 interface AmortizationRow {
   payment: number
@@ -52,36 +53,13 @@ function parseAmount(val: string): number {
   return parseFloat(val.replace(/,/g, '')) || 0
 }
 
-function buildSchedule(principal: number, annualRate: number, termMonths: number, extraMonthly = 0, extraYearly = 0): { schedule: AmortizationRow[]; monthlyPI: number } {
-  const r = annualRate / 100 / 12
-  const monthlyPI = r === 0
-    ? principal / termMonths
-    : (principal * r * Math.pow(1 + r, termMonths)) / (Math.pow(1 + r, termMonths) - 1)
-
-  let balance = principal
+function addDates(schedule: { payment: number; paymentAmount: number; principal: number; interest: number; balance: number }[]): AmortizationRow[] {
   const start = new Date()
-  const schedule: AmortizationRow[] = []
-
-  for (let i = 1; i <= termMonths; i++) {
-    const interest = balance * r
-    const principalPmt = monthlyPI - interest
-    const extra = extraMonthly + (i % 12 === 0 ? extraYearly : 0)
-    const totalPrincipal = Math.min(principalPmt + extra, balance)
-    balance = Math.max(0, balance - totalPrincipal)
+  return schedule.map((row) => {
     const d = new Date(start)
-    d.setMonth(start.getMonth() + i)
-    schedule.push({
-      payment: i,
-      date: d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
-      paymentAmount: interest + totalPrincipal,
-      principal: totalPrincipal,
-      interest,
-      balance,
-    })
-    if (balance === 0) break
-  }
-
-  return { schedule, monthlyPI }
+    d.setMonth(start.getMonth() + row.payment)
+    return { ...row, date: d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) }
+  })
 }
 
 export default function MortgageCalc({ user, initialValues }: Props) {
@@ -131,7 +109,8 @@ export default function MortgageCalc({ user, initialValues }: Props) {
     const withExtra = (extraM > 0 || extraY > 0)
       ? buildSchedule(loanAmount, rate, termMonths, extraM, extraY)
       : null
-    const { schedule, monthlyPI } = withExtra ?? base
+    const { schedule: rawSchedule, monthlyPI } = withExtra ?? base
+    const schedule = addDates(rawSchedule)
 
     const monthlyTax = (hp * (parseFloat(propertyTax || '0') / 100)) / 12
     const monthlyInsurance = parseAmount(homeInsurance) / 12
