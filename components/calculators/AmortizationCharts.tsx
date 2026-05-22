@@ -90,7 +90,7 @@ export default function AmortizationCharts({ schedule, homePrice }: Props) {
               <XAxis dataKey="year" tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} interval={Math.floor(data.length / 8)} />
               <YAxis tickFormatter={formatY} tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} width={52} />
               <Tooltip
-                formatter={(val: number, name: string) => [formatTooltip(val), name === 'principal' ? 'Principal' : 'Interest']}
+                formatter={(val, name) => [formatTooltip(Number(val)), name === 'principal' ? 'Principal' : 'Interest']}
                 contentStyle={tooltipStyle}
                 cursor={{ fill: '#f8fafc' }}
               />
@@ -107,7 +107,7 @@ export default function AmortizationCharts({ schedule, homePrice }: Props) {
               <XAxis dataKey="year" tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} interval={Math.floor(data.length / 8)} />
               <YAxis tickFormatter={formatY} tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} width={52} />
               <Tooltip
-                formatter={(val: number) => [formatTooltip(val), 'Remaining Balance']}
+                formatter={(val) => [formatTooltip(Number(val)), 'Remaining Balance']}
                 contentStyle={tooltipStyle}
               />
               <Line
@@ -125,7 +125,7 @@ export default function AmortizationCharts({ schedule, homePrice }: Props) {
               <XAxis dataKey="year" tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} interval={Math.floor(data.length / 8)} />
               <YAxis tickFormatter={formatY} tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} width={52} />
               <Tooltip
-                formatter={(val: number, name: string) => [formatTooltip(val), name === 'equity' ? 'Equity' : 'Remaining Balance']}
+                formatter={(val, name) => [formatTooltip(Number(val)), name === 'equity' ? 'Equity' : 'Remaining Balance']}
                 contentStyle={tooltipStyle}
               />
               <Legend
