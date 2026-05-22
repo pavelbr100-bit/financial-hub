@@ -172,7 +172,10 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
                 type="text"
                 inputMode="numeric"
                 value={loanAmount}
-                onChange={(e) => setLoanAmount(e.target.value)}
+                onChange={(e) => {
+                  const raw = e.target.value.replace(/[^0-9]/g, '')
+                  setLoanAmount(raw === '' ? '' : new Intl.NumberFormat('en-US').format(parseInt(raw, 10)))
+                }}
                 className={`w-full pl-7 pr-4 py-2.5 rounded-lg border text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 transition-colors ${
                   errors.loanAmount ? 'border-red-400 bg-red-50' : 'border-slate-300 bg-white hover:border-slate-400'
                 }`}
