@@ -23,7 +23,8 @@ export default function Navbar({ user }: NavbarProps) {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/calculators/loan-amortization', label: 'Loan Calculator' },
+    { href: '/calculators/loan-amortization', label: 'Loan' },
+    { href: '/calculators/mortgage', label: 'Mortgage' },
     ...(user ? [{ href: '/saved', label: 'Saved' }] : []),
   ]
 
