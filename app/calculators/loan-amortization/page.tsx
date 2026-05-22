@@ -12,20 +12,21 @@ export const metadata: Metadata = {
 export default async function LoanAmortizationPage({
   searchParams,
 }: {
-  searchParams: { amount?: string; rate?: string; term?: string; unit?: string; start?: string }
+  searchParams: Promise<{ amount?: string; rate?: string; term?: string; unit?: string; start?: string }>
 }) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const initialValues = searchParams.amount
+  const params = await searchParams
+  const initialValues = params.amount
     ? {
-        loanAmount: searchParams.amount,
-        interestRate: searchParams.rate ?? '6.5',
-        loanTerm: searchParams.term ?? '30',
-        termUnit: (searchParams.unit as 'years' | 'months') ?? 'years',
-        startDate: searchParams.start ?? '',
+        loanAmount: params.amount,
+        interestRate: params.rate ?? '6.5',
+        loanTerm: params.term ?? '30',
+        termUnit: (params.unit as 'years' | 'months') ?? 'years',
+        startDate: params.start ?? '',
       }
     : undefined
 
