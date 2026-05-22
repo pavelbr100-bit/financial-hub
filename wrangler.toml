@@ -1,0 +1,10 @@
+name = "financial-hub"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+pages_build_output_dir = ".vercel/output/static"
+
+[vars]
+# Add non-secret env vars here (secrets go in Cloudflare dashboard)
+# NEXT_PUBLIC_SUPABASE_URL = "your-project-url"
+# NEXT_PUBLIC_SUPABASE_ANON_KEY = "your-anon-key"
