@@ -95,7 +95,10 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
   }
 
-  const [loanAmount, setLoanAmount] = useState(initialValues?.loanAmount ?? '250000')
+  const [loanAmount, setLoanAmount] = useState(() => {
+    const raw = (initialValues?.loanAmount ?? '250000').replace(/[^0-9]/g, '')
+    return raw ? new Intl.NumberFormat('en-US').format(parseInt(raw, 10)) : ''
+  })
   const [interestRate, setInterestRate] = useState(initialValues?.interestRate ?? '6.5')
   const [loanTerm, setLoanTerm] = useState(initialValues?.loanTerm ?? '30')
   const [termUnit, setTermUnit] = useState<'years' | 'months'>(initialValues?.termUnit ?? 'years')
