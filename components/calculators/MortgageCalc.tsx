@@ -477,7 +477,6 @@ export default function MortgageCalc({ user, initialValues }: Props) {
           <AmortizationCharts
             schedule={results.schedule}
             homePrice={homePriceNum}
-            downPayment={downPaymentNum}
           />
 
           {/* Summary cards */}

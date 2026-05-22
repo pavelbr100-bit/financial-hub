@@ -16,7 +16,6 @@ interface ScheduleRow {
 interface Props {
   schedule: ScheduleRow[]
   homePrice?: number
-  downPayment?: number
 }
 
 type ChartTab = 'split' | 'balance' | 'equity'
@@ -49,7 +48,7 @@ const TABS: { id: ChartTab; label: string }[] = [
   { id: 'equity', label: 'Equity' },
 ]
 
-export default function AmortizationCharts({ schedule, homePrice, downPayment }: Props) {
+export default function AmortizationCharts({ schedule, homePrice }: Props) {
   const [tab, setTab] = useState<ChartTab>('split')
   const data = buildYearlyData(schedule, homePrice)
 
