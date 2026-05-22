@@ -28,6 +28,8 @@ interface Results {
   loanAmount: number
   totalInterest: number
   schedule: AmortizationRow[]
+  interestSaved?: number
+  monthsSaved?: number
 }
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
@@ -50,7 +52,7 @@ function parseAmount(val: string): number {
   return parseFloat(val.replace(/,/g, '')) || 0
 }
 
-function buildSchedule(principal: number, annualRate: number, termMonths: number): { schedule: AmortizationRow[]; monthlyPI: number } {
+function buildSchedule(principal: number, annualRate: number, termMonths: number, extraMonthly = 0, extraYearly = 0): { schedule: AmortizationRow[]; monthlyPI: number } {
   const r = annualRate / 100 / 12
   const monthlyPI = r === 0
     ? principal / termMonths
@@ -63,17 +65,20 @@ function buildSchedule(principal: number, annualRate: number, termMonths: number
   for (let i = 1; i <= termMonths; i++) {
     const interest = balance * r
     const principalPmt = monthlyPI - interest
-    balance = Math.max(0, balance - principalPmt)
+    const extra = extraMonthly + (i % 12 === 0 ? extraYearly : 0)
+    const totalPrincipal = Math.min(principalPmt + extra, balance)
+    balance = Math.max(0, balance - totalPrincipal)
     const d = new Date(start)
     d.setMonth(start.getMonth() + i)
     schedule.push({
       payment: i,
       date: d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
-      paymentAmount: monthlyPI,
-      principal: principalPmt,
+      paymentAmount: interest + totalPrincipal,
+      principal: totalPrincipal,
       interest,
       balance,
     })
+    if (balance === 0) break
   }
 
   return { schedule, monthlyPI }
@@ -88,6 +93,8 @@ export default function MortgageCalc({ user, initialValues }: Props) {
   const [propertyTax, setPropertyTax] = useState(initialValues?.tax ?? '1.2')
   const [homeInsurance, setHomeInsurance] = useState(initialValues?.insurance ?? '1,200')
   const [pmiRate, setPmiRate] = useState(initialValues?.pmi ?? '0.5')
+  const [extraMonthly, setExtraMonthly] = useState('')
+  const [extraYearly, setExtraYearly] = useState('')
   const [includeHOA, setIncludeHOA] = useState(parseAmount(initialValues?.hoa ?? '0') > 0)
   const [hoaFees, setHoaFees] = useState(initialValues?.hoa ?? '300')
   const [results, setResults] = useState<Results | null>(null)
@@ -118,7 +125,13 @@ export default function MortgageCalc({ user, initialValues }: Props) {
 
     const loanAmount = hp - dp
     const termMonths = loanTerm * 12
-    const { schedule, monthlyPI } = buildSchedule(loanAmount, rate, termMonths)
+    const extraM = parseAmount(extraMonthly)
+    const extraY = parseAmount(extraYearly)
+    const base = buildSchedule(loanAmount, rate, termMonths)
+    const withExtra = (extraM > 0 || extraY > 0)
+      ? buildSchedule(loanAmount, rate, termMonths, extraM, extraY)
+      : null
+    const { schedule, monthlyPI } = withExtra ?? base
 
     const monthlyTax = (hp * (parseFloat(propertyTax || '0') / 100)) / 12
     const monthlyInsurance = parseAmount(homeInsurance) / 12
@@ -127,11 +140,14 @@ export default function MortgageCalc({ user, initialValues }: Props) {
     const total = monthlyPI + monthlyTax + monthlyInsurance + monthlyPMI + monthlyHOA
     const totalInterest = monthlyPI * termMonths - loanAmount
 
+    const baseInterest = base.monthlyPI * termMonths - loanAmount
     setResults({
       monthly: { principalInterest: monthlyPI, propertyTax: monthlyTax, homeInsurance: monthlyInsurance, pmi: monthlyPMI, hoa: monthlyHOA, total },
       loanAmount,
       totalInterest,
       schedule,
+      interestSaved: withExtra ? baseInterest - totalInterest : undefined,
+      monthsSaved: withExtra ? base.schedule.length - schedule.length : undefined,
     })
     setShowFullTable(false)
     setSaveState('idle')
@@ -352,6 +368,43 @@ export default function MortgageCalc({ user, initialValues }: Props) {
           </div>
         </div>
 
+        {/* Extra payments */}
+        <div className="col-span-full mt-1 pt-5 border-t border-slate-100">
+          <p className="text-sm font-medium text-slate-700 mb-3">
+            Extra Payments <span className="text-xs font-normal text-slate-400">— optional, reduces interest &amp; payoff time</span>
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs text-slate-500 mb-1.5">Extra Monthly</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  value={extraMonthly}
+                  onChange={(e) => setExtraMonthly(formatCommas(e.target.value))}
+                  className="w-full pl-7 pr-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 hover:border-slate-400 transition-colors"
+                  placeholder="0"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs text-slate-500 mb-1.5">Extra Yearly (lump sum)</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  value={extraYearly}
+                  onChange={(e) => setExtraYearly(formatCommas(e.target.value))}
+                  className="w-full pl-7 pr-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 hover:border-slate-400 transition-colors"
+                  placeholder="0"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <button
           onClick={handleCalculate}
           className="mt-6 w-full py-3 bg-navy-700 hover:bg-navy-600 active:bg-navy-800 text-white font-semibold rounded-lg transition-colors text-sm tracking-wide shadow-sm"
@@ -394,6 +447,31 @@ export default function MortgageCalc({ user, initialValues }: Props) {
               ))}
             </div>
           </div>
+
+          {/* Savings banner */}
+          {results.interestSaved !== undefined && results.monthsSaved !== undefined && (
+            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5">
+              <div className="flex items-center gap-2 mb-3">
+                <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+                <h3 className="font-semibold text-emerald-800">Extra payment savings</h3>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-xs text-emerald-600 mb-0.5">Interest Saved</p>
+                  <p className="text-2xl font-bold text-emerald-700 tabular-nums">{formatCurrency(results.interestSaved)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-emerald-600 mb-0.5">Time Saved</p>
+                  <p className="text-2xl font-bold text-emerald-700">
+                    {Math.floor(results.monthsSaved / 12) > 0 && `${Math.floor(results.monthsSaved / 12)}y `}
+                    {results.monthsSaved % 12 > 0 && `${results.monthsSaved % 12}m`}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Charts */}
           <AmortizationCharts

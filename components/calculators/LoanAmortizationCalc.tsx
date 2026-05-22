@@ -19,6 +19,8 @@ interface Results {
   totalPayment: number
   totalInterest: number
   schedule: AmortizationRow[]
+  interestSaved?: number
+  monthsSaved?: number
 }
 
 function formatCurrency(n: number) {
@@ -29,7 +31,9 @@ function calculateAmortization(
   principal: number,
   annualRate: number,
   termMonths: number,
-  startDate: Date
+  startDate: Date,
+  extraMonthly = 0,
+  extraYearly = 0
 ): Results {
   const monthlyRate = annualRate / 100 / 12
   const monthlyPayment =
@@ -44,7 +48,9 @@ function calculateAmortization(
   for (let i = 1; i <= termMonths; i++) {
     const interestPayment = balance * monthlyRate
     const principalPayment = monthlyPayment - interestPayment
-    balance = Math.max(0, balance - principalPayment)
+    const extra = extraMonthly + (i % 12 === 0 ? extraYearly : 0)
+    const totalPrincipal = Math.min(principalPayment + extra, balance)
+    balance = Math.max(0, balance - totalPrincipal)
 
     const paymentDate = new Date(startDate)
     paymentDate.setMonth(startDate.getMonth() + i)
@@ -52,14 +58,16 @@ function calculateAmortization(
     schedule.push({
       payment: i,
       date: paymentDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
-      paymentAmount: monthlyPayment,
-      principal: principalPayment,
+      paymentAmount: interestPayment + totalPrincipal,
+      principal: totalPrincipal,
       interest: interestPayment,
       balance,
     })
+
+    if (balance === 0) break
   }
 
-  const totalPayment = monthlyPayment * termMonths
+  const totalPayment = schedule.reduce((s, r) => s + r.paymentAmount, 0)
   return {
     monthlyPayment,
     totalPayment,
@@ -95,6 +103,8 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
   const [results, setResults] = useState<Results | null>(null)
   const [showFullTable, setShowFullTable] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [extraMonthly, setExtraMonthly] = useState('')
+  const [extraYearly, setExtraYearly] = useState('')
   const [calcName, setCalcName] = useState('')
   const [saveState, setSaveState] = useState<SaveState>('idle')
 
@@ -123,7 +133,19 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
     const [year, month] = startDate.split('-').map(Number)
     const start = new Date(year, month - 1, 1)
 
-    setResults(calculateAmortization(principal, rate, termMonths, start))
+    const extraM = parseFloat(extraMonthly.replace(/,/g, '')) || 0
+    const extraY = parseFloat(extraYearly.replace(/,/g, '')) || 0
+
+    const base = calculateAmortization(principal, rate, termMonths, start)
+    const withExtra = (extraM > 0 || extraY > 0)
+      ? calculateAmortization(principal, rate, termMonths, start, extraM, extraY)
+      : null
+
+    setResults({
+      ...(withExtra ?? base),
+      interestSaved: withExtra ? base.totalInterest - withExtra.totalInterest : undefined,
+      monthsSaved: withExtra ? base.schedule.length - withExtra.schedule.length : undefined,
+    })
     setShowFullTable(false)
     setSaveState('idle')
     setCalcName('')
@@ -251,6 +273,49 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
           </div>
         </div>
 
+        {/* Extra payments */}
+        <div className="mt-5 pt-5 border-t border-slate-100">
+          <p className="text-sm font-medium text-slate-700 mb-3">
+            Extra Payments <span className="text-xs font-normal text-slate-400">— optional, reduces interest & payoff time</span>
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs text-slate-500 mb-1.5">Extra Monthly</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  value={extraMonthly}
+                  onChange={(e) => {
+                    const raw = e.target.value.replace(/[^0-9]/g, '')
+                    setExtraMonthly(raw === '' ? '' : new Intl.NumberFormat('en-US').format(parseInt(raw, 10)))
+                  }}
+                  className="w-full pl-7 pr-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 hover:border-slate-400 transition-colors"
+                  placeholder="0"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs text-slate-500 mb-1.5">Extra Yearly (lump sum)</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  value={extraYearly}
+                  onChange={(e) => {
+                    const raw = e.target.value.replace(/[^0-9]/g, '')
+                    setExtraYearly(raw === '' ? '' : new Intl.NumberFormat('en-US').format(parseInt(raw, 10)))
+                  }}
+                  className="w-full pl-7 pr-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 hover:border-slate-400 transition-colors"
+                  placeholder="0"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <button
           onClick={handleCalculate}
           className="mt-6 w-full py-3 bg-navy-700 hover:bg-navy-600 active:bg-navy-800 text-white font-semibold rounded-lg transition-colors text-sm tracking-wide shadow-sm"
@@ -280,6 +345,31 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
               accent="amber"
             />
           </div>
+
+          {/* Savings banner */}
+          {results.interestSaved !== undefined && results.monthsSaved !== undefined && (
+            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5">
+              <div className="flex items-center gap-2 mb-3">
+                <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+                <h3 className="font-semibold text-emerald-800">Extra payment savings</h3>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-xs text-emerald-600 mb-0.5">Interest Saved</p>
+                  <p className="text-2xl font-bold text-emerald-700 tabular-nums">{formatCurrency(results.interestSaved)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-emerald-600 mb-0.5">Time Saved</p>
+                  <p className="text-2xl font-bold text-emerald-700">
+                    {Math.floor(results.monthsSaved / 12) > 0 && `${Math.floor(results.monthsSaved / 12)}y `}
+                    {results.monthsSaved % 12 > 0 && `${results.monthsSaved % 12}m`}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Charts */}
           <AmortizationCharts schedule={results.schedule} />
