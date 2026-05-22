@@ -138,9 +138,9 @@ export default function MortgageCalc({ user, initialValues }: Props) {
     const monthlyPMI = needsPMI ? (loanAmount * (parseFloat(pmiRate || '0') / 100)) / 12 : 0
     const monthlyHOA = includeHOA ? parseAmount(hoaFees) : 0
     const total = monthlyPI + monthlyTax + monthlyInsurance + monthlyPMI + monthlyHOA
-    const totalInterest = monthlyPI * termMonths - loanAmount
+    const totalInterest = schedule.reduce((s, r) => s + r.interest, 0)
 
-    const baseInterest = base.monthlyPI * termMonths - loanAmount
+    const baseInterest = base.schedule.reduce((s, r) => s + r.interest, 0)
     setResults({
       monthly: { principalInterest: monthlyPI, propertyTax: monthlyTax, homeInsurance: monthlyInsurance, pmi: monthlyPMI, hoa: monthlyHOA, total },
       loanAmount,
