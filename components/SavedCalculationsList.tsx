@@ -59,6 +59,54 @@ export default function SavedCalculationsList({
     <div className="space-y-4">
       {calculations.map((calc) => {
         const { inputs, summary } = calc
+
+        if (calc.type === 'mortgage-compare') {
+          let scenarios: { label: string; rate: string; term: number }[] = []
+          try {
+            scenarios = JSON.parse(inputs.scenarios ?? '[]')
+          } catch { /* skip */ }
+
+          return (
+            <div key={calc.id} className="bg-white rounded-xl border border-slate-100 shadow-card p-5">
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 className="font-semibold text-navy-900">{calc.name}</h3>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="text-xs text-slate-400">{formatDate(calc.created_at)}</span>
+                    <span className="text-xs text-slate-300">·</span>
+                    <span className="text-xs text-slate-400">Mortgage comparison · {scenarios.length} scenario{scenarios.length !== 1 ? 's' : ''}</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Link
+                    href={`/calculators/mortgage/compare?saved=${calc.id}`}
+                    className="px-3 py-1.5 text-xs font-medium bg-navy-700 hover:bg-navy-600 text-white rounded-md transition-colors"
+                  >
+                    Load
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(calc.id)}
+                    disabled={deleting === calc.id}
+                    className="px-3 py-1.5 text-xs font-medium border border-slate-300 hover:border-red-300 text-slate-500 hover:text-red-500 rounded-md transition-colors disabled:opacity-50"
+                  >
+                    {deleting === calc.id ? 'Deleting…' : 'Delete'}
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {scenarios.map((s, i) => {
+                  const colors = ['bg-blue-50 text-blue-700 border-blue-200', 'bg-emerald-50 text-emerald-700 border-emerald-200', 'bg-amber-50 text-amber-700 border-amber-200']
+                  return (
+                    <span key={i} className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium ${colors[i % colors.length]}`}>
+                      {s.label} · {s.rate}% · {s.term}yr
+                    </span>
+                  )
+                })}
+              </div>
+            </div>
+          )
+        }
+
         const loadUrl = calc.type === 'mortgage'
           ? `/calculators/mortgage?homePrice=${inputs.homePrice}&down=${inputs.down}&downType=${inputs.downType}&rate=${inputs.rate}&term=${inputs.term}&tax=${inputs.tax}&insurance=${inputs.insurance}&pmi=${inputs.pmi}&hoa=${inputs.hoa}`
           : `/calculators/loan-amortization?amount=${inputs.loanAmount}&rate=${inputs.interestRate}&term=${inputs.loanTerm}&unit=${inputs.termUnit}&start=${inputs.startDate}`
