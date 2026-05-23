@@ -15,7 +15,7 @@ export default function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <span className="text-white font-semibold">FinanceHub</span>
+              <span className="text-white font-semibold">FinWiser</span>
             </div>
             <p className="text-navy-400 text-sm leading-relaxed">
               Free financial calculators and tools to help you make smarter money decisions.
@@ -62,7 +62,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-6 border-t border-navy-800 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-navy-500 text-xs">
-            © {currentYear} FinanceHub. For informational purposes only — not financial advice.
+            © {currentYear} FinWiser. For informational purposes only — not financial advice.
           </p>
           <div className="flex gap-4">
             <Link href="/how-it-works" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">How it works</Link>

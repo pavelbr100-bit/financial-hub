@@ -40,7 +40,7 @@ export default function Navbar({ user }: NavbarProps) {
               </svg>
             </div>
             <span className="text-white font-semibold text-lg tracking-tight group-hover:text-emerald-400 transition-colors">
-              FinanceHub
+              FinWiser
             </span>
           </Link>
 

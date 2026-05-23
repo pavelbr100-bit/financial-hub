@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'How It Works',
-  description: 'Learn how FinanceHub calculators work, how your data is stored, and the technology behind the site.',
+  description: 'Learn how FinWiser calculators work, how your data is stored, and the technology behind the site.',
 }
 
 const sections = [

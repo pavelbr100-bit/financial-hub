@@ -43,7 +43,7 @@ export default function LoginPage() {
               </svg>
             </div>
             <h1 className="text-xl font-bold text-navy-900">Welcome back</h1>
-            <p className="text-slate-500 text-sm mt-1">Sign in to your FinanceHub account</p>
+            <p className="text-slate-500 text-sm mt-1">Sign in to your FinWiser account</p>
           </div>
 
           {error && (
