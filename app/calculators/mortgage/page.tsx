@@ -2,6 +2,7 @@ import MortgageCalc from '@/components/calculators/MortgageCalc'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Mortgage Calculator',
@@ -30,12 +31,25 @@ export default async function MortgagePage({
           <span>/</span>
           <span className="text-slate-700 font-medium">Mortgage Calculator</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">
-          Mortgage Calculator
-        </h1>
-        <p className="text-slate-500 max-w-2xl">
-          Estimate your full monthly mortgage payment including principal, interest, property tax, home insurance, and PMI. Adjust the inputs to compare different scenarios.
-        </p>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">
+              Mortgage Calculator
+            </h1>
+            <p className="text-slate-500 max-w-2xl">
+              Estimate your full monthly mortgage payment including principal, interest, property tax, home insurance, and PMI.
+            </p>
+          </div>
+          <Link
+            href="/calculators/mortgage/compare"
+            className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 border border-navy-300 hover:border-navy-500 text-navy-700 hover:text-navy-900 text-sm font-medium rounded-lg transition-colors whitespace-nowrap"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            Compare scenarios
+          </Link>
+        </div>
       </div>
 
       <div className="mb-6">
