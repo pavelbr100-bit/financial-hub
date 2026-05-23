@@ -19,6 +19,8 @@ export default function AdBanner({ slot, format = 'horizontal', className = '' }
   const isProduction = process.env.NODE_ENV === 'production'
   const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
 
+  if (!clientId) return null
+
   if (isProduction && clientId) {
     // Live AdSense unit — script tag is loaded once in layout.tsx <head>
     return (
