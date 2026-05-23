@@ -235,7 +235,7 @@ export default function TechPage() {
       {tab === 'architecture' && (
         <div className="space-y-6">
           <p className="text-slate-600 text-sm leading-relaxed">
-            A request from a user's browser flows through three layers before returning HTML: Cloudflare's edge network, the Next.js server (running in a Worker), and Supabase for auth and data.
+            A request from a user&apos;s browser flows through three layers before returning HTML: Cloudflare&apos;s edge network, the Next.js server (running in a Worker), and Supabase for auth and data.
           </p>
 
           {/* Diagram */}
@@ -335,7 +335,7 @@ export default function TechPage() {
       {/* Technologies tab */}
       {tab === 'technologies' && (
         <div className="space-y-3">
-          <p className="text-slate-500 text-sm mb-5">Click any technology to see why it was chosen and exactly how it's used.</p>
+          <p className="text-slate-500 text-sm mb-5">Click any technology to see why it was chosen and exactly how it&apos;s used.</p>
           {technologies.map((tech) => (
             <TechCard
               key={tech.name}
