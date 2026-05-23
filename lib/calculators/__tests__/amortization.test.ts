@@ -125,3 +125,57 @@ describe('calculateAmortization — short loan', () => {
     expect(schedule[11].balance).toBeCloseTo(0, 0)
   })
 })
+
+describe('calculateAmortization — balloon loan', () => {
+  // 10-year term, 30-year amortization: monthly payment is calculated on 30yr
+  // but the loan ends after 10yr with the remaining balance due as balloon
+  const BALLOON_PRINCIPAL = 300_000
+  const BALLOON_RATE = 7
+  const AMORT_MONTHS = 360 // 30-year amortization
+  const LOAN_MONTHS = 120  // 10-year term
+
+  it('monthly payment is calculated on the amortization period, not the loan term', () => {
+    const balloon = calculateAmortization(BALLOON_PRINCIPAL, BALLOON_RATE, AMORT_MONTHS, 0, 0, LOAN_MONTHS)
+    const fullAmort = calculateAmortization(BALLOON_PRINCIPAL, BALLOON_RATE, AMORT_MONTHS)
+    // Same monthly payment — only the duration differs
+    expect(balloon.monthlyPayment).toBeCloseTo(fullAmort.monthlyPayment, 1)
+  })
+
+  it('monthly payment is lower than a standard 10-year loan', () => {
+    const balloon = calculateAmortization(BALLOON_PRINCIPAL, BALLOON_RATE, AMORT_MONTHS, 0, 0, LOAN_MONTHS)
+    const standard10yr = calculateAmortization(BALLOON_PRINCIPAL, BALLOON_RATE, LOAN_MONTHS)
+    expect(balloon.monthlyPayment).toBeLessThan(standard10yr.monthlyPayment)
+  })
+
+  it('schedule ends after loan term months', () => {
+    const { schedule } = calculateAmortization(BALLOON_PRINCIPAL, BALLOON_RATE, AMORT_MONTHS, 0, 0, LOAN_MONTHS)
+    expect(schedule.length).toBe(LOAN_MONTHS)
+  })
+
+  it('balloon payment is the remaining balance after the loan term', () => {
+    const { schedule, balloonPayment } = calculateAmortization(BALLOON_PRINCIPAL, BALLOON_RATE, AMORT_MONTHS, 0, 0, LOAN_MONTHS)
+    expect(balloonPayment).toBeCloseTo(schedule[schedule.length - 1].balance, 0)
+  })
+
+  it('balloon payment is substantial — most principal is still owed', () => {
+    const { balloonPayment } = calculateAmortization(BALLOON_PRINCIPAL, BALLOON_RATE, AMORT_MONTHS, 0, 0, LOAN_MONTHS)
+    expect(balloonPayment).toBeGreaterThan(BALLOON_PRINCIPAL * 0.5)
+  })
+
+  it('standard loan has zero balloon payment', () => {
+    const { balloonPayment } = calculateAmortization(PRINCIPAL, RATE, TERM)
+    expect(balloonPayment).toBeCloseTo(0, 0)
+  })
+
+  it('extra payments reduce the balloon', () => {
+    const noBalloon = calculateAmortization(BALLOON_PRINCIPAL, BALLOON_RATE, AMORT_MONTHS, 0, 0, LOAN_MONTHS)
+    const withExtra = calculateAmortization(BALLOON_PRINCIPAL, BALLOON_RATE, AMORT_MONTHS, 500, 0, LOAN_MONTHS)
+    expect(withExtra.balloonPayment).toBeLessThan(noBalloon.balloonPayment)
+  })
+
+  it('total payment includes the balloon', () => {
+    const { schedule, balloonPayment, totalPayment } = calculateAmortization(BALLOON_PRINCIPAL, BALLOON_RATE, AMORT_MONTHS, 0, 0, LOAN_MONTHS)
+    const regularPayments = schedule.reduce((s, r) => s + r.paymentAmount, 0)
+    expect(totalPayment).toBeCloseTo(regularPayments + balloonPayment, 0)
+  })
+})

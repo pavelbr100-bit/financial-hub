@@ -19,6 +19,7 @@ interface Results {
   totalPayment: number
   totalInterest: number
   schedule: AmortizationRow[]
+  balloonPayment: number
   interestSaved?: number
   monthsSaved?: number
 }
@@ -30,22 +31,24 @@ function formatCurrency(n: number) {
 function calculateAmortization(
   principal: number,
   annualRate: number,
-  termMonths: number,
+  amortMonths: number,
   startDate: Date,
   extraMonthly = 0,
-  extraYearly = 0
+  extraYearly = 0,
+  loanTermMonths = amortMonths
 ): Results {
   const monthlyRate = annualRate / 100 / 12
   const monthlyPayment =
     monthlyRate === 0
-      ? principal / termMonths
-      : (principal * monthlyRate * Math.pow(1 + monthlyRate, termMonths)) /
-        (Math.pow(1 + monthlyRate, termMonths) - 1)
+      ? principal / amortMonths
+      : (principal * monthlyRate * Math.pow(1 + monthlyRate, amortMonths)) /
+        (Math.pow(1 + monthlyRate, amortMonths) - 1)
 
   const schedule: AmortizationRow[] = []
   let balance = principal
+  const runMonths = Math.min(loanTermMonths, amortMonths)
 
-  for (let i = 1; i <= termMonths; i++) {
+  for (let i = 1; i <= runMonths; i++) {
     const interestPayment = balance * monthlyRate
     const principalPayment = monthlyPayment - interestPayment
     const extra = extraMonthly + (i % 12 === 0 ? extraYearly : 0)
@@ -67,12 +70,14 @@ function calculateAmortization(
     if (balance === 0) break
   }
 
-  const totalPayment = schedule.reduce((s, r) => s + r.paymentAmount, 0)
+  const balloonPayment = balance
+  const totalPayment = schedule.reduce((s, r) => s + r.paymentAmount, 0) + balloonPayment
   return {
     monthlyPayment,
     totalPayment,
     totalInterest: totalPayment - principal,
     schedule,
+    balloonPayment,
   }
 }
 
@@ -106,6 +111,9 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
   const [results, setResults] = useState<Results | null>(null)
   const [showFullTable, setShowFullTable] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [isBalloon, setIsBalloon] = useState(false)
+  const [amortTerm, setAmortTerm] = useState('30')
+  const [amortUnit, setAmortUnit] = useState<'years' | 'months'>('years')
   const [extraMonthly, setExtraMonthly] = useState('')
   const [extraYearly, setExtraYearly] = useState('')
   const [calcName, setCalcName] = useState('')
@@ -138,10 +146,13 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
 
     const extraM = parseFloat(extraMonthly.replace(/,/g, '')) || 0
     const extraY = parseFloat(extraYearly.replace(/,/g, '')) || 0
+    const amortMonths = isBalloon
+      ? (amortUnit === 'years' ? parseInt(amortTerm) * 12 : parseInt(amortTerm))
+      : termMonths
 
-    const base = calculateAmortization(principal, rate, termMonths, start)
+    const base = calculateAmortization(principal, rate, amortMonths, start, 0, 0, termMonths)
     const withExtra = (extraM > 0 || extraY > 0)
-      ? calculateAmortization(principal, rate, termMonths, start, extraM, extraY)
+      ? calculateAmortization(principal, rate, amortMonths, start, extraM, extraY, termMonths)
       : null
 
     setResults({
@@ -262,6 +273,52 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
             {errors.loanTerm && <p className="mt-1 text-xs text-red-500">{errors.loanTerm}</p>}
           </div>
 
+          {/* Balloon loan toggle */}
+          <div className="col-span-full">
+            <div className="flex items-center justify-between p-4 rounded-lg border border-slate-200 bg-slate-50">
+              <div>
+                <p className="text-sm font-medium text-slate-700">Balloon Loan</p>
+                <p className="text-xs text-slate-400 mt-0.5">Amortization period differs from loan term — remaining balance due at end</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsBalloon(!isBalloon)}
+                className={`relative inline-flex h-5 w-9 rounded-full transition-colors flex-shrink-0 ${isBalloon ? 'bg-navy-600' : 'bg-slate-300'}`}
+                aria-label="Toggle balloon loan"
+              >
+                <span className={`inline-block h-4 w-4 mt-0.5 rounded-full bg-white shadow transition-transform ${isBalloon ? 'translate-x-4' : 'translate-x-0.5'}`} />
+              </button>
+            </div>
+          </div>
+
+          {/* Amortization period — only shown for balloon loans */}
+          {isBalloon && (
+            <div className="col-span-full">
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Amortization Period
+                <span className="ml-2 text-xs font-normal text-slate-400">Used to calculate the monthly payment</span>
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="number"
+                  min="1"
+                  value={amortTerm}
+                  onChange={(e) => setAmortTerm(e.target.value)}
+                  className="flex-1 px-4 py-2.5 rounded-lg border border-navy-300 bg-navy-50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 transition-colors"
+                  placeholder="30"
+                />
+                <select
+                  value={amortUnit}
+                  onChange={(e) => setAmortUnit(e.target.value as 'years' | 'months')}
+                  className="px-3 py-2.5 rounded-lg border border-navy-300 bg-navy-50 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 cursor-pointer"
+                >
+                  <option value="years">Years</option>
+                  <option value="months">Months</option>
+                </select>
+              </div>
+            </div>
+          )}
+
           {/* Start date */}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1.5">
@@ -349,6 +406,26 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
             />
           </div>
 
+          {/* Balloon payment banner */}
+          {results.balloonPayment > 0 && (
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+              <div className="flex items-start gap-3">
+                <svg className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                </svg>
+                <div className="flex-1">
+                  <p className="font-semibold text-amber-800 mb-1">Balloon Payment Due</p>
+                  <p className="text-sm text-amber-700 leading-relaxed">
+                    At the end of the loan term a lump sum of{' '}
+                    <span className="font-bold text-amber-900">{formatCurrency(results.balloonPayment)}</span>{' '}
+                    is due. This is the remaining principal balance that was not paid down during the loan term.
+                    You will need to pay this in full, refinance, or sell the asset.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Savings banner */}
           {results.interestSaved !== undefined && results.monthsSaved !== undefined && (
             <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5">
@@ -421,24 +498,32 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-50">
-                  {displayedRows.map((row) => (
-                    <tr key={row.payment} className="hover:bg-slate-50 transition-colors">
-                      <td className="px-4 py-3 text-slate-500 font-mono text-xs">{row.payment}</td>
-                      <td className="px-4 py-3 text-slate-700">{row.date}</td>
-                      <td className="px-4 py-3 text-right font-medium text-slate-800 font-mono text-xs">
-                        {formatCurrency(row.paymentAmount)}
-                      </td>
-                      <td className="px-4 py-3 text-right text-navy-700 font-mono text-xs">
-                        {formatCurrency(row.principal)}
-                      </td>
-                      <td className="px-4 py-3 text-right text-amber-600 font-mono text-xs">
-                        {formatCurrency(row.interest)}
-                      </td>
-                      <td className="px-4 py-3 text-right font-medium text-slate-800 font-mono text-xs">
-                        {formatCurrency(row.balance)}
-                      </td>
-                    </tr>
-                  ))}
+                  {displayedRows.map((row, idx) => {
+                    const isBalloonRow = results.balloonPayment > 0 && idx === displayedRows.length - 1
+                    return (
+                      <tr key={row.payment} className={isBalloonRow ? 'bg-amber-50' : 'hover:bg-slate-50 transition-colors'}>
+                        <td className="px-4 py-3 text-slate-500 font-mono text-xs">{row.payment}</td>
+                        <td className="px-4 py-3 text-slate-700">
+                          {row.date}
+                          {isBalloonRow && <span className="ml-2 text-xs font-semibold text-amber-600">+ Balloon</span>}
+                        </td>
+                        <td className="px-4 py-3 text-right font-medium text-slate-800 font-mono text-xs">
+                          {formatCurrency(row.paymentAmount)}
+                        </td>
+                        <td className="px-4 py-3 text-right text-navy-700 font-mono text-xs">
+                          {formatCurrency(row.principal)}
+                        </td>
+                        <td className="px-4 py-3 text-right text-amber-600 font-mono text-xs">
+                          {formatCurrency(row.interest)}
+                        </td>
+                        <td className="px-4 py-3 text-right font-medium font-mono text-xs">
+                          {isBalloonRow
+                            ? <span className="text-amber-700 font-bold">{formatCurrency(results.balloonPayment)}</span>
+                            : <span className="text-slate-800">{formatCurrency(row.balance)}</span>}
+                        </td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
             </div>
