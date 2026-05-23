@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { buildSchedule } from '@/lib/calculators/mortgage'
+import { computeScenario } from '@/lib/calculators/mortgageCompare'
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer,
@@ -122,45 +122,23 @@ function computeResult(s: Scenario): ScenarioResult | null {
   if (isNaN(rate) || rate < 0) return null
 
   const loanAmount = hp - dp
-  const termMonths = s.term * 12
-  const extraM = parseAmt(s.extraMonthly)
-  const extraY = parseAmt(s.extraYearly)
-
-  const base = buildSchedule(loanAmount, rate, termMonths)
-  const withExtra =
-    extraM > 0 || extraY > 0
-      ? buildSchedule(loanAmount, rate, termMonths, extraM, extraY)
-      : null
-
-  const { schedule, monthlyPI } = withExtra ?? base
-  const totalInterest = schedule.reduce((sum, r) => sum + r.interest, 0)
-
   const downPct = (dp / hp) * 100
   const needsPMI = downPct < 20
-  const monthlyTax = (hp * (parseFloat(s.propertyTax || '0') / 100)) / 12
-  const monthlyIns = parseAmt(s.homeInsurance) / 12
-  const monthlyPMI = needsPMI
-    ? (loanAmount * (parseFloat(s.pmiRate || '0') / 100)) / 12
-    : 0
-  const monthlyHOA = parseAmt(s.hoa)
-  const totalMonthly = monthlyPI + monthlyTax + monthlyIns + monthlyPMI + monthlyHOA
 
-  return {
-    loanAmount,
-    downPct,
-    monthlyPI,
-    totalMonthly,
-    totalInterest,
-    totalPaid: loanAmount + totalInterest,
-    actualMonths: schedule.length,
-    interestSaved: withExtra
-      ? base.totalInterest - totalInterest
-      : undefined,
-    monthsSaved: withExtra
-      ? base.schedule.length - schedule.length
-      : undefined,
-    balances: schedule.map((r) => r.balance),
-  }
+  const computed = computeScenario({
+    principal: loanAmount,
+    annualRate: rate,
+    termMonths: s.term * 12,
+    homePrice: hp,
+    propertyTaxRate: parseFloat(s.propertyTax || '0'),
+    annualInsurance: parseAmt(s.homeInsurance),
+    pmiRate: needsPMI ? parseFloat(s.pmiRate || '0') : 0,
+    monthlyHOA: parseAmt(s.hoa),
+    extraMonthly: parseAmt(s.extraMonthly),
+    extraYearly: parseAmt(s.extraYearly),
+  })
+
+  return { loanAmount, downPct, ...computed }
 }
 
 interface Props {
