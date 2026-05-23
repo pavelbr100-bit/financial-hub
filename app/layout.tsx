@@ -7,15 +7,15 @@ import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
   title: {
-    default: 'FinWiser — Free Financial Calculators',
+    default: 'FinWiser — Your finances, only wiser',
     template: '%s | FinWiser',
   },
   description:
-    'Free online financial calculators. Loan amortization, mortgage, compound interest and more — no signup required.',
+    'Your finances, only wiser. Free loan, mortgage, and compound interest calculators — no signup required.',
   keywords: ['loan calculator', 'amortization', 'mortgage calculator', 'financial tools'],
   openGraph: {
-    title: 'FinWiser — Free Financial Calculators',
-    description: 'Free online financial calculators and tools.',
+    title: 'FinWiser — Your finances, only wiser',
+    description: 'Your finances, only wiser.',
     type: 'website',
   },
 }

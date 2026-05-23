@@ -18,7 +18,7 @@ export default function Footer() {
               <span className="text-white font-semibold">FinWiser</span>
             </div>
             <p className="text-navy-400 text-sm leading-relaxed">
-              Free financial calculators and tools to help you make smarter money decisions.
+              Your finances, only wiser.
             </p>
           </div>
 

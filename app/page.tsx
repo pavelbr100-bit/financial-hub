@@ -3,7 +3,7 @@ import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Free Financial Calculators & Tools | FinWiser',
+  title: 'FinWiser — Your finances, only wiser',
 }
 
 const tools = [
