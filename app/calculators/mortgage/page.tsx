@@ -52,7 +52,7 @@ export default async function MortgagePage({
           <span>/</span>
           <span className="text-slate-700 font-medium">Mortgage Calculator</span>
         </div>
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">
               Mortgage Calculator
