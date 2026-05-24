@@ -32,6 +32,13 @@ export const metadata: Metadata = {
     title: 'FinWiser — Your finances, only wiser',
     description: 'Your finances, only wiser.',
     type: 'website',
+    images: [{ url: 'https://finwiser.net/og-image.png', width: 1200, height: 630, alt: 'FinWiser — Your finances, only wiser' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FinWiser — Your finances, only wiser',
+    description: 'Your finances, only wiser.',
+    images: ['https://finwiser.net/og-image.png'],
   },
 }
 
