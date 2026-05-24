@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'How It Works',
-  description: 'Learn how FinWiser calculators work, how your data is stored, and the technology behind the site.',
+  description: 'How FinWiser works — all calculations run in your browser using standard financial formulas. No data is sent to a server. Learn how your data is stored and kept private.',
 }
 
 const sections = [

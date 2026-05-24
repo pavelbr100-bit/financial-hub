@@ -6,7 +6,7 @@ import { createClient } from '@/lib/supabase/server'
 export const metadata: Metadata = {
   title: 'Loan Amortization Calculator',
   description:
-    'Calculate your monthly loan payment and see a full amortization schedule. Works for mortgages, auto loans, personal loans, and more.',
+    'Free loan amortization calculator. Enter any loan amount, interest rate, and term to see your monthly payment, full payment schedule, and total interest. Add extra payments to see how much you can save.',
 }
 
 export default async function LoanAmortizationPage({

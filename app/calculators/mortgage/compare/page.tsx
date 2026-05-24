@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Compare Mortgages',
   description:
-    'Compare up to 3 mortgage scenarios side by side — different rates, terms, or down payments.',
+    'Free mortgage comparison tool. Compare up to 3 scenarios side by side — different rates, terms, or down payments. See exactly which option costs less over the life of your loan.',
 }
 
 export default async function MortgageComparePage({

@@ -7,7 +7,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Mortgage Calculator',
   description:
-    'Calculate your monthly mortgage payment including principal, interest, property tax, insurance, and PMI. Compare loan terms side by side.',
+    'Free mortgage calculator. Estimate your full monthly payment including principal, interest, property tax, home insurance, and PMI. See how extra payments reduce your interest and shorten your loan.',
 }
 
 export default async function MortgagePage({

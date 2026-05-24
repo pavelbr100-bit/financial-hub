@@ -4,6 +4,8 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'FinWiser — Your finances, only wiser',
+  description:
+    'Free financial calculators for loans and mortgages. See your full amortization schedule, compare mortgage scenarios side by side, and make smarter money decisions — no signup required.',
 }
 
 const tools = [
