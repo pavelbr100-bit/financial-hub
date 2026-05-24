@@ -68,6 +68,21 @@ export default async function LoanAmortizationPage({
         </p>
       </div>
 
+      <div className="flex flex-wrap gap-2 mb-6">
+        {[
+          'Full amortization schedule',
+          'Extra payment savings',
+          'Balloon loan support',
+        ].map(f => (
+          <span key={f} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-navy-50 border border-navy-100 text-navy-700 text-xs font-medium">
+            <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            {f}
+          </span>
+        ))}
+      </div>
+
       {/* Top AdSense slot */}
       <div className="mb-6">
         <AdBanner slot="1122334455" format="horizontal" />

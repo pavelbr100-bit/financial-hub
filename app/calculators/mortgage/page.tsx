@@ -73,6 +73,21 @@ export default async function MortgagePage({
         </div>
       </div>
 
+      <div className="flex flex-wrap gap-2 mb-6">
+        {[
+          'Includes PMI, taxes & insurance',
+          'Extra payment savings',
+          'Side-by-side scenario comparison',
+        ].map(f => (
+          <span key={f} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-navy-50 border border-navy-100 text-navy-700 text-xs font-medium">
+            <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            {f}
+          </span>
+        ))}
+      </div>
+
       <div className="mb-6">
         <AdBanner slot="2233445566" format="horizontal" />
       </div>

@@ -37,7 +37,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <span className="text-navy-600 text-sm">Compound Interest <span className="text-navy-700">(coming soon)</span></span>
+                <Link href="/calculators/compound-interest" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Compound Interest
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculators/debt-payoff" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Debt Payoff Planner
+                </Link>
               </li>
             </ul>
           </div>
@@ -66,8 +73,8 @@ export default function Footer() {
           </p>
           <div className="flex gap-4">
             <Link href="/how-it-works" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">How it works</Link>
-            <Link href="#" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">Privacy</Link>
-            <Link href="#" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">Terms</Link>
+            <Link href="/privacy" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">Privacy</Link>
+            <Link href="/terms" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">Terms</Link>
           </div>
         </div>
       </div>

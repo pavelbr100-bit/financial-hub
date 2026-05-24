@@ -60,6 +60,102 @@ export default function SavedCalculationsList({
       {calculations.map((calc) => {
         const { inputs, summary } = calc
 
+        if (calc.type === 'compound-interest') {
+          return (
+            <div key={calc.id} className="bg-white rounded-xl border border-slate-100 shadow-card p-5">
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 className="font-semibold text-navy-900">{calc.name}</h3>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="text-xs text-slate-400">{formatDate(calc.created_at)}</span>
+                    <span className="text-xs text-slate-300">·</span>
+                    <span className="text-xs text-slate-400">Compound interest · {inputs.years} years</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Link
+                    href={`/calculators/compound-interest?principal=${inputs.principal}&contribution=${inputs.contribution}&rate=${inputs.rate}&freq=${inputs.freq}&years=${inputs.years}`}
+                    className="px-3 py-1.5 text-xs font-medium bg-navy-700 hover:bg-navy-600 text-white rounded-md transition-colors"
+                  >
+                    Load
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(calc.id)}
+                    disabled={deleting === calc.id}
+                    className="px-3 py-1.5 text-xs font-medium border border-slate-300 hover:border-red-300 text-slate-500 hover:text-red-500 rounded-md transition-colors disabled:opacity-50"
+                  >
+                    {deleting === calc.id ? 'Deleting…' : 'Delete'}
+                  </button>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-4 bg-slate-50 rounded-lg p-4">
+                <div>
+                  <p className="text-xs text-slate-500 mb-0.5">Final Balance</p>
+                  <p className="font-semibold text-emerald-700 tabular-nums">{formatCurrency(summary.totalPayment)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 mb-0.5">Interest Earned</p>
+                  <p className="font-semibold text-emerald-600 tabular-nums">{formatCurrency(summary.totalInterest)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 mb-0.5">Rate</p>
+                  <p className="font-semibold text-navy-700">{inputs.rate}% {inputs.freq}</p>
+                </div>
+              </div>
+            </div>
+          )
+        }
+
+        if (calc.type === 'debt-payoff') {
+          let debtCount = 0
+          try { debtCount = JSON.parse(inputs.debts ?? '[]').length } catch { /* skip */ }
+          return (
+            <div key={calc.id} className="bg-white rounded-xl border border-slate-100 shadow-card p-5">
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 className="font-semibold text-navy-900">{calc.name}</h3>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="text-xs text-slate-400">{formatDate(calc.created_at)}</span>
+                    <span className="text-xs text-slate-300">·</span>
+                    <span className="text-xs text-slate-400 capitalize">
+                      Debt payoff · {debtCount} debt{debtCount !== 1 ? 's' : ''} · {inputs.strategy}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Link
+                    href={`/calculators/debt-payoff?saved=${calc.id}`}
+                    className="px-3 py-1.5 text-xs font-medium bg-navy-700 hover:bg-navy-600 text-white rounded-md transition-colors"
+                  >
+                    Load
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(calc.id)}
+                    disabled={deleting === calc.id}
+                    className="px-3 py-1.5 text-xs font-medium border border-slate-300 hover:border-red-300 text-slate-500 hover:text-red-500 rounded-md transition-colors disabled:opacity-50"
+                  >
+                    {deleting === calc.id ? 'Deleting…' : 'Delete'}
+                  </button>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-4 bg-slate-50 rounded-lg p-4">
+                <div>
+                  <p className="text-xs text-slate-500 mb-0.5">Total Debt</p>
+                  <p className="font-semibold text-navy-700 tabular-nums">{formatCurrency(summary.totalPayment)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 mb-0.5">Total Interest</p>
+                  <p className="font-semibold text-amber-700 tabular-nums">{formatCurrency(summary.totalInterest)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 mb-0.5">Monthly Payment</p>
+                  <p className="font-semibold text-emerald-700 tabular-nums">{formatCurrency(summary.monthlyPayment)}</p>
+                </div>
+              </div>
+            </div>
+          )
+        }
+
         if (calc.type === 'mortgage-compare') {
           let scenarios: { label: string; rate: string; term: number }[] = []
           try {
