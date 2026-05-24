@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
 
@@ -110,41 +111,56 @@ export default function HomePage() {
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-950 text-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full px-4 py-1.5 mb-6">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-emerald-400 text-xs font-semibold uppercase tracking-wider">
-                Free Financial Tools
-              </span>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            {/* Text */}
+            <div className="flex-1 min-w-0">
+              <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full px-4 py-1.5 mb-6">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+                  Free Financial Tools
+                </span>
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-5">
+                Make smarter{' '}
+                <span className="text-emerald-400">financial decisions</span>{' '}
+                with free calculators
+              </h1>
+
+              <p className="text-navy-200 text-lg leading-relaxed mb-8 max-w-xl">
+                From loan amortization to mortgage comparison — clear, accurate results with full breakdowns. No paywalls. No signup required.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/calculators/loan-amortization"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-emerald-900/20"
+                >
+                  Try Loan Calculator
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-navy-500 hover:border-navy-300 text-navy-100 hover:text-white font-semibold rounded-lg transition-colors"
+                >
+                  Create free account
+                </Link>
+              </div>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-5">
-              Make smarter{' '}
-              <span className="text-emerald-400">financial decisions</span>{' '}
-              with free calculators
-            </h1>
-
-            <p className="text-navy-200 text-lg leading-relaxed mb-8 max-w-xl">
-              From loan amortization to compound interest — clear, accurate results with full breakdowns. No paywalls. No signup required.
-            </p>
-
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/calculators/loan-amortization"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-emerald-900/20"
-              >
-                Try Loan Calculator
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-              <Link
-                href="/auth/signup"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-navy-500 hover:border-navy-300 text-navy-100 hover:text-white font-semibold rounded-lg transition-colors"
-              >
-                Create free account
-              </Link>
+            {/* Hero image */}
+            <div className="flex-shrink-0 w-full lg:w-[480px]">
+              <Image
+                src="/og-image.png"
+                alt="FinWiser — Your finances, only wiser"
+                width={1200}
+                height={630}
+                className="w-full rounded-2xl shadow-2xl shadow-black/40 border border-white/10"
+                priority
+              />
             </div>
           </div>
         </div>
