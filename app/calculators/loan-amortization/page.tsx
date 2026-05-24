@@ -4,9 +4,28 @@ import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
-  title: 'Loan Amortization Calculator',
+  title: 'Free Loan Amortization Calculator — Payment Schedule & Total Interest | FinWiser',
   description:
     'Free loan amortization calculator. Enter any loan amount, interest rate, and term to see your monthly payment, full payment schedule, and total interest. Add extra payments to see how much you can save.',
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Loan Amortization Calculator',
+  url: 'https://finwiser.net/calculators/loan-amortization',
+  description: 'Calculate monthly loan payments and generate a full amortization schedule. Works for mortgages, auto loans, personal loans, and balloon loans.',
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Any',
+  browserRequirements: 'Requires JavaScript',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  featureList: [
+    'Monthly payment calculation',
+    'Full amortization schedule',
+    'Extra monthly and yearly payments',
+    'Balloon loan support',
+    'Total interest calculation',
+  ],
 }
 
 export default async function LoanAmortizationPage({
@@ -31,7 +50,9 @@ export default async function LoanAmortizationPage({
     : undefined
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       {/* Page header */}
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
@@ -88,5 +109,6 @@ export default async function LoanAmortizationPage({
         </div>
       </section>
     </div>
+    </>
   )
 }

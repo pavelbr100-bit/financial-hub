@@ -12,7 +12,22 @@ export const metadata: Metadata = {
   },
   description:
     'Your finances, only wiser. Free loan, mortgage, and compound interest calculators — no signup required.',
-  keywords: ['loan calculator', 'amortization', 'mortgage calculator', 'financial tools'],
+  keywords: [
+    'mortgage calculator',
+    'loan amortization calculator',
+    'free mortgage calculator',
+    'loan payment calculator',
+    'amortization schedule',
+    'mortgage payment calculator',
+    'extra payment mortgage calculator',
+    'compare mortgage rates',
+    'balloon loan calculator',
+    'monthly payment calculator',
+    '30 year mortgage calculator',
+    '15 year mortgage calculator',
+    'financial calculator',
+    'how much house can I afford',
+  ],
   openGraph: {
     title: 'FinWiser — Your finances, only wiser',
     description: 'Your finances, only wiser.',

@@ -5,9 +5,28 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Mortgage Calculator',
+  title: 'Free Mortgage Calculator — Monthly Payment, PMI & Amortization | FinWiser',
   description:
     'Free mortgage calculator. Estimate your full monthly payment including principal, interest, property tax, home insurance, and PMI. See how extra payments reduce your interest and shorten your loan.',
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Mortgage Calculator',
+  url: 'https://finwiser.net/calculators/mortgage',
+  description: 'Calculate your full monthly mortgage payment including P&I, property tax, insurance, and PMI. Add extra payments to see interest savings.',
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Any',
+  browserRequirements: 'Requires JavaScript',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  featureList: [
+    'Monthly payment breakdown',
+    'Full amortization schedule',
+    'PMI calculation',
+    'Extra payment savings calculator',
+    'Property tax and insurance included',
+  ],
 }
 
 export default async function MortgagePage({
@@ -24,7 +43,9 @@ export default async function MortgagePage({
   const initialValues = params.homePrice ? params : undefined
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
           <a href="/" className="hover:text-navy-600 transition-colors">Home</a>
@@ -80,5 +101,6 @@ export default async function MortgagePage({
         </div>
       </section>
     </div>
+    </>
   )
 }

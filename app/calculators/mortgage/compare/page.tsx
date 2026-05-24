@@ -3,9 +3,28 @@ import { createClient } from '@/lib/supabase/server'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Compare Mortgages',
+  title: 'Mortgage Comparison Calculator — Compare Up to 3 Loan Scenarios | FinWiser',
   description:
     'Free mortgage comparison tool. Compare up to 3 scenarios side by side — different rates, terms, or down payments. See exactly which option costs less over the life of your loan.',
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Mortgage Comparison Calculator',
+  url: 'https://finwiser.net/calculators/mortgage/compare',
+  description: 'Compare up to 3 mortgage scenarios side by side. Instantly see how rate, term, and down payment affect your total cost.',
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Any',
+  browserRequirements: 'Requires JavaScript',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  featureList: [
+    'Compare up to 3 mortgage scenarios',
+    'Side-by-side payment comparison',
+    'Total interest comparison',
+    'Loan balance chart',
+    'Best value highlighting',
+  ],
 }
 
 export default async function MortgageComparePage({
@@ -36,7 +55,9 @@ export default async function MortgageComparePage({
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
           <a href="/" className="hover:text-navy-600 transition-colors">
@@ -68,5 +89,6 @@ export default async function MortgageComparePage({
         user={user ? { email: user.email } : null}
       />
     </div>
+    </>
   )
 }

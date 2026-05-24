@@ -3,7 +3,7 @@ import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'FinWiser — Your finances, only wiser',
+  title: 'Free Mortgage & Loan Amortization Calculators | FinWiser',
   description:
     'Free financial calculators for loans and mortgages. See your full amortization schedule, compare mortgage scenarios side by side, and make smarter money decisions — no signup required.',
 }
@@ -77,9 +77,32 @@ const features = [
   },
 ]
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://finwiser.net/#organization',
+      name: 'FinWiser',
+      url: 'https://finwiser.net',
+      description: 'Free financial calculators for loans and mortgages.',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://finwiser.net/#website',
+      url: 'https://finwiser.net',
+      name: 'FinWiser',
+      description: 'Free mortgage and loan amortization calculators.',
+      publisher: { '@id': 'https://finwiser.net/#organization' },
+    },
+  ],
+}
+
 export default function HomePage() {
   return (
-    <div className="flex flex-col">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <div className="flex flex-col">
       {/* Top AdSense banner */}
       <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 pt-4">
         <AdBanner slot="1234567890" format="horizontal" />
@@ -233,5 +256,6 @@ export default function HomePage() {
         </Link>
       </section>
     </div>
+    </>
   )
 }
