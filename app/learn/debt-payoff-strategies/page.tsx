@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -122,7 +123,7 @@ export default function Page() {
         sends you back to the credit card, potentially undoing months of progress.
       </p>
       <p>
-        Use FinWiser&apos;s free debt payoff calculator to build your personalized payoff plan in
+        Use <Link href="/calculators/debt-payoff">FinWiser&apos;s free debt payoff calculator</Link> to build your personalized payoff plan in
         seconds — enter your debts, rates, and extra payment amount to see your exact payoff
         date and total interest under any strategy.
       </p>

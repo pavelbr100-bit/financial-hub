@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -134,7 +135,7 @@ export default function Page() {
         behavioral risk of having no buffer usually outweighs it.
       </p>
       <p>
-        Use FinWiser&apos;s free debt payoff calculator to run both methods against your actual debts
+        Use <Link href="/calculators/debt-payoff">FinWiser&apos;s free debt payoff calculator</Link> to run both methods against your actual debts
         in seconds — see the total interest and payoff date for each approach side by side.
       </p>
 

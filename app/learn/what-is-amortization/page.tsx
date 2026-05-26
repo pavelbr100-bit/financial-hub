@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -142,7 +143,7 @@ export default function Page() {
       </p>
 
       <p>
-        Use FinWiser&apos;s free loan amortization calculator to generate your full payment schedule
+        Use <Link href="/calculators/loan-amortization">FinWiser&apos;s free loan amortization calculator</Link> to generate your full payment schedule
         instantly — see every month&apos;s interest/principal split, your running balance, and the
         total cost of your loan before you commit to it.
       </p>

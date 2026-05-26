@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -118,7 +119,7 @@ export default function Page() {
         versus expected investment returns — run both scenarios before deciding.
       </p>
       <p>
-        Use FinWiser&apos;s free mortgage calculator to run your own numbers in seconds — see exactly
+        Use <Link href="/calculators/mortgage">FinWiser&apos;s free mortgage calculator</Link> to run your own numbers in seconds — see exactly
         how much interest you save and how many years you cut with different extra payment amounts.
       </p>
 

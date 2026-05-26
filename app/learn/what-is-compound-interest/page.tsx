@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -118,7 +119,7 @@ export default function Page() {
         recover.
       </p>
       <p>
-        Use FinWiser&apos;s free compound interest calculator to run your own numbers in seconds —
+        Use <Link href="/calculators/compound-interest">FinWiser&apos;s free compound interest calculator</Link> to run your own numbers in seconds —
         enter your starting amount, monthly contribution, rate, and time horizon to see exactly
         how your money grows year by year.
       </p>

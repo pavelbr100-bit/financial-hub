@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -115,7 +116,7 @@ export default function Page() {
         interest — $460 saved for an extra $2,000 of effort.
       </p>
       <p>
-        Use FinWiser&apos;s free debt payoff calculator to model both the avalanche and snowball
+        Use <Link href="/calculators/debt-payoff">FinWiser&apos;s free debt payoff calculator</Link> to model both the avalanche and snowball
         against your actual debts — see exactly how long each takes and what you&apos;ll pay
         in total interest.
       </p>

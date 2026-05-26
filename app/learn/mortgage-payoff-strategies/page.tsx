@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -119,8 +120,7 @@ export default function Page() {
       <p>
         The most important thing is to actually run the numbers. The difference between a 30-year
         mortgage with no extra payments and one where you add $200/month can easily exceed $100,000
-        in total interest — money that stays in your pocket instead. Use FinWiser&apos;s free mortgage
-        calculator to see exactly how each strategy plays out on your specific loan.
+        in total interest — money that stays in your pocket instead. Use <Link href="/calculators/mortgage">FinWiser&apos;s free mortgage calculator</Link> to see exactly how each strategy plays out on your specific loan.
       </p>
 
       <table>

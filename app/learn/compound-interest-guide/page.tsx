@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -129,7 +130,7 @@ export default function Page() {
       </p>
 
       <p>
-        Use FinWiser&apos;s free compound interest calculator to model your own timeline — enter your
+        Use <Link href="/calculators/compound-interest">FinWiser&apos;s free compound interest calculator</Link> to model your own timeline — enter your
         starting amount, monthly contribution, rate, and years to see exactly how your money
         compounds over time.
       </p>

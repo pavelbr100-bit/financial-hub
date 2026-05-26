@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -82,7 +83,7 @@ export default function Page() {
       <p>
         A 15-year mortgage at 6.5% on the same $300,000 costs $484,968 total — about $233,592
         less in interest. The monthly payment is higher ($2,139 vs $1,996), but the total savings
-        are enormous. FinWiser&apos;s free mortgage calculator lets you run both scenarios side by side
+        are enormous. <Link href="/calculators/mortgage">FinWiser&apos;s free mortgage calculator</Link> lets you run both scenarios side by side
         in seconds.
       </p>
 
@@ -127,7 +128,7 @@ export default function Page() {
         refinancing, and total loan cost.
       </p>
       <p>
-        Use FinWiser&apos;s free mortgage calculator to run your own numbers in seconds — see your
+        Use <Link href="/calculators/mortgage">FinWiser&apos;s free mortgage calculator</Link> to run your own numbers in seconds — see your
         full payment breakdown, total interest, and how extra payments would change your timeline.
       </p>
 

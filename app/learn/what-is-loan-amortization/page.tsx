@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -98,7 +99,7 @@ export default function Page() {
       <h2>How to Get Your Amortization Schedule</h2>
       <p>
         For existing loans, your lender is required to provide an amortization schedule at closing.
-        For new loan comparisons, FinWiser&apos;s free loan amortization calculator generates a full
+        For new loan comparisons, <Link href="/calculators/loan-amortization">FinWiser&apos;s free loan amortization calculator</Link> generates a full
         payment-by-payment schedule instantly — you can see how your entire loan breaks down
         before you ever sign anything.
       </p>
@@ -119,7 +120,7 @@ export default function Page() {
         rather than abstract.</li>
       </ul>
       <p>
-        Use FinWiser&apos;s free loan amortization calculator to generate your full schedule in
+        Use <Link href="/calculators/loan-amortization">FinWiser&apos;s free loan amortization calculator</Link> to generate your full schedule in
         seconds — enter your loan amount, rate, and term to see every payment broken down and
         the total cost of your loan.
       </p>

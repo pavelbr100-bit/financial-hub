@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -72,7 +73,7 @@ export default function Page() {
         $300,000. With a 10% down payment, around $267,000.
       </p>
       <p>
-        FinWiser&apos;s free mortgage calculator lets you enter any purchase price and see the
+        <Link href="/calculators/mortgage">FinWiser&apos;s free mortgage calculator</Link> lets you enter any purchase price and see the
         exact monthly payment — useful for testing different price points quickly.
       </p>
 
@@ -117,7 +118,7 @@ export default function Page() {
         based on your lifestyle, goals, and risk tolerance.
       </p>
       <p>
-        Use FinWiser&apos;s free mortgage calculator to run your own numbers in seconds — enter your
+        Use <Link href="/calculators/mortgage">FinWiser&apos;s free mortgage calculator</Link> to run your own numbers in seconds — enter your
         target home price, down payment, and rate to see your exact monthly payment and whether
         it fits within your 28% threshold.
       </p>

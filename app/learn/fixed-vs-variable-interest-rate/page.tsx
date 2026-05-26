@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -118,7 +119,7 @@ export default function Page() {
         property value shifts, or credit events can make refinancing harder than expected.
       </p>
       <p>
-        Use FinWiser&apos;s free loan amortization calculator to model your loan with different
+        Use <Link href="/calculators/loan-amortization">FinWiser&apos;s free loan amortization calculator</Link> to model your loan with different
         rates in seconds — enter a fixed rate, then try a variable rate scenario to see how
         each affects your payment and total cost.
       </p>

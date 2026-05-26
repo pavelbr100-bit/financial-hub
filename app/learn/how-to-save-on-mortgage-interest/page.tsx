@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -91,7 +92,7 @@ export default function Page() {
         five quotes save significantly more.
       </p>
       <p>
-        FinWiser&apos;s free mortgage calculator makes it easy to compare what different rates mean
+        <Link href="/calculators/mortgage">FinWiser&apos;s free mortgage calculator</Link> makes it easy to compare what different rates mean
         for your total cost — enter two rates side by side and see the lifetime difference instantly.
       </p>
 
@@ -131,7 +132,7 @@ export default function Page() {
         put 20% down if possible, and make one extra payment per year.
       </p>
       <p>
-        Use FinWiser&apos;s free mortgage calculator to run your own numbers in seconds — model
+        Use <Link href="/calculators/mortgage">FinWiser&apos;s free mortgage calculator</Link> to run your own numbers in seconds — model
         different rates, terms, and extra payment amounts to see exactly how much you could
         save on your specific loan.
       </p>

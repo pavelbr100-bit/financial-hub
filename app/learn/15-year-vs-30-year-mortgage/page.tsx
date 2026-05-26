@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
@@ -143,7 +144,7 @@ export default function Page() {
         loan, and your specific rate offers may differ from the averages used here.
       </p>
       <p>
-        Use FinWiser&apos;s free mortgage comparison calculator to run your own numbers side by side
+        Use <Link href="/calculators/mortgage/compare">FinWiser&apos;s free mortgage comparison calculator</Link> to run your own numbers side by side
         in seconds — enter your loan amount and see the exact monthly payment, total interest,
         and equity timeline for both options.
       </p>

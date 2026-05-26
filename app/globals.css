@@ -41,6 +41,9 @@
 .article-body strong {
   @apply font-semibold text-slate-900;
 }
+.article-body a {
+  @apply text-emerald-600 underline underline-offset-2 hover:text-emerald-500 transition-colors;
+}
 .article-body .callout {
   @apply bg-emerald-50 border-l-4 border-emerald-500 px-5 py-4 rounded-r-lg my-7;
 }
