@@ -133,6 +133,10 @@ export default function Page() {
         of payoff progress. The math slightly favors paying down high-rate debt first, but the
         behavioral risk of having no buffer usually outweighs it.
       </p>
+      <p>
+        Use FinWiser&apos;s free debt payoff calculator to run both methods against your actual debts
+        in seconds — see the total interest and payoff date for each approach side by side.
+      </p>
 
     </ArticleLayout>
   )

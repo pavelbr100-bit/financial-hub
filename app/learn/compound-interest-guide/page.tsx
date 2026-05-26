@@ -128,6 +128,12 @@ export default function Page() {
         years is larger than most people expect — and it only widens with time.
       </p>
 
+      <p>
+        Use FinWiser&apos;s free compound interest calculator to model your own timeline — enter your
+        starting amount, monthly contribution, rate, and years to see exactly how your money
+        compounds over time.
+      </p>
+
       <table>
         <thead>
           <tr>

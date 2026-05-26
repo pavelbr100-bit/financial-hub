@@ -141,6 +141,12 @@ export default function Page() {
         minutes to generate and gives you information that takes years to act on.
       </p>
 
+      <p>
+        Use FinWiser&apos;s free loan amortization calculator to generate your full payment schedule
+        instantly — see every month&apos;s interest/principal split, your running balance, and the
+        total cost of your loan before you commit to it.
+      </p>
+
       <table>
         <thead>
           <tr>
