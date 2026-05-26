@@ -46,6 +46,11 @@ export default function Footer() {
                   Debt Payoff Planner
                 </Link>
               </li>
+              <li>
+                <Link href="/calculators/car-loan" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Car Loan Calculator
+                </Link>
+              </li>
             </ul>
           </div>
 
