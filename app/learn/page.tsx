@@ -4,7 +4,7 @@ import { articles } from '@/lib/articles'
 
 export const metadata: Metadata = {
   title: { absolute: 'Personal Finance Guides | FinWiser Learn' },
-  description: 'Free guides on mortgages, compound interest, debt payoff strategies, and loan amortization. Learn how to make smarter financial decisions.',
+  description: 'Free personal finance guides on mortgages, loans, debt, and investing. Written clearly so you can understand your numbers, not just calculate them.',
   openGraph: {
     title: 'Personal Finance Guides | FinWiser Learn',
     description: 'Free guides on mortgages, compound interest, debt payoff strategies, and loan amortization. Learn how to make smarter financial decisions.',
