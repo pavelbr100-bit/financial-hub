@@ -15,6 +15,7 @@ const calcLinks = [
   { href: '/calculators/compound-interest', label: 'Compound Interest' },
   { href: '/calculators/debt-payoff', label: 'Debt Payoff Planner' },
   { href: '/calculators/mortgage/compare', label: 'Compare Mortgages' },
+  { href: '/calculators/car-loan', label: 'Car Loan Calculator' },
 ]
 
 export default function Navbar({ user }: NavbarProps) {

@@ -69,6 +69,19 @@ const tools = [
       </svg>
     ),
   },
+  {
+    href: '/calculators/car-loan',
+    title: 'Car Loan Calculator',
+    description:
+      'See your true monthly payment, total interest, and whether the car fits your budget — including sales tax and trade-in value.',
+    badge: 'New' as const,
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l1.293 1.293A1 1 0 005 18h1m7-2h5m0 0l1.293-1.293A1 1 0 0020 14V9.5a1 1 0 00-.293-.707l-2-2A1 1 0 0017 6.5H13" />
+      </svg>
+    ),
+  },
 ]
 
 const features = [
@@ -250,7 +263,7 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
         <div className="mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">What do you want to figure out?</h2>
-          <p className="text-slate-500">Four calculators, instant results, no account needed.</p>
+          <p className="text-slate-500">Five calculators, instant results, no account needed.</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
