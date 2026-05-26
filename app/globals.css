@@ -19,6 +19,47 @@
   }
 }
 
+/* Article prose styles */
+.article-body h2 {
+  @apply text-2xl font-bold text-navy-900 mt-10 mb-4;
+}
+.article-body h3 {
+  @apply text-lg font-semibold text-navy-800 mt-7 mb-3;
+}
+.article-body p {
+  @apply text-slate-700 leading-relaxed mb-5 text-[1.05rem];
+}
+.article-body ul {
+  @apply list-disc list-outside pl-6 mb-5 space-y-2;
+}
+.article-body ol {
+  @apply list-decimal list-outside pl-6 mb-5 space-y-2;
+}
+.article-body li {
+  @apply text-slate-700 leading-relaxed text-[1.05rem];
+}
+.article-body strong {
+  @apply font-semibold text-slate-900;
+}
+.article-body .callout {
+  @apply bg-emerald-50 border-l-4 border-emerald-500 px-5 py-4 rounded-r-lg my-7;
+}
+.article-body .callout p {
+  @apply mb-0 text-emerald-900;
+}
+.article-body table {
+  @apply w-full text-sm mb-7 border-collapse;
+}
+.article-body th {
+  @apply text-left px-4 py-2.5 bg-slate-100 text-slate-600 font-semibold text-xs uppercase tracking-wide;
+}
+.article-body td {
+  @apply px-4 py-2.5 border-t border-slate-100 text-slate-700;
+}
+.article-body tr:hover td {
+  @apply bg-slate-50;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

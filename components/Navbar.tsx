@@ -77,6 +77,17 @@ export default function Navbar({ user }: NavbarProps) {
               Home
             </Link>
 
+            <Link
+              href="/learn"
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                pathname.startsWith('/learn')
+                  ? 'bg-navy-700 text-white'
+                  : 'text-navy-200 hover:bg-navy-800 hover:text-white'
+              }`}
+            >
+              Learn
+            </Link>
+
             {/* Calculators dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
@@ -183,6 +194,16 @@ export default function Navbar({ user }: NavbarProps) {
               }`}
             >
               Home
+            </Link>
+
+            <Link
+              href="/learn"
+              onClick={() => setMenuOpen(false)}
+              className={`block px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                pathname.startsWith('/learn') ? 'bg-navy-700 text-white' : 'text-navy-200 hover:bg-navy-800 hover:text-white'
+              }`}
+            >
+              Learn
             </Link>
 
             <p className="px-4 pt-3 pb-1 text-xs font-semibold text-navy-500 uppercase tracking-wider">

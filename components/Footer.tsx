@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-navy-950 border-t border-navy-800 mt-auto">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
@@ -44,6 +44,33 @@ export default function Footer() {
               <li>
                 <Link href="/calculators/debt-payoff" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
                   Debt Payoff Planner
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Learn */}
+          <div>
+            <h3 className="text-white font-medium text-sm mb-3">Learn</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/learn/mortgage-payoff-strategies" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Mortgage Payoff Strategies
+                </Link>
+              </li>
+              <li>
+                <Link href="/learn/compound-interest-guide" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Compound Interest Guide
+                </Link>
+              </li>
+              <li>
+                <Link href="/learn/debt-avalanche-vs-snowball" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Avalanche vs. Snowball
+                </Link>
+              </li>
+              <li>
+                <Link href="/learn/what-is-amortization" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  What Is Amortization?
                 </Link>
               </li>
             </ul>
