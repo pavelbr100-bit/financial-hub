@@ -25,6 +25,15 @@ export const metadata: Metadata = {
     title: meta.title,
     description: meta.description,
   },
+  keywords: [
+    'car loan calculator',
+    'auto loan payment',
+    'used car loan rates',
+    'car loan interest rate',
+    'new vs used car loan',
+    'monthly car payment calculator',
+    'used car financing',
+  ],
 }
 
 export default function Page() {

@@ -25,6 +25,15 @@ export const metadata: Metadata = {
     title: meta.title,
     description: meta.description,
   },
+  keywords: [
+    'car loan calculator',
+    'auto loan payment',
+    'car loan interest rate',
+    'monthly car payment calculator',
+    'car loan down payment',
+    'how much to put down on a car',
+    'used car loan rates',
+  ],
 }
 
 export default function Page() {
