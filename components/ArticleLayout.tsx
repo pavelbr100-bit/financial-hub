@@ -6,14 +6,16 @@ const categoryStyles: Record<ArticleMeta['categoryColor'], string> = {
   sky:     'bg-sky-100 text-sky-700',
   amber:   'bg-amber-100 text-amber-700',
   purple:  'bg-purple-100 text-purple-700',
+  blue:    'bg-blue-100 text-blue-700',
 }
 
 interface Props {
   meta: ArticleMeta
   children: React.ReactNode
+  related?: ArticleMeta[]
 }
 
-export default function ArticleLayout({ meta, children }: Props) {
+export default function ArticleLayout({ meta, children, related }: Props) {
   return (
     <div className="min-h-screen bg-slate-50">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10 pb-20">
@@ -72,6 +74,34 @@ export default function ArticleLayout({ meta, children }: Props) {
           </Link>
         </div>
       </div>
+
+      {/* Related articles */}
+      {related && related.length > 0 && (
+        <div className="border-t border-slate-200 py-12 px-4 sm:px-6">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-lg font-bold text-navy-900 mb-6">Related Articles</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {related.map(r => (
+                <Link
+                  key={r.slug}
+                  href={`/learn/${r.slug}`}
+                  className="group bg-white rounded-xl border border-slate-100 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all p-5 flex flex-col"
+                >
+                  <span className={`self-start px-2 py-0.5 rounded-full text-xs font-semibold mb-3 ${categoryStyles[r.categoryColor]}`}>
+                    {r.category}
+                  </span>
+                  <h3 className="text-sm font-bold text-navy-900 leading-snug mb-2 group-hover:text-navy-600 transition-colors flex-1">
+                    {r.title}
+                  </h3>
+                  <span className="text-xs font-medium text-navy-500 group-hover:text-emerald-600 transition-colors mt-3">
+                    Read article →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

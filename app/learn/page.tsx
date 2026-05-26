@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { articles } from '@/lib/articles'
+import LearnArticles from '@/components/LearnArticles'
 
 export const metadata: Metadata = {
   title: { absolute: 'Personal Finance Guides | FinWiser Learn' },
@@ -19,13 +20,6 @@ export const metadata: Metadata = {
   },
 }
 
-const categoryStyles: Record<string, string> = {
-  emerald: 'bg-emerald-100 text-emerald-700',
-  sky:     'bg-sky-100 text-sky-700',
-  amber:   'bg-amber-100 text-amber-700',
-  purple:  'bg-purple-100 text-purple-700',
-}
-
 export default function LearnPage() {
   return (
     <div className="min-h-screen bg-slate-50">
@@ -37,41 +31,14 @@ export default function LearnPage() {
             Personal Finance, Explained Clearly
           </h1>
           <p className="text-navy-300 text-lg leading-relaxed">
-            Practical guides on mortgages, investing, debt, and loans — written to help you understand your numbers, not just calculate them.
+            Practical guides on mortgages, investing, debt, loans, and auto financing — written to help you understand your numbers, not just calculate them.
           </p>
         </div>
       </div>
 
-      {/* Articles */}
+      {/* Articles + filters */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {articles.map(article => (
-            <Link
-              key={article.slug}
-              href={`/learn/${article.slug}`}
-              className="group bg-white rounded-2xl border border-slate-100 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all p-7 flex flex-col"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${categoryStyles[article.categoryColor]}`}>
-                  {article.category}
-                </span>
-                <span className="text-xs text-slate-400">{article.readMinutes} min read</span>
-              </div>
-              <h2 className="text-lg font-bold text-navy-900 leading-snug mb-3 group-hover:text-navy-600 transition-colors">
-                {article.title}
-              </h2>
-              <p className="text-slate-500 text-sm leading-relaxed flex-1">
-                {article.description}
-              </p>
-              <div className="mt-5 flex items-center justify-between">
-                <span className="text-xs text-slate-400">{article.date}</span>
-                <span className="text-sm font-medium text-navy-600 group-hover:text-emerald-600 transition-colors">
-                  Read article →
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <LearnArticles articles={articles} />
 
         {/* Calculators CTA */}
         <div className="mt-14 bg-white rounded-2xl border border-slate-100 shadow-card p-8 text-center">
@@ -83,6 +50,7 @@ export default function LearnPage() {
               { href: '/calculators/compound-interest', label: 'Compound Interest' },
               { href: '/calculators/debt-payoff', label: 'Debt Payoff' },
               { href: '/calculators/loan-amortization', label: 'Loan Amortization' },
+              { href: '/calculators/car-loan', label: 'Car Loan' },
             ].map(c => (
               <Link
                 key={c.href}

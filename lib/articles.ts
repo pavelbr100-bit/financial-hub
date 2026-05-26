@@ -5,7 +5,7 @@ export interface ArticleMeta {
   date: string
   readMinutes: number
   category: string
-  categoryColor: 'emerald' | 'sky' | 'amber' | 'purple'
+  categoryColor: 'emerald' | 'sky' | 'amber' | 'purple' | 'blue'
   calculatorHref: string
   calculatorLabel: string
 }
@@ -164,6 +164,72 @@ export const articles: ArticleMeta[] = [
     categoryColor: 'emerald',
     calculatorHref: '/calculators/mortgage',
     calculatorLabel: 'Calculate your mortgage and interest savings',
+  },
+  {
+    slug: 'how-car-loan-interest-works',
+    title: 'How Car Loan Interest Works: What You\'re Really Paying',
+    description: 'Your monthly payment is just a number — but how it\'s split between interest and principal is what determines the true cost of your car. Here\'s how it works.',
+    date: 'June 9, 2026',
+    readMinutes: 5,
+    category: 'Auto Loans',
+    categoryColor: 'blue',
+    calculatorHref: '/calculators/car-loan',
+    calculatorLabel: 'Calculate your car loan payment',
+  },
+  {
+    slug: 'new-vs-used-car-loan',
+    title: 'New Car vs. Used Car Loan: Rates, Terms, and True Cost',
+    description: 'New cars have lower rates but higher prices. Used cars cost less upfront but come with higher rates. Here\'s how to compare the real numbers.',
+    date: 'June 10, 2026',
+    readMinutes: 5,
+    category: 'Auto Loans',
+    categoryColor: 'blue',
+    calculatorHref: '/calculators/car-loan',
+    calculatorLabel: 'Compare new vs. used car loan costs',
+  },
+  {
+    slug: 'how-to-get-best-car-loan-rate',
+    title: 'How to Get the Best Car Loan Rate: 7 Steps Before You Sign',
+    description: 'The interest rate on your car loan is negotiable — and the difference between a good and bad rate can be thousands of dollars. Here\'s how to get the best one.',
+    date: 'June 11, 2026',
+    readMinutes: 6,
+    category: 'Auto Loans',
+    categoryColor: 'blue',
+    calculatorHref: '/calculators/car-loan',
+    calculatorLabel: 'See what different rates cost you',
+  },
+  {
+    slug: 'car-loan-term-length-guide',
+    title: '60 vs. 72 vs. 84-Month Car Loan: The Hidden Cost of Longer Terms',
+    description: 'A longer loan term lowers your payment — but dramatically increases what you pay in total. Here\'s a side-by-side breakdown so you can choose with confidence.',
+    date: 'June 12, 2026',
+    readMinutes: 5,
+    category: 'Auto Loans',
+    categoryColor: 'blue',
+    calculatorHref: '/calculators/car-loan',
+    calculatorLabel: 'Compare car loan terms side by side',
+  },
+  {
+    slug: 'how-to-pay-off-car-loan-early',
+    title: 'How to Pay Off Your Car Loan Early and Save on Interest',
+    description: 'Paying off your car loan ahead of schedule can save hundreds to thousands in interest. Here are five practical moves that actually work.',
+    date: 'June 13, 2026',
+    readMinutes: 5,
+    category: 'Auto Loans',
+    categoryColor: 'blue',
+    calculatorHref: '/calculators/car-loan',
+    calculatorLabel: 'Calculate your car loan amortization',
+  },
+  {
+    slug: 'car-loan-down-payment-guide',
+    title: 'How Much to Put Down on a Car: The Trade-offs Explained',
+    description: 'A bigger down payment reduces your loan, your interest, and your monthly payment — but how much is the right amount? Here\'s how to decide.',
+    date: 'June 14, 2026',
+    readMinutes: 5,
+    category: 'Auto Loans',
+    categoryColor: 'blue',
+    calculatorHref: '/calculators/car-loan',
+    calculatorLabel: 'See how your down payment affects your loan',
   },
 ]
 

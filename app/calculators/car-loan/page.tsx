@@ -2,11 +2,13 @@ import CarLoanCalc from '@/components/calculators/CarLoanCalc'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
+import Link from 'next/link'
+import { articles } from '@/lib/articles'
 
 export const metadata: Metadata = {
   title: { absolute: 'Free Car Loan Calculator — Monthly Payment, Total Interest & Affordability | FinWiser' },
   description:
-    'Free car loan calculator. Enter vehicle price, down payment, trade-in, and rate to see your monthly payment, total interest, and full amortization schedule. Includes affordability check and sales tax.',
+    'Free car loan calculator — enter your vehicle price, down payment, and interest rate to see your monthly payment, total interest, and full amortization schedule.',
   openGraph: {
     title: 'Free Car Loan Calculator — Monthly Payment & Total Interest',
     description: 'Calculate your car loan payment, total interest, and true vehicle cost including sales tax and trade-in. Check if it fits your budget.',
@@ -122,6 +124,47 @@ export default async function CarLoanPage() {
             </p>
           </div>
         </section>
+
+        {/* Learn More */}
+        {(() => {
+          const carLoanSlugs = [
+            'how-car-loan-interest-works',
+            'new-vs-used-car-loan',
+            'how-to-get-best-car-loan-rate',
+            'car-loan-term-length-guide',
+            'how-to-pay-off-car-loan-early',
+            'car-loan-down-payment-guide',
+          ]
+          const carArticles = articles.filter(a => carLoanSlugs.includes(a.slug))
+          return (
+            <section className="mt-12">
+              <h2 className="text-xl font-bold text-navy-900 mb-2">Learn More About Car Loans</h2>
+              <p className="text-slate-500 text-sm mb-6">Guides to help you understand your loan, get the best rate, and pay it off faster.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {carArticles.map(article => (
+                  <Link
+                    key={article.slug}
+                    href={`/learn/${article.slug}`}
+                    className="group bg-white rounded-xl border border-slate-100 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all p-5 flex flex-col"
+                  >
+                    <span className="self-start px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 mb-3">
+                      {article.category}
+                    </span>
+                    <h3 className="text-sm font-bold text-navy-900 leading-snug mb-2 group-hover:text-navy-600 transition-colors flex-1">
+                      {article.title}
+                    </h3>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="text-xs text-slate-400">{article.readMinutes} min read</span>
+                      <span className="text-xs font-medium text-navy-500 group-hover:text-emerald-600 transition-colors">
+                        Read article →
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )
+        })()}
       </div>
     </>
   )
