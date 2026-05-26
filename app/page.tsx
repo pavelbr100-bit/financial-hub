@@ -3,9 +3,21 @@ import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Free Mortgage & Loan Amortization Calculators | FinWiser',
+  title: { absolute: 'Free Mortgage & Loan Calculators — No Signup Required | FinWiser' },
   description:
-    'Free financial calculators for loans and mortgages. See your full amortization schedule, compare mortgage scenarios side by side, and make smarter money decisions — no signup required.',
+    'Free financial calculators for mortgages, loans, compound interest, and debt payoff. See your full amortization schedule, compare mortgage scenarios, and make smarter money decisions — no signup required.',
+  openGraph: {
+    title: 'FinWiser — Free Mortgage & Loan Calculators',
+    description: 'Free calculators for mortgages, loans, compound interest, and debt payoff. No signup required.',
+    type: 'website',
+    url: 'https://finwiser.net',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'FinWiser — Free Financial Calculators' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FinWiser — Free Mortgage & Loan Calculators',
+    description: 'Free calculators for mortgages, loans, compound interest, and debt payoff. No signup required.',
+  },
 }
 
 const tools = [

@@ -4,9 +4,21 @@ import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
-  title: 'Free Loan Amortization Calculator — Payment Schedule & Total Interest | FinWiser',
+  title: { absolute: 'Free Loan Amortization Calculator — Payment Schedule & Total Interest | FinWiser' },
   description:
     'Free loan amortization calculator. Enter any loan amount, interest rate, and term to see your monthly payment, full payment schedule, and total interest. Add extra payments to see how much you can save.',
+  openGraph: {
+    title: 'Free Loan Amortization Calculator — Payment Schedule & Total Interest',
+    description: 'Enter any loan amount, rate, and term to get your full amortization schedule and total interest cost.',
+    type: 'website',
+    url: 'https://finwiser.net/calculators/loan-amortization',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Free Loan Amortization Calculator — FinWiser' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Loan Amortization Calculator | FinWiser',
+    description: 'Enter any loan amount, rate, and term to get your full amortization schedule and total interest cost.',
+  },
 }
 
 const jsonLd = {

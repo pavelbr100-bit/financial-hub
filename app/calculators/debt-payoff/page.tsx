@@ -5,9 +5,21 @@ import { createClient } from '@/lib/supabase/server'
 import type { DebtPayoffStrategy } from '@/lib/calculators/debtPayoff'
 
 export const metadata: Metadata = {
-  title: 'Free Debt Payoff Calculator — Avalanche & Snowball Planner | FinWiser',
+  title: { absolute: 'Free Debt Payoff Calculator — Avalanche & Snowball Planner | FinWiser' },
   description:
     'Free debt payoff calculator. Compare the avalanche and snowball strategies side by side. Enter your debts, add an extra monthly payment, and see exactly when each debt is paid off and how much interest you save.',
+  openGraph: {
+    title: 'Free Debt Payoff Calculator — Avalanche & Snowball Planner',
+    description: 'Compare debt avalanche vs snowball strategies. See your payoff date and total interest for each approach.',
+    type: 'website',
+    url: 'https://finwiser.net/calculators/debt-payoff',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Free Debt Payoff Calculator — FinWiser' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Debt Payoff Calculator | FinWiser',
+    description: 'Compare debt avalanche vs snowball strategies. See your payoff date and total interest for each approach.',
+  },
 }
 
 const jsonLd = {

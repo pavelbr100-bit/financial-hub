@@ -3,6 +3,12 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: 'How FinWiser collects, uses, and protects your information.',
+  openGraph: {
+    title: 'Privacy Policy | FinWiser',
+    description: 'How FinWiser collects, uses, and protects your information.',
+    type: 'website',
+    url: 'https://finwiser.net/privacy',
+  },
 }
 
 export default function PrivacyPage() {

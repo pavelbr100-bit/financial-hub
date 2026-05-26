@@ -6,12 +6,13 @@ import Footer from '@/components/Footer'
 import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://finwiser.net'),
   title: {
-    default: 'FinWiser — Your finances, only wiser',
+    default: 'FinWiser — Free Financial Calculators for Mortgages, Loans & Investing',
     template: '%s | FinWiser',
   },
   description:
-    'Your finances, only wiser. Free loan, mortgage, and compound interest calculators — no signup required.',
+    'Free financial calculators for mortgages, loans, compound interest, and debt payoff. No signup required. Make smarter money decisions with FinWiser.',
   keywords: [
     'mortgage calculator',
     'loan amortization calculator',
@@ -27,18 +28,21 @@ export const metadata: Metadata = {
     '15 year mortgage calculator',
     'financial calculator',
     'how much house can I afford',
+    'compound interest calculator',
+    'debt payoff calculator',
   ],
   openGraph: {
-    title: 'FinWiser — Your finances, only wiser',
-    description: 'Your finances, only wiser.',
+    title: 'FinWiser — Free Financial Calculators',
+    description: 'Free calculators for mortgages, loans, compound interest, and debt payoff. No signup required.',
     type: 'website',
-    images: [{ url: 'https://finwiser.net/og-image.png', width: 1200, height: 630, alt: 'FinWiser — Your finances, only wiser' }],
+    url: 'https://finwiser.net',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'FinWiser — Free Financial Calculators' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FinWiser — Your finances, only wiser',
-    description: 'Your finances, only wiser.',
-    images: ['https://finwiser.net/og-image.png'],
+    title: 'FinWiser — Free Financial Calculators',
+    description: 'Free calculators for mortgages, loans, compound interest, and debt payoff. No signup required.',
+    images: ['/og-image.png'],
   },
 }
 

@@ -5,9 +5,21 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Free Mortgage Calculator — Monthly Payment, PMI & Amortization | FinWiser',
+  title: { absolute: 'Free Mortgage Calculator — Monthly Payment, PMI & Amortization | FinWiser' },
   description:
     'Free mortgage calculator. Estimate your full monthly payment including principal, interest, property tax, home insurance, and PMI. See how extra payments reduce your interest and shorten your loan.',
+  openGraph: {
+    title: 'Free Mortgage Calculator — Monthly Payment, PMI & Amortization',
+    description: 'Calculate your full monthly mortgage payment including P&I, taxes, insurance, and PMI. See how extra payments save you thousands.',
+    type: 'website',
+    url: 'https://finwiser.net/calculators/mortgage',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Free Mortgage Calculator — FinWiser' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Mortgage Calculator | FinWiser',
+    description: 'Calculate your full monthly mortgage payment including P&I, taxes, insurance, and PMI.',
+  },
 }
 
 const jsonLd = {

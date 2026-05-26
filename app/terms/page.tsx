@@ -3,6 +3,12 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Terms of Use',
   description: 'Terms and conditions for using FinWiser financial calculators.',
+  openGraph: {
+    title: 'Terms of Use | FinWiser',
+    description: 'Terms and conditions for using FinWiser financial calculators.',
+    type: 'website',
+    url: 'https://finwiser.net/terms',
+  },
 }
 
 export default function TermsPage() {

@@ -4,9 +4,21 @@ import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
-  title: 'Free Compound Interest Calculator — Savings & Investment Growth | FinWiser',
+  title: { absolute: 'Free Compound Interest Calculator — Savings & Investment Growth | FinWiser' },
   description:
     'Free compound interest calculator. Enter your initial investment, monthly contributions, and interest rate to see how your money grows over time. Compare daily, monthly, quarterly, and annual compounding.',
+  openGraph: {
+    title: 'Free Compound Interest Calculator — Savings & Investment Growth',
+    description: 'See how your money grows with compound interest. Enter your investment, monthly contributions, and rate.',
+    type: 'website',
+    url: 'https://finwiser.net/calculators/compound-interest',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Free Compound Interest Calculator — FinWiser' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Compound Interest Calculator | FinWiser',
+    description: 'See how your money grows with compound interest. Enter your investment, monthly contributions, and rate.',
+  },
 }
 
 const jsonLd = {

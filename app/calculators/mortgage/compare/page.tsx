@@ -3,9 +3,21 @@ import { createClient } from '@/lib/supabase/server'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Mortgage Comparison Calculator — Compare Up to 3 Loan Scenarios | FinWiser',
+  title: { absolute: 'Mortgage Comparison Calculator — Compare Up to 3 Loan Scenarios | FinWiser' },
   description:
     'Free mortgage comparison tool. Compare up to 3 scenarios side by side — different rates, terms, or down payments. See exactly which option costs less over the life of your loan.',
+  openGraph: {
+    title: 'Mortgage Comparison Calculator — Compare Up to 3 Loan Scenarios',
+    description: 'Compare up to 3 mortgage scenarios side by side. See which rate, term, and down payment combination costs less.',
+    type: 'website',
+    url: 'https://finwiser.net/calculators/mortgage/compare',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Mortgage Comparison Calculator — FinWiser' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mortgage Comparison Calculator | FinWiser',
+    description: 'Compare up to 3 mortgage scenarios side by side. See which rate, term, and down payment costs less.',
+  },
 }
 
 const jsonLd = {

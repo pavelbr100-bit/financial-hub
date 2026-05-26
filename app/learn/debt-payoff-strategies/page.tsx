@@ -6,8 +6,20 @@ import { getArticle } from '@/lib/articles'
 const meta = getArticle('debt-payoff-strategies')!
 
 export const metadata: Metadata = {
-  title: `${meta.title} | FinWiser Learn`,
+  title: { absolute: `${meta.title} | FinWiser Learn` },
   description: meta.description,
+  openGraph: {
+    title: meta.title,
+    description: meta.description,
+    type: 'article',
+    url: `https://finwiser.net/learn/${meta.slug}`,
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: meta.title }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: meta.title,
+    description: meta.description,
+  },
 }
 
 export default function Page() {
