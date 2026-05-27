@@ -34,6 +34,19 @@ const tools = [
     ),
   },
   {
+    href: '/calculators/car-loan',
+    title: 'Car Loan Calculator',
+    description:
+      'See your true monthly payment, total interest, and whether the car fits your budget — including sales tax and trade-in value.',
+    badge: 'New' as const,
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l1.293 1.293A1 1 0 005 18h1m7-2h5m0 0l1.293-1.293A1 1 0 0020 14V9.5a1 1 0 00-.293-.707l-2-2A1 1 0 0017 6.5H13" />
+      </svg>
+    ),
+  },
+  {
     href: '/calculators/loan-amortization',
     title: 'Loan Amortization Calculator',
     description:
@@ -42,18 +55,6 @@ const tools = [
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a1 1 0 001-1V6a1 1 0 00-1-1H4a1 1 0 00-1 1v12a1 1 0 001 1z" />
-      </svg>
-    ),
-  },
-  {
-    href: '/calculators/compound-interest',
-    title: 'Compound Interest Calculator',
-    description:
-      'See how $10,000 and $200/month grows to six figures. Watch interest outpace contributions as compounding kicks in.',
-    badge: 'New' as const,
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
       </svg>
     ),
   },
@@ -70,15 +71,14 @@ const tools = [
     ),
   },
   {
-    href: '/calculators/car-loan',
-    title: 'Car Loan Calculator',
+    href: '/calculators/compound-interest',
+    title: 'Compound Interest Calculator',
     description:
-      'See your true monthly payment, total interest, and whether the car fits your budget — including sales tax and trade-in value.',
+      'See how $10,000 and $200/month grows to six figures. Watch interest outpace contributions as compounding kicks in.',
     badge: 'New' as const,
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l1.293 1.293A1 1 0 005 18h1m7-2h5m0 0l1.293-1.293A1 1 0 0020 14V9.5a1 1 0 00-.293-.707l-2-2A1 1 0 0017 6.5H13" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
       </svg>
     ),
   },

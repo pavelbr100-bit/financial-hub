@@ -11,11 +11,11 @@ interface NavbarProps {
 
 const calcLinks = [
   { href: '/calculators/mortgage', label: 'Mortgage Calculator' },
-  { href: '/calculators/loan-amortization', label: 'Loan Amortization' },
-  { href: '/calculators/compound-interest', label: 'Compound Interest' },
-  { href: '/calculators/debt-payoff', label: 'Debt Payoff Planner' },
-  { href: '/calculators/mortgage/compare', label: 'Compare Mortgages' },
   { href: '/calculators/car-loan', label: 'Car Loan Calculator' },
+  { href: '/calculators/loan-amortization', label: 'Loan Amortization' },
+  { href: '/calculators/debt-payoff', label: 'Debt Payoff Planner' },
+  { href: '/calculators/compound-interest', label: 'Compound Interest' },
+  { href: '/calculators/mortgage/compare', label: 'Compare Mortgages' },
 ]
 
 export default function Navbar({ user }: NavbarProps) {

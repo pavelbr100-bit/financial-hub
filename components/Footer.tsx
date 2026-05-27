@@ -27,18 +27,18 @@ export default function Footer() {
             <h3 className="text-white font-medium text-sm mb-3">Calculators</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/calculators/loan-amortization" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
-                  Loan Amortization
-                </Link>
-              </li>
-              <li>
                 <Link href="/calculators/mortgage" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
                   Mortgage Calculator
                 </Link>
               </li>
               <li>
-                <Link href="/calculators/compound-interest" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
-                  Compound Interest
+                <Link href="/calculators/car-loan" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Car Loan Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculators/loan-amortization" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Loan Amortization
                 </Link>
               </li>
               <li>
@@ -47,8 +47,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/calculators/car-loan" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
-                  Car Loan Calculator
+                <Link href="/calculators/compound-interest" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Compound Interest
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculators/mortgage/compare" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Compare Mortgages
                 </Link>
               </li>
             </ul>
