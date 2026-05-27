@@ -111,8 +111,8 @@ export default function Page() {
       <h2>The Right Way to Set It Up</h2>
       <p>
         Not all biweekly programs are equal. The key question to ask your lender:
-        <em> "Are biweekly payments credited immediately to reduce my principal, or are they
-        held until a full monthly payment accumulates?"</em>
+        <em> &ldquo;Are biweekly payments credited immediately to reduce my principal, or are they
+        held until a full monthly payment accumulates?&rdquo;</em>
       </p>
       <p>
         If payments are held and credited once a month, you get no benefit — it&apos;s the same
