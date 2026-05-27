@@ -44,6 +44,17 @@ export const metadata: Metadata = {
     description: 'Free calculators for mortgages, loans, compound interest, and debt payoff. No signup required.',
     images: ['/og-image.png'],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+      'max-video-preview': -1,
+    },
+  },
 }
 
 export default async function RootLayout({

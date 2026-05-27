@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Free Compound Interest Calculator — Savings & Investment Growth | FinWiser' },
   description:
     'Free compound interest calculator. Enter your initial investment, monthly contributions, and interest rate to see how your money grows over time. Compare daily, monthly, quarterly, and annual compounding.',
+  alternates: { canonical: 'https://finwiser.net/calculators/compound-interest' },
   openGraph: {
     title: 'Free Compound Interest Calculator — Savings & Investment Growth',
     description: 'See how your money grows with compound interest. Enter your investment, monthly contributions, and rate.',
@@ -41,6 +42,16 @@ const jsonLd = {
   ],
 }
 
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
+    { '@type': 'ListItem', position: 2, name: 'Compound Interest Calculator', item: 'https://finwiser.net/calculators/compound-interest' },
+  ],
+}
+
 export default async function CompoundInterestPage({
   searchParams,
 }: {
@@ -65,6 +76,7 @@ export default async function CompoundInterestPage({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8">
           <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">

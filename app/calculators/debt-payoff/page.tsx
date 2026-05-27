@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Free Debt Payoff Calculator — Avalanche & Snowball Planner | FinWiser' },
   description:
     'Free debt payoff calculator. Compare the avalanche and snowball strategies side by side. Enter your debts, add an extra monthly payment, and see exactly when each debt is paid off and how much interest you save.',
+  alternates: { canonical: 'https://finwiser.net/calculators/debt-payoff' },
   openGraph: {
     title: 'Free Debt Payoff Calculator — Avalanche & Snowball Planner',
     description: 'Compare debt avalanche vs snowball strategies. See your payoff date and total interest for each approach.',
@@ -39,6 +40,16 @@ const jsonLd = {
     'Extra payment savings calculator',
     'Payoff date per debt',
     'Total interest comparison',
+  ],
+}
+
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
+    { '@type': 'ListItem', position: 2, name: 'Debt Payoff Planner', item: 'https://finwiser.net/calculators/debt-payoff' },
   ],
 }
 
@@ -80,6 +91,7 @@ export default async function DebtPayoffPage({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8">
           <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">

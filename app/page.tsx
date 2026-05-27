@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Free Mortgage & Loan Calculators — No Signup Required | FinWiser' },
   description:
     'Free financial calculators for mortgages, loans, compound interest, and debt payoff. See your full amortization schedule, compare mortgage scenarios, and make smarter money decisions — no signup required.',
+  alternates: { canonical: 'https://finwiser.net' },
   openGraph: {
     title: 'FinWiser — Free Mortgage & Loan Calculators',
     description: 'Free calculators for mortgages, loans, compound interest, and debt payoff. No signup required.',

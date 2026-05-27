@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Free Mortgage Calculator — Monthly Payment, PMI & Amortization | FinWiser' },
   description:
     'Free mortgage calculator. Estimate your full monthly payment including principal, interest, property tax, home insurance, and PMI. See how extra payments reduce your interest and shorten your loan.',
+  alternates: { canonical: 'https://finwiser.net/calculators/mortgage' },
   openGraph: {
     title: 'Free Mortgage Calculator — Monthly Payment, PMI & Amortization',
     description: 'Calculate your full monthly mortgage payment including P&I, taxes, insurance, and PMI. See how extra payments save you thousands.',
@@ -41,6 +42,16 @@ const jsonLd = {
   ],
 }
 
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
+    { '@type': 'ListItem', position: 2, name: 'Mortgage Calculator', item: 'https://finwiser.net/calculators/mortgage' },
+  ],
+}
+
 export default async function MortgagePage({
   searchParams,
 }: {
@@ -57,6 +68,7 @@ export default async function MortgagePage({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">

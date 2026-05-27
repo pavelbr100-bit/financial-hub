@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Free Loan Amortization Calculator — Payment Schedule & Total Interest | FinWiser' },
   description:
     'Free loan amortization calculator. Enter any loan amount, interest rate, and term to see your monthly payment, full payment schedule, and total interest. Add extra payments to see how much you can save.',
+  alternates: { canonical: 'https://finwiser.net/calculators/loan-amortization' },
   openGraph: {
     title: 'Free Loan Amortization Calculator — Payment Schedule & Total Interest',
     description: 'Enter any loan amount, rate, and term to get your full amortization schedule and total interest cost.',
@@ -41,6 +42,16 @@ const jsonLd = {
   ],
 }
 
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
+    { '@type': 'ListItem', position: 2, name: 'Loan Amortization Calculator', item: 'https://finwiser.net/calculators/loan-amortization' },
+  ],
+}
+
 export default async function LoanAmortizationPage({
   searchParams,
 }: {
@@ -65,6 +76,7 @@ export default async function LoanAmortizationPage({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       {/* Page header */}
       <div className="mb-8">

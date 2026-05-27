@@ -8,6 +8,7 @@ const meta = getArticle('15-year-vs-30-year-mortgage')!
 export const metadata: Metadata = {
   title: { absolute: `${meta.title} | FinWiser Learn` },
   description: meta.description,
+  alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
     title: meta.title,
     description: meta.description,

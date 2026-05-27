@@ -8,6 +8,7 @@ const meta = getArticle('mortgage-amortization-explained')!
 export const metadata: Metadata = {
   title: { absolute: `${meta.title} | FinWiser Learn` },
   description: meta.description,
+  alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
     title: meta.title,
     description: meta.description,

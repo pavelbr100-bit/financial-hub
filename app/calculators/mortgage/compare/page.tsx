@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Mortgage Comparison Calculator — Compare Up to 3 Loan Scenarios | FinWiser' },
   description:
     'Free mortgage comparison tool. Compare up to 3 scenarios side by side — different rates, terms, or down payments. See exactly which option costs less over the life of your loan.',
+  alternates: { canonical: 'https://finwiser.net/calculators/mortgage/compare' },
   openGraph: {
     title: 'Mortgage Comparison Calculator — Compare Up to 3 Loan Scenarios',
     description: 'Compare up to 3 mortgage scenarios side by side. See which rate, term, and down payment combination costs less.',
@@ -40,6 +41,17 @@ const jsonLd = {
   ],
 }
 
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
+    { '@type': 'ListItem', position: 2, name: 'Mortgage Calculator', item: 'https://finwiser.net/calculators/mortgage' },
+    { '@type': 'ListItem', position: 3, name: 'Compare Mortgages', item: 'https://finwiser.net/calculators/mortgage/compare' },
+  ],
+}
+
 export default async function MortgageComparePage({
   searchParams,
 }: {
@@ -70,6 +82,7 @@ export default async function MortgageComparePage({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">

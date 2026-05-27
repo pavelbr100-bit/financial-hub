@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: { absolute: 'Free Car Loan Calculator — Monthly Payment, Total Interest & Affordability | FinWiser' },
   description:
     'Free car loan calculator — enter your vehicle price, down payment, and interest rate to see your monthly payment, total interest, and full amortization schedule.',
+  alternates: { canonical: 'https://finwiser.net/calculators/car-loan' },
   openGraph: {
     title: 'Free Car Loan Calculator — Monthly Payment & Total Interest',
     description: 'Calculate your car loan payment, total interest, and true vehicle cost including sales tax and trade-in. Check if it fits your budget.',
@@ -43,6 +44,16 @@ const jsonLd = {
   ],
 }
 
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
+    { '@type': 'ListItem', position: 2, name: 'Car Loan Calculator', item: 'https://finwiser.net/calculators/car-loan' },
+  ],
+}
+
 export default async function CarLoanPage() {
   const supabase = await createClient()
   const {
@@ -52,6 +63,7 @@ export default async function CarLoanPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         {/* Page header */}
         <div className="mb-8">

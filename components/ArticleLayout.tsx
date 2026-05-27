@@ -1,6 +1,10 @@
 import Link from 'next/link'
 import type { ArticleMeta } from '@/lib/articles'
 
+function toISODate(dateStr: string): string {
+  return new Date(dateStr).toISOString().split('T')[0]
+}
+
 const categoryStyles: Record<ArticleMeta['categoryColor'], string> = {
   emerald: 'bg-emerald-100 text-emerald-700',
   sky:     'bg-sky-100 text-sky-700',
@@ -16,7 +20,36 @@ interface Props {
 }
 
 export default function ArticleLayout({ meta, children, related }: Props) {
+  const articleUrl = `https://finwiser.net/learn/${meta.slug}`
+  const isoDate = toISODate(meta.date)
+
+  const blogPostingLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: meta.title,
+    description: meta.description,
+    url: articleUrl,
+    datePublished: isoDate,
+    dateModified: isoDate,
+    author: { '@type': 'Organization', name: 'FinWiser', url: 'https://finwiser.net' },
+    publisher: { '@type': 'Organization', name: 'FinWiser', url: 'https://finwiser.net' },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
+  }
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
+      { '@type': 'ListItem', position: 2, name: 'Learn', item: 'https://finwiser.net/learn' },
+      { '@type': 'ListItem', position: 3, name: meta.title, item: articleUrl },
+    ],
+  }
+
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
     <div className="min-h-screen bg-slate-50">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10 pb-20">
 
@@ -103,5 +136,6 @@ export default function ArticleLayout({ meta, children, related }: Props) {
         </div>
       )}
     </div>
+    </>
   )
 }
