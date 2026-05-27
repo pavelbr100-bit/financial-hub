@@ -30,6 +30,14 @@ export const metadata: Metadata = {
     description:
       'See exactly how much interest and time you save by switching to biweekly mortgage payments.',
   },
+  keywords: [
+    'biweekly mortgage calculator',
+    'biweekly vs monthly mortgage',
+    'biweekly mortgage savings',
+    'how much do biweekly payments save',
+    'biweekly mortgage payment',
+    'pay mortgage faster',
+  ],
 }
 
 const jsonLd = {
