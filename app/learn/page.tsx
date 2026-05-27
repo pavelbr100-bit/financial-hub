@@ -48,10 +48,11 @@ export default function LearnPage() {
           <div className="flex flex-wrap justify-center gap-3">
             {[
               { href: '/calculators/mortgage', label: 'Mortgage' },
+              { href: '/calculators/biweekly-mortgage', label: 'Biweekly Mortgage' },
+              { href: '/calculators/car-loan', label: 'Car Loan' },
               { href: '/calculators/compound-interest', label: 'Compound Interest' },
               { href: '/calculators/debt-payoff', label: 'Debt Payoff' },
               { href: '/calculators/loan-amortization', label: 'Loan Amortization' },
-              { href: '/calculators/car-loan', label: 'Car Loan' },
             ].map(c => (
               <Link
                 key={c.href}
