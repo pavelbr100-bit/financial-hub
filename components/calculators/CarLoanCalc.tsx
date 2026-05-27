@@ -306,7 +306,7 @@ export default function CarLoanCalc({ user }: Props) {
                 avg {isNewCar ? 'new ~7%' : 'used ~11%'}
               </span>
             </label>
-            <div className="relative max-w-[200px]">
+            <div className="relative">
               <input
                 type="number"
                 step="0.01"
@@ -326,7 +326,7 @@ export default function CarLoanCalc({ user }: Props) {
 
           {/* Loan term */}
           <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-slate-700 mb-2">Loan Term</label>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Loan Term <span className="font-normal text-slate-400">(months)</span></label>
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
               {LOAN_TERMS.map((months) => (
                 <button
@@ -339,9 +339,27 @@ export default function CarLoanCalc({ user }: Props) {
                       : 'bg-white text-slate-600 border-slate-300 hover:border-navy-400 hover:text-navy-700'
                   }`}
                 >
-                  {months}mo
+                  {months}
                 </button>
               ))}
+            </div>
+          </div>
+
+          {/* Monthly income for affordability */}
+          <div className="sm:col-span-2">
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">
+              Monthly Income <span className="text-xs font-normal text-slate-400">— optional, for affordability check</span>
+            </label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={monthlyIncome}
+                onChange={(e) => setMonthlyIncome(formatInput(e.target.value))}
+                className="w-full pl-7 pr-4 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 hover:border-slate-400 transition-colors"
+                placeholder="e.g. 6,000"
+              />
             </div>
           </div>
         </div>
@@ -353,6 +371,17 @@ export default function CarLoanCalc({ user }: Props) {
           Calculate
         </button>
       </div>
+
+      {/* Empty state */}
+      {!results && (
+        <div className="bg-white rounded-xl border border-slate-100 shadow-card p-8 text-center">
+          <p className="text-slate-400 text-sm">
+            Fill in your details above and click{' '}
+            <span className="font-medium text-slate-500">Calculate</span>{' '}
+            to see your monthly payment and full amortization schedule.
+          </p>
+        </div>
+      )}
 
       {/* Results */}
       {results && (
@@ -387,51 +416,37 @@ export default function CarLoanCalc({ user }: Props) {
           </div>
 
           {/* Affordability section */}
-          <div className="bg-white rounded-xl shadow-card border border-slate-100 p-6">
-            <h3 className="font-semibold text-navy-900 mb-1">Can I afford this car?</h3>
-            <p className="text-slate-500 text-sm mb-4">
-              Enter your gross monthly income to see what percentage this payment represents.
-            </p>
-            <div className="flex gap-3 items-start">
-              <div className="relative flex-1 max-w-[220px]">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  value={monthlyIncome}
-                  onChange={(e) => setMonthlyIncome(formatInput(e.target.value))}
-                  className="w-full pl-7 pr-4 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 hover:border-slate-400 transition-colors"
-                  placeholder="Monthly income"
-                />
-              </div>
-              {affordabilityPct !== null && monthlyIncome && (
-                <div className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold ${
-                  affordabilityColor === 'emerald'
-                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                    : affordabilityColor === 'amber'
-                    ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                    : 'bg-red-50 text-red-700 border border-red-200'
-                }`}>
-                  <span>{affordabilityPct.toFixed(1)}% of income</span>
-                </div>
+          {monthlyIncome ? (
+            <div className="bg-white rounded-xl shadow-card border border-slate-100 p-6">
+              <h3 className="font-semibold text-navy-900 mb-3">Can I afford this car?</h3>
+              {affordabilityPct !== null && (
+                <>
+                  <div className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold mb-3 ${
+                    affordabilityColor === 'emerald'
+                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                      : affordabilityColor === 'amber'
+                      ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                      : 'bg-red-50 text-red-700 border border-red-200'
+                  }`}>
+                    {affordabilityPct.toFixed(1)}% of monthly income
+                  </div>
+                  <div className={`flex items-start gap-2 text-sm ${
+                    affordabilityColor === 'emerald' ? 'text-emerald-700' :
+                    affordabilityColor === 'amber' ? 'text-amber-700' : 'text-red-700'
+                  }`}>
+                    <span className={`inline-block w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${
+                      affordabilityColor === 'emerald' ? 'bg-emerald-500' :
+                      affordabilityColor === 'amber' ? 'bg-amber-500' : 'bg-red-500'
+                    }`} />
+                    {affordabilityLabel}
+                  </div>
+                </>
               )}
+              <p className="mt-3 text-xs text-slate-400">
+                Rule of thumb: keep car payment under 15% of gross monthly income. Above 20% puts financial stress on your budget.
+              </p>
             </div>
-            {affordabilityPct !== null && monthlyIncome && (
-              <div className={`mt-3 flex items-start gap-2 text-sm ${
-                affordabilityColor === 'emerald' ? 'text-emerald-700' :
-                affordabilityColor === 'amber' ? 'text-amber-700' : 'text-red-700'
-              }`}>
-                <span className={`inline-block w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${
-                  affordabilityColor === 'emerald' ? 'bg-emerald-500' :
-                  affordabilityColor === 'amber' ? 'bg-amber-500' : 'bg-red-500'
-                }`} />
-                {affordabilityLabel}
-              </div>
-            )}
-            <p className="mt-3 text-xs text-slate-400">
-              Rule of thumb: keep car payment under 15% of gross monthly income. Above 20% puts financial stress on your budget.
-            </p>
-          </div>
+          ) : null}
 
           {/* Payment breakdown bar */}
           <div className="bg-white rounded-xl shadow-card border border-slate-100 p-6">
@@ -474,7 +489,7 @@ export default function CarLoanCalc({ user }: Props) {
                     <th className="text-right px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Balance</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {displayedRows.map((row) => (
                     <tr key={row.payment} className="hover:bg-slate-50 transition-colors">
                       <td className="px-4 py-3 text-slate-500 font-mono text-xs">{row.payment}</td>

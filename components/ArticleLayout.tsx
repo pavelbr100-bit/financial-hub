@@ -26,7 +26,7 @@ export default function ArticleLayout({ meta, children, related }: Props) {
           <span>/</span>
           <Link href="/learn" className="hover:text-slate-600 transition-colors">Learn</Link>
           <span>/</span>
-          <span className="text-slate-600 truncate">{meta.category}</span>
+          <span className="text-slate-600 truncate">{meta.title}</span>
         </nav>
 
         {/* Header */}

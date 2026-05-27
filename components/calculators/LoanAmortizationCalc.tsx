@@ -497,7 +497,7 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
                     <th className="text-right px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Balance</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {displayedRows.map((row, idx) => {
                     const isBalloonRow = results.balloonPayment > 0 && idx === displayedRows.length - 1
                     return (

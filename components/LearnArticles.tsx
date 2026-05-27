@@ -21,6 +21,13 @@ interface Props {
 export default function LearnArticles({ articles }: Props) {
   const [active, setActive] = useState('All')
 
+  const counts: Record<string, number> = {
+    All: articles.length,
+    ...Object.fromEntries(
+      FILTERS.slice(1).map(f => [f, articles.filter(a => a.category === f).length])
+    ),
+  }
+
   const filtered = active === 'All' ? articles : articles.filter(a => a.category === active)
 
   return (
@@ -38,12 +45,15 @@ export default function LearnArticles({ articles }: Props) {
             }`}
           >
             {filter}
+            <span className={`ml-1.5 text-xs ${active === filter ? 'text-white/70' : 'text-slate-400'}`}>
+              {counts[filter]}
+            </span>
           </button>
         ))}
       </div>
 
-      {/* Article grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Article grid — key triggers remount + fade-in on filter change */}
+      <div key={active} className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in">
         {filtered.map(article => (
           <Link
             key={article.slug}

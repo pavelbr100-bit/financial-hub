@@ -266,7 +266,7 @@ export default function HomePage() {
           <p className="text-slate-500">Five calculators, instant results, no account needed.</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {tools.map((tool) => (
             <Link key={tool.title} href={tool.href}>
               <div className="group relative bg-white rounded-xl border border-slate-200 hover:border-navy-300 hover:shadow-card-hover p-6 shadow-card transition-all duration-200 cursor-pointer h-full flex flex-col">
