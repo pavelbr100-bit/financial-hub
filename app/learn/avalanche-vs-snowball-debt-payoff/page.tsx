@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "What is the avalanche method for paying off debt?", a: "The debt avalanche method directs all extra payment money toward the debt with the highest interest rate first, while maintaining minimum payments on everything else. Once that debt is eliminated, the freed-up payment moves to the next highest-rate debt. This approach minimizes the total interest you pay, making it the mathematically optimal strategy for spending as little as possible to become debt-free." },
+  { q: "What is the snowball method for paying off debt?", a: "The debt snowball method pays off the smallest balance first, regardless of interest rate, while maintaining minimums on all other debts. After the smallest debt is gone, that payment rolls into the next smallest. The strategy creates rapid wins early on, and seeing debts disappear completely provides a psychological boost that helps many people stay motivated and on track with their repayment plan." },
+  { q: "Is the debt avalanche or debt snowball method better?", a: "It depends on your personality and financial situation. The avalanche saves more money on interest, often thousands of dollars, and is better if you can stay disciplined without quick wins. The snowball can cost more in interest but produces early victories that help many people maintain momentum. Research on behavioral economics suggests the snowball's psychological wins lead to better long-term outcomes for people who have struggled to pay off debt consistently in the past." },
+  { q: "How do I start the debt avalanche method?", a: "List all your debts with their balances, minimum payments, and interest rates. Order them by interest rate from highest to lowest. Pay the minimum on every debt, then put every extra dollar toward the top of the list. When the highest-rate debt is paid off, add its former payment to the next debt on the list. Repeat until all debts are gone. A debt payoff calculator makes it easy to see your exact payoff date and total interest cost under this approach." },
+  { q: "Can I switch from the snowball to the avalanche method mid-way?", a: "Yes, you can switch at any time with no penalty or reset. If you started with the snowball to build momentum but now want to focus on reducing interest costs, simply reorder your payoff list by interest rate and continue from there. Some people use a deliberate hybrid: snowball for the first two or three small debts to build confidence, then switch to avalanche for the remaining larger balances where the rate differences matter most." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         If you have more than one debt — a credit card, a car loan, a medical bill — you&apos;ve

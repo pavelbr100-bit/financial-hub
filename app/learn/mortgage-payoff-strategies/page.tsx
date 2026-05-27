@@ -6,7 +6,7 @@ import { getArticle } from '@/lib/articles'
 const meta = getArticle('mortgage-payoff-strategies')!
 
 export const metadata: Metadata = {
-  title: { absolute: `${meta.title} | FinWiser Learn` },
+  title: { absolute: 'How to Pay Off Your Mortgage Early — 7 Proven Strategies | FinWiser' },
   description: meta.description,
   alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "How do extra mortgage payments work?", a: "Extra payments applied to a mortgage go directly toward the principal balance. This reduces the outstanding amount, which means less interest accrues the following month, and more of every future regular payment goes toward principal instead of interest. Over time this compounding effect can shave years off the loan and save tens of thousands of dollars." },
+  { q: "How much can I save by making one extra mortgage payment per year?", a: "On a typical 30-year mortgage, making just one extra payment per year usually cuts the loan term by 4 to 6 years and saves $40,000 to $100,000 in interest, depending on your loan balance and rate. The earlier in the loan you start, the greater the savings because you avoid more years of interest accrual on that reduced balance." },
+  { q: "What is the best strategy to pay off a mortgage early?", a: "The best strategy depends on your budget flexibility. Biweekly payments and rounding up your monthly payment by $100 to $200 are low-effort and highly effective. Applying annual windfalls like tax refunds to principal makes a big dent. Refinancing to a 15-year mortgage is the most aggressive option but requires higher monthly payments. Many homeowners combine two or more of these strategies for maximum impact." },
+  { q: "Do biweekly mortgage payments really save money?", a: "Yes. Biweekly payments are mathematically equivalent to making 13 monthly payments per year instead of 12. That extra payment goes entirely toward principal, which reduces the balance faster and cuts interest costs. On a $300,000 30-year mortgage at 7%, biweekly payments typically save $40,000 to $50,000 in interest and pay off the loan 4 to 5 years earlier than scheduled." },
+  { q: "Does paying extra on mortgage principal actually reduce interest?", a: "Yes. Mortgage interest is calculated on the outstanding balance each month. When you make an extra principal payment the balance drops, and every future payment accrues slightly less interest. This effect compounds over time: a smaller balance today means less interest next month, which means more of next month's payment reduces the balance further, and so on for the remainder of the loan." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         The average 30-year mortgage costs more than double the original loan amount by the time

@@ -11,7 +11,7 @@ const related = [
 ]
 
 export const metadata: Metadata = {
-  title: { absolute: `${meta.title} | FinWiser Learn` },
+  title: { absolute: 'How Car Loan Interest Is Calculated — Monthly Breakdown | FinWiser' },
   description: meta.description,
   alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
@@ -37,9 +37,17 @@ export const metadata: Metadata = {
   ],
 }
 
+const faq = [
+  { q: "How is interest calculated on a car loan?", a: "Most car loans use simple interest calculated on the outstanding principal balance each month. Interest for the period equals the balance multiplied by the annual rate divided by 12. The rest of your fixed monthly payment reduces the principal. Because the balance decreases with each payment, the interest portion shrinks over time. Early payments go mostly toward interest; later payments go mostly toward principal. This is why extra payments made early in the loan save more than the same payments made near the end." },
+  { q: "Do car loans use simple or compound interest?", a: "Most standard car loans use simple interest, not compound interest. Interest accrues on the outstanding balance, and your fixed monthly payment covers that period's interest plus a portion of principal. There is no interest-on-interest mechanic the way compound interest works. However, if you miss a payment or your loan has a capitalization clause, unpaid interest may be added to your principal balance, which would then accrue more interest in future periods." },
+  { q: "What happens if I make extra car loan payments?", a: "Extra payments applied to principal reduce your balance faster, which means less interest accrues each subsequent month. This shortens the total loan term and reduces total interest paid. On a $25,000 car loan at 7% over 60 months, adding $100 per month extra saves roughly $600 to $800 in interest and pays off the loan about 6 to 8 months early. Always confirm with your lender that extra payments are applied to principal and not held for future scheduled payments." },
+  { q: "How much total interest will I pay on a $30,000 car loan?", a: "At a 7% rate over 60 months, a $30,000 car loan results in roughly $5,600 in total interest with a monthly payment of about $594. Stretched to 72 months the total interest rises to roughly $6,800 with a $512 monthly payment. At 84 months the total interest is about $8,100 with a $459 payment. A higher rate amplifies these numbers significantly. The same $30,000 loan at 12% over 60 months costs approximately $9,700 in total interest charges." },
+  { q: "Does paying biweekly help with a car loan?", a: "Yes, though the benefit is smaller than with a 30-year mortgage because car loan terms are much shorter. Making a half-payment every two weeks instead of one full payment monthly results in 26 half-payments per year, which is equivalent to 13 full monthly payments. That one extra payment per year reduces principal faster and saves some interest. On a typical 5-year car loan the savings are a few hundred dollars and one to two months off the payoff date." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} related={related}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         When you take out a car loan, the lender quotes you a monthly payment and a rate. Most

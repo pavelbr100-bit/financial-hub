@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "Why do I pay mostly interest at the start of my mortgage?", a: "Mortgage interest is charged on the outstanding balance each month. At the beginning of a 30-year mortgage the balance is at its full amount, so the interest portion of each payment is at its maximum. As you pay down principal over the years the balance shrinks, interest charges decrease, and more of each payment goes toward principal. This pattern is a mathematical consequence of how amortization works, not a fee or a penalty from the lender." },
+  { q: "How does mortgage amortization work?", a: "Amortization spreads loan repayment evenly across a fixed number of payments. Each payment covers the month's interest, which is the balance multiplied by the monthly rate, plus a portion of principal. Because the balance decreases each month the interest portion gradually shrinks and the principal portion grows. Your payment amount stays the same throughout the loan, but its composition shifts from mostly interest at the start to mostly principal near the end." },
+  { q: "How much of my mortgage payment goes to principal in the early years?", a: "In the first year of a 30-year mortgage at 7%, roughly 12 to 15 percent of each payment reduces the principal. The rest is interest. By year 10 about 25 to 30 percent goes to principal. By year 20 it is roughly 50 percent. In the final year nearly the entire payment is principal. The exact split depends on your interest rate and loan term; higher rates mean even more of early payments go to interest." },
+  { q: "Does making extra payments change my amortization schedule?", a: "Yes. Extra principal payments shorten the amortization schedule by reducing the outstanding balance, which reduces future interest charges. The required monthly payment stays the same, but you reach payoff sooner. Even small consistent extras like $100 per month can cut several years off a 30-year mortgage. A mortgage calculator lets you see exactly how your specific extra payment amount changes your payoff date and total interest cost." },
+  { q: "What is negative amortization on a mortgage?", a: "Negative amortization occurs when a monthly payment is too small to cover even the interest due, so the unpaid interest gets added to the loan balance. This means the balance grows over time instead of shrinking. Negative amortization loans were common in the early 2000s with certain adjustable-rate products but are now rare. They are risky for borrowers because you can end up owing more than you originally borrowed." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         You make your first mortgage payment — $1,800, say — and feel good about chipping away at

@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "How can I reduce the total interest I pay on my mortgage?", a: "The most impactful ways to reduce mortgage interest are to make extra principal payments regularly, refinance to a lower rate when rates drop meaningfully, make a larger down payment upfront to reduce the loan amount, choose a shorter loan term like 15 years instead of 30, and maintain excellent credit to qualify for the best available rates. Even small consistent extras like $100 to $200 per month toward principal can save tens of thousands over the life of a 30-year loan." },
+  { q: "Does a higher down payment reduce mortgage interest?", a: "Yes, in two ways. First, a larger down payment means a smaller loan amount, so you pay interest on less money throughout the loan. Second, a down payment of 20% or more eliminates PMI, which reduces your monthly payment further. A higher down payment may also qualify you for a marginally lower interest rate, as lenders view lower loan-to-value loans as lower risk. The trade-off is the opportunity cost of that capital, since money used for a down payment cannot be invested elsewhere." },
+  { q: "How does my credit score affect my mortgage interest rate?", a: "Your credit score has one of the largest single impacts on the rate you are offered. Borrowers with scores above 760 typically receive the best available rates. Each tier lower, at 740, 720, 700, and below 680, often adds 0.25 to 0.5 percentage points to the rate. On a $300,000 mortgage, a 1% rate difference amounts to roughly $60,000 to $70,000 in additional interest over 30 years. Improving your score before applying, even by 20 to 30 points, can meaningfully lower your lifetime interest cost." },
+  { q: "Is it worth buying down your mortgage interest rate with points?", a: "Buying discount points means paying 1% of the loan amount upfront to reduce the interest rate by roughly 0.25%. Whether it is worth it depends on how long you will stay in the home. Divide the upfront cost by the monthly savings to find your break-even point, which is typically 5 to 8 years. If you plan to stay in the home longer than the break-even period, buying points saves money. If you might move or refinance before then, the upfront cost will not be recovered." },
+  { q: "Can I negotiate a lower mortgage interest rate?", a: "Yes, and this is more common than most borrowers realize. Lenders have some discretion in rate setting, and presenting a competing offer from another lender often results in a match or a better offer. Working with a mortgage broker gives you access to rates from multiple lenders at once. You can also negotiate closing costs and point structures. Improving your credit score, reducing your debt-to-income ratio, and making a larger down payment all strengthen your position before applying." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         A 30-year mortgage at 7% on a $350,000 loan will cost you $488,000 in total interest

@@ -37,9 +37,17 @@ export const metadata: Metadata = {
   ],
 }
 
+const faq = [
+  { q: "How much should I put down on a car?", a: "20% is the commonly recommended down payment for a new car. At 20% down you are less likely to become immediately upside-down due to depreciation after driving off the lot. For used cars, 10% is a reasonable starting point since much of the depreciation has already occurred. That said, any down payment is better than none. Even 5 to 10% meaningfully reduces your loan amount, monthly payment, and total interest paid over the life of the loan." },
+  { q: "What happens if I put no money down on a car?", a: "A zero-down purchase means you immediately owe the full purchase price plus taxes and fees on an asset that starts depreciating the moment you drive it off the lot. New cars lose 15 to 20% of value in the first year. With no down payment you could quickly be $3,000 to $5,000 upside-down, meaning if the car is totaled or you need to sell, you would still owe money after the proceeds. Most financial advisors recommend against zero-down financing unless you are getting 0% APR or have exceptional financial stability." },
+  { q: "How does a car down payment affect my monthly payment?", a: "A larger down payment directly reduces your loan amount, which lowers both the monthly payment and total interest. On a $30,000 car at 7% over 60 months with 10% down ($3,000), your payment is about $534 per month. With 20% down ($6,000), it drops to about $475 per month, roughly $59 less each month. Over 60 months that is $3,540 saved in total payments, plus you also pay interest on a smaller principal throughout the entire loan term." },
+  { q: "Does the size of a car down payment affect the interest rate?", a: "Sometimes. A larger down payment reduces the loan-to-value ratio, which lowers lender risk, and some lenders offer slightly better rates for lower-LTV loans, particularly on used cars. The rate improvement is usually modest, around 0.25 to 0.5 percentage points, compared to the larger impact of credit score on rate. However, even a small rate improvement combined with a smaller loan balance produces meaningful total savings over the loan term." },
+  { q: "Can I use a trade-in as a down payment on a car?", a: "Yes. Your trade-in's value is applied directly against the purchase price, reducing the amount you need to finance. This works the same as a cash down payment from a loan calculation perspective. Get your trade-in appraised independently at a third-party buyer or dealer before negotiating to ensure you receive fair market value. Dealers sometimes undervalue a trade-in on paper while adjusting the purchase price to compensate, so negotiate the sale price and trade-in value as separate transactions when possible." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} related={related}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         A larger down payment reduces your loan, your monthly payment, and your total interest

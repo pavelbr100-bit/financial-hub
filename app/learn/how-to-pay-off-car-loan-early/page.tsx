@@ -37,9 +37,17 @@ export const metadata: Metadata = {
   ],
 }
 
+const faq = [
+  { q: "Can I pay off my car loan early?", a: "Yes, in most cases. Standard car loans allow early payoff without penalty. You can pay extra toward principal at any time, make one large lump-sum payoff, or refinance to a shorter term. Before making a large extra payment, confirm with your lender that there is no prepayment penalty, which is rare on modern car loans but worth verifying. Also make sure your extra payments are applied to principal and not held as credit toward future scheduled payments." },
+  { q: "How much do I save by paying off my car loan early?", a: "The savings depend on your rate, remaining balance, and how many months early you pay it off. On a $25,000 car loan at 7% over 60 months, paying off 12 months early saves roughly $900 to $1,000 in interest. Paying off 24 months early saves around $2,000. On higher-rate loans the savings are more substantial because each month of reduced balance eliminates more interest. Use an amortization calculator to see the exact savings on your specific loan." },
+  { q: "Is there a prepayment penalty for paying off a car loan early?", a: "Most modern car loans from banks and credit unions do not have prepayment penalties. However, some dealer-arranged financing or subprime loans may include them. Check the prepayment section of your loan contract before making large extra payments. Prepayment penalties are typically stated as a percentage of the remaining balance or a set number of months of interest. If your contract includes one, calculate whether the penalty cost still makes early payoff financially worthwhile." },
+  { q: "What is the best way to pay off a car loan faster?", a: "The most effective strategies are making biweekly half-payments instead of monthly payments, which results in one extra payment per year; adding extra principal to each monthly payment; applying windfalls like tax refunds or bonuses as lump-sum payments; and refinancing to a lower rate if your credit has improved since origination. Always specify that extra payments go toward principal. Even $50 to $100 per month extra meaningfully reduces total interest on most car loans." },
+  { q: "Does paying off a car loan early hurt your credit?", a: "Paying off a car loan early generally has a neutral to slightly negative short-term effect on credit scores. Closing an installment account can slightly reduce your average account age and credit mix. However, the effect is usually minor and temporary, typically 5 to 15 points, and most people's scores recover within a few months. The financial savings from paying less interest almost always outweigh any brief credit score dip, especially if you have other open accounts maintaining your credit history." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} related={related}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         A car loan is one of the most common forms of consumer debt — and one of the easiest

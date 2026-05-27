@@ -11,7 +11,7 @@ const related = [
 ]
 
 export const metadata: Metadata = {
-  title: { absolute: `${meta.title} | FinWiser Learn` },
+  title: { absolute: '60 vs 72 vs 84-Month Car Loan: Which Term Should You Choose? | FinWiser' },
   description: meta.description,
   alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
@@ -37,9 +37,17 @@ export const metadata: Metadata = {
   ],
 }
 
+const faq = [
+  { q: "What is the best loan term length for a car?", a: "48 or 60 months is generally considered the sweet spot for car loans. These terms offer manageable monthly payments while limiting total interest paid and reducing the risk of being upside-down on the loan. Terms beyond 60 months increase the likelihood of owing more than the car is worth for extended periods, and total interest costs rise significantly with each additional year. Choosing a term where the payment fits your budget at 48 to 60 months is usually the financially optimal choice." },
+  { q: "How much extra do you pay in interest on a 72-month versus a 60-month car loan?", a: "On a $30,000 car loan at 7%, a 60-month loan costs roughly $5,600 in total interest. A 72-month loan at the same rate costs roughly $6,800, about $1,200 more. However, the monthly payment drops from about $594 to $512, saving $82 per month. The cost of that monthly savings is $1,200 in extra interest and 12 additional payments. At higher loan amounts or interest rates the gap between the two terms widens further." },
+  { q: "Is an 84-month car loan a bad idea?", a: "For most borrowers, yes. An 84-month car loan typically means paying significantly more in total interest, being upside-down on the loan for 3 to 5 years, making payments on an aging vehicle that may need costly repairs, and often paying a higher interest rate because lenders charge more for longer terms. The lower monthly payment can feel attractive, but the financial cost is substantial. If you need an 84-month term to make the payments fit your budget, the vehicle may be more than you can comfortably afford." },
+  { q: "Does a longer car loan term affect your credit score?", a: "A longer term itself does not directly hurt your credit score. On-time payment history matters far more than the term length. However, being upside-down on the loan for years creates financial risk. If you need to sell, trade in, or the car is totaled while you owe more than the vehicle is worth, you may face negative equity you would need to pay out of pocket or roll into a new loan. Longer terms also mean the debt stays on your credit report longer, but consistent payment history during that period is a positive factor." },
+  { q: "What is the maximum car loan term most lenders offer?", a: "Most lenders offer up to 84 months for new cars and 72 months for used cars. Some specialty lenders go up to 96 months, but these are unusual and come with very high total interest costs along with significant risk of being upside-down for nearly the entire loan period. Credit unions often offer more flexible terms than banks or dealer financing arms. As vehicles age, lenders impose tighter term restrictions to reduce their collateral risk." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} related={related}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         Dealers know that buyers focus on the monthly payment, not the total cost. A longer

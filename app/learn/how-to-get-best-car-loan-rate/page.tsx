@@ -37,9 +37,17 @@ export const metadata: Metadata = {
   ],
 }
 
+const faq = [
+  { q: "What is a good interest rate for a car loan?", a: "A good car loan rate depends on your credit score and the current rate environment. For borrowers with excellent credit above 750, a competitive rate is below 5 to 6% for a new car. For used cars, below 7 to 8% is strong with good credit. Average rates across all credit tiers run higher, often 8 to 12%, because they include subprime borrowers. The best rates typically come from credit unions, followed by banks, and then dealership-arranged financing through captive lenders." },
+  { q: "How do I qualify for a lower car loan interest rate?", a: "The most powerful factors are your credit score, income stability, down payment size, and chosen loan term length. Improve your credit score before applying by paying down revolving balances and correcting any errors on your credit report. A down payment of 20% or more reduces lender risk and often results in a better rate. Choosing a shorter term of 48 or 60 months rather than 72 to 84 typically lowers your rate because the lender faces less risk over a shorter repayment period." },
+  { q: "Does getting pre-approved for a car loan hurt my credit score?", a: "Getting pre-approved triggers a hard inquiry, which may temporarily lower your score by 2 to 5 points. However, if you receive multiple pre-approvals within a 14 to 45 day window, depending on the scoring model, they are typically counted as a single inquiry for scoring purposes. The temporary impact is small and well worth it. Comparing rates from 3 to 5 lenders before committing can save you thousands of dollars over the life of the loan." },
+  { q: "Should I get a car loan from a bank or a dealership?", a: "Get pre-approved from a bank or credit union before visiting the dealer. This gives you a benchmark rate and real negotiating leverage. Dealers often mark up rates from their lender partners, with the spread going to the dealership as profit, but they also have access to manufacturer incentive financing that can be very competitive. Walk in with your pre-approval in hand, and if the dealer can beat your rate, take the better offer. Never anchor the negotiation on your monthly payment target; focus on total cost and interest rate." },
+  { q: "How much does credit score affect car loan interest rate?", a: "The impact is substantial. Borrowers with excellent credit above 750 average around 5 to 6% on new car loans nationally. With good credit between 700 and 749 it is typically 6 to 8%. Fair credit between 650 and 699 averages 8 to 12%. Poor credit below 600 can result in rates of 15 to 25% or even loan denial. The difference between excellent and poor credit on a $25,000 loan can exceed $8,000 to $10,000 in total interest cost over a 5-year loan term." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} related={related}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         Most car buyers walk into a dealership without a financing plan and end up with

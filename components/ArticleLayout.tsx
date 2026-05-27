@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { ArticleMeta } from '@/lib/articles'
+import ArticleFAQ, { type FAQItem } from './ArticleFAQ'
 
 function toISODate(dateStr: string): string {
   return new Date(dateStr).toISOString().split('T')[0]
@@ -17,9 +18,10 @@ interface Props {
   meta: ArticleMeta
   children: React.ReactNode
   related?: ArticleMeta[]
+  faq?: FAQItem[]
 }
 
-export default function ArticleLayout({ meta, children, related }: Props) {
+export default function ArticleLayout({ meta, children, related, faq }: Props) {
   const articleUrl = `https://finwiser.net/learn/${meta.slug}`
   const isoDate = toISODate(meta.date)
 
@@ -46,10 +48,21 @@ export default function ArticleLayout({ meta, children, related }: Props) {
     ],
   }
 
+  const faqLd = faq && faq.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map(item => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  } : null
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      {faqLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />}
     <div className="min-h-screen bg-slate-50">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10 pb-20">
 
@@ -107,6 +120,16 @@ export default function ArticleLayout({ meta, children, related }: Props) {
           </Link>
         </div>
       </div>
+
+      {/* FAQ section */}
+      {faq && faq.length > 0 && (
+        <div className="border-t border-slate-200 py-12 px-4 sm:px-6">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-xl font-bold text-navy-900 mb-6">Frequently Asked Questions</h2>
+            <ArticleFAQ items={faq} />
+          </div>
+        </div>
+      )}
 
       {/* Related articles */}
       {related && related.length > 0 && (

@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "What is the 28/36 rule for buying a home?", a: "The 28/36 rule is a lender guideline for home affordability. The 28 means your monthly housing costs, including mortgage principal and interest, property taxes, and insurance, should not exceed 28% of your gross monthly income. The 36 means your total monthly debt payments, including housing plus car loans, student loans, credit cards, and other recurring debts, should not exceed 36% of gross income. Most lenders use these thresholds to evaluate mortgage applications." },
+  { q: "How much house can I afford on a $100,000 salary?", a: "Using the 28% rule, your maximum monthly housing payment on a $100,000 salary would be roughly $2,333. Assuming a 7% mortgage rate, a 30-year term, and 10% down, that translates to roughly $280,000 to $320,000 in home price depending on property taxes and insurance in your area. A larger down payment or a lower interest rate increases your buying power, while high existing debts reduce it." },
+  { q: "What percentage of income should go to a mortgage payment?", a: "Lenders typically use 28% of gross monthly income as the maximum for housing costs. However, this is a ceiling, not a target. Many financial advisors suggest keeping housing costs at 25% or below to leave room for savings and unexpected expenses. Your individual situation matters too. If you carry high student loans or plan significant near-term expenses, keeping housing costs closer to 20 to 22% gives you considerably more financial breathing room." },
+  { q: "What counts as debt in the 36% rule?", a: "The 36% back-end debt-to-income ratio includes all recurring monthly debt obligations: your proposed mortgage payment including taxes and insurance, car loans, student loans, minimum credit card payments, personal loans, and any child support or alimony. It does not include utilities, groceries, subscriptions, phone bills, or other variable living expenses. Only fixed contractual debt obligations are counted." },
+  { q: "Does the 28/36 rule factor in a down payment?", a: "The 28/36 rule applies to your monthly payment, not the purchase price directly. A larger down payment reduces your loan amount, which lowers your monthly payment and effectively lets you afford a more expensive home while staying within the 28% limit. Down payments also affect PMI: going below 20% down typically adds private mortgage insurance to your monthly costs, which counts toward the 28% housing expense limit." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         Before you start touring homes, you need a number — not a vague range, but an actual

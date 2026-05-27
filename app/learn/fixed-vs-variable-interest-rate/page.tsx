@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "What is the difference between a fixed and variable interest rate?", a: "A fixed interest rate stays the same for the entire loan term, so your payment never changes. A variable rate, also called an adjustable rate, can change periodically based on a benchmark index like the prime rate or SOFR. Variable rates typically start lower than fixed rates but carry the risk of rising over time. Fixed rates offer payment predictability; variable rates offer potential savings if interest rates stay low or decline during the loan term." },
+  { q: "When is a variable interest rate a better choice than a fixed rate?", a: "A variable rate makes more sense when you plan to pay off the debt quickly before rates can rise significantly, when rates are high overall and likely to fall, or when you have the financial flexibility to absorb a payment increase. Short-term loans like 5-year car loans carry less variable-rate risk than a 30-year mortgage. For long-term loans where rate uncertainty could have a major impact on your budget, the certainty of a fixed rate is usually worth the slightly higher starting cost." },
+  { q: "Can a variable rate loan be converted to a fixed rate?", a: "Some variable-rate loans include an option to convert to a fixed rate at certain points in the term, usually with a fee, though the offered fixed rate may not always be competitive. Alternatively, you can refinance a variable-rate loan into a new fixed-rate loan, which closes out the old loan and opens a new one. Refinancing comes with closing costs, so it is worth calculating how long it takes for the savings to exceed the upfront cost before proceeding." },
+  { q: "What is a rate cap on a variable rate loan?", a: "A rate cap limits how much a variable interest rate can increase, either per adjustment period or over the life of the loan. For example, a 2/6 cap on an adjustable-rate mortgage means the rate cannot increase more than 2% at any single adjustment and cannot exceed the starting rate by more than 6% in total. Caps protect borrowers from extreme payment increases, but a loan near its ceiling can still see substantial payment rises if rates increase sharply over a short period." },
+  { q: "Is a fixed or variable rate better for a mortgage?", a: "For most homebuyers, especially those taking out 30-year mortgages, a fixed rate provides the most security because your payment is locked in for the life of the loan regardless of rate movements. Variable-rate mortgages, known as ARMs, can make sense if you plan to sell or refinance within 5 to 7 years and want to benefit from the lower initial rate. ARMs carry real risk on longer time horizons because even modest rate increases can significantly raise monthly payments on a large mortgage balance." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         When you apply for a mortgage, car loan, or personal loan, one of the first choices

@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "How much do extra mortgage payments really save?", a: "The savings depend on your loan balance, rate, and how much extra you pay. On a $300,000 30-year mortgage at 7%, paying an extra $100 per month saves roughly $44,000 in interest and cuts about 4 years off the loan. Paying an extra $200 per month saves about $72,000 and cuts 7 years. Paying an extra $500 per month saves over $120,000 and cuts more than 12 years. Every dollar of extra principal payment saves multiple dollars in future interest." },
+  { q: "Is it worth making extra mortgage payments?", a: "It depends on your interest rate and alternative uses for the money. Extra mortgage payments are effectively a guaranteed return equal to your mortgage rate. At 7%, every dollar you pay reduces future interest at 7%. If your mortgage rate is low and you can reliably earn more by investing, investing may come out ahead mathematically. At higher rates of 6 to 8% or above, extra mortgage payments often beat low-risk alternatives. There is also real non-financial value in owning your home free and clear sooner." },
+  { q: "What happens when you pay extra on mortgage principal?", a: "When you designate a payment as extra principal, it reduces your outstanding balance immediately. Because mortgage interest is calculated on the balance each month, a lower balance means less interest accrues the next month and every month after. The required monthly payment stays fixed; what changes is that you reach payoff sooner. The extra principal also builds equity faster, which matters if you plan to sell or refinance." },
+  { q: "Should I pay extra on my mortgage or invest the money?", a: "This is one of the most common personal finance dilemmas, and the answer depends on your mortgage rate and risk tolerance. At historically low rates like 3 to 4%, money invested in a diversified index fund has historically outperformed early mortgage payoff over long periods. At higher rates like 6 to 8%, paying down mortgage debt becomes more competitive. A practical approach: contribute to retirement accounts first, especially to capture any employer match, then direct remaining surplus toward the mortgage." },
+  { q: "How much does $200 extra per month save on a mortgage?", a: "On a $300,000 30-year mortgage at 7%, adding $200 per month in extra principal payments saves approximately $72,000 in total interest and shortens the loan by about 7 years. On a $400,000 mortgage at the same rate the savings are roughly $85,000 to $90,000, cutting about 6 to 7 years. Use a mortgage calculator to enter your exact numbers. The savings on larger balances or higher-rate loans are proportionally greater." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         Most homeowners sign a 30-year mortgage and then pay exactly what the bank asks every

@@ -6,7 +6,7 @@ import { getArticle } from '@/lib/articles'
 const meta = getArticle('debt-avalanche-vs-snowball')!
 
 export const metadata: Metadata = {
-  title: { absolute: `${meta.title} | FinWiser Learn` },
+  title: { absolute: 'Debt Avalanche vs Snowball Calculator: Which Method Wins? | FinWiser' },
   description: meta.description,
   alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "What is the debt avalanche method?", a: "The debt avalanche method prioritizes paying off your highest-interest-rate debt first while making minimum payments on all others. Once the highest-rate debt is paid off, you roll that payment toward the next highest-rate debt, and so on. Mathematically this minimizes total interest paid across all your debts and is the fastest way to become debt-free in terms of total dollars spent." },
+  { q: "What is the debt snowball method?", a: "The debt snowball method pays off your smallest-balance debt first, regardless of interest rate, while paying minimums on everything else. Once the smallest debt is gone, you roll that payment to the next smallest balance. This approach generates quick wins that build momentum and motivation, which is why it tends to work well for people who have struggled to stay consistent with debt repayment in the past." },
+  { q: "Which debt payoff method saves the most money, avalanche or snowball?", a: "The debt avalanche saves more money in total interest because it targets high-rate debt first. The difference can be substantial if your debts have very different interest rates. For example, if you have a 24% credit card and a 6% personal loan, the avalanche saves significantly more than the snowball. If your debts have similar rates, the difference between the two methods is minimal and the choice comes down to personal preference." },
+  { q: "How do I choose between the debt avalanche and debt snowball?", a: "Choose avalanche if you want to minimize total interest paid and can stay motivated without early wins. Choose snowball if you have tried and failed to pay off debt before, need the psychological boost of eliminating entire accounts, or have a debt with a very small balance that the avalanche would leave sitting for months. Many financial advisors say the best method is whichever one you will actually stick with consistently." },
+  { q: "How long does it take to pay off debt using these methods?", a: "The timeline depends on your total debt, interest rates, and how much extra you can put toward debt each month beyond minimums. Adding $200 to $300 per month extra can cut a 5-year payoff timeline down to 3 years. Both avalanche and snowball produce similar total payoff timelines. The main difference between them is the total interest paid and which specific debts disappear first along the way." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         Most people with multiple debts — a credit card, a car loan, a student loan — pay whatever

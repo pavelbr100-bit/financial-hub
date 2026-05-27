@@ -6,7 +6,7 @@ import { getArticle } from '@/lib/articles'
 const meta = getArticle('what-is-amortization')!
 
 export const metadata: Metadata = {
-  title: { absolute: `${meta.title} | FinWiser Learn` },
+  title: { absolute: 'What Is Loan Amortization? Simple Explanation + Calculator | FinWiser' },
   description: meta.description,
   alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "What is an amortization schedule?", a: "An amortization schedule is a table showing every payment on a loan, including how much goes to interest, how much reduces the principal balance, and the remaining balance after each payment. It maps the entire life of the loan from the first payment to the last. Reviewing your amortization schedule reveals the true cost of borrowing and shows exactly how extra payments change your payoff date and total interest cost." },
+  { q: "How is an amortization schedule calculated?", a: "Each row uses the outstanding balance and the monthly interest rate. Interest for the period equals balance multiplied by the annual rate divided by 12. Principal paid equals the fixed monthly payment minus that interest. The new balance equals the previous balance minus the principal paid. This repeats for every period until the balance reaches zero. Because the balance is highest at the start, early payments are mostly interest and only a small portion reduces the principal." },
+  { q: "Why do I pay so much interest at the beginning of a loan?", a: "Loan interest is calculated on the outstanding balance. At the start of the loan the balance is at its maximum, so the interest charge for that period is the highest it will ever be. As you pay down principal over time the balance drops, and each month's interest charge shrinks. This front-loading of interest is built into how amortization works and applies equally to mortgages, car loans, and personal loans." },
+  { q: "Can I get an amortization schedule for my mortgage?", a: "Yes. Your lender is required to provide an amortization schedule on request, and most loan servicer portals display one online. You can also generate one instantly with an amortization calculator: enter your loan amount, interest rate, and term and the full payment-by-payment schedule is computed automatically. FinWiser's free loan amortization calculator generates a complete schedule for any loan type." },
+  { q: "What happens to my amortization schedule if I make extra payments?", a: "Extra payments applied to principal shorten the amortization schedule: you reach a zero balance before the original end date. Each extra payment eliminates future interest charges from every remaining row in the schedule. The required monthly payment stays the same; what changes is the total number of payments you end up making. Use an amortization calculator to see exactly how much any extra payment shortens your specific loan." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         When you take out a mortgage or car loan, you receive a fixed monthly payment amount. What

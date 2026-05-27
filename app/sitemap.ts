@@ -46,6 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${base}/calculators/biweekly-mortgage`,
+      lastModified: new Date('2026-05-27'),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${base}/calculators/mortgage/compare`,
       lastModified: new Date('2026-05-01'),
       changeFrequency: 'monthly',

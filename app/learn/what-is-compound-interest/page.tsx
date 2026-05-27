@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "What is compound interest in simple terms?", a: "Compound interest is interest that earns interest. When you save or invest money, you earn interest on your principal. In the next period, you earn interest on the principal plus the interest you already earned. Over time this snowball effect causes your balance to grow faster and faster. The same mechanic works in reverse for debt: unpaid interest gets added to your balance, and in the next period you owe interest on that larger amount." },
+  { q: "How does compound interest grow over time?", a: "Compound interest grows slowly at first and then accelerates dramatically. The first few years of a $10,000 investment at 7% add only a few hundred dollars per year. But after 20 years the balance has grown to about $38,700, adding nearly $2,700 that year alone. After 30 years the balance reaches about $76,000, adding roughly $5,000 per year. The later years do most of the heavy lifting, which is why patience and time in the market matter so much." },
+  { q: "What is the difference between compound and simple interest?", a: "Simple interest is calculated only on the original principal. Compound interest is calculated on principal plus all previously accumulated interest. For a $1,000 investment at 10% over 5 years: simple interest earns a flat $100 per year for $500 total. Compound interest earns $100, then $110, then $121, then $133, then $146, totaling $610. The gap between them grows larger every single year the money stays invested." },
+  { q: "How does compound interest work on a savings account?", a: "Banks calculate and credit interest to your balance periodically, usually daily or monthly. The next calculation uses your new, slightly higher balance. Your annual percentage yield, or APY, reflects the effective annual return after compounding is factored in. A savings account with a 5% nominal rate compounding daily has an APY slightly above 5%. The practical difference is small on short timelines but adds up meaningfully over many years." },
+  { q: "Can compound interest work against you?", a: "Yes, and it is just as powerful on debt as on investments. Credit card balances that carry unpaid interest have that interest added to the balance, which is then charged interest the next period. A $5,000 credit card balance at 22% APR with only minimum payments could take 15 or more years to pay off and cost $8,000 to $10,000 in total interest charges. This is why high-rate revolving debt is so financially destructive and should be paid off as aggressively as possible." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         Put $10,000 in a savings account that earns 7% per year. After one year, you have $10,700.

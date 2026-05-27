@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "What is the fastest way to pay off debt?", a: "The fastest way is to maximize the amount you put toward your highest-interest debt each month while paying minimums on everything else, which is the avalanche method. Speed depends primarily on how much extra you can direct toward debt each month. Increasing income through a side job, cutting variable expenses, and applying windfalls like tax refunds and bonuses directly to debt all accelerate payoff. Consolidating multiple debts to a lower interest rate can also speed things up by reducing how much of each payment goes to interest." },
+  { q: "How do I pay off $20,000 in debt quickly?", a: "Start by listing all debts with their balances, rates, and minimum payments. Calculate how much you can put toward debt above the minimums. Prioritize by interest rate for maximum savings or by balance for motivation. Reducing expenses to free up even $300 to $400 per month extra can pay off $20,000 in 4 to 5 years. Consider a balance transfer to a 0% APR card or a debt consolidation loan to reduce the rate. Avoid taking on any new debt while paying off existing balances." },
+  { q: "Does debt consolidation help pay off debt faster?", a: "Consolidation helps if it reduces your interest rate, because more of each payment then goes to principal. Moving $15,000 from a 22% credit card to a 10% personal loan meaningfully accelerates payoff. However, if consolidation extends your loan term without reducing the monthly payment, it may cost more over time even with a lower rate. The key is to maintain or increase your monthly payment after consolidating, not use the lower required payment as an excuse to pay less each month." },
+  { q: "What is a debt payoff plan and how do I create one?", a: "A debt payoff plan is a structured schedule showing the order and timeline for eliminating each of your debts. To create one, list all debts with balances, rates, and minimums; choose a method such as avalanche or snowball; calculate how much extra you can pay monthly; and project the payoff date for each debt. A debt payoff calculator automates this math and shows you exactly when each balance hits zero and how much total interest you will pay under any scenario." },
+  { q: "How much extra should I pay on debt each month?", a: "Pay as much as you can while maintaining a small emergency fund of at least $1,000 to $2,000 to avoid going back into debt for unexpected expenses. A practical approach: pay minimums on all debts, then direct every available extra dollar toward your top-priority debt. Even $100 to $200 per month extra can significantly change your payoff timeline. Track your progress monthly and adjust when your income or expenses change." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         Debt doesn&apos;t just drain money — it drains mental energy. Every month you carry a

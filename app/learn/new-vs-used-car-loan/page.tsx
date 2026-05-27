@@ -37,9 +37,17 @@ export const metadata: Metadata = {
   ],
 }
 
+const faq = [
+  { q: "Do new or used cars have lower interest rates?", a: "New cars almost always have lower interest rates than used cars. Lenders view new cars as less risky collateral because the value is well established and they carry manufacturer warranties. Interest rate differences of 1 to 3 percentage points between new and used financing are common. However, new cars also cost more upfront, so the total interest paid over the life of the loan may still be higher on a new car even with a lower rate, because the lower rate does not fully offset the larger loan amount." },
+  { q: "How much more does it cost to finance a used car compared to a new one?", a: "The higher interest rate on used cars adds meaningful cost over the loan term. A $25,000 used car loan at 8% over 60 months costs about $5,450 in total interest. The same amount at 6%, which is more typical for new car financing with good credit, costs about $4,000, a difference of $1,450 over 5 years. On older used cars with higher rates of 10 to 15%, the interest cost on a $20,000 loan can easily exceed $7,000 to $8,000 over the loan term." },
+  { q: "What credit score do I need to get a good new car loan rate?", a: "For the best new car loan rates you generally need a credit score of 720 or above. Borrowers with scores of 750 or higher typically qualify for manufacturer promotional rates, sometimes as low as 0 to 2% APR. Scores between 660 and 720 usually result in rates of 4 to 7%. Below 660 is considered subprime territory and typically means rates of 10 to 20% or more from some lenders. Improving your score before applying is one of the most cost-effective ways to reduce your car's true total cost." },
+  { q: "Is it better to finance a new or used car?", a: "It depends on your priorities and financial situation. New cars offer lower interest rates, full warranties, and predictable reliability, but depreciate quickly and lose 15 to 25% of value in the first year. Used cars cost less upfront and depreciate more slowly, but carry higher rates and more uncertainty around condition and history. Many financial advisors suggest a lightly used certified pre-owned vehicle that is 2 to 4 years old as the sweet spot, where most depreciation has already occurred and the rate premium over new is usually small." },
+  { q: "How long can you finance a used car?", a: "Most lenders will finance used cars up to 72 or 84 months for newer used vehicles under 5 years old. Older vehicles often have term restrictions, and many lenders cap financing at 60 months for cars over 5 years old. Some lenders decline financing entirely for very old or high-mileage vehicles. Longer terms on older used cars are particularly risky because the vehicle may need significant repairs or depreciate below the loan balance before you finish paying it off." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} related={related}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         The choice between a new and used car isn&apos;t just about the sticker price. It involves

@@ -83,6 +83,18 @@ const tools = [
       </svg>
     ),
   },
+  {
+    href: '/calculators/biweekly-mortgage',
+    title: 'Biweekly Mortgage Calculator',
+    description:
+      'See how much interest and time you save by paying every two weeks instead of once a month. The math is surprisingly powerful.',
+    badge: 'New' as const,
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
 ]
 
 const features = [
@@ -264,7 +276,7 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
         <div className="mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">What do you want to figure out?</h2>
-          <p className="text-slate-500">Five calculators, instant results, no account needed.</p>
+          <p className="text-slate-500">Six calculators, instant results, no account needed.</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

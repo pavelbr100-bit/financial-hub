@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "What is the difference between simple and compound interest?", a: "Simple interest is calculated only on the original principal. Compound interest is calculated on the principal plus any previously earned interest, meaning interest earns interest. Over long periods the difference is dramatic. A $10,000 investment earning 7% simple interest grows to $20,000 in 14 years; with compound interest it grows to roughly $25,000 over the same period." },
+  { q: "How often does compound interest compound?", a: "Compounding frequency varies by account or investment type. Savings accounts and money market accounts typically compound daily or monthly. CDs often compound semiannually or annually. The more frequently interest compounds, the faster your balance grows, though the practical difference between daily and monthly compounding is small at typical savings rates. What matters far more is the rate itself and how long you leave the money invested." },
+  { q: "How long does it take to double money with compound interest?", a: "The Rule of 72 gives a quick estimate: divide 72 by your annual interest rate. At 6%, your money doubles in about 12 years. At 8%, it doubles in 9 years. At 10%, in about 7 years. This is why starting early matters enormously. Time is the most powerful variable in compound interest, and waiting even a few extra years to start investing can cost far more than contributing a larger amount later." },
+  { q: "Does starting early really matter that much for compound interest?", a: "Enormously. Investing $5,000 per year from age 25 to 65 at 7% compounds to roughly $1.1 million. Starting at 35 and contributing the same amount over 30 years yields only about $540,000, despite contributing just $50,000 less in total. Those 10 extra years of compounding account for a difference of over $560,000. No other variable in personal finance has as large an impact as the number of years your money compounds." },
+  { q: "What is the Rule of 72 in investing?", a: "The Rule of 72 is a mental shortcut for estimating how long an investment takes to double. Divide 72 by the expected annual return rate. At 9% annual returns, the investment doubles in 8 years. It works in reverse too: to find the return needed to double money in a given number of years, divide 72 by the number of years. To double money in 10 years requires roughly 7.2% annual returns. It is an approximation, but a remarkably accurate one for rates in the 5 to 15% range." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         If you save $5,000 today and earn 8% per year, you&apos;ll have $10,795 in 10 years — not $9,000.

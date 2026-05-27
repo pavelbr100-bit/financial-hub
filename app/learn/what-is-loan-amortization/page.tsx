@@ -23,9 +23,17 @@ export const metadata: Metadata = {
   },
 }
 
+const faq = [
+  { q: "What is a loan amortization schedule?", a: "A loan amortization schedule is a complete table showing every payment over the life of a loan. Each row shows the payment number, the payment amount, how much goes to interest, how much reduces the principal, and the remaining balance after that payment. It is generated based on your loan amount, interest rate, and term, and it serves as the full roadmap for repayment from the first payment to the final one that brings the balance to zero." },
+  { q: "How do you read an amortization schedule?", a: "Each row represents one payment period, usually one month. Look at the Interest column to see how much of that payment is the cost of borrowing, and the Principal column to see how much reduces your debt. Early rows will show high interest and low principal. Later rows reverse the pattern with low interest and high principal. The Balance column shows your remaining debt after each payment, which is useful for tracking equity and understanding your exact payoff date." },
+  { q: "Why does the interest portion of payments decrease over time?", a: "Interest is calculated on the outstanding balance each period. As you pay down principal month after month the balance shrinks, and a smaller balance means less interest accrues. Because the total payment amount stays fixed, the share going to principal grows automatically as the interest portion shrinks. By the final years of a loan, nearly the entire payment goes to principal because the balance has been reduced so dramatically over the preceding years." },
+  { q: "How does an amortization schedule change with extra payments?", a: "Extra principal payments reduce the outstanding balance earlier than scheduled, which means less interest accrues in subsequent periods, and the loan reaches a zero balance before the original end date. The required monthly payment amount does not change. What changes is the total number of payments you need to make. An amortization calculator lets you model exactly how any extra payment amount changes your payoff date and total interest cost." },
+  { q: "What is the formula for calculating loan amortization?", a: "The monthly payment formula is M equals P times r times (1 plus r) to the power of n, divided by (1 plus r) to the power of n minus 1, where P is the loan principal, r is the monthly interest rate which is the annual rate divided by 12, and n is the total number of monthly payments. For each period, interest equals balance times r, principal paid equals M minus interest, and new balance equals old balance minus principal paid. This calculation repeats for all n periods until the balance reaches zero." }
+]
+
 export default function Page() {
   return (
-    <ArticleLayout meta={meta}>
+    <ArticleLayout meta={meta} faq={faq}>
 
       <p>
         When you take out a car loan or mortgage, the lender hands you a single monthly payment
