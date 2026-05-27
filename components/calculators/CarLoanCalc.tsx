@@ -201,7 +201,7 @@ export default function CarLoanCalc({ user }: Props) {
           <div className="flex rounded-lg border border-slate-200 overflow-hidden bg-white">
             <button
               type="button"
-              onClick={() => setIsNewCar(true)}
+              onClick={() => { setIsNewCar(true); setInterestRate('7.0') }}
               className={`px-4 py-2 text-sm font-medium transition-colors ${
                 isNewCar ? 'bg-navy-700 text-white' : 'text-slate-600 hover:bg-slate-50'
               }`}
@@ -210,7 +210,7 @@ export default function CarLoanCalc({ user }: Props) {
             </button>
             <button
               type="button"
-              onClick={() => setIsNewCar(false)}
+              onClick={() => { setIsNewCar(false); setInterestRate('11.0') }}
               className={`px-4 py-2 text-sm font-medium transition-colors border-l border-slate-200 ${
                 !isNewCar ? 'bg-navy-700 text-white' : 'text-slate-600 hover:bg-slate-50'
               }`}
@@ -369,7 +369,7 @@ export default function CarLoanCalc({ user }: Props) {
           {/* Summary cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <ResultCard
-              label="Total Loan Amount"
+              label="Amount Financed"
               value={formatCurrency(results.totalLoanAmount)}
               accent="navy"
             />
@@ -382,7 +382,7 @@ export default function CarLoanCalc({ user }: Props) {
               label="Total Vehicle Cost"
               value={formatCurrency(results.totalCost)}
               sub={`incl. ${formatCurrency(results.taxAmount)} tax`}
-              accent="slate"
+              accent="emerald"
             />
           </div>
 

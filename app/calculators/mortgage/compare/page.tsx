@@ -1,6 +1,7 @@
 import MortgageCompare, { type Scenario } from '@/components/calculators/MortgageCompare'
 import { createClient } from '@/lib/supabase/server'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: { absolute: 'Mortgage Comparison Calculator — Compare Up to 3 Loan Scenarios | FinWiser' },
@@ -72,9 +73,7 @@ export default async function MortgageComparePage({
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
-          <a href="/" className="hover:text-navy-600 transition-colors">
-            Home
-          </a>
+          <Link href="/" className="hover:text-navy-600 transition-colors">Home</Link>
           <span>/</span>
           <a
             href="/calculators/mortgage"

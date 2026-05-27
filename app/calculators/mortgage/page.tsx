@@ -60,7 +60,7 @@ export default async function MortgagePage({
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
-          <a href="/" className="hover:text-navy-600 transition-colors">Home</a>
+          <Link href="/" className="hover:text-navy-600 transition-colors">Home</Link>
           <span>/</span>
           <span className="text-slate-700 font-medium">Mortgage Calculator</span>
         </div>
