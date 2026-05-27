@@ -53,6 +53,39 @@ const breadcrumbLd = {
   ],
 }
 
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the debt avalanche method?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The debt avalanche method means making minimum payments on all debts and putting every extra dollar toward the debt with the highest interest rate. Once that debt is eliminated, you roll its payment to the next highest-rate debt. This method mathematically minimizes the total interest paid across all your debts, making it the most efficient path to becoming debt-free.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the debt snowball method?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The debt snowball method means paying off debts from smallest balance to largest, regardless of interest rate. You make minimum payments on everything except the smallest debt, which you attack aggressively. When it\'s gone, roll that payment to the next smallest. The snowball delivers quick motivational wins that many people find crucial for staying on track over months or years.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which method pays off debt faster — avalanche or snowball?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Mathematically, the avalanche method pays off debt faster and saves more in total interest because it targets high-rate debt first. However, research shows the snowball method often leads to better real-world results because eliminating individual debts provides psychological motivation that keeps people committed. If you\'ll stick to either method, choose avalanche. If you need motivation to keep going, snowball often wins in practice.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does an extra monthly payment save on debt?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Even a small extra payment can dramatically reduce your total interest and payoff time, especially on high-rate debt. On a $10,000 credit card balance at 22% APR paying only minimums, adding just $100/month can cut years off your payoff timeline and save thousands in interest. The higher the interest rate, the greater the benefit of extra payments.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should I use my savings to pay off debt?',
+      acceptedAnswer: { '@type': 'Answer', text: 'If your debt\'s interest rate is higher than what your savings earn, paying off the debt is the better financial move. High-interest debt like credit cards (18–25% APR) almost always warrants aggressive payoff. For low-rate debt (under 5%), the math may favor investing instead. Most financial planners recommend keeping a 3–6 month emergency fund before making extra debt payments.' },
+    },
+  ],
+}
+
 export default async function DebtPayoffPage({
   searchParams,
 }: {
@@ -92,6 +125,7 @@ export default async function DebtPayoffPage({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8">
           <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">

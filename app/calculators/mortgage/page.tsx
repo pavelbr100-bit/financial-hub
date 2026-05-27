@@ -52,6 +52,39 @@ const breadcrumbLd = {
   ],
 }
 
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How is a monthly mortgage payment calculated?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A monthly mortgage payment is calculated using the amortization formula: Payment = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount, r is the monthly interest rate (annual rate ÷ 12), and n is the total number of payments. For a $300,000 loan at 7% for 30 years, the principal and interest payment is about $1,996/month.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is included in a full monthly mortgage payment?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A full mortgage payment typically covers four things: principal (reducing your loan balance), interest (the lender\'s fee), property tax (usually escrowed at roughly 1–1.5% of home value per year), and homeowner\'s insurance. If your down payment was less than 20%, PMI (private mortgage insurance) is added as well. Together these are called PITI.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is PMI and when can I stop paying it?',
+      acceptedAnswer: { '@type': 'Answer', text: 'PMI (private mortgage insurance) protects the lender if you default. It\'s required when your down payment is below 20% and typically costs 0.5–1.5% of the loan per year, added to your monthly payment. Under the Homeowners Protection Act, lenders must automatically cancel PMI when you reach 22% equity based on the original purchase price and payment schedule.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much do extra mortgage payments save?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Extra payments go directly toward principal, reducing future interest charges. On a $300,000 30-year mortgage at 7%, paying an extra $200/month saves over $60,000 in interest and pays off the loan roughly 5 years early. The earlier in the loan term you make extra payments, the greater the savings.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the 28/36 rule for mortgages?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The 28/36 rule is a lender guideline for affordability. Your housing costs (mortgage, taxes, insurance) should not exceed 28% of your gross monthly income, and your total debt payments (housing plus auto loans, student loans, credit cards) should not exceed 36%. Staying within these limits reduces the risk of financial stress and improves loan approval odds.' },
+    },
+  ],
+}
+
 export default async function MortgagePage({
   searchParams,
 }: {
@@ -69,6 +102,7 @@ export default async function MortgagePage({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">

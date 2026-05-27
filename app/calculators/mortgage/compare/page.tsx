@@ -52,6 +52,39 @@ const breadcrumbLd = {
   ],
 }
 
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the difference between a 15-year and 30-year mortgage?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A 15-year mortgage has higher monthly payments but builds equity faster and costs dramatically less in total interest. A 30-year mortgage has lower payments that give you more monthly flexibility. On a $300,000 loan at the same interest rate, the 30-year option typically costs over $200,000 more in total interest compared to the 15-year — while the monthly payment difference is often $400–$600.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which mortgage term saves the most money overall?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Shorter terms always save the most total interest. A 15-year mortgage typically costs less than half the total interest of a 30-year at the same rate — and 15-year loans usually carry rates 0.5–0.75% lower than 30-year loans, compounding the savings. The trade-off is a higher monthly payment that leaves less room for other financial goals.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What factors should I compare when evaluating mortgage offers?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Compare the interest rate, loan term, APR (which includes lender fees and points), required down payment, and total cost over the full loan term. Two loans with the same rate can have very different total costs once origination fees and discount points are factored in. Use the APR and a side-by-side amortization comparison as your primary benchmarks.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should I choose a fixed-rate or adjustable-rate mortgage?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A fixed-rate mortgage locks your rate for the life of the loan — ideal for long-term owners who want payment certainty. An ARM starts with a lower introductory rate for 3, 5, or 7 years, then adjusts periodically based on market rates. ARMs make sense if you\'re confident you\'ll sell or refinance before the fixed period ends and current fixed rates are high.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I calculate the total cost of a mortgage?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Multiply your monthly principal and interest payment by the total number of payments (years × 12), then add your down payment. For example: $1,996/month × 360 payments = $718,560 in total P&I payments. Add a $60,000 down payment and the home\'s total purchase cost is $778,560 — even though the purchase price was $360,000. This is why comparing total costs, not just monthly payments, matters.' },
+    },
+  ],
+}
+
 export default async function MortgageComparePage({
   searchParams,
 }: {
@@ -83,6 +116,7 @@ export default async function MortgageComparePage({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">

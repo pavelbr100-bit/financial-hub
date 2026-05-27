@@ -52,6 +52,39 @@ const breadcrumbLd = {
   ],
 }
 
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is compound interest?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Compound interest is interest calculated on both your original principal and the interest already accumulated. Unlike simple interest (always calculated on the original amount), compound interest causes your balance to grow exponentially — your interest earns interest. A $10,000 investment at 8% grows to $21,589 in 10 years with annual compounding, versus $18,000 with simple interest.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does compounding frequency affect investment growth?',
+      acceptedAnswer: { '@type': 'Answer', text: 'More frequent compounding produces slightly higher returns because interest is added to your balance sooner, creating a larger base for the next calculation. $10,000 at 8% over 10 years grows to $21,589 with annual compounding and $22,080 with daily compounding. The difference between monthly and daily compounding is minimal — what matters far more is your rate and investment timeline.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the Rule of 72?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The Rule of 72 is a quick mental math shortcut: divide 72 by your annual interest rate to estimate how many years it takes to double your money. At 6%, money doubles in about 12 years. At 9%, it doubles in 8 years. At 12%, it doubles in 6 years. It\'s a simple way to feel the power (or cost) of any interest rate at a glance.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much should I invest each month to reach a million dollars?',
+      acceptedAnswer: { '@type': 'Answer', text: 'It depends entirely on your timeline and expected return. Assuming a 7% average annual return: to reach $1,000,000 in 30 years requires about $830/month. In 35 years, about $555/month. In 40 years, about $380/month. Starting a decade earlier cuts your required monthly contribution roughly in half — the clearest illustration of why starting early beats starting big.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between simple and compound interest?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Simple interest is always calculated on the original principal only. Compound interest is calculated on the growing balance — principal plus accumulated interest. On $1,000 at 10%: simple interest earns $100 every year (flat). Compound interest earns $100 in year one, $110 in year two, $121 in year three, and so on. Over decades, compound interest grows exponentially while simple interest grows linearly.' },
+    },
+  ],
+}
+
 export default async function CompoundInterestPage({
   searchParams,
 }: {
@@ -77,6 +110,7 @@ export default async function CompoundInterestPage({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8">
           <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">

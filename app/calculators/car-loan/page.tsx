@@ -54,6 +54,39 @@ const breadcrumbLd = {
   ],
 }
 
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How is car loan interest calculated?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Car loans use simple interest on the declining balance. Each month your interest charge equals the remaining balance multiplied by the monthly rate (annual rate ÷ 12). As you pay down the principal, the interest portion of each payment shrinks and the principal portion grows. This makes early extra payments particularly effective at reducing total cost.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is a good car loan interest rate?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Good car loan rates depend on your credit score and whether the car is new or used. Borrowers with excellent credit (720+) typically qualify for new car rates of 5–8% and used car rates of 7–11%. Those with fair credit (580–669) often see rates of 11–17%. Credit unions and banks frequently offer lower rates than dealership financing, so it pays to get pre-approved before visiting a dealer.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much should I put down on a car?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A common guideline is 20% for a new car and 10% for a used car. A larger down payment reduces your loan amount, monthly payment, and total interest paid. It also protects you from going \'underwater\' — owing more than the car is worth — as vehicles typically depreciate 15–25% in the first year alone.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is a 72 or 84-month car loan a bad idea?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Longer terms lower your monthly payment but significantly increase total interest paid and the risk of being underwater on your loan. A $30,000 loan at 8% costs roughly $1,800 more in total interest over 72 months than 60 months — and about $3,700 more over 84 months. Most financial advisors recommend keeping car loan terms at 60 months or less.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What credit score do I need for a good car loan rate?',
+      acceptedAnswer: { '@type': 'Answer', text: 'To qualify for the best car loan rates, a credit score of 720 or higher is generally needed. Scores in the 660–719 range get reasonable rates. Below 620 typically means subprime rates of 13% or more. Before visiting a dealership, check your credit, get pre-approved through your bank or credit union, and compare offers — dealerships earn a markup on financing, so their rate is rarely your best option.' },
+    },
+  ],
+}
+
 export default async function CarLoanPage() {
   const supabase = await createClient()
   const {
@@ -64,6 +97,7 @@ export default async function CarLoanPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         {/* Page header */}
         <div className="mb-8">

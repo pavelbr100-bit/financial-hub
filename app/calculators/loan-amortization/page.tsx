@@ -52,6 +52,39 @@ const breadcrumbLd = {
   ],
 }
 
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a loan amortization schedule?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A loan amortization schedule is a complete table showing every payment over the life of a loan, broken down into principal and interest components. It reveals how much of each payment reduces your balance versus how much is the cost of borrowing, and shows your remaining balance after every payment. It\'s the clearest way to understand the true cost of any loan.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Why do I pay mostly interest at the start of my loan?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Interest is calculated on your remaining balance each month. At the start of a loan, your balance is at its highest — so interest consumes most of your payment. As you pay down the principal over time, the interest portion shrinks and the principal portion grows, even though your total monthly payment stays the same. This is why extra early payments have an outsized effect.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do extra payments affect loan amortization?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Extra payments reduce your principal balance immediately. A lower balance means less interest is charged next month, so more of your next regular payment goes toward principal. This compounding effect accelerates repayment: on a $200,000 loan at 7% for 30 years, an extra $100/month saves over $26,000 in interest and shortens the loan by more than 4 years.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between a 15-year and 30-year loan?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A 15-year loan has higher monthly payments but pays dramatically less total interest and builds equity much faster. A 30-year loan has lower payments that provide cash flow flexibility. On a $300,000 loan at 7%, the 30-year option costs over $400,000 in total interest versus about $185,000 for the 15-year — a difference of more than $215,000.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I calculate my monthly loan payment?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Use the formula: Payment = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the principal, r is the monthly rate (annual rate ÷ 12), and n is total payments. For a $20,000 loan at 6% for 5 years: r = 0.005, n = 60, giving a payment of about $386/month. Online amortization calculators like this one do the math instantly and show the full payment schedule.' },
+    },
+  ],
+}
+
 export default async function LoanAmortizationPage({
   searchParams,
 }: {
@@ -77,6 +110,7 @@ export default async function LoanAmortizationPage({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       {/* Page header */}
       <div className="mb-8">

@@ -1,6 +1,13 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import { Inter } from 'next/font/google'
 import './globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+})
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { createClient } from '@/lib/supabase/server'
@@ -70,7 +77,7 @@ export default async function RootLayout({
   const adSenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
 
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <body className="flex flex-col min-h-screen">
         {adSenseClient && (
           <Script
