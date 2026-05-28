@@ -14,6 +14,7 @@ import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://finwiser.net'),
+  other: { 'google-adsense-account': 'ca-pub-5438252770961085' },
   title: {
     default: 'FinWiser — Free Financial Calculators for Mortgages, Loans & Investing',
     template: '%s | FinWiser',
