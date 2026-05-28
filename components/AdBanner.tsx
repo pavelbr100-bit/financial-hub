@@ -1,7 +1,6 @@
 'use client'
 
-// Replace data-ad-* attributes with your real AdSense values once approved.
-// Set NEXT_PUBLIC_ADSENSE_CLIENT in your .env.local to your ca-pub-XXXXXXXXXXXXXXXX id.
+import { useEffect, useRef } from 'react'
 
 interface AdBannerProps {
   slot: string
@@ -15,14 +14,26 @@ const formatClass: Record<string, string> = {
   vertical:   'h-[600px] w-[160px]',
 }
 
+declare global {
+  interface Window { adsbygoogle: unknown[] }
+}
+
 export default function AdBanner({ slot, format = 'horizontal', className = '' }: AdBannerProps) {
   const isProduction = process.env.NODE_ENV === 'production'
   const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
+  const pushed = useRef(false)
+
+  useEffect(() => {
+    if (!isProduction || !clientId || pushed.current) return
+    try {
+      pushed.current = true
+      ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+    } catch {}
+  }, [isProduction, clientId])
 
   if (!clientId) return null
 
   if (isProduction && clientId) {
-    // Live AdSense unit — script tag is loaded once in layout.tsx <head>
     return (
       <div className={`overflow-hidden ${className}`}>
         <ins
@@ -37,7 +48,7 @@ export default function AdBanner({ slot, format = 'horizontal', className = '' }
     )
   }
 
-  // Development / staging placeholder
+  // Development placeholder
   return (
     <div
       className={`
