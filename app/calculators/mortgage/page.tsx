@@ -147,13 +147,13 @@ export default async function MortgagePage({
       </div>
 
       <div className="mb-6">
-        <AdBanner slot="2233445566" format="horizontal" />
+        <AdBanner slot="2503689657" format="horizontal" />
       </div>
 
       <MortgageCalc user={user ? { email: user.email } : null} initialValues={initialValues} />
 
       <div className="mt-8">
-        <AdBanner slot="6655443322" format="horizontal" />
+        <AdBanner slot="2503689657" format="horizontal" />
       </div>
 
       <section className="mt-12 bg-white rounded-xl border border-slate-100 shadow-card p-6 sm:p-8">

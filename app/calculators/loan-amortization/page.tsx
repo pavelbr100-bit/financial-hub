@@ -144,7 +144,7 @@ export default async function LoanAmortizationPage({
 
       {/* Top AdSense slot */}
       <div className="mb-6">
-        <AdBanner slot="1122334455" format="horizontal" />
+        <AdBanner slot="2503689657" format="horizontal" />
       </div>
 
       {/* Calculator */}
@@ -155,7 +155,7 @@ export default async function LoanAmortizationPage({
 
       {/* Bottom AdSense slot */}
       <div className="mt-8">
-        <AdBanner slot="5544332211" format="horizontal" />
+        <AdBanner slot="2503689657" format="horizontal" />
       </div>
 
       {/* Explainer */}

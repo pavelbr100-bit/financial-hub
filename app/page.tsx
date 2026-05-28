@@ -155,7 +155,7 @@ export default function HomePage() {
       <div className="flex flex-col">
       {/* Top AdSense banner */}
       <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 pt-4">
-        <AdBanner slot="1234567890" format="horizontal" />
+        <AdBanner slot="2503689657" format="horizontal" />
       </div>
 
       {/* Hero */}
@@ -313,7 +313,7 @@ export default function HomePage() {
 
       {/* Mid-page AdSense */}
       <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 pb-10">
-        <AdBanner slot="0987654321" format="horizontal" />
+        <AdBanner slot="2503689657" format="horizontal" />
       </div>
 
       {/* Features row */}

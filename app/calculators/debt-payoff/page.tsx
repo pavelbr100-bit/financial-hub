@@ -157,7 +157,7 @@ export default async function DebtPayoffPage({
         </div>
 
         <div className="mb-6">
-          <AdBanner slot="4455667788" format="horizontal" />
+          <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
         <DebtPayoffCalc
@@ -168,7 +168,7 @@ export default async function DebtPayoffPage({
         />
 
         <div className="mt-8">
-          <AdBanner slot="8877665544" format="horizontal" />
+          <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
         <section className="mt-12 bg-white rounded-xl border border-slate-100 shadow-card p-6 sm:p-8">

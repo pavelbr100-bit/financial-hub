@@ -132,7 +132,7 @@ export default async function CarLoanPage() {
 
         {/* Top AdSense slot */}
         <div className="mb-6">
-          <AdBanner slot="2233445566" format="horizontal" />
+          <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
         {/* Calculator */}
@@ -140,7 +140,7 @@ export default async function CarLoanPage() {
 
         {/* Bottom AdSense slot */}
         <div className="mt-8">
-          <AdBanner slot="6655443322" format="horizontal" />
+          <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
         {/* Explainer */}

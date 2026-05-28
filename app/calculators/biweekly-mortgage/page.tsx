@@ -207,13 +207,13 @@ export default async function BiweeklyMortgagePage() {
         </div>
 
         <div className="mb-6">
-          <AdBanner slot="3344556677" format="horizontal" />
+          <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
         <BiweeklyMortgageCalc user={user ? { email: user.email } : null} />
 
         <div className="mt-8">
-          <AdBanner slot="7766554433" format="horizontal" />
+          <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
         <section className="mt-12 bg-white rounded-xl border border-slate-100 shadow-card p-6 sm:p-8">
