@@ -10,6 +10,7 @@ const inter = Inter({
 })
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import CookieConsent from '@/components/CookieConsent'
 import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
@@ -90,6 +91,7 @@ export default async function RootLayout({
         <Navbar user={user ? { email: user.email } : null} />
         <main className="flex-1">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   )

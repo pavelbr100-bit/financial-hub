@@ -18,17 +18,29 @@ declare global {
   interface Window { adsbygoogle: unknown[] }
 }
 
+function hasAdConsent() {
+  return localStorage.getItem('finwiser_consent') === 'all'
+}
+
 export default function AdBanner({ slot, format = 'horizontal', className = '' }: AdBannerProps) {
   const isProduction = process.env.NODE_ENV === 'production'
   const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
   const pushed = useRef(false)
 
   useEffect(() => {
-    if (!isProduction || !clientId || pushed.current) return
-    try {
-      pushed.current = true
-      ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-    } catch {}
+    if (!isProduction || !clientId) return
+
+    function tryPush() {
+      if (pushed.current || !hasAdConsent()) return
+      try {
+        pushed.current = true
+        ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+      } catch {}
+    }
+
+    tryPush()
+    window.addEventListener('finwiser_consent_updated', tryPush)
+    return () => window.removeEventListener('finwiser_consent_updated', tryPush)
   }, [isProduction, clientId])
 
   if (!clientId) return null
