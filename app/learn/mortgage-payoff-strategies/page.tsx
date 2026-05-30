@@ -42,7 +42,7 @@ export default function Page() {
         and save tens of thousands of dollars.
       </p>
       <p>
-        You don&apos;t need to refinance or dramatically change your finances. Here are five strategies
+        You don&apos;t need to refinance or dramatically change your finances. Here are seven strategies
         that work, ranked roughly by ease of implementation.
       </p>
 
@@ -132,6 +132,53 @@ export default function Page() {
         calculator to model both scenarios before deciding.
       </p>
 
+      <h2>6. Recast Your Mortgage</h2>
+      <p>
+        A mortgage recast (also called reamortization) lets you make a large lump-sum payment toward
+        your principal and then ask your lender to recalculate your monthly payment based on the
+        reduced balance — while keeping the same interest rate and remaining loan term.
+      </p>
+      <p>
+        Unlike refinancing, a recast doesn&apos;t change your rate or term and typically costs only a small
+        administrative fee ($150–$500). The result is a lower required monthly payment, which frees
+        up cash flow. You can then choose to redirect those savings back into extra principal payments
+        to accelerate payoff further.
+      </p>
+      <p>
+        Recasting is particularly useful after a large windfall — a home sale, inheritance, or bonus —
+        where you want to put a significant amount toward the mortgage without committing to the higher
+        payments of a 15-year refinance. Not all lenders offer recasting, and government-backed loans
+        (FHA, VA) typically don&apos;t qualify, so confirm with your servicer first.
+      </p>
+      <div className="callout">
+        <p><strong>Example:</strong> You have 20 years left on a $280,000 balance at 6.5%. You apply
+        a $40,000 lump sum, then recast. The new required payment drops by roughly $300/month — savings
+        you can redirect to principal to pay off the loan even faster.</p>
+      </div>
+
+      <h2>7. Eliminate PMI as Soon as Possible</h2>
+      <p>
+        If you put less than 20% down, your lender likely requires private mortgage insurance (PMI),
+        which typically costs 0.5%–1.5% of the loan amount per year. On a $300,000 loan, that&apos;s
+        $1,500–$4,500 annually — paid to protect the lender, not you.
+      </p>
+      <p>
+        Under federal law (Homeowners Protection Act), lenders must automatically cancel PMI once your
+        loan-to-value ratio reaches 78% based on the original amortization schedule. But you can request
+        cancellation as soon as you reach 20% equity — you don&apos;t have to wait for automatic cancellation.
+        In a rising market, a new appraisal showing increased home value can get you there sooner.
+      </p>
+      <p>
+        Once PMI is cancelled, redirect that monthly savings directly to extra principal payments. You
+        were already accustomed to paying that amount, so this is a painless way to accelerate payoff
+        without changing your budget.
+      </p>
+      <div className="callout">
+        <p><strong>Example:</strong> Your PMI costs $175/month. You reach 20% equity and cancel it.
+        Redirecting that $175/month to principal on a $280,000 loan at 6.5% cuts roughly 3 years off
+        the remaining term and saves about $35,000 in interest.</p>
+      </div>
+
       <h2>Which Strategy Is Right for You?</h2>
       <p>
         The right choice depends on your budget flexibility and how aggressively you want to pay down
@@ -157,6 +204,8 @@ export default function Page() {
           <tr><td>One extra payment per year</td><td>Low</td><td>$50,000–$90,000</td></tr>
           <tr><td>Biweekly payments</td><td>Low</td><td>$50,000–$90,000</td></tr>
           <tr><td>Apply annual windfall</td><td>Medium</td><td>Varies widely</td></tr>
+          <tr><td>Recast your mortgage</td><td>Medium</td><td>Varies (frees cash for extra payments)</td></tr>
+          <tr><td>Eliminate PMI early</td><td>Medium</td><td>$25,000–$50,000</td></tr>
           <tr><td>Refinance to 15-year</td><td>High</td><td>$150,000–$200,000</td></tr>
         </tbody>
       </table>

@@ -5,11 +5,11 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: { absolute: 'Free Mortgage & Loan Calculators — No Signup Required | FinWiser' },
   description:
-    'Free financial calculators for mortgages, loans, compound interest, and debt payoff. See your full amortization schedule, compare mortgage scenarios, and make smarter money decisions — no signup required.',
+    'Free calculators for mortgage payments, car loans, debt payoff, compound interest, and biweekly mortgage savings. Instant results, no account required.',
   alternates: { canonical: 'https://finwiser.net' },
   openGraph: {
-    title: 'FinWiser — Free Mortgage & Loan Calculators',
-    description: 'Free calculators for mortgages, loans, compound interest, and debt payoff. No signup required.',
+    title: 'Free Financial Calculators — FinWiser',
+    description: 'Mortgage, car loan, debt payoff, and compound interest calculators. Free, instant, no signup.',
     type: 'website',
     url: 'https://finwiser.net',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'FinWiser — Free Financial Calculators' }],

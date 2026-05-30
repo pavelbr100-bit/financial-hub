@@ -58,6 +58,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${base}/calculators/mortgage/north-carolina`,
+      lastModified: new Date('2026-05-30'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${base}/learn`,
       lastModified: new Date('2026-05-27'),
       changeFrequency: 'weekly',

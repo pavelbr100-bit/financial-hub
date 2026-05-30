@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 scripts/add_article_faqs.py)",
+      "Bash(sed -n '25,55p' /Users/pavelborishkevich/Apps/financial-hub/app/calculators/mortgage/page.tsx)",
+      "Bash(sed -n '25,55p' /Users/pavelborishkevich/Apps/financial-hub/app/calculators/car-loan/page.tsx)",
+      "Bash(echo \".claude/settings.local.json\" >> /Users/pavelborishkevich/Apps/financial-hub/.gitignore && echo \"added to .gitignore\")"
+    ],
+    "additionalDirectories": [
+      "/Users/pavelborishkevich/Apps/financial-hub"
+    ]
+  }
+}
