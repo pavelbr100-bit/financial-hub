@@ -371,6 +371,15 @@ export default async function MortgagePage({
           <li><Link href="/calculators/loan-amortization" className="text-navy-700 underline hover:text-navy-900">Loan Amortization Calculator</Link> — full amortization schedule for any loan type</li>
           <li><Link href="/learn/mortgage-payoff-strategies" className="text-navy-700 underline hover:text-navy-900">How to Pay Off Your Mortgage Early — 7 Proven Strategies</Link></li>
         </ul>
+        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mt-5 mb-2">State Calculators</p>
+        <ul className="space-y-2 text-sm text-slate-600">
+          <li><Link href="/calculators/mortgage/north-carolina" className="text-navy-700 underline hover:text-navy-900">NC Mortgage Calculator</Link> — NC tax rate (0.77%) pre-loaded</li>
+          <li><Link href="/calculators/mortgage/south-carolina" className="text-navy-700 underline hover:text-navy-900">SC Mortgage Calculator</Link> — SC tax rate (0.57%) pre-loaded</li>
+          <li><Link href="/calculators/mortgage/georgia" className="text-navy-700 underline hover:text-navy-900">GA Mortgage Calculator</Link> — GA tax rate (0.92%) pre-loaded</li>
+          <li><Link href="/calculators/mortgage/florida" className="text-navy-700 underline hover:text-navy-900">FL Mortgage Calculator</Link> — FL tax &amp; hurricane insurance pre-loaded</li>
+          <li><Link href="/calculators/mortgage/texas" className="text-navy-700 underline hover:text-navy-900">TX Mortgage Calculator</Link> — TX tax rate (1.60%) pre-loaded</li>
+          <li><Link href="/calculators/mortgage/virginia" className="text-navy-700 underline hover:text-navy-900">VA Mortgage Calculator</Link> — VA tax rate &amp; VA loan info</li>
+        </ul>
       </section>
 
       <p className="mt-6 mb-2 text-xs text-slate-400 leading-relaxed">

@@ -64,6 +64,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${base}/calculators/mortgage/south-carolina`,
+      lastModified: new Date('2026-05-30'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${base}/calculators/mortgage/georgia`,
+      lastModified: new Date('2026-05-30'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${base}/calculators/mortgage/florida`,
+      lastModified: new Date('2026-05-30'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${base}/calculators/mortgage/texas`,
+      lastModified: new Date('2026-05-30'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${base}/calculators/mortgage/virginia`,
+      lastModified: new Date('2026-05-30'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${base}/learn`,
       lastModified: new Date('2026-05-27'),
       changeFrequency: 'weekly',

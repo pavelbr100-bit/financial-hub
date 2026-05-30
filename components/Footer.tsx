@@ -62,6 +62,39 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
+            <h3 className="text-white font-medium text-sm mt-5 mb-3">State Calculators</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/calculators/mortgage/north-carolina" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  NC Mortgage Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculators/mortgage/south-carolina" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  SC Mortgage Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculators/mortgage/georgia" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  GA Mortgage Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculators/mortgage/florida" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  FL Mortgage Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculators/mortgage/texas" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  TX Mortgage Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculators/mortgage/virginia" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  VA Mortgage Calculator
+                </Link>
+              </li>
+            </ul>
           </div>
 
           {/* Learn */}
