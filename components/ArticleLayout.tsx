@@ -4,7 +4,7 @@ import { siteAuthor } from '@/lib/author'
 import ArticleFAQ, { type FAQItem } from './ArticleFAQ'
 
 function toISODate(dateStr: string): string {
-  return new Date(dateStr).toISOString().split('T')[0]
+  return new Date(dateStr).toISOString().replace(/\.\d{3}Z$/, 'Z')
 }
 
 const categoryStyles: Record<ArticleMeta['categoryColor'], string> = {
@@ -33,6 +33,7 @@ export default function ArticleLayout({ meta, children, related, faq }: Props) {
     headline: meta.title,
     description: meta.description,
     url: articleUrl,
+    image: 'https://finwiser.net/og-image.png',
     datePublished: isoDate,
     dateModified: isoUpdated,
     author: {
