@@ -177,9 +177,7 @@ export default async function CarLoanPage() {
             'how-car-loan-interest-works',
             'new-vs-used-car-loan',
             'how-to-get-best-car-loan-rate',
-            'car-loan-term-length-guide',
             'how-to-pay-off-car-loan-early',
-            'car-loan-down-payment-guide',
           ]
           const carArticles = articles.filter(a => carLoanSlugs.includes(a.slug))
           return (
