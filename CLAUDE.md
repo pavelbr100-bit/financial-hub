@@ -30,8 +30,8 @@ public/
   _headers              Cloudflare cache headers (/_next/static/* immutable)
   og-image.png          shared OG image
   googlec37c7deb2993535b.html  Search Console verification
-  # _redirects does NOT exist
-  # ads.txt does NOT exist
+  ads.txt               AdSense publisher verification (pub-5438252770961085)
+  # _redirects does NOT exist — use next.config.mjs redirects only
 ```
 
 ## Learn Articles
@@ -117,7 +117,8 @@ Do not add `public/_redirects` — use `next.config.mjs` redirects only.
 - **Adding a new article:** Add entry to `lib/articles.ts` array, create `app/learn/<slug>/page.tsx` that calls `getArticle(slug)` and returns `<ArticleLayout>`. Use `` title: { absolute: `${meta.title} | FinWiser` } `` in metadata — never hardcode.
 - **Adding a new state mortgage page:** Add state config to `lib/data/`, create `app/calculators/mortgage/<state>/page.tsx` that renders `<StateMortgageCalculatorPage>`.
 - **No content schema file** (not Astro) — the TypeScript `ArticleMeta` interface in `lib/articles.ts` IS the schema.
-- **No `public/ads.txt`** — needs to be created if AdSense requires it.
+- **`public/ads.txt` exists** — do not modify; contains the AdSense publisher line.
+- **Auth pages are noindexed** via `app/auth/layout.tsx` (server component, sets `robots: { index: false, follow: false }` for the whole `/auth/` tree). Auth routes are also disallowed in `app/robots.ts`. Do not add auth pages to the sitemap.
 
 ## Sitemap
 
