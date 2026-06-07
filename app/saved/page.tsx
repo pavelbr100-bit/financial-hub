@@ -6,6 +6,7 @@ import type { SavedCalculation } from '@/lib/supabase/calculations'
 
 export const metadata: Metadata = {
   title: 'My Saved Calculations',
+  robots: { index: false, follow: false },
 }
 
 export default async function SavedPage() {
