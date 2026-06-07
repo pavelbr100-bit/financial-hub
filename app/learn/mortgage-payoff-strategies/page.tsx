@@ -6,7 +6,7 @@ import { getArticle } from '@/lib/articles'
 const meta = getArticle('mortgage-payoff-strategies')!
 
 export const metadata: Metadata = {
-  title: { absolute: 'How to Pay Off Your Mortgage Early — 7 Proven Strategies | FinWiser' },
+  title: { absolute: `${meta.title} | FinWiser` },
   description: meta.description,
   alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
@@ -78,6 +78,9 @@ export default function Page() {
         that the servicer applies the funds immediately (not held until month-end), and that there are
         no fees for the program. If there are fees, just implement the extra-payment strategy manually.
       </p>
+      <div className="callout">
+        <p><strong>Biweekly vs semi-monthly:</strong> Biweekly means every two weeks — 26 half-payments per year, equivalent to 13 full monthly payments. Semi-monthly means twice per month — 24 half-payments per year, exactly 12 full equivalents and zero extra payment. Only a true biweekly schedule produces the extra annual payment that shortens the loan.</p>
+      </div>
       <p>
         This approach works well for people paid biweekly because the payments align with their income
         schedule, making it easier to manage cash flow.
@@ -96,6 +99,14 @@ export default function Page() {
       <div className="callout">
         <p><strong>Example:</strong> On a $300,000 mortgage at 7% for 30 years, paying an extra
         $100/month cuts the term by about 4 years and saves roughly $44,000 in interest.</p>
+      </div>
+      <div className="callout">
+        <p><strong>Common mistake:</strong> Making an extra payment without designating it as
+        &quot;apply to principal.&quot; Many servicers will hold the overpayment as a credit against
+        your next scheduled payment — which changes the calendar date of the next bill but doesn&apos;t
+        reduce your balance any faster. Check your payment portal or call your servicer to confirm
+        extra funds are applied directly to principal. This one step determines whether the extra
+        payment saves you anything at all.</p>
       </div>
 
       <h2>4. Apply Windfalls to Principal</h2>
@@ -178,6 +189,19 @@ export default function Page() {
         Redirecting that $175/month to principal on a $280,000 loan at 6.5% cuts roughly 3 years off
         the remaining term and saves about $35,000 in interest.</p>
       </div>
+
+      <h2>When Other Goals Come First</h2>
+      <p>
+        Extra mortgage payments make the most financial sense when you have no high-interest consumer
+        debt, an emergency fund in place, and are already capturing any employer retirement match.
+        If those boxes aren&apos;t checked, address them before accelerating the mortgage.
+      </p>
+      <p>
+        At lower rates (3–4%), a diversified portfolio has historically outperformed early payoff
+        over long periods. At higher rates (6–8%+), paying down the mortgage becomes more competitive.
+        The math depends on your specific rate versus expected investment returns — run both scenarios
+        with your actual numbers before deciding.
+      </p>
 
       <h2>Which Strategy Is Right for You?</h2>
       <p>

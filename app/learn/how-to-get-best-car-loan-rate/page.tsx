@@ -7,7 +7,7 @@ const meta = getArticle('how-to-get-best-car-loan-rate')!
 const related = [
   getArticle('how-car-loan-interest-works')!,
   getArticle('new-vs-used-car-loan')!,
-  getArticle('car-loan-down-payment-guide')!,
+  getArticle('how-to-pay-off-car-loan-early')!,
 ]
 
 export const metadata: Metadata = {
@@ -38,8 +38,6 @@ export const metadata: Metadata = {
 }
 
 const faq = [
-  { q: "What is a good interest rate for a car loan?", a: "A good car loan rate depends on your credit score and the current rate environment. For borrowers with excellent credit above 750, a competitive rate is below 5 to 6% for a new car. For used cars, below 7 to 8% is strong with good credit. Average rates across all credit tiers run higher, often 8 to 12%, because they include subprime borrowers. The best rates typically come from credit unions, followed by banks, and then dealership-arranged financing through captive lenders." },
-  { q: "How do I qualify for a lower car loan interest rate?", a: "The most powerful factors are your credit score, income stability, down payment size, and chosen loan term length. Improve your credit score before applying by paying down revolving balances and correcting any errors on your credit report. A down payment of 20% or more reduces lender risk and often results in a better rate. Choosing a shorter term of 48 or 60 months rather than 72 to 84 typically lowers your rate because the lender faces less risk over a shorter repayment period." },
   { q: "Does getting pre-approved for a car loan hurt my credit score?", a: "Getting pre-approved triggers a hard inquiry, which may temporarily lower your score by 2 to 5 points. However, if you receive multiple pre-approvals within a 14 to 45 day window, depending on the scoring model, they are typically counted as a single inquiry for scoring purposes. The temporary impact is small and well worth it. Comparing rates from 3 to 5 lenders before committing can save you thousands of dollars over the life of the loan." },
   { q: "Should I get a car loan from a bank or a dealership?", a: "Get pre-approved from a bank or credit union before visiting the dealer. This gives you a benchmark rate and real negotiating leverage. Dealers often mark up rates from their lender partners, with the spread going to the dealership as profit, but they also have access to manufacturer incentive financing that can be very competitive. Walk in with your pre-approval in hand, and if the dealer can beat your rate, take the better offer. Never anchor the negotiation on your monthly payment target; focus on total cost and interest rate." },
   { q: "How much does credit score affect car loan interest rate?", a: "The impact is substantial. Borrowers with excellent credit above 750 average around 5 to 6% on new car loans nationally. With good credit between 700 and 749 it is typically 6 to 8%. Fair credit between 650 and 699 averages 8 to 12%. Poor credit below 600 can result in rates of 15 to 25% or even loan denial. The difference between excellent and poor credit on a $25,000 loan can exceed $8,000 to $10,000 in total interest cost over a 5-year loan term." }
@@ -50,91 +48,90 @@ export default function Page() {
     <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
-        Most car buyers walk into a dealership without a financing plan and end up with
-        whatever rate the dealer offers. That rate is almost never the best available. Taking
-        a few steps before you buy can save you hundreds to thousands of dollars over the life
-        of your loan.
+        The rate you get on a car loan is rarely determined at the dealership. It&apos;s largely
+        determined before you walk in — by your credit score, your preparation, and whether
+        you showed up with a competing offer or without one. Here&apos;s the sequence that
+        consistently produces the best rate.
       </p>
 
-      <h2>1. Know Your Credit Score Before You Shop</h2>
+      <h2>Six Weeks Before You Buy: Pull Your Credit</h2>
       <p>
-        Your credit score is the single biggest factor in the rate you&apos;ll be offered. Lenders
-        tier rates by credit range:
-      </p>
-      <ul>
-        <li><strong>760+:</strong> Excellent — access to the lowest advertised rates</li>
-        <li><strong>700–759:</strong> Good — competitive rates, slightly higher</li>
-        <li><strong>650–699:</strong> Fair — rates noticeably higher; consider improving score first</li>
-        <li><strong>Below 650:</strong> Subprime — significantly elevated rates; often 14–20%+</li>
-      </ul>
-      <p>
-        Check your credit report for errors before applying. Disputing inaccurate negative
-        items can meaningfully improve your score within 30–60 days.
-      </p>
-
-      <h2>2. Get Pre-Approved Before the Dealership</h2>
-      <p>
-        Pre-approval from your bank or credit union gives you a rate offer you can walk in
-        with. This serves two purposes: you know your worst-case rate, and it removes the
-        dealer&apos;s leverage. A dealer who knows you have a 7.2% pre-approval will work harder
-        to beat it with their financing arm.
+        Your credit score is the single biggest variable in the rate you&apos;ll be offered, and
+        it&apos;s one of the few variables you can actually improve before applying. Lenders tier
+        rates by credit range — the difference between a 680 and a 740 can be 3–5 percentage
+        points, which translates to thousands of dollars on a typical car loan.
       </p>
       <p>
-        Pre-approval typically involves a soft credit inquiry (which doesn&apos;t affect your score).
-        Multiple hard inquiries for auto loans within a 14–45 day window are usually counted
-        as a single inquiry by credit bureaus, so shopping doesn&apos;t hurt your score.
+        Six weeks out is enough time to correct errors on your credit report. Pull your report
+        from AnnualCreditReport.com, look for accounts that aren&apos;t yours, incorrect late payments,
+        or balances that should be zero. Disputing an inaccurate negative item can improve your
+        score within 30 days. Also pay down any credit card balances you can — credit utilization
+        (balance-to-limit ratio) affects your score quickly when you reduce it.
       </p>
 
-      <h2>3. Try a Credit Union First</h2>
+      <h2>Two Weeks Before: Get Pre-Approved, Starting With a Credit Union</h2>
       <p>
-        Credit unions are member-owned nonprofits. They regularly offer auto loan rates 1–2%
-        lower than banks and significantly lower than dealer financing. If you&apos;re not a member
-        of one, many allow you to join by making a small donation to an affiliated organization.
-        The rate savings on a $30,000 loan can easily exceed $1,000–$2,000 over 60 months.
+        Credit unions are member-owned nonprofits, and their auto loan rates consistently run
+        1–2% below equivalent bank rates. If you&apos;re not a member of one, many allow you to join
+        by making a small donation to an affiliated nonprofit. The paperwork takes 20 minutes and
+        the rate savings can easily top $1,000–$2,000 over a 60-month loan.
+      </p>
+      <p>
+        Apply to your credit union first, then your current bank, and one online lender. Multiple
+        auto loan applications within a 14–45 day window count as a single credit inquiry under
+        most scoring models, so shopping doesn&apos;t harm your score. Each pre-approval gives you
+        a rate offer you can use as a benchmark — and a fallback if the dealer can&apos;t beat it.
       </p>
 
-      <h2>4. Separate the Car Price from the Financing</h2>
+      <h2>At the Dealership: What&apos;s Actually Happening Behind the Counter</h2>
       <p>
-        Dealerships often blend the car price negotiation with the financing offer. A common
-        tactic is to offer a low monthly payment while extending the term or padding the rate.
-        Always negotiate the car price first — get that agreed upon — then discuss financing
-        separately. Never start the conversation with &quot;what can I afford per month.&quot;
+        When you ask about financing, the dealer&apos;s finance and insurance (F&I) office submits
+        your application to a network of lenders. Each responds with a <strong>buy rate</strong>
+        — the actual rate you qualify for based on your credit. The dealer is then permitted to
+        mark that rate up — typically up to 2–2.5 percentage points — and keep the difference
+        as profit. You never see the buy rate. You only see the final number the F&I manager
+        presents as if it were a fact.
+      </p>
+      <div className="callout">
+        <p><strong>How the pre-approval changes this dynamic:</strong> When you hand the F&I
+        manager a pre-approval at, say, 6.9%, they know their financing must beat 6.9% or lose
+        the deal. That eliminates most of the markup — they can&apos;t pad the rate above what you
+        already have. Even if you end up using dealer financing because they beat your rate,
+        the pre-approval is what forced them to compete.</p>
+      </div>
+      <p>
+        One more thing about the dealership conversation: always negotiate the car price
+        completely — agree on a number — before financing comes up. Dealers trained in F&I
+        often anchor buyers on a monthly payment target rather than a total price, because
+        they can hide a rate increase inside a payment that still looks affordable. Know your
+        price first. Then discuss the rate separately.
       </p>
 
-      <h2>5. Compare at Least Three Lenders</h2>
+      <h2>Manufacturer Financing: When It&apos;s Genuinely Good</h2>
       <p>
-        Get quotes from: your current bank, a credit union, and the dealer&apos;s financing arm.
-        For used cars, also check online lenders. Research shows buyers who compare three or
-        more loan offers save an average of $1,000–$2,500 over the loan term compared to
-        those who accept the first offer.
+        Automakers sometimes subsidize financing rates to move inventory — especially at
+        end of model year (September–November) or during slow sales periods. A 2.9% or 0%
+        APR promotional offer on a new car is real money. On a $35,000 vehicle, 0% APR over
+        60 months saves you the entire interest cost — $5,000 to $7,000 compared to a market rate.
+      </p>
+      <p>
+        The catch: these rates typically require excellent credit (720+) and aren&apos;t combinable
+        with other discounts. Dealers may also be less willing to negotiate the purchase price
+        when they know you&apos;re using subsidized financing. Run both scenarios — the promotional
+        rate with a higher price, versus a market rate with a better price — to see which total
+        cost is actually lower.
       </p>
 
-      <h2>6. Consider a Larger Down Payment</h2>
+      <h2>The Number That Settles It</h2>
       <p>
-        A bigger down payment reduces the amount financed, which lowers the lender&apos;s risk.
-        Some lenders offer better rates to borrowers who put down 20% or more. It also
-        means less interest accrues on a smaller balance — the savings compound over the
-        full loan term.
-      </p>
-
-      <h2>7. Time Your Purchase Strategically</h2>
-      <p>
-        Rates on new cars fluctuate with manufacturer incentives and federal rate cycles.
-        End of month, end of quarter, and end of model year (typically September–November)
-        are historically the best times to buy — dealers are more motivated to move inventory
-        and manufacturers sometimes subsidize financing rates to hit sales targets.
-      </p>
-
-      <h2>One Number That Matters</h2>
-      <p>
-        On a $30,000 loan over 60 months, the difference between 7% and 10% is $4,256 in
-        total interest. That&apos;s real money — worth a few hours of lender shopping and credit
-        score work before you sign anything.
+        On a $30,000 loan over 60 months, the difference between 7% and 10% is $4,256 in total
+        interest. Three hours of credit union applications, bank comparisons, and pre-approval
+        paperwork routinely saves that amount. The rate you walk in with is almost always better
+        than the rate you&apos;d get by walking in empty-handed.
       </p>
       <p>
-        Use <Link href="/calculators/car-loan">FinWiser&apos;s free car loan calculator</Link> to
-        see exactly what different rates cost you over the full term of your loan — before
-        you walk onto the lot.
+        Use <Link href="/calculators/car-loan">FinWiser&apos;s free car loan calculator</Link> to model
+        your loan at different rates and see the exact total interest cost before you sign anything.
       </p>
 
     </ArticleLayout>

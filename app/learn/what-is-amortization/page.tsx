@@ -6,7 +6,7 @@ import { getArticle } from '@/lib/articles'
 const meta = getArticle('what-is-amortization')!
 
 export const metadata: Metadata = {
-  title: { absolute: 'What Is Loan Amortization? Simple Explanation + Calculator | FinWiser' },
+  title: { absolute: `${meta.title} | FinWiser` },
   description: meta.description,
   alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
@@ -49,6 +49,14 @@ export default function Page() {
 
       <h2>How Amortization Works</h2>
       <p>
+        &quot;Amortize&quot; comes from a Latin root meaning &quot;to kill off&quot; — as in, to gradually
+        extinguish a debt. An amortizing loan is one where each payment covers both interest and
+        some principal, so the balance decreases with every payment until it reaches zero. Not all
+        loans work this way: interest-only loans don&apos;t reduce the balance at all — you pay
+        interest each period and still owe the full principal at the end. Most mortgages, car loans,
+        and personal loans are fully amortizing.
+      </p>
+      <p>
         Each month, your interest charge is calculated on your outstanding principal balance. At
         the start of the loan, that balance is at its highest — so a large portion of your payment
         goes to interest. As you pay down the principal, the interest portion shrinks and the
@@ -62,8 +70,17 @@ export default function Page() {
       </p>
       <div className="callout">
         <p><strong>The front-loading effect:</strong> On a $300,000 mortgage at 7% for 30 years,
-        you pay more in interest than principal for the first 22 years of the loan. It&apos;s only in
-        years 23–30 that principal payments exceed interest payments each month.</p>
+        you pay more in interest than principal for approximately the first 20 years. It&apos;s only
+        from around year 21 onward that principal payments exceed interest each month.</p>
+      </div>
+
+      <div className="callout">
+        <p><strong>Common mistake:</strong> Assuming the loan balance drops linearly — that halfway
+        through a 30-year mortgage, you&apos;ve paid off roughly half. You haven&apos;t. On a $300,000 mortgage
+        at 7%, after 15 years (180 payments) you still owe about $230,000. Most of those payments
+        went to interest. The balance drops slowly at first, then accelerates sharply in the final
+        years. This surprises nearly every first-time homebuyer who looks at their statement and
+        expects to see something closer to $150,000.</p>
       </div>
 
       <h2>Reading an Amortization Schedule</h2>
@@ -76,8 +93,8 @@ export default function Page() {
       </p>
       <ul>
         <li><strong>Total interest paid over the loan term</strong> — this is often a shock. A
-        $300,000 mortgage at 7% for 30 years costs $418,527 in total payments — $118,527 more
-        than the amount borrowed.</li>
+        $300,000 mortgage at 7% for 30 years totals $718,527 in payments — $418,527 in interest
+        alone, more than the original loan amount.</li>
         <li><strong>Balance at the midpoint</strong> — a 30-year mortgage at 7% still has over
         $230,000 outstanding after 15 years, despite 15 years of payments. This matters if you
         plan to sell or refinance.</li>
@@ -136,8 +153,15 @@ export default function Page() {
 
       <h2>Other Loans That Amortize</h2>
       <p>
-        Mortgages get the most attention, but amortization applies to any installment loan:
+        Mortgages get the most attention, but amortization applies to any installment loan. A car
+        loan works the same way — the numbers are just smaller and the timeline shorter:
       </p>
+      <div className="callout">
+        <p><strong>Car loan example:</strong> $25,000 at 6% for 5 years. Monthly payment: $483.32.
+        Month 1 interest: 6% ÷ 12 × $25,000 = $125.00. Principal paid: $483.32 − $125.00 = $358.32.
+        New balance: $24,641.68. Month 2 interest is calculated on $24,641.68 — slightly less, so
+        slightly more principal is repaid. This shift repeats every month until the balance reaches zero.</p>
+      </div>
       <ul>
         <li><strong>Auto loans</strong> — typically 3–7 years. Front-loaded like mortgages, but
         shorter term means the crossover happens faster (usually around the midpoint).</li>
@@ -180,9 +204,9 @@ export default function Page() {
         </thead>
         <tbody>
           <tr><td>Monthly payment</td><td>$1,996</td><td>$1,996</td><td>$1,996</td></tr>
-          <tr><td>Interest portion</td><td>$1,750</td><td>$1,598</td><td>$1,033</td></tr>
-          <tr><td>Principal portion</td><td>$246</td><td>$398</td><td>$963</td></tr>
-          <tr><td>Remaining balance</td><td>$299,754</td><td>$272,568</td><td>$175,710</td></tr>
+          <tr><td>Interest portion</td><td>$1,750</td><td>$1,504</td><td>$596</td></tr>
+          <tr><td>Principal portion</td><td>$246</td><td>$492</td><td>$1,400</td></tr>
+          <tr><td>Remaining balance</td><td>$299,754</td><td>$257,364</td><td>$100,793</td></tr>
         </tbody>
       </table>
 

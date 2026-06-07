@@ -36,14 +36,15 @@ export default function Page() {
     <ArticleLayout meta={meta} faq={faq}>
 
       <p>
-        If you save $5,000 today and earn 8% per year, you&apos;ll have $10,795 in 10 years — not $9,000.
-        That extra $1,795 came from interest earning interest. That&apos;s compound interest, and once you
-        understand it, you&apos;ll look at every savings and investment decision differently.
+        Most people assume that picking the right investment — the right stock, the right fund — is
+        what determines wealth over time. It isn&apos;t. The dominant variable is how long money compounds.
+        A modest return starting early consistently beats a higher return starting late, by margins that
+        feel implausible until you work through the math.
       </p>
       <p>
-        The same principle works in reverse: compound interest is why credit card debt spirals and why
-        ignoring a loan for a few years can double what you owe. Understanding the mechanic gives you
-        a decisive edge in both building wealth and avoiding debt traps.
+        That math is compound interest: interest that earns interest on itself, then on that, in an
+        accelerating cycle. It works the same way in reverse — which is why credit card debt spirals
+        and why ignoring a loan for a few years can double what you owe.
       </p>
 
       <h2>How Compound Interest Actually Works</h2>
@@ -105,6 +106,12 @@ export default function Page() {
         but meaningful amount over long periods. This is because money invested in February has 10
         extra months of compounding over money invested in December.
       </p>
+      <div className="callout">
+        <p><strong>The compounding-vs-contribution ratio:</strong> $200/month invested at 7% for
+        30 years grows to roughly $227,000. The total you contributed: $72,000. The other $155,000
+        — more than twice what you put in — came entirely from compounding. This ratio becomes more
+        extreme at higher rates and longer timelines.</p>
+      </div>
       <p>
         For practical purposes: automate regular contributions and don&apos;t wait to invest a lump sum.
         Time in the market almost always beats timing the market over long horizons.
@@ -145,15 +152,14 @@ export default function Page() {
         process. A 25-year-old who puts $100/month into a retirement account will likely end up
         wealthier than a 35-year-old who puts $300/month, even accounting for the late start.
       </p>
+      <div className="callout">
+        <p><strong>Common mistake:</strong> Waiting to invest because &quot;the amounts are too small to matter.&quot; On a 30-year timeline at 7%, every $100 you invest today becomes roughly $760 by year 30. The amount feels trivial; the compounded result doesn&apos;t. The habit and the time horizon are what matter — not the initial size of the contribution. Start with whatever you can, because starting late costs far more than starting small.</p>
+      </div>
       <p>
-        Run the numbers on your own timeline. The gap between starting today and starting in two
-        years is larger than most people expect — and it only widens with time.
-      </p>
-
-      <p>
-        Use <Link href="/calculators/compound-interest">FinWiser&apos;s free compound interest calculator</Link> to model your own timeline — enter your
-        starting amount, monthly contribution, rate, and years to see exactly how your money
-        compounds over time.
+        Run the numbers on your own timeline with{' '}
+        <Link href="/calculators/compound-interest">FinWiser&apos;s free compound interest calculator</Link>.
+        The gap between starting today and starting in two years is larger than most people expect —
+        and it only widens with time.
       </p>
 
       <table>

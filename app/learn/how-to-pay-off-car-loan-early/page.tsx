@@ -6,8 +6,8 @@ import { getArticle } from '@/lib/articles'
 const meta = getArticle('how-to-pay-off-car-loan-early')!
 const related = [
   getArticle('how-car-loan-interest-works')!,
-  getArticle('car-loan-term-length-guide')!,
-  getArticle('car-loan-down-payment-guide')!,
+  getArticle('how-to-get-best-car-loan-rate')!,
+  getArticle('new-vs-used-car-loan')!,
 ]
 
 export const metadata: Metadata = {
@@ -50,87 +50,97 @@ export default function Page() {
     <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
-        A car loan is one of the most common forms of consumer debt — and one of the easiest
-        to pay off ahead of schedule. Because car loans use simple interest, every extra
-        dollar you pay reduces the principal immediately, which reduces future interest charges.
-        Here are five practical ways to pay off your car loan faster.
+        Say you took out a $28,000 car loan at 8% over 60 months. Your payment is $568/month,
+        and your total interest bill over five years is $6,080. That&apos;s a meaningful cost on
+        top of the car itself — and unlike the sticker price, it&apos;s still negotiable after you
+        drive off the lot.
+      </p>
+      <p>
+        Because car loans use simple interest calculated on the remaining balance, any extra
+        dollar you pay reduces principal today — which reduces the interest you&apos;re charged every
+        subsequent month. The math rewards acting early.
       </p>
 
-      <h2>1. Check for Prepayment Penalties First</h2>
+      <h2>Why Earlier Extra Payments Save More</h2>
       <p>
-        Before making any extra payments, confirm your loan has no prepayment penalty. Most
-        auto loans in the US do not carry one, but some lenders — particularly in subprime
-        financing — include them. Check your loan agreement for any mention of &quot;prepayment
-        penalty&quot; or &quot;early payoff fee.&quot; If there&apos;s a penalty, calculate whether the interest
-        savings still outweigh the cost.
+        On that same $28,000 loan, an extra $1,000 in month 3 saves significantly more than
+        $1,000 in month 45. Here&apos;s why: in month 3 your balance is still close to $26,000, so
+        that $1,000 eliminates interest on $1,000 for the next 57 months. In month 45 the loan
+        is nearly paid down, and the same payment eliminates interest for only 15 months.
+      </p>
+      <div className="callout">
+        <p><strong>On the $28,000 loan at 8%:</strong> An extra $100/month starting from month 1
+        saves roughly $1,050 in total interest and pays off the loan about 9 months early. The
+        same $100/month starting at month 25 saves roughly $420. Same money, same commitment —
+        but starting early more than doubles the benefit.</p>
+      </div>
+      <p>
+        This is the core reason to start paying extra now, not &quot;when things calm down.&quot;
+        The window where early payments matter most is the first half of the loan.
       </p>
 
-      <h2>2. Round Up Your Monthly Payment</h2>
+      <h2>Before You Send Anything Extra: Check Two Things</h2>
       <p>
-        If your payment is $487, pay $500 or $550. The $13–$63 extra goes entirely to
-        principal. On a $25,000 loan at 8% over 60 months, an extra $50/month saves
-        approximately $580 in interest and pays the loan off about 5 months early. Easy,
-        painless, and requires no change to your monthly habits beyond a slightly rounded
-        payment amount.
+        First, confirm your loan has no prepayment penalty. Most US auto loans don&apos;t — but
+        some dealer-arranged or subprime financing includes one. Check the &quot;prepayment&quot; section
+        of your loan agreement before making large extra payments.
       </p>
       <p>
-        Always confirm with your lender — either through their online portal or by adding
-        a note on paper checks — that the extra amount is applied to principal, not held
-        as a credit toward next month&apos;s payment.
-      </p>
-
-      <h2>3. Make One Extra Payment Per Year</h2>
-      <p>
-        Use a tax refund, work bonus, or any windfall to make one additional full payment
-        per year. Applied entirely to principal, this roughly reduces a 60-month loan to
-        53–54 months and saves a meaningful amount in interest — without changing your
-        regular monthly budget at all.
-      </p>
-      <p>
-        On a $30,000 loan at 7%, one extra payment of $594 per year starting in month one
-        saves approximately $800 in total interest and cuts about 6 months off the loan.
+        Second, confirm how your lender applies extra payments. Some apply extra immediately to
+        principal (ideal). Others hold the overpayment as credit against your next scheduled
+        payment, which changes the accounting date but doesn&apos;t reduce your balance faster. Call
+        or check your servicer portal, and designate extra payments explicitly as &quot;apply to
+        principal.&quot; This one step determines whether the extra payment actually helps.
       </p>
 
-      <h2>4. Switch to Biweekly Payments</h2>
+      <h2>The Practical Levers</h2>
       <p>
-        Instead of 12 monthly payments, make 26 half-payments every two weeks. Because
-        26 ÷ 2 = 13, you make the equivalent of one extra full payment per year automatically.
-        The effect is similar to the extra annual payment above, but it&apos;s automatic and
-        spread across the year.
+        The simplest approach is rounding up your payment. If your scheduled payment is $568,
+        pay $600 or $625 every month. The $32–$57 extra goes to principal automatically, and
+        you likely won&apos;t notice the difference in your budget. On the $28,000 loan at 8%, an
+        extra $50/month cuts about 5 months off the loan and saves roughly $580 in interest.
       </p>
       <p>
-        Check with your lender before doing this — some will apply biweekly payments
-        immediately (good), while others will hold the first half-payment and only apply
-        it at month-end (which eliminates the benefit). If your lender doesn&apos;t support true
-        biweekly processing, manually add extra to each monthly payment instead.
-      </p>
-
-      <h2>5. Refinance to a Lower Rate or Shorter Term</h2>
-      <p>
-        If interest rates have dropped since you took out your loan, or your credit score has
-        improved significantly, refinancing may get you a materially lower rate. Lowering
-        a 10% rate to 7% on a $25,000 balance saves roughly $2,000 in interest over 48 months.
+        For a bigger impact without changing your monthly commitment, apply any windfall —
+        tax refund, work bonus, birthday money — as a lump-sum principal payment. A $2,000
+        tax refund applied in year one of the loan cuts around 3 months off the payoff date
+        and saves roughly $1,200 in interest. The earlier in the loan, the larger the multiplier.
       </p>
       <p>
-        Refinancing to a shorter term — for example, from 72 to 48 months — also reduces
-        total interest, though it raises your monthly payment. Weigh the higher payment
-        against the interest savings and the faster payoff.
-      </p>
-      <p>
-        Watch for refinancing fees: origination charges, title transfer fees, and in some
-        states, sales tax on the new loan. Calculate your break-even point before committing.
+        If you&apos;re paid biweekly, making half your monthly payment every two weeks produces
+        26 half-payments per year — equivalent to 13 full monthly payments instead of 12. That
+        one extra payment per year automatically shaves a few months off the loan without
+        changing how much you actually pay. Confirm your lender applies the half-payment
+        immediately rather than holding it until month-end; if they hold it, the timing benefit
+        disappears.
       </p>
 
-      <h2>What Early Payoff Saves You</h2>
+      <h2>When Refinancing Makes Sense</h2>
       <p>
-        The exact savings depend on your balance, rate, and when you start paying extra.
-        Early extra payments save more because they reduce a higher balance — the interest
-        eliminated compounds forward through every remaining month.
+        If your credit score has improved significantly since you took out the loan, or if
+        market rates have fallen, refinancing to a lower rate can reduce both your payment
+        and your total interest cost. Dropping from 10% to 7% on a $20,000 remaining balance
+        saves roughly $1,800 in interest over 36 months. Refinancing to a shorter term — say,
+        from 48 to 36 months — also cuts total interest, though it raises the monthly payment.
       </p>
       <p>
-        Use <Link href="/calculators/car-loan">FinWiser&apos;s free car loan calculator</Link> to
-        model your loan with different extra payment amounts and see your exact payoff date
-        and total interest savings.
+        Watch for refinancing fees: origination charges, title transfer fees, and in some states,
+        sales tax on the new loan amount. Calculate your break-even point — how many months of
+        lower payments it takes to recover the upfront cost — before committing.
+      </p>
+
+      <h2>How Much Can You Actually Save?</h2>
+      <p>
+        Back to the $28,000 loan at 8%. With no extra payments, total interest is $6,080 and
+        payoff is in month 60. Add $100/month from the start: payoff moves to month 51, total
+        interest drops to roughly $5,030 — $1,050 saved. Add $200/month: payoff at month 44,
+        total interest around $4,100 — nearly $2,000 saved. The earlier and larger the extra
+        payment, the more the savings compound through the remaining months.
+      </p>
+      <p>
+        Use <Link href="/calculators/car-loan">FinWiser&apos;s free car loan calculator</Link> to model
+        your specific loan — enter your balance, rate, and extra payment amount to see your exact
+        new payoff date and total interest savings.
       </p>
 
     </ArticleLayout>

@@ -41,9 +41,10 @@ export default function Page() {
         by about $200. Where did the other $1,600 go?
       </p>
       <p>
-        The answer is amortization, and understanding how it works is one of the most useful things
-        you can do as a homeowner. Once you see the math clearly, you&apos;ll know exactly why extra
-        payments are so powerful and when they matter most.
+        This article explains the mortgage-specific reason your balance barely moves in the early
+        years and how to use that knowledge to pay less. For a broader explanation of how loan
+        amortization schedules work across all loan types, see{' '}
+        <Link href="/learn/what-is-amortization">What Is a Loan Amortization Schedule?</Link>
       </p>
 
       <h2>What Amortization Actually Means</h2>
@@ -90,8 +91,8 @@ export default function Page() {
       </p>
       <p>
         On a 30-year mortgage at 7%, the crossover point — where principal finally exceeds interest
-        in each payment — doesn&apos;t happen until month 153, which is roughly the 13th year. For
-        the first 12 and a half years, you&apos;re paying more interest than principal every single month.
+        in each payment — doesn&apos;t happen until around month 242, which is roughly year 20. For
+        the first 20 years, you&apos;re paying more interest than principal every single month.
       </p>
 
       <h2>Why the Total Cost Is So High</h2>
@@ -134,6 +135,16 @@ export default function Page() {
         <li><strong>The crossover point</strong> — the payment number where principal starts
         exceeding interest. Knowing this makes the front-loading feel less abstract.</li>
       </ul>
+      <div className="callout">
+        <p><strong>Common mistake — the refi clock reset:</strong> Many borrowers refinance a
+        30-year mortgage after 10 years into a new 30-year loan and compare only the monthly
+        payments. The new payment is lower, but they&apos;ve just restarted the interest-heavy early
+        phase of the schedule and added 10 years back to their payoff date. On a $260,000 remaining
+        balance refinanced to a lower rate, the monthly savings are real — but the total interest
+        cost over both loans combined often ends up higher. Run the full amortization comparison
+        (total interest paid on both loans through final payoff), not just the monthly payment difference,
+        before deciding. Refinancing to a 15-year term avoids this problem entirely.</p>
+      </div>
       <p>
         The schedule also helps you see exactly how much a refinance would cost in terms of
         resetting the clock — if you refinance a 30-year mortgage after year 10 into a new

@@ -6,7 +6,7 @@ import { getArticle } from '@/lib/articles'
 const meta = getArticle('debt-avalanche-vs-snowball')!
 
 export const metadata: Metadata = {
-  title: { absolute: 'Debt Avalanche vs Snowball Calculator: Which Method Wins? | FinWiser' },
+  title: { absolute: `${meta.title} | FinWiser` },
   description: meta.description,
   alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
@@ -28,7 +28,8 @@ const faq = [
   { q: "What is the debt snowball method?", a: "The debt snowball method pays off your smallest-balance debt first, regardless of interest rate, while paying minimums on everything else. Once the smallest debt is gone, you roll that payment to the next smallest balance. This approach generates quick wins that build momentum and motivation, which is why it tends to work well for people who have struggled to stay consistent with debt repayment in the past." },
   { q: "Which debt payoff method saves the most money, avalanche or snowball?", a: "The debt avalanche saves more money in total interest because it targets high-rate debt first. The difference can be substantial if your debts have very different interest rates. For example, if you have a 24% credit card and a 6% personal loan, the avalanche saves significantly more than the snowball. If your debts have similar rates, the difference between the two methods is minimal and the choice comes down to personal preference." },
   { q: "How do I choose between the debt avalanche and debt snowball?", a: "Choose avalanche if you want to minimize total interest paid and can stay motivated without early wins. Choose snowball if you have tried and failed to pay off debt before, need the psychological boost of eliminating entire accounts, or have a debt with a very small balance that the avalanche would leave sitting for months. Many financial advisors say the best method is whichever one you will actually stick with consistently." },
-  { q: "How long does it take to pay off debt using these methods?", a: "The timeline depends on your total debt, interest rates, and how much extra you can put toward debt each month beyond minimums. Adding $200 to $300 per month extra can cut a 5-year payoff timeline down to 3 years. Both avalanche and snowball produce similar total payoff timelines. The main difference between them is the total interest paid and which specific debts disappear first along the way." }
+  { q: "How long does it take to pay off debt using these methods?", a: "The timeline depends on your total debt, interest rates, and how much extra you can put toward debt each month beyond minimums. Adding $200 to $300 per month extra can cut a 5-year payoff timeline down to 3 years. Both avalanche and snowball produce similar total payoff timelines. The main difference between them is the total interest paid and which specific debts disappear first along the way." },
+  { q: "What if two of my debts have the same interest rate — which do I pay first?", a: "When two debts have identical rates, avalanche and snowball converge on the same answer: pay the smaller balance first. Eliminating an account faster simplifies your finances, reduces the number of minimum payments you track, and can improve your credit utilization ratio sooner. The interest cost difference between targeting the smaller or larger balance first is negligible at the same rate." }
 ]
 
 export default function Page() {
@@ -112,6 +113,26 @@ export default function Page() {
         </tbody>
       </table>
 
+      <h2>How to Choose Between Them</h2>
+      <p>
+        A few questions to help you decide:
+      </p>
+      <ul>
+        <li><strong>Do you have a high-interest credit card?</strong> If one debt charges 20%+ and
+        others are under 10%, the rate spread is large enough that the avalanche saves thousands.
+        Hard to argue with.</li>
+        <li><strong>Have you tried paying off debt before and quit?</strong> If motivation has been
+        the obstacle, the snowball&apos;s early wins may be what keeps you on track this time.</li>
+        <li><strong>How many accounts do you have?</strong> With five or six debts, the snowball&apos;s
+        account elimination gives you visible milestones faster. With two or three, the difference
+        between methods is less significant.</li>
+      </ul>
+      <p>
+        You can also switch at any time — reordering your target debt mid-plan costs nothing and
+        doesn&apos;t reset your progress. Some people start with the snowball for a quick win, then switch
+        to the avalanche once the smallest balance is gone.
+      </p>
+
       <h2>A Hybrid Approach</h2>
       <p>
         The strategies aren&apos;t mutually exclusive. A practical hybrid: use the avalanche for
@@ -141,6 +162,28 @@ export default function Page() {
         meaningful results. A $5,000 credit card balance at 22% with $200/month in payments takes
         30 months and costs $1,350 in interest. Adding $100 more per month cuts it to 20 months
         and $890 in interest — $460 saved for $2,000 of additional payments.
+      </p>
+
+      <h2>A Real Choice: Same Debts, Two Paths</h2>
+      <p>
+        Suppose Marcus has three debts: $6,000 on a credit card at 22%, $2,500 personal loan
+        at 10%, and $9,000 car loan at 6%. He can put $400/month toward debt above minimums.
+      </p>
+      <p>
+        <strong>Avalanche:</strong> He targets the credit card first. It takes about 18 months
+        to eliminate. Then the personal loan (cleared in another 8 months). Then the car loan.
+        Total interest paid: roughly $3,800. Total payoff: about 38 months.
+      </p>
+      <p>
+        <strong>Snowball:</strong> He targets the personal loan first ($2,500). That&apos;s gone in
+        about 7 months — a quick win. Then the credit card (taking about 20 months more). Then
+        the car loan. Total interest paid: roughly $4,700. Total payoff: about 39 months.
+      </p>
+      <p>
+        The avalanche saves Marcus $900 over the same timeline. But the snowball gives him a fully
+        eliminated account in month 7 — five months before the avalanche closes anything. If Marcus
+        has tried and abandoned debt plans before, the snowball&apos;s early win may be worth $900.
+        If he&apos;s motivated by numbers and can stay the course, the avalanche is the clear choice.
       </p>
 
       <h2>When Neither Method Is the Right Next Step</h2>

@@ -5,13 +5,13 @@ import { getArticle } from '@/lib/articles'
 
 const meta = getArticle('how-car-loan-interest-works')!
 const related = [
-  getArticle('car-loan-term-length-guide')!,
   getArticle('how-to-pay-off-car-loan-early')!,
   getArticle('how-to-get-best-car-loan-rate')!,
+  getArticle('new-vs-used-car-loan')!,
 ]
 
 export const metadata: Metadata = {
-  title: { absolute: 'How Car Loan Interest Is Calculated — Monthly Breakdown | FinWiser' },
+  title: { absolute: `${meta.title} | FinWiser` },
   description: meta.description,
   alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
@@ -129,6 +129,34 @@ export default function Page() {
         the same $30,000 for an extra three years. And that&apos;s before you factor in depreciation,
         which can leave you owing more than the car is worth for much of the loan.
       </p>
+      <div className="callout">
+        <p><strong>The upside-down risk:</strong> New cars lose 15–25% of value in the first year. On
+        a $30,000 car with no down payment and an 84-month loan, you could easily owe $28,000 after
+        12 months while the car is worth $22,000 — $6,000 upside-down. If the car is totaled or you
+        need to sell, you still owe the difference. 48- to 60-month terms minimize this risk. If you
+        need an 84-month term to make the payment fit, the vehicle may be more than you can afford.</p>
+      </div>
+
+      <h2>How Your Down Payment Affects Total Cost</h2>
+      <p>
+        A larger down payment reduces your loan amount from day one, which cuts both the monthly
+        payment and the total interest you pay. The standard guidance: <strong>20% down on a new
+        car, 10% on used</strong>. At 20% down on a new car, you&apos;re also less likely to go
+        immediately upside-down due to first-year depreciation.
+      </p>
+      <p>
+        On a $30,000 car at 7% over 60 months:
+      </p>
+      <ul>
+        <li>No down payment: $594/month, $5,640 total interest, loan starts at $30,000</li>
+        <li>10% down ($3,000): $535/month, $5,076 total interest, loan starts at $27,000</li>
+        <li>20% down ($6,000): $475/month, $4,512 total interest, loan starts at $24,000</li>
+      </ul>
+      <p>
+        A trade-in counts as a down payment — its appraised value reduces the amount you need to
+        finance. Get your trade-in appraised independently before negotiating, so you can evaluate
+        the dealer&apos;s offer against a benchmark.
+      </p>
 
       <h2>APR vs. Interest Rate</h2>
       <p>
@@ -140,6 +168,14 @@ export default function Page() {
       </p>
 
       <h2>What This Means for Your Decision</h2>
+      <div className="callout">
+        <p><strong>Common mistake:</strong> Negotiating by monthly payment instead of total cost.
+        A dealer who extends your loan from 60 to 72 months drops the payment by about $40–$50 —
+        which feels like a win. But on a $30,000 loan at 7%, those 12 extra months cost you roughly
+        $1,300 in additional interest. The dealer isn&apos;t lowering your cost; they&apos;re spreading it
+        thinner and collecting more of it. Always evaluate a car loan on total interest paid, not
+        the monthly number alone.</p>
+      </div>
       <p>
         When evaluating a car loan, look at three numbers together: the monthly payment, the
         total interest paid, and the total cost of the vehicle including financing. A payment

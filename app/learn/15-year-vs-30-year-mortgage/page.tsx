@@ -6,7 +6,7 @@ import { getArticle } from '@/lib/articles'
 const meta = getArticle('15-year-vs-30-year-mortgage')!
 const related = [
   getArticle('mortgage-payoff-strategies')!,
-  getArticle('extra-mortgage-payments-how-much-can-you-save')!,
+  getArticle('mortgage-amortization-explained')!,
   getArticle('how-much-house-can-you-afford')!,
 ]
 
@@ -151,6 +151,30 @@ export default function Page() {
         considerably. You need to hold the loan long enough to recoup the higher monthly payments
         through reduced interest. For most borrowers who stay in a home 7+ years, the 15-year
         clearly wins on total cost.
+      </p>
+
+      <h2>A Tale of Two Borrowers</h2>
+      <p>
+        Two colleagues — same $350,000 home, same closing date, same income. One takes the
+        15-year at 6.35%; the other takes the 30-year at 7% with a plan to make extra payments.
+      </p>
+      <p>
+        After 5 years: the 15-year borrower has paid down $86,000 in principal and has $264,000
+        left. The 30-year borrower, even paying an extra $300/month, has paid down roughly $60,000
+        and has $290,000 left. The 15-year borrower has built $26,000 more in equity and paid a
+        lower interest rate the entire time.
+      </p>
+      <p>
+        Then year 4 hits a rough patch — a job change, a medical bill. The 15-year borrower has
+        no choice: the $3,022 payment is due regardless. The 30-year borrower drops back to the
+        $2,329 minimum and weathers the storm. The extra payments resume in year 5.
+      </p>
+      <p>
+        Both outcomes are defensible. The 15-year generates real, automatic discipline and saves
+        $295,000 in interest if everything goes as planned. The 30-year provides a safety valve
+        that can prevent a financial shock from becoming a missed payment. The right answer depends
+        less on the numbers — which clearly favor the 15-year — and more on how stable your income
+        is and whether the higher required payment would genuinely strain your budget.
       </p>
 
       <h2>Run Your Own Numbers</h2>

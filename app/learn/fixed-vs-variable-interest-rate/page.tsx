@@ -24,11 +24,9 @@ export const metadata: Metadata = {
 }
 
 const faq = [
-  { q: "What is the difference between a fixed and variable interest rate?", a: "A fixed interest rate stays the same for the entire loan term, so your payment never changes. A variable rate, also called an adjustable rate, can change periodically based on a benchmark index like the prime rate or SOFR. Variable rates typically start lower than fixed rates but carry the risk of rising over time. Fixed rates offer payment predictability; variable rates offer potential savings if interest rates stay low or decline during the loan term." },
-  { q: "When is a variable interest rate a better choice than a fixed rate?", a: "A variable rate makes more sense when you plan to pay off the debt quickly before rates can rise significantly, when rates are high overall and likely to fall, or when you have the financial flexibility to absorb a payment increase. Short-term loans like 5-year car loans carry less variable-rate risk than a 30-year mortgage. For long-term loans where rate uncertainty could have a major impact on your budget, the certainty of a fixed rate is usually worth the slightly higher starting cost." },
   { q: "Can a variable rate loan be converted to a fixed rate?", a: "Some variable-rate loans include an option to convert to a fixed rate at certain points in the term, usually with a fee, though the offered fixed rate may not always be competitive. Alternatively, you can refinance a variable-rate loan into a new fixed-rate loan, which closes out the old loan and opens a new one. Refinancing comes with closing costs, so it is worth calculating how long it takes for the savings to exceed the upfront cost before proceeding." },
   { q: "What is a rate cap on a variable rate loan?", a: "A rate cap limits how much a variable interest rate can increase, either per adjustment period or over the life of the loan. For example, a 2/6 cap on an adjustable-rate mortgage means the rate cannot increase more than 2% at any single adjustment and cannot exceed the starting rate by more than 6% in total. Caps protect borrowers from extreme payment increases, but a loan near its ceiling can still see substantial payment rises if rates increase sharply over a short period." },
-  { q: "Is a fixed or variable rate better for a mortgage?", a: "For most homebuyers, especially those taking out 30-year mortgages, a fixed rate provides the most security because your payment is locked in for the life of the loan regardless of rate movements. Variable-rate mortgages, known as ARMs, can make sense if you plan to sell or refinance within 5 to 7 years and want to benefit from the lower initial rate. ARMs carry real risk on longer time horizons because even modest rate increases can significantly raise monthly payments on a large mortgage balance." }
+  { q: "When is a variable interest rate a better choice than a fixed rate?", a: "A variable rate makes more sense when you plan to pay off the debt quickly before rates can rise significantly, when rates are high overall and likely to fall, or when you have the financial flexibility to absorb a payment increase. Short-term loans like 5-year car loans carry less variable-rate risk than a 30-year mortgage. For long-term loans where rate uncertainty could have a major impact on your budget, the certainty of a fixed rate is usually worth the slightly higher starting cost." },
 ]
 
 export default function Page() {
@@ -100,32 +98,33 @@ export default function Page() {
 
       <h2>When Fixed Makes Sense</h2>
       <p>
-        Choose a fixed rate if:
+        A fixed rate is the right call for long-term loans — 10 years or more — especially when
+        rates are at or near historical norms. If your budget doesn&apos;t have much room to absorb
+        a payment increase, a fixed rate removes that risk entirely. The same applies if you plan
+        to stay in the home or keep the loan through most of its term: locking in today&apos;s rate
+        means market movements can never make your situation worse. When current rates are low
+        relative to historical averages, fixing them is almost always the right choice — you&apos;re
+        paying a modest premium over the variable rate to eliminate a risk that compounds over decades.
       </p>
-      <ul>
-        <li>You&apos;re taking a long-term loan (10 years or more) and rates are at or near
-        historical norms</li>
-        <li>Your budget is tight and you can&apos;t absorb a significant payment increase</li>
-        <li>You plan to stay in the home or keep the loan for most of its term</li>
-        <li>You value predictability more than the potential for short-term savings</li>
-        <li>Current rates are low relative to historical averages (lock in the good rate)</li>
-      </ul>
 
       <h2>When Variable Might Make Sense</h2>
       <p>
-        A variable rate may be appropriate if:
+        The scenario where a variable rate clearly wins is a short, certain timeline. If you know
+        with high confidence that you&apos;ll sell or refinance before the initial fixed period of an
+        ARM expires — typically 5 or 7 years — you capture the lower starting rate without ever
+        facing an adjustment. The $286/month savings on a $350,000 5/1 ARM over 5 years represents
+        $17,160 in genuine savings if you exit on schedule.
       </p>
-      <ul>
-        <li>You have a short timeline — if you&apos;re certain you&apos;ll sell or refinance before
-        the initial fixed period ends, you capture the lower starting rate without the risk</li>
-        <li>Rates are unusually high and likely to fall — if rates drop, your ARM adjusts
-        down automatically (fixed rates require refinancing)</li>
-        <li>The loan is short-term and fully paid off before the rate adjusts</li>
-      </ul>
       <p>
-        The key condition for variable rates is timeline certainty. If there&apos;s any meaningful
-        chance you&apos;ll keep the loan past the initial fixed period, the unpredictability of
-        future payments is a genuine financial risk.
+        Variable rates can also make sense when rates are unusually high and likely to fall. An
+        ARM adjusts downward automatically when benchmark rates drop; a fixed-rate borrower would
+        need to refinance to capture the same benefit. The catch: predicting the direction of rates
+        is unreliable. &quot;Rates will likely fall&quot; has been wrong for multi-year stretches.
+      </p>
+      <p>
+        The key test for any variable rate is timeline certainty. If there&apos;s meaningful probability
+        you&apos;ll hold the loan past the initial fixed period, the unpredictability of future payments
+        is a real financial risk — not a hypothetical one.
       </p>
 
       <h2>The Refinancing Option</h2>

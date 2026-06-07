@@ -126,6 +126,16 @@ export default function Page() {
         today&apos;s income may be too aggressive.</li>
       </ul>
 
+      <div className="callout">
+        <p><strong>Common mistake:</strong> Treating the lender&apos;s approval amount as the
+        right amount to borrow. Lenders approve based on maximum risk tolerance — their risk,
+        not your financial comfort. A lender who approves you for a $420,000 mortgage doesn&apos;t
+        know that you plan to have a child next year, that your car needs replacing, or that you
+        value having savings left over after closing. The approval limit is the ceiling of what
+        they&apos;ll lend; your comfortable number is almost always lower. Use the 28/36 rule as a
+        guardrail, not a target.</p>
+      </div>
+
       <h2>A More Conservative Starting Point</h2>
       <p>
         Many financial planners recommend targeting 25% or less of gross income for housing, not

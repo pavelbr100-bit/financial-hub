@@ -6,8 +6,8 @@ import { getArticle } from '@/lib/articles'
 const meta = getArticle('new-vs-used-car-loan')!
 const related = [
   getArticle('how-to-get-best-car-loan-rate')!,
-  getArticle('car-loan-down-payment-guide')!,
   getArticle('how-car-loan-interest-works')!,
+  getArticle('how-to-pay-off-car-loan-early')!,
 ]
 
 export const metadata: Metadata = {
@@ -42,7 +42,8 @@ const faq = [
   { q: "How much more does it cost to finance a used car compared to a new one?", a: "The higher interest rate on used cars adds meaningful cost over the loan term. A $25,000 used car loan at 8% over 60 months costs about $5,450 in total interest. The same amount at 6%, which is more typical for new car financing with good credit, costs about $4,000, a difference of $1,450 over 5 years. On older used cars with higher rates of 10 to 15%, the interest cost on a $20,000 loan can easily exceed $7,000 to $8,000 over the loan term." },
   { q: "What credit score do I need to get a good new car loan rate?", a: "For the best new car loan rates you generally need a credit score of 720 or above. Borrowers with scores of 750 or higher typically qualify for manufacturer promotional rates, sometimes as low as 0 to 2% APR. Scores between 660 and 720 usually result in rates of 4 to 7%. Below 660 is considered subprime territory and typically means rates of 10 to 20% or more from some lenders. Improving your score before applying is one of the most cost-effective ways to reduce your car's true total cost." },
   { q: "Is it better to finance a new or used car?", a: "It depends on your priorities and financial situation. New cars offer lower interest rates, full warranties, and predictable reliability, but depreciate quickly and lose 15 to 25% of value in the first year. Used cars cost less upfront and depreciate more slowly, but carry higher rates and more uncertainty around condition and history. Many financial advisors suggest a lightly used certified pre-owned vehicle that is 2 to 4 years old as the sweet spot, where most depreciation has already occurred and the rate premium over new is usually small." },
-  { q: "How long can you finance a used car?", a: "Most lenders will finance used cars up to 72 or 84 months for newer used vehicles under 5 years old. Older vehicles often have term restrictions, and many lenders cap financing at 60 months for cars over 5 years old. Some lenders decline financing entirely for very old or high-mileage vehicles. Longer terms on older used cars are particularly risky because the vehicle may need significant repairs or depreciate below the loan balance before you finish paying it off." }
+  { q: "How long can you finance a used car?", a: "Most lenders will finance used cars up to 72 or 84 months for newer used vehicles under 5 years old. Older vehicles often have term restrictions, and many lenders cap financing at 60 months for cars over 5 years old. Some lenders decline financing entirely for very old or high-mileage vehicles. Longer terms on older used cars are particularly risky because the vehicle may need significant repairs or depreciate below the loan balance before you finish paying it off." },
+  { q: "Does buying used still make sense if the new car has a 0% APR offer?", a: "A 0% APR offer on a new car significantly narrows or eliminates the used car financial advantage. On a $40,000 car at 0% over 60 months, you pay exactly $40,000 in total — zero interest. A comparable used car at 11% over 60 months generates roughly $8,500 in interest charges. Whether the new car is still the better total value depends on the price gap between the two vehicles, but 0% APR removes one of the main reasons to favor used car financing." }
 ]
 
 export default function Page() {
@@ -121,6 +122,23 @@ export default function Page() {
         financing rates — sometimes as low as 3–5% through the automaker&apos;s financing arm.
         If you can get near-new-car rates on a used-car price, the total cost can be significantly
         lower than either a straight new or used loan.
+      </p>
+
+      <h2>When 0% APR Changes Everything</h2>
+      <p>
+        Occasionally, automakers offer 0% APR promotional financing on new vehicles to move
+        inventory. These deals fundamentally shift the new-vs-used math. On a $40,000 car at
+        0% APR over 60 months, you pay exactly $40,000 — no interest at all. A comparable
+        used car financed at 11% over 60 months generates roughly $8,500 in interest charges.
+        Unless the used car&apos;s price is at least $8,500 lower, the new car with 0% APR is the
+        better financial deal.
+      </p>
+      <p>
+        The caveats: these rates require excellent credit (usually 720+), are often non-negotiable
+        on price (the manufacturer captures value through the financing subsidy), and are typically
+        available only on specific trim levels or outgoing model years. But when you qualify and
+        the numbers line up, 0% APR on a new car is genuinely one of the best financing deals
+        available to consumers.
       </p>
 
       <h2>How to Compare the Real Numbers</h2>
