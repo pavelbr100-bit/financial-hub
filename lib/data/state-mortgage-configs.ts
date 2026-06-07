@@ -52,6 +52,23 @@ export const ncConfig: StateConfig = {
     taxContext:
       "North Carolina's average effective property tax rate is 0.77%, well below the national average of 1.1%, which helps keep monthly payments lower than many comparable states.",
   },
+  extraSections: [
+    {
+      heading: 'Closing Costs in North Carolina',
+      paragraphs: [
+        "North Carolina is an attorney state — meaning a licensed NC real estate attorney must supervise and conduct the closing. This is not optional; it's required by state law. Attorney fees typically run $750–$1,500, depending on the transaction complexity and firm. Budget for this on top of the standard closing cost components.",
+        'Total closing costs in North Carolina generally run 2–3% of the purchase price, which includes:',
+      ],
+      bullets: [
+        'Attorney fee: $750–$1,500',
+        'Title search and title insurance: $500–$1,000',
+        'Recording fees: $64 (deed) + $64 (deed of trust)',
+        'Lender origination fee: varies (0–1% of loan amount)',
+        'Prepaid interest, escrow setup, and homeowner\'s insurance premium',
+      ],
+      note: 'On a $320,000 purchase, closing costs often total $6,400–$9,600. Ask your lender for a Loan Estimate within 3 business days of applying — it breaks down every closing cost line by line.',
+    },
+  ],
 }
 
 export const scConfig: StateConfig = {
@@ -72,6 +89,21 @@ export const scConfig: StateConfig = {
     taxContext:
       'South Carolina has one of the lowest property tax rates in the country at 0.57% average effective rate, significantly below the national average of 1.1%.',
   },
+  extraSections: [
+    {
+      heading: 'Flood Insurance for South Carolina Coastal Homes',
+      paragraphs: [
+        'South Carolina\'s coastline — including Myrtle Beach, Hilton Head, the Sea Islands, and Charleston — runs through FEMA-designated Special Flood Hazard Areas (SFHAs). If your home is in a SFHA and you have a federally backed mortgage, flood insurance is required by law. Even outside SFHAs, many SC lenders require it for coastal properties.',
+        'Standard homeowner\'s insurance does not cover flooding. Flood insurance is a separate policy, typically through FEMA\'s National Flood Insurance Program (NFIP) or a private insurer. Annual premiums vary widely:',
+      ],
+      bullets: [
+        'Low-risk zones (Zone X): $400–$800/year — optional but worth having near the coast',
+        'Moderate-risk zones (Zone AE): $1,000–$2,500/year — often required by lenders',
+        'High-risk zones (Zone VE, coastal high-hazard): $2,500–$6,000+/year',
+      ],
+      note: 'The calculator above uses $1,600/year for homeowner\'s insurance — a reasonable estimate for inland SC. For coastal properties, add the flood insurance premium on top. Check the FEMA Flood Map Service Center to look up a specific property\'s flood zone.',
+    },
+  ],
 }
 
 export const gaConfig: StateConfig = {
@@ -90,8 +122,25 @@ export const gaConfig: StateConfig = {
     marketOverview:
       "Georgia's housing market is anchored by Atlanta, one of the fastest-growing metro areas in the country. Outside Atlanta, markets like Savannah, Augusta, and Athens offer considerably more affordable options with strong quality of life.",
     taxContext:
-      "Georgia's average effective property tax rate is 0.92%, slightly below the national average of 1.1%.",
+      "Georgia's average effective property tax rate is 0.92%, slightly below the national average of 1.1%. However, Georgia's homestead exemption program can meaningfully reduce the effective rate for primary-residence owners — see below.",
   },
+  extraSections: [
+    {
+      heading: "Georgia's Homestead Exemption Program",
+      paragraphs: [
+        "Georgia law requires counties to grant a basic homestead exemption to any homeowner who occupies their property as their primary residence as of January 1. The standard state exemption reduces the assessed taxable value of your home by $2,000 for the state portion of the tax bill — a modest but automatic benefit.",
+        "The larger savings come from county-level exemptions, which vary significantly by location:",
+      ],
+      bullets: [
+        'Fulton County: $30,000 homestead exemption on county taxes (plus additional exemptions for seniors)',
+        'DeKalb County: $15,000 base exemption; up to $62,500 for seniors 62+',
+        'Cobb County: $10,000 base exemption; additional options for seniors and disabled veterans',
+        'Chatham County (Savannah): $10,000 base exemption on county portion',
+        'Clarke County (Athens): standard exemption; full tax schedule available through county tax commissioner',
+      ],
+      note: 'To receive the exemption, you must apply through your county tax assessor\'s office by April 1 of the tax year — it is not applied automatically. Once approved, it renews each year as long as you maintain primary residency. New homeowners who miss the April 1 deadline must wait until the following year.',
+    },
+  ],
 }
 
 export const flConfig: StateConfig = {
