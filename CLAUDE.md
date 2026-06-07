@@ -13,14 +13,17 @@
 app/
   calculators/          7 calculators + 6 state mortgage variants
   learn/                13 article pages (TSX, not MDX)
+  about/                About page — named author, how calculators are built
+  contact/              Contact page — mailto links for corrections & feedback
   page.tsx              homepage
   sitemap.ts            programmatic sitemap
   robots.ts             robots.txt
 components/
-  ArticleLayout.tsx     article wrapper — JSON-LD, breadcrumb, date rendering
+  ArticleLayout.tsx     article wrapper — JSON-LD, breadcrumb, byline, author bio
   calculators/          interactive calculator components
 lib/
   articles.ts           SINGLE SOURCE OF TRUTH for all article metadata
+  author.ts             siteAuthor constant (name, bio, url) — imported by ArticleLayout & About
   calculators/          calculator logic
   data/                 state-specific mortgage configs
 public/
@@ -35,10 +38,10 @@ public/
 
 - **Location:** `app/learn/<slug>/page.tsx` — 13 articles, each a TSX file
 - **Metadata schema:** `lib/articles.ts` — `ArticleMeta` interface + `articles[]` array
-- **Fields per article:** `slug`, `title`, `description`, `date` (string, e.g. "March 3, 2026"), `readMinutes`, `category`, `categoryColor`, `calculatorHref`, `calculatorLabel`
+- **Fields per article:** `slug`, `title`, `description`, `date`, `updated?` (both human-readable strings e.g. "March 3, 2026"), `readMinutes`, `category`, `categoryColor`, `calculatorHref`, `calculatorLabel`
 - **No MDX, no frontmatter** — all metadata lives in `lib/articles.ts`; article bodies are TSX/JSX
-- **Date rendering:** `ArticleLayout.tsx:90` — `<span>{meta.date}</span>`. Date is never hardcoded in article body files.
-- **Date format in articles.ts:** Human-readable string e.g. `"March 3, 2026"`. Converted to ISO for JSON-LD via `toISODate()` at ArticleLayout line 5-6.
+- **Date rendering:** `ArticleLayout.tsx` renders "Published {meta.date} · Reviewed {meta.updated}" in the byline. Dates are never hardcoded in article body files.
+- **Date format in articles.ts:** Human-readable string e.g. `"March 3, 2026"`. Converted to ISO for JSON-LD via `toISODate()`. `updated` falls back to `date` in JSON-LD `dateModified`.
 - **Metadata title rule:** Every `page.tsx` must use `` title: { absolute: `${meta.title} | FinWiser` } `` — never a hardcoded string. The H1 is rendered by `ArticleLayout` from `meta.title`; keeping the `<title>` tag in sync prevents drift.
 
 ### 13 surviving article slugs (in date order)
@@ -78,12 +81,16 @@ Each calculator page has 150–350 lines of surrounding prose (explainer section
 
 ## JSON-LD (Articles)
 
-Generated in `components/ArticleLayout.tsx` lines 28–65. Three schemas per article:
-1. `BlogPosting` — headline, description, url, datePublished/Modified, author/publisher (FinWiser org)
+Generated in `components/ArticleLayout.tsx`. Three schemas per article:
+1. `BlogPosting` — headline, description, url, `datePublished` from `meta.date`, `dateModified` from `meta.updated` (fallback `meta.date`), `author` as **Person** (Pavel Borishkevich), `publisher` as Organization (FinWiser + logo)
 2. `BreadcrumbList` — Home → Learn → Article title
 3. `FAQPage` — conditional, only if `faq` prop is passed
 
 Injected via `<script type="application/ld+json" dangerouslySetInnerHTML>`.
+
+## Author
+
+`lib/author.ts` exports `siteAuthor` — a single object with `name`, `bio`, and `url`. Import this wherever the author is referenced (ArticleLayout, About page) to keep name/bio in sync. Do not hardcode the author name in any component.
 
 ## Redirects
 
@@ -118,9 +125,9 @@ Do not add `public/_redirects` — use `next.config.mjs` redirects only.
 
 ## Article Dates
 
-All 13 article dates are March–May 2026. As of June 2026 these are all in the past — no future-dating issue. Dates render from `meta.date` only; no article body hardcodes a date string.
+All 13 articles have `date` (March–May 2026) and `updated` (May–June 2026). Both are human-readable strings. `updated` is staggered across articles — no two share the same value. Dates render from `meta.date` / `meta.updated` only; no article body hardcodes a date string.
 
-A `dateModified` field (for tracking edits separately from the original publish date) is planned for a future phase. It would require adding an optional `updated` field to `ArticleMeta` and updating `ArticleLayout` to emit it in JSON-LD.
+When editing an article, update its `updated` field in `lib/articles.ts` to today's date.
 
 ## Article Structure Standards (Phase 3)
 

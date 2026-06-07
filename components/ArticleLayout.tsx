@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { ArticleMeta } from '@/lib/articles'
+import { siteAuthor } from '@/lib/author'
 import ArticleFAQ, { type FAQItem } from './ArticleFAQ'
 
 function toISODate(dateStr: string): string {
@@ -24,6 +25,7 @@ interface Props {
 export default function ArticleLayout({ meta, children, related, faq }: Props) {
   const articleUrl = `https://finwiser.net/learn/${meta.slug}`
   const isoDate = toISODate(meta.date)
+  const isoUpdated = meta.updated ? toISODate(meta.updated) : isoDate
 
   const blogPostingLd = {
     '@context': 'https://schema.org',
@@ -32,9 +34,18 @@ export default function ArticleLayout({ meta, children, related, faq }: Props) {
     description: meta.description,
     url: articleUrl,
     datePublished: isoDate,
-    dateModified: isoDate,
-    author: { '@type': 'Organization', name: 'FinWiser', url: 'https://finwiser.net' },
-    publisher: { '@type': 'Organization', name: 'FinWiser', url: 'https://finwiser.net' },
+    dateModified: isoUpdated,
+    author: {
+      '@type': 'Person',
+      name: siteAuthor.name,
+      url: siteAuthor.url,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'FinWiser',
+      url: 'https://finwiser.net',
+      logo: { '@type': 'ImageObject', url: 'https://finwiser.net/og-image.png' },
+    },
     mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
   }
 
@@ -86,8 +97,21 @@ export default function ArticleLayout({ meta, children, related, faq }: Props) {
           <p className="text-lg text-slate-500 leading-relaxed mb-5">
             {meta.description}
           </p>
-          <div className="flex items-center gap-3 text-sm text-slate-400">
-            <span>{meta.date}</span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-400">
+            <span>
+              By{' '}
+              <Link href="/about" className="text-slate-500 hover:text-navy-600 transition-colors font-medium">
+                {siteAuthor.name}
+              </Link>
+            </span>
+            <span>·</span>
+            <span>Published {meta.date}</span>
+            {meta.updated && (
+              <>
+                <span>·</span>
+                <span>Reviewed {meta.updated}</span>
+              </>
+            )}
             <span>·</span>
             <span>{meta.readMinutes} min read</span>
           </div>
@@ -98,8 +122,19 @@ export default function ArticleLayout({ meta, children, related, faq }: Props) {
           {children}
         </article>
 
+        {/* Author bio */}
+        <div className="mt-10 flex gap-4 bg-white border border-slate-100 shadow-card rounded-xl p-5">
+          <div className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center flex-shrink-0 text-white font-bold text-sm">
+            PB
+          </div>
+          <div>
+            <p className="font-semibold text-navy-900 text-sm">{siteAuthor.name}</p>
+            <p className="text-slate-500 text-sm leading-relaxed mt-0.5">{siteAuthor.bio}</p>
+          </div>
+        </div>
+
         {/* Calculator CTA */}
-        <div className="mt-12 bg-navy-900 rounded-2xl p-7 text-center">
+        <div className="mt-8 bg-navy-900 rounded-2xl p-7 text-center">
           <p className="text-navy-300 text-sm font-medium mb-2 uppercase tracking-wide">Put it into practice</p>
           <p className="text-white text-xl font-bold mb-5">{meta.calculatorLabel}</p>
           <Link

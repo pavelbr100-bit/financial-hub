@@ -101,9 +101,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${base}/about`,
-      lastModified: new Date('2026-05-27'),
+      lastModified: new Date('2026-06-07'),
       changeFrequency: 'monthly',
       priority: 0.6,
+    },
+    {
+      url: `${base}/contact`,
+      lastModified: new Date('2026-06-07'),
+      changeFrequency: 'yearly',
+      priority: 0.5,
     },
     {
       url: `${base}/how-it-works`,
@@ -133,7 +139,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const articlePages: MetadataRoute.Sitemap = articles.map(article => ({
     url: `${base}/learn/${article.slug}`,
-    lastModified: parseDate(article.date),
+    lastModified: parseDate(article.updated ?? article.date),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))
