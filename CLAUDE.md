@@ -120,6 +120,20 @@ Do not add `public/_redirects` — use `next.config.mjs` redirects only.
 - **`public/ads.txt` exists** — do not modify; contains the AdSense publisher line.
 - **Auth pages are noindexed** via `app/auth/layout.tsx` (server component, sets `robots: { index: false, follow: false }` for the whole `/auth/` tree). Auth routes are also disallowed in `app/robots.ts`. Do not add auth pages to the sitemap.
 
+## Article Math Accuracy
+
+All numerical examples in article bodies must be verifiable from first principles. Key rules:
+
+- **Verify before writing.** Use `node -e "..."` or the vitest test suite to confirm dollar figures, interest totals, and term lengths before publishing. Never round-trip from memory.
+- **Consistency across the page.** Every strategy's interest-savings range must agree across the inline callout, the FAQ, and the summary table. A reader who checks all three should see the same numbers.
+- **Explicit assumptions.** Whenever a calculation result is quoted, the loan amount, rate, and term must be stated in the same sentence or callout — never leave the reader to guess the inputs.
+- **Pinned test cases.** Key article example values are pinned in `lib/calculators/__tests__/compoundInterest.test.ts` (section: "article example values"). When adding or changing a numerical example in the compound-interest article, add or update the corresponding test. Run `npm test` before committing.
+- **Common error patterns caught in prior audits:**
+  - Monthly vs quarterly compounding confusion (e.g. `$10k × (1+r/4)^80` mistakenly labelled monthly)
+  - Annual vs monthly contribution formulas (multiply PMT by 12 vs use monthly annuity formula)
+  - Quoting the 15-year loan's own interest cost instead of the savings vs the 30-year alternative
+  - Credit card growth figures that imply ~17% APR while the surrounding text says 20–29%
+
 ## Sitemap
 
 `app/sitemap.ts` — programmatic Next.js sitemap. Pulls article slugs from `lib/articles.ts` and calculator paths statically. Automatically reflects the 13-article set.
