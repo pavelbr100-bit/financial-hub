@@ -119,6 +119,7 @@ Do not add `public/_redirects` — use `next.config.mjs` redirects only.
 - **No content schema file** (not Astro) — the TypeScript `ArticleMeta` interface in `lib/articles.ts` IS the schema.
 - **`public/ads.txt` exists** — do not modify; contains the AdSense publisher line.
 - **Auth pages are noindexed** via `app/auth/layout.tsx` (server component, sets `robots: { index: false, follow: false }` for the whole `/auth/` tree). Auth routes are also disallowed in `app/robots.ts`. Do not add auth pages to the sitemap.
+- **Calculator strategy/mode switches must pass the new value explicitly.** `DebtPayoffCalc` uses `runCalc(strat)` instead of reading `strategy` from closure — calling a calculation function from inside an `onClick` that just called `setStrategy()` will see the old state value. Pattern: extract `runCalc(strat: StrategyType)`, call it from both the Calculate button and the mode-switch handler. The mode-switch auto-recalculates only when `results !== null` (i.e. a prior run exists).
 
 ## Article Math Accuracy
 
