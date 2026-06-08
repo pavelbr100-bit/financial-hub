@@ -145,3 +145,63 @@ describe('calculateCompoundInterest — time', () => {
     expect(r.yearlyData.length).toBe(1)
   })
 })
+
+// Pin values cited in the compound-interest-guide article so a copy-edit never
+// silently breaks the math on the page.
+describe('calculateCompoundInterest — article example values', () => {
+  it('$10k at 7% monthly for 20yr ≈ $40,388 (monthly, not quarterly)', () => {
+    const r = calculateCompoundInterest({ ...BASE, years: 20 })
+    expect(r.finalBalance).toBeCloseTo(40_388, -1)
+  })
+
+  it('$10k at 7% quarterly for 20yr ≈ $40,064', () => {
+    const r = calculateCompoundInterest({ ...BASE, compoundingFrequency: 'quarterly', years: 20 })
+    expect(r.finalBalance).toBeCloseTo(40_064, -1)
+  })
+
+  // Investor A: $300/mo for 10yr at 8% → let grow 30yr more
+  it('Investor A at 65: $300/mo 8% for 10yr then 30yr growth ≈ $600,195', () => {
+    const phase1 = calculateCompoundInterest({
+      principal: 0, monthlyContribution: 300, annualRate: 8,
+      compoundingFrequency: 'monthly', years: 10,
+    })
+    const phase2 = calculateCompoundInterest({
+      principal: phase1.finalBalance, monthlyContribution: 0, annualRate: 8,
+      compoundingFrequency: 'monthly', years: 30,
+    })
+    expect(phase2.finalBalance).toBeCloseTo(600_195, -2)
+  })
+
+  // Investor B: $300/mo for 30yr at 8%
+  it('Investor B at 65: $300/mo 8% for 30yr ≈ $447,108', () => {
+    const r = calculateCompoundInterest({
+      principal: 0, monthlyContribution: 300, annualRate: 8,
+      compoundingFrequency: 'monthly', years: 30,
+    })
+    expect(r.finalBalance).toBeCloseTo(447_108, -2)
+  })
+
+  it('$150/mo 8% for 40yr ≈ $523,652 (25-to-65 example)', () => {
+    const r = calculateCompoundInterest({
+      principal: 0, monthlyContribution: 150, annualRate: 8,
+      compoundingFrequency: 'monthly', years: 40,
+    })
+    expect(r.finalBalance).toBeCloseTo(523_652, -2)
+  })
+
+  it('$200/mo 7% for 30yr ≈ $244,000 (contribution ratio callout)', () => {
+    const r = calculateCompoundInterest({
+      principal: 0, monthlyContribution: 200, annualRate: 7,
+      compoundingFrequency: 'monthly', years: 30,
+    })
+    expect(r.finalBalance).toBeCloseTo(244_000, -3)
+  })
+
+  it('$5k at 20% daily for 3yr ≈ $9,109 (credit card example)', () => {
+    const r = calculateCompoundInterest({
+      principal: 5_000, monthlyContribution: 0, annualRate: 20,
+      compoundingFrequency: 'daily', years: 3,
+    })
+    expect(r.finalBalance).toBeCloseTo(9_109, -1)
+  })
+})

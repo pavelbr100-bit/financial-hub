@@ -60,7 +60,7 @@ export default function Page() {
       <div className="callout">
         <p><strong>The formula:</strong> A = P × (1 + r/n)<sup>nt</sup>, where P is principal,
         r is annual rate, n is compounding frequency per year, and t is years. At n = 12 (monthly
-        compounding), $10,000 at 7% for 20 years grows to $40,064 — over four times the original amount.</p>
+        compounding), $10,000 at 7% for 20 years grows to about $40,388 — over four times the original amount.</p>
       </div>
       <p>
         Compounding frequency matters, but less than most people think. The difference between monthly
@@ -95,8 +95,8 @@ export default function Page() {
         Assuming 8% annual returns, who has more at 65?
       </p>
       <div className="callout">
-        <p><strong>Investor A: ~$561,000. Investor B: ~$408,000.</strong> Investor A contributed
-        one-third as much but ends up with 37% more — because the first decade of growth had 30
+        <p><strong>Investor A: ~$600,000. Investor B: ~$447,000.</strong> Investor A contributed
+        one-third as much but ends up with about 34% more — because the first decade of growth had 30
         additional years to compound. The early years are irreplaceable.</p>
       </div>
 
@@ -108,7 +108,7 @@ export default function Page() {
       </p>
       <div className="callout">
         <p><strong>The compounding-vs-contribution ratio:</strong> $200/month invested at 7% for
-        30 years grows to roughly $227,000. The total you contributed: $72,000. The other $155,000
+        30 years grows to roughly $244,000. The total you contributed: $72,000. The other $172,000
         — more than twice what you put in — came entirely from compounding. This ratio becomes more
         extreme at higher rates and longer timelines.</p>
       </div>
@@ -119,9 +119,9 @@ export default function Page() {
 
       <h2>Compound Interest Working Against You</h2>
       <p>
-        Credit cards typically charge 20–29% APR, compounding daily. A $5,000 balance with no
-        payments grows to $8,300 in 3 years. That&apos;s $3,300 in interest on debt that produced no
-        lasting value.
+        Credit cards typically charge 20–29% APR, compounding daily. At 20% APR, daily compounding
+        can turn a $5,000 balance into about $9,100 in 3 years, assuming no payments are made.
+        That&apos;s $4,100 in interest on debt that produced no lasting value.
       </p>
       <p>
         The same mechanic that builds wealth destroys it when you&apos;re on the wrong side of the
@@ -149,8 +149,11 @@ export default function Page() {
       <h2>The Practical Takeaway</h2>
       <p>
         Compound interest rewards two things above all else: starting early and not interrupting the
-        process. A 25-year-old who puts $100/month into a retirement account will likely end up
-        wealthier than a 35-year-old who puts $300/month, even accounting for the late start.
+        process. A 25-year-old who puts $100/month into a retirement account can still build a
+        surprisingly large balance by retirement — but waiting until 35 often means contributing
+        much more each month to reach a similar result. A 25-year-old investing $150/month from 25
+        to 65 can end up with roughly $524,000 at 65, compared with about $447,000 for someone who
+        starts at 35 and invests $300/month — twice the monthly outlay.
       </p>
       <div className="callout">
         <p><strong>Common mistake:</strong> Waiting to invest because &quot;the amounts are too small to matter.&quot; On a 30-year timeline at 7%, every $100 you invest today becomes roughly $760 by year 30. The amount feels trivial; the compounded result doesn&apos;t. The habit and the time horizon are what matter — not the initial size of the contribution. Start with whatever you can, because starting late costs far more than starting small.</p>
