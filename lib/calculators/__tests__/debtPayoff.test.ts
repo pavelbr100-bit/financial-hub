@@ -115,6 +115,74 @@ describe('calculateDebtPayoff — single debt', () => {
   })
 })
 
+describe('calculateDebtPayoff — article example values', () => {
+  it('single debt $5k@22% with $200/month → 34 months, ~$1,750 interest', () => {
+    const r = calculateDebtPayoff({
+      debts: [{ id: 'cc', name: 'CC', balance: 5000, rate: 22, minPayment: 200 }],
+      extraMonthly: 0,
+      strategy: 'avalanche',
+    })
+    expect(r.payoffMonths).toBe(34)
+    expect(r.totalInterest).toBeCloseTo(1749.88, 0)
+  })
+
+  it('single debt $5k@22% with $300/month → 21 months, ~$1,022 interest', () => {
+    const r = calculateDebtPayoff({
+      debts: [{ id: 'cc', name: 'CC', balance: 5000, rate: 22, minPayment: 300 }],
+      extraMonthly: 0,
+      strategy: 'avalanche',
+    })
+    expect(r.payoffMonths).toBe(21)
+    expect(r.totalInterest).toBeCloseTo(1021.60, 0)
+  })
+
+  it('3-debt avalanche: $8k@22%+$5k@7%+$12k@5%, mins 160+100+120, extra $500 → 33 months, ~$2,813 interest', () => {
+    const debts: Debt[] = [
+      { id: 'cc', name: 'CC', balance: 8000, rate: 22, minPayment: 160 },
+      { id: 'car', name: 'Car', balance: 5000, rate: 7, minPayment: 100 },
+      { id: 'stu', name: 'Student', balance: 12000, rate: 5, minPayment: 120 },
+    ]
+    const r = calculateDebtPayoff({ debts, extraMonthly: 500, strategy: 'avalanche' })
+    expect(r.payoffMonths).toBe(33)
+    expect(r.totalInterest).toBeCloseTo(2812.99, 0)
+  })
+
+  it('3-debt snowball: $8k@22%+$5k@7%+$12k@5%, mins 160+100+120, extra $500 → 34 months, ~$3,669 interest', () => {
+    const debts: Debt[] = [
+      { id: 'cc', name: 'CC', balance: 8000, rate: 22, minPayment: 160 },
+      { id: 'car', name: 'Car', balance: 5000, rate: 7, minPayment: 100 },
+      { id: 'stu', name: 'Student', balance: 12000, rate: 5, minPayment: 120 },
+    ]
+    const r = calculateDebtPayoff({ debts, extraMonthly: 500, strategy: 'snowball' })
+    expect(r.payoffMonths).toBe(34)
+    expect(r.totalInterest).toBeCloseTo(3668.96, 0)
+  })
+
+  it('Marcus avalanche: $6k@22%+$2.5k@10%+$9k@6%, total $525/month → 39 months, ~$2,574 interest, CC paid off month 13', () => {
+    const debts: Debt[] = [
+      { id: 'cc', name: 'CC', balance: 6000, rate: 22, minPayment: 0 },
+      { id: 'pl', name: 'PL', balance: 2500, rate: 10, minPayment: 0 },
+      { id: 'car', name: 'Car', balance: 9000, rate: 6, minPayment: 0 },
+    ]
+    const r = calculateDebtPayoff({ debts, extraMonthly: 525, strategy: 'avalanche' })
+    expect(r.payoffMonths).toBe(39)
+    expect(r.totalInterest).toBeCloseTo(2573.83, 0)
+    expect(r.debtResults.find(d => d.id === 'cc')!.paidOffMonth).toBe(13)
+  })
+
+  it('Marcus snowball: $6k@22%+$2.5k@10%+$9k@6%, total $525/month → 40 months, ~$3,068 interest, PL paid off month 5', () => {
+    const debts: Debt[] = [
+      { id: 'cc', name: 'CC', balance: 6000, rate: 22, minPayment: 0 },
+      { id: 'pl', name: 'PL', balance: 2500, rate: 10, minPayment: 0 },
+      { id: 'car', name: 'Car', balance: 9000, rate: 6, minPayment: 0 },
+    ]
+    const r = calculateDebtPayoff({ debts, extraMonthly: 525, strategy: 'snowball' })
+    expect(r.payoffMonths).toBe(40)
+    expect(r.totalInterest).toBeCloseTo(3068.20, 0)
+    expect(r.debtResults.find(d => d.id === 'pl')!.paidOffMonth).toBe(5)
+  })
+})
+
 describe('calculateDebtPayoff — zero rate debt', () => {
   const zeroRate: Debt[] = [
     { id: 'z', name: 'Interest-free', balance: 1_200, rate: 0, minPayment: 100 },

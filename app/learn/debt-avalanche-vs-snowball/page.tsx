@@ -58,11 +58,17 @@ export default function Page() {
         reduces the total interest you pay across all debts. Over a multi-year payoff timeline, the
         savings can be substantial.
       </p>
+      <p>
+        <em>Debt payoff calculations depend on minimum payments, monthly interest accrual, and
+        payment timing. The examples below assume monthly compounding and that payments are applied
+        once per month.</em>
+      </p>
       <div className="callout">
-        <p><strong>Example:</strong> Three debts — $8,000 credit card at 22%, $5,000 car loan at 7%,
-        $12,000 student loan at 5%. With $500/month in extra payments, the avalanche pays off all
-        three in ~38 months and costs ~$4,200 in total interest. The snowball takes the same time
-        but costs ~$5,100 in interest — a $900 difference on the same income.</p>
+        <p><strong>Example:</strong> Three debts — $8,000 credit card at 22% with a $160 minimum
+        payment, $5,000 car loan at 7% with a $100 minimum, and $12,000 student loan at 5% with a
+        $120 minimum. With $500/month in extra payments, the avalanche pays everything off in about
+        33 months and costs roughly $2,800 in total interest. The snowball takes about 34 months and
+        costs roughly $3,700 — about $850 more on the same income.</p>
       </div>
 
       <h2>The Debt Snowball</h2>
@@ -159,31 +165,31 @@ export default function Page() {
       </p>
       <p>
         If cash flow is tight, even $50–$100 extra per month applied consistently compounds into
-        meaningful results. A $5,000 credit card balance at 22% with $200/month in payments takes
-        30 months and costs $1,350 in interest. Adding $100 more per month cuts it to 20 months
-        and $890 in interest — $460 saved for $2,000 of additional payments.
+        meaningful results. A $5,000 credit card balance at 22% APR with $200/month in payments takes
+        about 34 months and costs roughly $1,750 in interest. Increasing to $300/month cuts the
+        payoff time to about 21 months and reduces interest to roughly $1,020 — saving about $730.
       </p>
 
       <h2>A Real Choice: Same Debts, Two Paths</h2>
       <p>
-        Suppose Marcus has three debts: $6,000 on a credit card at 22%, $2,500 personal loan
-        at 10%, and $9,000 car loan at 6%. He can put $400/month toward debt above minimums.
+        Suppose Marcus has three debts: $6,000 on a credit card at 22%, $2,500 on a personal loan
+        at 10%, and $9,000 on a car loan at 6%. He can put $525/month total toward debt payoff.
       </p>
       <p>
-        <strong>Avalanche:</strong> He targets the credit card first. It takes about 18 months
-        to eliminate. Then the personal loan (cleared in another 8 months). Then the car loan.
-        Total interest paid: roughly $3,800. Total payoff: about 38 months.
+        <strong>Avalanche:</strong> He targets the credit card first. It is eliminated in about
+        13 months. Then he targets the personal loan, then the car loan. Total interest paid is
+        roughly $2,600, and total payoff takes about 39 months.
       </p>
       <p>
-        <strong>Snowball:</strong> He targets the personal loan first ($2,500). That&apos;s gone in
-        about 7 months — a quick win. Then the credit card (taking about 20 months more). Then
-        the car loan. Total interest paid: roughly $4,700. Total payoff: about 39 months.
+        <strong>Snowball:</strong> He targets the personal loan first. It is gone in about 5 months
+        — a quick win. Then he targets the credit card, then the car loan. Total interest paid is
+        roughly $3,100, and total payoff takes about 40 months.
       </p>
       <p>
-        The avalanche saves Marcus $900 over the same timeline. But the snowball gives him a fully
-        eliminated account in month 7 — five months before the avalanche closes anything. If Marcus
-        has tried and abandoned debt plans before, the snowball&apos;s early win may be worth $900.
-        If he&apos;s motivated by numbers and can stay the course, the avalanche is the clear choice.
+        The avalanche saves Marcus about $500, while the snowball gives him an account eliminated
+        about 8 months sooner. If Marcus has tried and abandoned debt plans before, that early win
+        may be worth the extra cost. If he&apos;s motivated by numbers and can stay the course,
+        the avalanche is the clear choice.
       </p>
 
       <h2>When Neither Method Is the Right Next Step</h2>

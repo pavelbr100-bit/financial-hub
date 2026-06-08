@@ -41,7 +41,7 @@ export const articles: ArticleMeta[] = [
     title: 'Avalanche vs Snowball Method: Which Pays Off Debt Faster? (With Calculator)',
     description: 'Compare the avalanche and snowball debt payoff methods side by side. See which saves more interest and which gets you debt-free faster — with a free calculator.',
     date: 'March 12, 2026',
-    updated: 'May 21, 2026',
+    updated: 'June 7, 2026',
     readMinutes: 8,
     category: 'Debt',
     categoryColor: 'amber',
