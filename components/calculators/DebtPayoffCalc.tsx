@@ -32,10 +32,14 @@ type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 
 const DEBT_COLORS = ['#1e3a5f', '#10b981', '#f59e0b', '#8b5cf6', '#f43f5e', '#06b6d4']
 
+// Defaults use debts with opposite priority orderings so switching strategies
+// immediately shows different results: CC has the highest rate (avalanche targets it),
+// Personal Loan has the smallest balance (snowball targets it).
 const DEFAULT_DEBTS: DebtInput[] = [
-  { id: 'debt-1', name: 'Credit Card', balance: '5,000', rate: '21', minPayment: '150' },
-  { id: 'debt-2', name: 'Car Loan', balance: '12,000', rate: '6.5', minPayment: '250' },
+  { id: 'debt-1', name: 'Credit Card', balance: '8,000', rate: '22', minPayment: '200' },
+  { id: 'debt-2', name: 'Personal Loan', balance: '2,500', rate: '10', minPayment: '80' },
 ]
+const DEFAULT_EXTRA = '200'
 
 function formatCurrency(n: number) {
   return new Intl.NumberFormat('en-US', {
@@ -72,7 +76,7 @@ function payoffDate(months: number): string {
 export default function DebtPayoffCalc({ user, initialDebts, initialStrategy, initialExtra }: Props) {
   const [debts, setDebts] = useState<DebtInput[]>(initialDebts ?? DEFAULT_DEBTS)
   const [strategy, setStrategy] = useState<DebtPayoffStrategy>(initialStrategy ?? 'avalanche')
-  const [extraMonthly, setExtraMonthly] = useState(initialExtra ?? '')
+  const [extraMonthly, setExtraMonthly] = useState(initialExtra ?? DEFAULT_EXTRA)
   const [results, setResults] = useState<DebtPayoffResult | null>(null)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [calcName, setCalcName] = useState('')
@@ -490,7 +494,9 @@ export default function DebtPayoffCalc({ user, initialDebts, initialStrategy, in
             <div className="px-6 py-4 border-b border-slate-100">
               <h3 className="font-semibold text-navy-900">Payoff Order</h3>
               <p className="text-xs text-slate-500 mt-0.5">
-                {strategy === 'avalanche' ? 'Highest interest rate first' : 'Lowest balance first'}
+                {strategy === 'avalanche'
+                  ? 'Extra payments target the highest-rate debt first'
+                  : 'Extra payments target the smallest-balance debt first'}
               </p>
             </div>
             <div className="overflow-x-auto">
