@@ -116,7 +116,7 @@ export default function DebtPayoffCalc({ user, initialDebts, initialStrategy, in
     return Object.keys(errs).length === 0
   }
 
-  function handleCalculate() {
+  function runCalc(strat: DebtPayoffStrategy) {
     if (!validate()) return
     const parsedDebts = debts.map(d => ({
       id: d.id,
@@ -126,10 +126,14 @@ export default function DebtPayoffCalc({ user, initialDebts, initialStrategy, in
       minPayment: parseMoney(d.minPayment),
     }))
     const extra = parseMoney(extraMonthly)
-    const result = calculateDebtPayoff({ debts: parsedDebts, extraMonthly: extra, strategy })
+    const result = calculateDebtPayoff({ debts: parsedDebts, extraMonthly: extra, strategy: strat })
     setResults(result)
     setSaveState('idle')
     setCalcName('')
+  }
+
+  function handleCalculate() {
+    runCalc(strategy)
   }
 
   // Build chart data from monthly snapshots
@@ -199,7 +203,10 @@ export default function DebtPayoffCalc({ user, initialDebts, initialStrategy, in
           <button
             key={opt.value}
             type="button"
-            onClick={() => { setStrategy(opt.value); setResults(null) }}
+            onClick={() => {
+              setStrategy(opt.value)
+              if (results !== null) runCalc(opt.value)
+            }}
             className={`text-left p-4 rounded-xl border-2 transition-all ${
               strategy === opt.value
                 ? 'border-navy-600 bg-navy-50'
