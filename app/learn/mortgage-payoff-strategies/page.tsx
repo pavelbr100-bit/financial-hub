@@ -37,7 +37,7 @@ export default function Page() {
 
       <p>
         The average 30-year mortgage costs more than double the original loan amount by the time
-        it&apos;s paid off — a $300,000 loan at 7% means you&apos;ll pay over $420,000 in interest alone.
+        it&apos;s paid off — a $300,000 loan at 7% means you&apos;ll pay nearly $420,000 in interest alone.
         The good news is that even modest changes to how you pay can shave years off your timeline
         and save tens of thousands of dollars.
       </p>
@@ -63,8 +63,8 @@ export default function Page() {
       </p>
       <div className="callout">
         <p><strong>Example:</strong> On a $350,000 mortgage at 6.5% for 30 years, adding $184/month
-        (one-twelfth of the monthly payment) cuts the loan to roughly 24 years and saves approximately
-        $100,000 in total interest.</p>
+        (one-twelfth of the $2,212 monthly payment) cuts the loan to roughly 24 years and saves
+        approximately $102,000 in total interest.</p>
       </div>
 
       <h2>2. Switch to Biweekly Payments</h2>
@@ -98,7 +98,7 @@ export default function Page() {
       </p>
       <div className="callout">
         <p><strong>Example:</strong> On a $300,000 mortgage at 7% for 30 years, paying an extra
-        $100/month cuts the term by about 4 years and saves roughly $44,000 in interest.</p>
+        $100/month cuts the term by about 4 years and saves roughly $69,000 in interest.</p>
       </div>
       <div className="callout">
         <p><strong>Common mistake:</strong> Making an extra payment without designating it as
@@ -225,8 +225,8 @@ export default function Page() {
         </thead>
         <tbody>
           <tr><td>Round up payment by $100</td><td>Very low</td><td>$30,000–$50,000</td></tr>
-          <tr><td>One extra payment per year</td><td>Low</td><td>$40,000–$100,000</td></tr>
-          <tr><td>Biweekly payments</td><td>Low</td><td>$40,000–$100,000</td></tr>
+          <tr><td>One extra payment per year</td><td>Low</td><td>$50,000–$100,000+</td></tr>
+          <tr><td>Biweekly payments</td><td>Low</td><td>$50,000–$100,000+</td></tr>
           <tr><td>Apply annual windfall</td><td>Medium</td><td>Varies widely</td></tr>
           <tr><td>Recast your mortgage</td><td>Medium</td><td>Varies (frees cash for extra payments)</td></tr>
           <tr><td>Eliminate PMI early</td><td>Medium</td><td>$25,000–$50,000</td></tr>

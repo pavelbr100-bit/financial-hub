@@ -4,10 +4,38 @@
       "Bash(python3 scripts/add_article_faqs.py)",
       "Bash(sed -n '25,55p' /Users/pavelborishkevich/Apps/financial-hub/app/calculators/mortgage/page.tsx)",
       "Bash(sed -n '25,55p' /Users/pavelborishkevich/Apps/financial-hub/app/calculators/car-loan/page.tsx)",
-      "Bash(echo \".claude/settings.local.json\" >> /Users/pavelborishkevich/Apps/financial-hub/.gitignore && echo \"added to .gitignore\")"
+      "Bash(echo \".claude/settings.local.json\" >> /Users/pavelborishkevich/Apps/financial-hub/.gitignore && echo \"added to .gitignore\")",
+      "Bash(mkdir -p /Users/pavelborishkevich/Apps/financial-hub/lib/data /Users/pavelborishkevich/Apps/financial-hub/app/calculators/mortgage/south-carolina /Users/pavelborishkevich/Apps/financial-hub/app/calculators/mortgage/georgia)",
+      "Bash(git init *)",
+      "Bash(npm list *)",
+      "Read(//tmp/**)",
+      "Read(//private/tmp/**)",
+      "WebFetch(domain:five-minute-watch-reviews.pages.dev)",
+      "WebFetch(domain:fiveminutewatchreviews.com)",
+      "Bash(npx tsx *)",
+      "Bash(curl -s -o /dev/null -w \"status: %{http_code}\\\\n\" \"https://www.youtube.com/feeds/videos.xml?playlist_id=UULFRlrsvXWzqGkVZcKuGCcyrA\")",
+      "Bash(curl -s \"https://www.youtube.com/feeds/videos.xml?playlist_id=UULFRlrsvXWzqGkVZcKuGCcyrA\" -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0.0.0 Safari/537.36\")",
+      "Bash(python3 -c ' *)",
+      "Bash(grep -r \"currency\\\\|toLocaleString\\\\|formatCurrency\\\\|format.*price\\\\|price.*format\\\\|\\\\$\\\\|USD\\\\|Intl\\\\.NumberFormat\" /Users/pavelborishkevich/Apps/financial-hub/src --include=\"*.ts\" --include=\"*.tsx\" -l)",
+      "Bash(node -e ' *)",
+      "Bash(grep -n \"30 months\\\\|1,350\\\\|\\\\$890\\\\|460 saved\\\\|4,200\\\\|5,100\\\\|3,800\\\\|4,700\\\\|\\\\$900\" /Users/pavelborishkevich/Apps/financial-hub/app/learn/debt-avalanche-vs-snowball/page.tsx)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3099/calculators/debt-payoff)",
+      "Bash(node verify_debt_calc.mjs)",
+      "Bash(node /tmp/verify_debt_calc.mjs)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(node verify-article-math.mjs)",
+      "Bash(sed -n '20,45p' app/learn/how-car-loan-interest-works/page.tsx)",
+      "Bash(sed -n '25,45p' app/calculators/biweekly-mortgage/page.tsx)",
+      "Bash(grep -n \"248,000\\\\|190,000\\\\|100,000\\\\|40,000 to \\\\$50,000\\\\|6 years earlier\\\\|4 to 5 years\" -A1 -B1 app/learn/mortgage-payoff-strategies/page.tsx)",
+      "Bash(sort -t\"'\" -k2)",
+      "Bash(uniq -c -f1)",
+      "Bash(awk '$1>1')",
+      "Bash(git mv *)"
     ],
     "additionalDirectories": [
-      "/Users/pavelborishkevich/Apps/financial-hub"
+      "/Users/pavelborishkevich/Apps/financial-hub",
+      "/Users/pavelborishkevich/Apps/financial-hub/lib",
+      "/Users/pavelborishkevich/Apps/five-minute-watch-reviews"
     ]
   }
 }

@@ -115,9 +115,11 @@ Do not add `public/_redirects` — use `next.config.mjs` redirects only.
 ## Key Patterns
 
 - **Adding a new article:** Add entry to `lib/articles.ts` array, create `app/learn/<slug>/page.tsx` that calls `getArticle(slug)` and returns `<ArticleLayout>`. Use `` title: { absolute: `${meta.title} | FinWiser` } `` in metadata — never hardcode.
-- **Adding a new state mortgage page:** Add state config to `lib/data/`, create `app/calculators/mortgage/<state>/page.tsx` that renders `<StateMortgageCalculatorPage>`.
+- **Adding a new state mortgage page:** Add state config to `lib/data/`, create `app/calculators/mortgage/<state>/page.tsx` that renders `<StateMortgageCalculatorPage>`. Export `metadata` via `generateStateMortgageMetadata(config)` (in `lib/data/state-mortgage-configs.ts`) — it builds title/description/canonical/OG/Twitter from the `StateConfig`. In `contentBlurbs`, write `taxFaq`/`priceFaq` with phrasing distinct from `taxContext`/`marketOverview` — FAQ answers must not repeat body sentences verbatim.
 - **No content schema file** (not Astro) — the TypeScript `ArticleMeta` interface in `lib/articles.ts` IS the schema.
 - **`public/ads.txt` exists** — do not modify; contains the AdSense publisher line.
+- **No `keywords` metadata field anywhere** — removed site-wide (Google ignores it, and a long stuffed list reads as a spam signal to AdSense reviewers). Do not re-add it to any page.
+- **`robots` and `google-adsense-account`** are set once in the root `app/layout.tsx` `metadata` export and inherit to every route via Next's metadata merging. Only set `robots` per-page when a route needs to deviate (e.g. `/auth/*` noindex) — don't duplicate the defaults on every page.
 - **Auth pages are noindexed** via `app/auth/layout.tsx` (server component, sets `robots: { index: false, follow: false }` for the whole `/auth/` tree). Auth routes are also disallowed in `app/robots.ts`. Do not add auth pages to the sitemap.
 - **Calculator strategy/mode switches must pass the new value explicitly.** `DebtPayoffCalc` uses `runCalc(strat)` instead of reading `strategy` from closure — calling a calculation function from inside an `onClick` that just called `setStrategy()` will see the old state value. Pattern: extract `runCalc(strat: StrategyType)`, call it from both the Calculate button and the mode-switch handler. The mode-switch auto-recalculates only when `results !== null` (i.e. a prior run exists).
 

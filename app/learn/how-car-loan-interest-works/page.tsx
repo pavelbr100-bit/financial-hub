@@ -26,15 +26,6 @@ export const metadata: Metadata = {
     title: meta.title,
     description: meta.description,
   },
-  keywords: [
-    'car loan calculator',
-    'auto loan payment',
-    'car loan interest rate',
-    'monthly car payment calculator',
-    'how car loan interest works',
-    'auto loan amortization',
-    'car loan total interest',
-  ],
 }
 
 const faq = [

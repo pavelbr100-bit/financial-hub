@@ -15,6 +15,8 @@ export type StateConfig = {
   contentBlurbs: {
     marketOverview: string
     taxContext: string
+    taxFaq: string
+    priceFaq: string
   }
   // Override auto-generated metadata
   metaTitle?: string
@@ -51,6 +53,10 @@ export const ncConfig: StateConfig = {
       'North Carolina has seen strong population growth, particularly in the Research Triangle and Charlotte metro areas. Median home prices range from around $280,000 in smaller markets to over $400,000 in Raleigh and Charlotte.',
     taxContext:
       "North Carolina's average effective property tax rate is 0.77%, well below the national average of 1.1%, which helps keep monthly payments lower than many comparable states.",
+    taxFaq:
+      "Homeowners in North Carolina pay an effective property tax rate of about 0.77% of their home's assessed value each year — roughly 30% below the 1.1% national average. That difference shows up directly in your monthly escrow payment compared to higher-tax states.",
+    priceFaq:
+      "Home prices vary widely across North Carolina. Smaller markets can start around $280,000, while in-demand areas like Raleigh and Charlotte — both benefiting from strong population growth in the Research Triangle and Charlotte metro — often top $400,000. Plug a price from your target area into the calculator above to see NC-specific monthly costs.",
   },
   extraSections: [
     {
@@ -88,6 +94,10 @@ export const scConfig: StateConfig = {
       'South Carolina offers some of the most affordable home prices in the Southeast. Charleston and Greenville have seen significant price appreciation, while Columbia and smaller markets remain highly accessible for first-time buyers.',
     taxContext:
       'South Carolina has one of the lowest property tax rates in the country at 0.57% average effective rate, significantly below the national average of 1.1%.',
+    taxFaq:
+      'At an average effective rate near 0.57%, South Carolina property taxes rank among the lowest in the country — roughly half the 1.1% national average. That keeps the tax portion of a monthly mortgage payment relatively small compared to most other states.',
+    priceFaq:
+      "South Carolina remains one of the more affordable states in the Southeast for buyers, though that's changing in popular spots — Charleston and Greenville have both seen sharp price growth in recent years. Columbia and the state's smaller markets are still relatively accessible, especially for first-time buyers. Enter a price from your target market into the calculator above for SC-specific monthly costs.",
   },
   extraSections: [
     {
@@ -123,6 +133,10 @@ export const gaConfig: StateConfig = {
       "Georgia's housing market is anchored by Atlanta, one of the fastest-growing metro areas in the country. Outside Atlanta, markets like Savannah, Augusta, and Athens offer considerably more affordable options with strong quality of life.",
     taxContext:
       "Georgia's average effective property tax rate is 0.92%, slightly below the national average of 1.1%. However, Georgia's homestead exemption program can meaningfully reduce the effective rate for primary-residence owners — see below.",
+    taxFaq:
+      "Georgia homeowners pay an average effective property tax rate of about 0.92% — just under the 1.1% national average. Primary residents can reduce that further through the state's homestead exemption program, which lowers the assessed value used to calculate the bill (details below).",
+    priceFaq:
+      "Atlanta drives much of Georgia's housing market and remains one of the fastest-growing metros in the country, which keeps upward pressure on prices there. Buyers looking for more affordable options with a strong quality of life often look to Savannah, Augusta, or Athens instead. The calculator above uses Georgia-specific tax defaults no matter which market you're comparing.",
   },
   extraSections: [
     {
@@ -160,6 +174,10 @@ export const flConfig: StateConfig = {
       'Florida is one of the fastest-growing states in the country, driven by no state income tax, warm weather, and strong job growth in Tampa, Orlando, and Miami. Median home prices have risen sharply since 2020, with Miami and coastal markets exceeding $500,000 and inland markets like Orlando and Jacksonville remaining more accessible.',
     taxContext:
       'Florida has no state income tax, which helps offset its property tax rate of around 0.89% — close to the national average. However, homeowners insurance in Florida is significantly above the national average due to hurricane risk, often running $2,000–$4,000 per year depending on location and coverage.',
+    taxFaq:
+      "Florida's average effective property tax rate is around 0.89%, roughly in line with the 1.1% national average. The bigger cost gap for FL homeowners is insurance — hurricane risk pushes annual premiums to $2,000–$4,000 in many areas, well above what most other states pay.",
+    priceFaq:
+      "Florida's population growth — fueled by no state income tax, warm weather, and job growth in Tampa, Orlando, and Miami — has pushed home prices up sharply since 2020. Coastal markets like Miami now commonly exceed $500,000, while inland cities such as Orlando and Jacksonville remain comparatively accessible. The calculator above is pre-loaded with Florida's higher insurance costs so your estimate reflects the real cost of owning here.",
   },
   metaTitle: 'Florida Mortgage Calculator — FL Tax & Insurance Rates | FinWiser',
   metaDescription:
@@ -183,6 +201,10 @@ export const txConfig: StateConfig = {
       'Texas has one of the largest and most diverse housing markets in the country. Austin saw dramatic price appreciation through 2022 and has since cooled, while Dallas, Houston, and San Antonio remain relatively affordable for their size. Texas has no state income tax, which attracts significant relocation from higher-tax states.',
     taxContext:
       "Texas has one of the highest property tax rates in the country at around 1.60% — nearly 50% above the national average of 1.1%. This meaningfully increases monthly payments compared to neighboring states, making it especially important to include taxes in your mortgage estimate.",
+    taxFaq:
+      "At roughly 1.60%, Texas property tax rates run about 50% above the 1.1% national average — among the highest in the country. Because that tax is escrowed into your monthly payment, leaving it out of a mortgage estimate can understate your true monthly cost by a wide margin.",
+    priceFaq:
+      "Texas has one of the largest, most varied housing markets in the country. Austin's prices climbed sharply through 2022 and have since leveled off, while Dallas, Houston, and San Antonio remain relatively affordable for their size — a draw for the steady stream of relocations from higher-tax states. Whichever market you're considering, Texas's high property tax rate (above) has an outsized effect on the monthly payment estimate.",
   },
   metaTitle: 'Texas Mortgage Calculator — High Property Tax Rates Included | FinWiser',
   metaDescription:
@@ -210,6 +232,10 @@ export const vaConfig: StateConfig = {
       "Virginia's housing market is heavily shaped by the Northern Virginia suburbs of Washington DC, where home prices routinely exceed $600,000 and competition is intense. Richmond, Virginia Beach, and Charlottesville offer more moderate prices with strong quality of life. Virginia also has one of the highest concentrations of VA loan eligible buyers in the country due to its large military population.",
     taxContext:
       "Virginia's average effective property tax rate is 0.82%, below the national average of 1.1%. However, Northern Virginia localities like Fairfax and Arlington have higher effective rates due to high assessed home values, so actual tax costs vary significantly by location.",
+    taxFaq:
+      "Statewide, Virginia's average effective property tax rate is about 0.82%, below the 1.1% national average. That figure can be misleading for buyers in Fairfax, Arlington, and other Northern Virginia localities, where high assessed home values push the actual tax bill well above the statewide average.",
+    priceFaq:
+      "Home prices in Virginia vary enormously by region. Northern Virginia's DC suburbs are among the most competitive markets in the country, with prices routinely topping $600,000, while Richmond, Virginia Beach, and Charlottesville offer considerably more moderate price points. If you're an eligible veteran or active-duty service member, see the VA loan section below — Virginia has one of the highest concentrations of VA-eligible buyers in the country.",
   },
   metaTitle: 'Virginia Mortgage Calculator — VA Loan & Local Rates | FinWiser',
   metaDescription:

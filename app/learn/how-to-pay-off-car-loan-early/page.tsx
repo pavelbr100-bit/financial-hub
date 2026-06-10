@@ -26,15 +26,6 @@ export const metadata: Metadata = {
     title: meta.title,
     description: meta.description,
   },
-  keywords: [
-    'how to pay off car loan early',
-    'car loan calculator',
-    'auto loan payment',
-    'car loan interest rate',
-    'monthly car payment calculator',
-    'pay off car loan faster',
-    'extra car loan payment',
-  ],
 }
 
 const faq = [

@@ -20,6 +20,8 @@ const nextConfig = {
       { source: '/learn/dealer-financing-vs-bank-loan',                  destination: '/learn/how-to-get-best-car-loan-rate', permanent: true },
       // Cluster K — new vs used consolidation
       { source: '/learn/new-car-vs-used-car-loan',                       destination: '/learn/new-vs-used-car-loan',       permanent: true },
+      // Malformed URL crawled by Googlebot
+      { source: '/&',                                                     destination: '/',                                 permanent: true },
     ]
   },
 }

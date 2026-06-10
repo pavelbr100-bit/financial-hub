@@ -61,7 +61,7 @@ export default async function StateMortgageCalculatorPage({ config }: Props) {
         name: `What is the average property tax rate in ${stateName}?`,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `The average effective property tax rate in ${stateName} is approximately ${avgPropertyTaxRate}% of assessed home value per year. ${contentBlurbs.taxContext}`,
+          text: contentBlurbs.taxFaq,
         },
       },
       {
@@ -69,7 +69,7 @@ export default async function StateMortgageCalculatorPage({ config }: Props) {
         name: `What is the average home price in ${stateName}?`,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `${contentBlurbs.marketOverview} Use the calculator above with ${stateAbbr}-specific defaults pre-loaded to estimate your monthly payment.`,
+          text: contentBlurbs.priceFaq,
         },
       },
       {
@@ -269,13 +269,11 @@ export default async function StateMortgageCalculatorPage({ config }: Props) {
           <div className="space-y-6">
             <div>
               <h3 className="font-semibold text-slate-800 mb-1">What is the average property tax rate in {stateName}?</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                The average effective property tax rate in {stateName} is approximately {avgPropertyTaxRate}% of assessed home value per year. {contentBlurbs.taxContext}
-              </p>
+              <p className="text-slate-600 text-sm leading-relaxed">{contentBlurbs.taxFaq}</p>
             </div>
             <div>
               <h3 className="font-semibold text-slate-800 mb-1">What is the average home price in {stateName}?</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">{contentBlurbs.marketOverview}</p>
+              <p className="text-slate-600 text-sm leading-relaxed">{contentBlurbs.priceFaq}</p>
             </div>
             <div>
               <h3 className="font-semibold text-slate-800 mb-1">Does {stateName} have good mortgage rates?</h3>
