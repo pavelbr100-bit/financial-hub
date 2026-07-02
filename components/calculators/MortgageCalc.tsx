@@ -3,7 +3,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
-import AmortizationCharts from './AmortizationCharts'
+import dynamic from 'next/dynamic'
+const AmortizationCharts = dynamic(() => import('./AmortizationCharts'), {
+  ssr: false,
+  loading: () => <div className="bg-white rounded-xl shadow-card border border-slate-100 h-[340px] animate-pulse" />,
+})
 import { buildSchedule } from '@/lib/calculators/mortgage'
 
 function buildCompareUrl(params: Record<string, string>): string {
@@ -398,6 +402,7 @@ export default function MortgageCalc({ user, initialValues }: Props) {
       </div>
 
       {/* Results */}
+      <div aria-live="polite" aria-atomic="false">
       {results && (
         <>
           {/* Total monthly */}
@@ -589,6 +594,7 @@ export default function MortgageCalc({ user, initialValues }: Props) {
           </div>
         </>
       )}
+      </div>
     </div>
   )
 }

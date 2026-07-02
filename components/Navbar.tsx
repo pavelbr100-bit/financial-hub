@@ -94,6 +94,8 @@ export default function Navbar({ user }: NavbarProps) {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setCalcOpen(v => !v)}
+                aria-expanded={calcOpen}
+                aria-haspopup="true"
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 ${
                   isCalcActive
                     ? 'bg-navy-700 text-white'

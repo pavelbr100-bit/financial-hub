@@ -4,6 +4,11 @@ import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
 const meta = getArticle('compound-interest-guide')!
+const related = [
+  getArticle('debt-payoff-strategies')!,
+  getArticle('what-is-amortization')!,
+  getArticle('fixed-vs-variable-interest-rate')!,
+]
 
 export const metadata: Metadata = {
   title: { absolute: `${meta.title} | FinWiser Learn` },
@@ -33,7 +38,7 @@ const faq = [
 
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} faq={faq}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         Most people assume that picking the right investment — the right stock, the right fund — is

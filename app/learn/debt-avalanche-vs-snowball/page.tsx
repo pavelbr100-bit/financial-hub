@@ -4,6 +4,11 @@ import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
 const meta = getArticle('debt-avalanche-vs-snowball')!
+const related = [
+  getArticle('debt-payoff-strategies')!,
+  getArticle('what-is-amortization')!,
+  getArticle('fixed-vs-variable-interest-rate')!,
+]
 
 export const metadata: Metadata = {
   title: { absolute: `${meta.title} | FinWiser` },
@@ -34,7 +39,7 @@ const faq = [
 
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} faq={faq}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         Most people with multiple debts — a credit card, a car loan, a student loan — pay whatever

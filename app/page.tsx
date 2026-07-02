@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
+import { articles } from '@/lib/articles'
 
 export const metadata: Metadata = {
   title: { absolute: 'Free Mortgage & Loan Calculators — No Signup Required | FinWiser' },
@@ -333,6 +334,49 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Learn section */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+        <div className="flex items-end justify-between mb-10 gap-4">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">Learn how money works</h2>
+            <p className="text-slate-500">Plain-English guides to loans, interest, and debt payoff.</p>
+          </div>
+          <Link
+            href="/learn"
+            className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-700 hover:text-navy-900 transition-colors"
+          >
+            All guides
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {['mortgage-payoff-strategies', 'debt-avalanche-vs-snowball', 'compound-interest-guide', 'how-car-loan-interest-works'].map(slug => {
+            const article = articles.find(a => a.slug === slug)!
+            const colorMap: Record<string, string> = {
+              emerald: 'bg-emerald-100 text-emerald-700',
+              sky: 'bg-sky-100 text-sky-700',
+              amber: 'bg-amber-100 text-amber-700',
+              purple: 'bg-purple-100 text-purple-700',
+              blue: 'bg-blue-100 text-blue-700',
+            }
+            return (
+              <Link key={slug} href={`/learn/${slug}`} className="group flex flex-col bg-white rounded-xl border border-slate-200 hover:border-navy-300 hover:shadow-card-hover shadow-card p-5 transition-all duration-200">
+                <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-3 ${colorMap[article.categoryColor]}`}>
+                  {article.category}
+                </span>
+                <h3 className="text-sm font-semibold text-navy-900 leading-snug mb-2 group-hover:text-navy-700 transition-colors line-clamp-3">
+                  {article.title}
+                </h3>
+                <p className="text-xs text-slate-400 mt-auto pt-3">{article.readMinutes} min read</p>
+              </Link>
+            )
+          })}
         </div>
       </section>
 

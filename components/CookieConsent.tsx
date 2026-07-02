@@ -23,7 +23,7 @@ export default function CookieConsent() {
   }
 
   function savePreferences() {
-    save(advertising ? 'all' : 'essential')
+    save(advertising ? 'all' : analytics ? 'analytics' : 'essential')
   }
 
   if (!visible) return null

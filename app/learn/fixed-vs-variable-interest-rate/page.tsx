@@ -4,6 +4,11 @@ import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
 const meta = getArticle('fixed-vs-variable-interest-rate')!
+const related = [
+  getArticle('what-is-amortization')!,
+  getArticle('how-car-loan-interest-works')!,
+  getArticle('debt-payoff-strategies')!,
+]
 
 export const metadata: Metadata = {
   title: { absolute: `${meta.title} | FinWiser Learn` },
@@ -31,7 +36,7 @@ const faq = [
 
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} faq={faq}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         When you apply for a mortgage, car loan, or personal loan, one of the first choices

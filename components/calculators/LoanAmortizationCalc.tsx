@@ -3,7 +3,11 @@
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
-import AmortizationCharts from './AmortizationCharts'
+import dynamic from 'next/dynamic'
+const AmortizationCharts = dynamic(() => import('./AmortizationCharts'), {
+  ssr: false,
+  loading: () => <div className="bg-white rounded-xl shadow-card border border-slate-100 h-[340px] animate-pulse" />,
+})
 
 interface AmortizationRow {
   payment: number
@@ -385,6 +389,7 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
       </div>
 
       {/* Results */}
+      <div aria-live="polite" aria-atomic="false">
       {results && (
         <>
           {/* Summary cards */}
@@ -599,6 +604,7 @@ export default function LoanAmortizationCalc({ user, initialValues }: Props) {
           </div>
         </>
       )}
+      </div>
     </div>
   )
 }

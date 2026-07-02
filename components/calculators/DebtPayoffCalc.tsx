@@ -387,6 +387,7 @@ export default function DebtPayoffCalc({ user, initialDebts, initialStrategy, in
       </div>
 
       {/* Results */}
+      <div aria-live="polite" aria-atomic="false">
       {results && (
         <>
           {/* Summary cards */}
@@ -593,6 +594,7 @@ export default function DebtPayoffCalc({ user, initialDebts, initialStrategy, in
           </div>
         </>
       )}
+      </div>
     </div>
   )
 }

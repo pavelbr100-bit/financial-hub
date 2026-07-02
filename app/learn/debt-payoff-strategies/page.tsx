@@ -4,6 +4,11 @@ import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
 const meta = getArticle('debt-payoff-strategies')!
+const related = [
+  getArticle('debt-avalanche-vs-snowball')!,
+  getArticle('compound-interest-guide')!,
+  getArticle('fixed-vs-variable-interest-rate')!,
+]
 
 export const metadata: Metadata = {
   title: { absolute: `${meta.title} | FinWiser Learn` },
@@ -31,7 +36,7 @@ const faq = [
 
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} faq={faq}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         Knowing <em>which</em> debt to target first is one decision. Actually building a plan

@@ -4,6 +4,11 @@ import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
 const meta = getArticle('mortgage-payoff-strategies')!
+const related = [
+  getArticle('mortgage-amortization-explained')!,
+  getArticle('15-year-vs-30-year-mortgage')!,
+  getArticle('how-much-house-can-you-afford')!,
+]
 
 export const metadata: Metadata = {
   title: { absolute: `${meta.title} | FinWiser` },
@@ -33,7 +38,7 @@ const faq = [
 
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} faq={faq}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         The average 30-year mortgage costs more than double the original loan amount by the time

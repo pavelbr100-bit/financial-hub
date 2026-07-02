@@ -384,6 +384,7 @@ export default function CarLoanCalc({ user }: Props) {
       )}
 
       {/* Results */}
+      <div aria-live="polite" aria-atomic="false">
       {results && (
         <>
           {/* Monthly payment hero */}
@@ -577,6 +578,7 @@ export default function CarLoanCalc({ user }: Props) {
           </div>
         </>
       )}
+      </div>
     </div>
   )
 }

@@ -4,6 +4,11 @@ import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
 const meta = getArticle('how-much-house-can-you-afford')!
+const related = [
+  getArticle('15-year-vs-30-year-mortgage')!,
+  getArticle('mortgage-payoff-strategies')!,
+  getArticle('mortgage-amortization-explained')!,
+]
 
 export const metadata: Metadata = {
   title: { absolute: `${meta.title} | FinWiser Learn` },
@@ -33,7 +38,7 @@ const faq = [
 
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} faq={faq}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         Before you start touring homes, you need a number — not a vague range, but an actual

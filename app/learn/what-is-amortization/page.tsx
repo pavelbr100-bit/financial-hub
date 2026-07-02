@@ -4,6 +4,11 @@ import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
 const meta = getArticle('what-is-amortization')!
+const related = [
+  getArticle('mortgage-amortization-explained')!,
+  getArticle('fixed-vs-variable-interest-rate')!,
+  getArticle('how-car-loan-interest-works')!,
+]
 
 export const metadata: Metadata = {
   title: { absolute: `${meta.title} | FinWiser` },
@@ -33,7 +38,7 @@ const faq = [
 
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} faq={faq}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         When you take out a mortgage or car loan, you receive a fixed monthly payment amount. What

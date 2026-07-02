@@ -4,6 +4,11 @@ import ArticleLayout from '@/components/ArticleLayout'
 import { getArticle } from '@/lib/articles'
 
 const meta = getArticle('mortgage-amortization-explained')!
+const related = [
+  getArticle('mortgage-payoff-strategies')!,
+  getArticle('what-is-amortization')!,
+  getArticle('15-year-vs-30-year-mortgage')!,
+]
 
 export const metadata: Metadata = {
   title: { absolute: `${meta.title} | FinWiser Learn` },
@@ -33,7 +38,7 @@ const faq = [
 
 export default function Page() {
   return (
-    <ArticleLayout meta={meta} faq={faq}>
+    <ArticleLayout meta={meta} related={related} faq={faq}>
 
       <p>
         You make your first mortgage payment — $1,800, say — and feel good about chipping away at
