@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import CookiePreferencesButton from './CookiePreferencesButton'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -152,6 +153,7 @@ export default function Footer() {
             <Link href="/how-it-works" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">How it works</Link>
             <Link href="/privacy" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">Privacy</Link>
             <Link href="/terms" className="text-navy-500 hover:text-navy-300 text-xs transition-colors">Terms</Link>
+            <CookiePreferencesButton />
           </div>
         </div>
       </div>

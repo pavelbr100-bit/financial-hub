@@ -18,8 +18,13 @@ declare global {
   interface Window { adsbygoogle: unknown[] }
 }
 
-function hasAdConsent() {
-  return localStorage.getItem('finwiser_consent') === 'all'
+type ConsentLevel = 'personalized' | 'nonPersonalized' | 'pending'
+
+function getConsentLevel(): ConsentLevel {
+  const val = localStorage.getItem('finwiser_consent')
+  if (val === 'all') return 'personalized'
+  if (val === 'analytics' || val === 'essential') return 'nonPersonalized'
+  return 'pending'
 }
 
 export default function AdBanner({ slot, format = 'horizontal', className = '' }: AdBannerProps) {
@@ -31,10 +36,13 @@ export default function AdBanner({ slot, format = 'horizontal', className = '' }
     if (!isProduction || !clientId) return
 
     function tryPush() {
-      if (pushed.current || !hasAdConsent()) return
+      if (pushed.current) return
+      const level = getConsentLevel()
+      if (level === 'pending') return
       try {
         pushed.current = true
-        ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+        const pushArg = level === 'nonPersonalized' ? { params: { google_npa: '1' } } : {}
+        ;(window.adsbygoogle = window.adsbygoogle || []).push(pushArg)
       } catch {}
     }
 

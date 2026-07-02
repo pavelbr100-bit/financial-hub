@@ -182,6 +182,45 @@ export const flConfig: StateConfig = {
   metaTitle: 'Florida Mortgage Calculator — FL Tax & Insurance Rates | FinWiser',
   metaDescription:
     'Free Florida mortgage calculator with FL average property tax and hurricane insurance costs pre-loaded. Estimate your true monthly payment including taxes, insurance, and PMI.',
+  topCallout: {
+    heading: 'Florida Homeowners Insurance: Budget for the Real Cost',
+    body: "Florida homeowners pay some of the highest insurance premiums in the country — typically $2,000–$4,000 per year for a standard home, and significantly more for coastal or older properties. Hurricane risk, a high-litigation environment, and reinsurance losses have pushed more than a dozen private carriers out of the state in recent years. The calculator is pre-loaded with $2,400/year, but get an actual insurance quote early — it's the line item most likely to diverge from the default.",
+  },
+  extraSections: [
+    {
+      heading: "Florida's Homestead Exemption and the Save Our Homes Cap",
+      paragraphs: [
+        "Florida provides two meaningful property tax benefits that reduce the tax portion of your mortgage payment over time — both exclusive to primary-residence homeowners.",
+        "The Homestead Exemption reduces your home's taxable assessed value by up to $50,000. The first $25,000 applies to all taxing authorities (county, school, city); the second $25,000 applies to all taxes except school district levies. On a home assessed at $400,000, this typically saves $700–$1,400 per year depending on your combined local millage rate. To claim it, you must apply with your county property appraiser's office by March 1 of the tax year — it is not automatic for new owners.",
+        "Once you qualify, the Save Our Homes (SOH) cap limits annual increases in your home's assessed value to 3% or the rate of inflation (CPI), whichever is lower. For homeowners who have held a homestead property for several years, the SOH cap can mean the assessed value is well below market value — and the tax bill substantially lower than what a new buyer of the same home would face.",
+      ],
+      bullets: [
+        'First $25,000 exemption: applies to all taxing authorities',
+        'Second $25,000 exemption: applies to all taxes except school district',
+        'Save Our Homes cap: assessed value grows no more than 3%/year after you qualify',
+        'Portability: when you sell and buy in FL, you can transfer up to $500,000 of accumulated SOH benefit to your next home',
+        'Application deadline: March 1 — apply through your county property appraiser\'s office',
+      ],
+      note: "The 0.89% effective tax rate in the calculator reflects the statewide average across all homeowners, including those who already benefit from the exemption. Your actual effective rate after qualifying — especially in year two and beyond — may be noticeably lower.",
+    },
+    {
+      heading: 'Windstorm and Flood Insurance in Florida',
+      paragraphs: [
+        "Standard homeowners insurance in Florida may not fully cover hurricane wind damage. Many policies include a separate windstorm deductible — typically 2–5% of the insured value rather than a flat dollar amount. On a $400,000 home, a 2% deductible means you pay the first $8,000 of any hurricane-related wind damage before coverage applies.",
+        "Flood insurance is separate from homeowners insurance and is required by lenders for homes in FEMA-designated Special Flood Hazard Areas (SFHAs). Florida has more active NFIP policies than any other state. Premiums vary widely by flood zone and elevation:",
+      ],
+      bullets: [
+        'Zone X (minimal risk): $400–$900/year — optional but common near the coast',
+        'Zone AE (100-year floodplain): $1,000–$3,000/year — typically lender-required',
+        'Zone VE (coastal high-hazard, wave action): $3,000–$8,000+/year',
+      ],
+      link: {
+        text: "Look up any property's flood zone on the FEMA Map Service Center",
+        url: 'https://msc.fema.gov',
+      },
+      note: "The $2,400 homeowners insurance default covers a typical inland Florida home. Coastal buyers should budget separately for a windstorm deductible risk and, if in a SFHA, a flood insurance premium — these can add hundreds to thousands per year.",
+    },
+  ],
 }
 
 export const txConfig: StateConfig = {

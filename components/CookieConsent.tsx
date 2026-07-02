@@ -13,6 +13,10 @@ export default function CookieConsent() {
 
   useEffect(() => {
     if (!localStorage.getItem(CONSENT_KEY)) setVisible(true)
+
+    function openPreferences() { setShowModal(true) }
+    window.addEventListener('finwiser_open_preferences', openPreferences)
+    return () => window.removeEventListener('finwiser_open_preferences', openPreferences)
   }, [])
 
   function save(value: string) {
@@ -26,12 +30,12 @@ export default function CookieConsent() {
     save(advertising ? 'all' : analytics ? 'analytics' : 'essential')
   }
 
-  if (!visible) return null
+  if (!visible && !showModal) return null
 
   return (
     <>
       {/* Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-navy-900 border-t border-navy-700 shadow-2xl">
+      {visible && <div className="fixed bottom-0 left-0 right-0 z-50 bg-navy-900 border-t border-navy-700 shadow-2xl">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <p className="text-navy-300 text-sm leading-relaxed flex-1">
             We use cookies to serve ads and understand how our tools are used. See our{' '}
@@ -61,7 +65,7 @@ export default function CookieConsent() {
             </button>
           </div>
         </div>
-      </div>
+      </div>}
 
       {/* Preferences modal */}
       {showModal && (

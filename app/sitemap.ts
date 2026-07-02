@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: base,
-      lastModified: new Date('2026-05-27'),
+      lastModified: new Date('2026-07-02'),
       changeFrequency: 'weekly',
       priority: 1,
     },
@@ -118,20 +118,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
-      url: `${base}/tech`,
-      lastModified: new Date('2026-05-01'),
-      changeFrequency: 'monthly',
-      priority: 0.4,
-    },
-    {
       url: `${base}/privacy`,
-      lastModified: new Date('2026-05-01'),
+      lastModified: new Date('2026-07-02'),
       changeFrequency: 'yearly',
       priority: 0.2,
     },
     {
       url: `${base}/terms`,
-      lastModified: new Date('2026-05-01'),
+      lastModified: new Date('2026-07-02'),
       changeFrequency: 'yearly',
       priority: 0.2,
     },

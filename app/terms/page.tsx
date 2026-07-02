@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Terms of Use',
+  title: { absolute: 'Terms of Use | FinWiser' },
   description: 'Terms and conditions for using FinWiser financial calculators.',
   openGraph: {
     title: 'Terms of Use | FinWiser',
@@ -21,7 +21,7 @@ export default function TermsPage() {
           <span className="text-slate-700 font-medium">Terms of Use</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">Terms of Use</h1>
-        <p className="text-slate-500 text-sm">Last updated: May 2025</p>
+        <p className="text-slate-500 text-sm">Last updated: July 2, 2026</p>
       </div>
 
       <div className="bg-white rounded-xl border border-slate-100 shadow-card p-6 sm:p-8 space-y-8 text-slate-600 text-sm leading-relaxed">
