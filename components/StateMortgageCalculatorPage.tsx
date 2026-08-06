@@ -342,6 +342,14 @@ export default async function StateMortgageCalculatorPage({ config }: Props) {
             <li><Link href="/calculators/mortgage" className="text-navy-700 underline hover:text-navy-900">Mortgage Calculator</Link> — standard mortgage calculator with full amortization</li>
             <li><Link href="/calculators/biweekly-mortgage" className="text-navy-700 underline hover:text-navy-900">Biweekly Mortgage Calculator</Link> — see how biweekly payments cut your loan term</li>
             <li><Link href="/learn/mortgage-payoff-strategies" className="text-navy-700 underline hover:text-navy-900">How to Pay Off Your Mortgage Early — 7 Proven Strategies</Link></li>
+            {firstTimeBuyerProgram.guideHref && firstTimeBuyerProgram.guideLabel && (
+              <li>
+                <Link href={firstTimeBuyerProgram.guideHref} className="text-navy-700 underline hover:text-navy-900">
+                  {firstTimeBuyerProgram.guideLabel}
+                </Link>{' '}
+                — our full guide to the {firstTimeBuyerProgram.name} and what it pays
+              </li>
+            )}
             {otherStates.map(s => (
               <li key={s.slug}>
                 <Link href={`/calculators/mortgage/${s.slug}`} className="text-navy-700 underline hover:text-navy-900">

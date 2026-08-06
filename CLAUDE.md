@@ -13,7 +13,7 @@
 app/
   calculators/          13 calculators + 6 state mortgage variants
                         page.tsx = the /calculators hub, generated from lib/calculators.ts
-  learn/                16 article pages (TSX, not MDX)
+  learn/                20 article pages (TSX, not MDX)
   about/                About page — named author, how calculators are built
   contact/              Contact page — mailto links for corrections & feedback
   page.tsx              homepage
@@ -38,16 +38,16 @@ public/
 
 ## Learn Articles
 
-- **Location:** `app/learn/<slug>/page.tsx` — 16 articles, each a TSX file
+- **Location:** `app/learn/<slug>/page.tsx` — 20 articles, each a TSX file
 - **Metadata schema:** `lib/articles.ts` — `ArticleMeta` interface + `articles[]` array
 - **Fields per article:** `slug`, `title`, `description`, `metaTitle?`, `metaDescription?`, `date`, `updated?` (both human-readable strings e.g. "March 3, 2026"), `readMinutes`, `category`, `categoryColor`, `calculatorHref`, `calculatorLabel`
 - **No MDX, no frontmatter** — all metadata lives in `lib/articles.ts`; article bodies are TSX/JSX
 - **Date rendering:** `ArticleLayout.tsx` renders "Published {meta.date} · Reviewed {meta.updated}" in the byline. Dates are never hardcoded in article body files.
 - **Date format in articles.ts:** Human-readable string e.g. `"March 3, 2026"`. Converted to ISO for JSON-LD via `toISODate()`. `updated` falls back to `date` in JSON-LD `dateModified`.
 - **Metadata title rule:** Every `page.tsx` must use `` title: { absolute: `${meta.metaTitle ?? meta.title} | FinWiser` } `` and `description: meta.metaDescription ?? meta.description` — never a hardcoded string. The suffix is always `| FinWiser`, never `| FinWiser Learn`.
-- **`title`/`description` are reader-facing; `metaTitle`/`metaDescription` are SERP-facing.** `title` renders as the H1 and `description` as the visible subtitle under it (and on the `/learn` index cards), so both are written for humans and run long. The optional overrides exist purely to fit search-result limits: **titles ≤ 60 characters including the ` | FinWiser` suffix** (so ≤ 49 in `metaTitle` itself) and **descriptions ≤ 160**. All 16 articles currently set both. When adding an article, check the lengths and add overrides if either limit is exceeded — do not shorten the visible `title`/`description` to fit.
+- **`title`/`description` are reader-facing; `metaTitle`/`metaDescription` are SERP-facing.** `title` renders as the H1 and `description` as the visible subtitle under it (and on the `/learn` index cards), so both are written for humans and run long. The optional overrides exist purely to fit search-result limits: **titles ≤ 60 characters including the ` | FinWiser` suffix** (so ≤ 49 in `metaTitle` itself) and **descriptions ≤ 160**. All 20 articles currently set both. When adding an article, check the lengths and add overrides if either limit is exceeded — do not shorten the visible `title`/`description` to fit.
 
-### 16 article slugs (in date order)
+### 20 article slugs (in date order)
 
 | Slug | Date | Category |
 |---|---|---|
@@ -67,6 +67,10 @@ public/
 | `how-to-pay-off-credit-card-debt` | June 12, 2026 | Debt |
 | `should-you-pay-off-student-loans-early` | June 20, 2026 | Student Loans |
 | `is-renting-throwing-money-away` | July 1, 2026 | Mortgage |
+| `first-time-home-buyer-programs` | August 3, 2026 | Home Buying |
+| `first-time-home-buyer-programs-nc` | August 4, 2026 | Home Buying |
+| `first-time-home-buyer-programs-georgia` | August 5, 2026 | Home Buying |
+| `first-time-home-buyer-programs-south-carolina` | August 6, 2026 | Home Buying |
 
 11 slugs were deleted and replaced with permanent redirects in `next.config.mjs` (see Redirects section).
 
@@ -140,6 +144,34 @@ informational one — so **their FAQ questions must not overlap**:
 `/calculators/auto-loan-payoff` is already served by `how-to-pay-off-car-loan-early`
 — **do not add a fifth Auto Loans article**, the category has four and another
 would compete with the ones that exist.
+
+### Home Buying article cluster (first-time buyer programs)
+
+Four articles added August 2026: `first-time-home-buyer-programs` (federal) plus
+`-nc`, `-georgia`, `-south-carolina` state guides. Category `Home Buying` — the
+`/learn` filter list is hardcoded in `components/LearnArticles.tsx` (`FILTERS`);
+a new category must be added there or its articles only show under "All".
+
+- **Cannibalization boundary:** the federal article owns loan-type mechanics
+  (FHA/VA/USDA/conventional-97, MCC concept, IRA exception); state articles own
+  state-agency program specifics and defer loan mechanics to the federal one.
+  FAQ questions are disjoint across all four — keep them that way.
+- **Program facts were verified from official agency sources in August 2026**
+  (nchfa.com, dca.georgia.gov, schousing.sc.gov) and are hedged "as of mid-2026"
+  in the prose. When editing, re-verify dollar amounts/limits against the agency —
+  they change every June-ish. Do not "round-trip from memory."
+- **Dead programs stay dead:** NC's MCC/tax credit ended 2025; SC's MCC sunset
+  June 30, 2026. Both articles describe them in past tense deliberately — do not
+  "fix" them back to available. No federal FTHB tax credit or first-gen DPA has
+  ever become law; the federal article says so explicitly.
+- **Keep the three DPA structures straight:** Georgia Dream is *repayable*
+  (deferred, due on sale/refi); SC's is *forgivable* ($10k after 15-yr term; PHA
+  3–4% over 10 yrs); NC's *forgives 20%/yr in years 11–15*. These distinctions
+  are load-bearing in the prose and FAQs.
+- The three state mortgage calculator pages link their state's guide via the
+  optional `guideHref`/`guideLabel` on `firstTimeBuyerProgram` in
+  `lib/data/state-mortgage-configs.ts`, rendered in the Related list of
+  `StateMortgageCalculatorPage`.
 
 ### Head terms vs H1s
 
@@ -260,7 +292,7 @@ npm run check:seo
 
 ## Article Dates
 
-All 16 articles have `date` (March–July 2026) and `updated` (May–August 2026). Both are human-readable strings. `updated` is staggered across articles — no two share the same value. Dates render from `meta.date` / `meta.updated` only; no article body hardcodes a date string.
+All 20 articles have `date` (March–August 2026); the first 16 also have `updated` (May–August 2026), while the four August 2026 Home Buying articles have no `updated` yet. Both are human-readable strings. `updated` is staggered across articles — no two share the same value. Dates render from `meta.date` / `meta.updated` only; no article body hardcodes a date string.
 
 When editing an article, update its `updated` field in `lib/articles.ts` to today's date.
 

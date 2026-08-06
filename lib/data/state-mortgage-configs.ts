@@ -11,6 +11,9 @@ export type StateConfig = {
   firstTimeBuyerProgram: {
     name: string
     url: string
+    // Optional in-depth /learn guide, rendered in the Related Calculators & Guides list
+    guideHref?: string
+    guideLabel?: string
   }
   contentBlurbs: {
     marketOverview: string
@@ -47,6 +50,8 @@ export const ncConfig: StateConfig = {
   firstTimeBuyerProgram: {
     name: 'NC Home Advantage Mortgage',
     url: 'https://nchfa.com',
+    guideHref: '/learn/first-time-home-buyer-programs-nc',
+    guideLabel: 'First-Time Home Buyer Programs in North Carolina',
   },
   contentBlurbs: {
     marketOverview:
@@ -86,8 +91,10 @@ export const scConfig: StateConfig = {
   avgHomePrice: 290000,
   majorCities: ['Charleston', 'Columbia', 'Greenville', 'Myrtle Beach'],
   firstTimeBuyerProgram: {
-    name: 'SC Housing Home Advantage',
-    url: 'https://schousing.com',
+    name: 'SC Housing Homebuyer Program',
+    url: 'https://schousing.sc.gov',
+    guideHref: '/learn/first-time-home-buyer-programs-south-carolina',
+    guideLabel: 'First-Time Home Buyer Programs in South Carolina',
   },
   contentBlurbs: {
     marketOverview:
@@ -126,7 +133,9 @@ export const gaConfig: StateConfig = {
   majorCities: ['Atlanta', 'Savannah', 'Augusta', 'Athens'],
   firstTimeBuyerProgram: {
     name: 'Georgia Dream Homeownership Program',
-    url: 'https://www.dca.ga.gov/safe-affordable-housing/homeownership',
+    url: 'https://dca.georgia.gov',
+    guideHref: '/learn/first-time-home-buyer-programs-georgia',
+    guideLabel: 'First-Time Home Buyer Programs in Georgia',
   },
   contentBlurbs: {
     marketOverview:

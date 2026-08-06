@@ -12,7 +12,7 @@ const categoryStyles: Record<string, string> = {
   blue:    'bg-blue-100 text-blue-700',
 }
 
-const FILTERS = ['All', 'Mortgage', 'Investing', 'Debt', 'Loans', 'Auto Loans']
+const FILTERS = ['All', 'Mortgage', 'Home Buying', 'Investing', 'Debt', 'Loans', 'Auto Loans']
 
 interface Props {
   articles: ArticleMeta[]

@@ -249,6 +249,66 @@ export const articles: ArticleMeta[] = [
     calculatorHref: '/calculators/rent-vs-buy',
     calculatorLabel: 'Compare renting and buying on net worth',
   },
+  {
+    slug: 'first-time-home-buyer-programs',
+    title: 'First-Time Home Buyer Programs: Every Federal Option, Explained',
+    description:
+      'FHA, VA, USDA, 3%-down conventional loans, tax credits — and the programs that don\'t actually exist. A clear map of every federal route into a first home.',
+    metaTitle: 'First-Time Home Buyer Programs: Federal Guide',
+    metaDescription:
+      'FHA, VA, USDA, and 3%-down conventional loans compared — plus the federal grants and tax credits that don\'t actually exist yet. Updated for 2026.',
+    date: 'August 3, 2026',
+    readMinutes: 9,
+    category: 'Home Buying',
+    categoryColor: 'sky',
+    calculatorHref: '/calculators/mortgage',
+    calculatorLabel: 'Estimate your full monthly payment',
+  },
+  {
+    slug: 'first-time-home-buyer-programs-nc',
+    title: 'First-Time Home Buyer Programs in North Carolina: What NC Actually Offers',
+    description:
+      'The NC Home Advantage Mortgage, the $15,000 1st Home Advantage down payment, and how North Carolina\'s buyer programs really work — limits, fine print, and all.',
+    metaTitle: 'NC First-Time Home Buyer Programs & Grants',
+    metaDescription:
+      'NC Home Advantage down payment help, the $15,000 1st Home Advantage program, income limits, and the fine print North Carolina buyers should know.',
+    date: 'August 4, 2026',
+    readMinutes: 8,
+    category: 'Home Buying',
+    categoryColor: 'sky',
+    calculatorHref: '/calculators/mortgage/nc',
+    calculatorLabel: 'Run the numbers with NC tax rates',
+  },
+  {
+    slug: 'first-time-home-buyer-programs-georgia',
+    title: 'First-Time Home Buyer Programs in Georgia: How Georgia Dream Works',
+    description:
+      'Georgia Dream is the state\'s main route to down payment help. Here\'s who qualifies, what the standard and enhanced tiers pay, and the rules that catch buyers out.',
+    metaTitle: 'Georgia First-Time Home Buyer Programs',
+    metaDescription:
+      'How the Georgia Dream program works: down payment assistance amounts, income and price limits, the PEN and CHOICE tiers, and who actually qualifies.',
+    date: 'August 5, 2026',
+    readMinutes: 8,
+    category: 'Home Buying',
+    categoryColor: 'sky',
+    calculatorHref: '/calculators/mortgage/ga',
+    calculatorLabel: 'Run the numbers with GA tax rates',
+  },
+  {
+    slug: 'first-time-home-buyer-programs-south-carolina',
+    title: 'First-Time Home Buyer Programs in South Carolina: A Working Guide',
+    description:
+      'SC Housing\'s forgivable down payment assistance, the Palmetto Home Advantage option for repeat buyers, and the county rules that change who qualifies.',
+    metaTitle: 'SC First-Time Home Buyer Programs & Grants',
+    metaDescription:
+      'SC Housing\'s forgivable down payment assistance, Palmetto Home Advantage, and the county-by-county rules that decide which SC buyers qualify.',
+    date: 'August 6, 2026',
+    readMinutes: 8,
+    category: 'Home Buying',
+    categoryColor: 'sky',
+    calculatorHref: '/calculators/mortgage/sc',
+    calculatorLabel: 'Run the numbers with SC tax rates',
+  },
 ]
 
 export function getArticle(slug: string): ArticleMeta | undefined {
