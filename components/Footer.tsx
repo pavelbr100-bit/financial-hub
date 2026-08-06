@@ -33,6 +33,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/calculators/mortgage-payoff" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Mortgage Payoff Calculator
+                </Link>
+              </li>
+              <li>
                 <Link href="/calculators/biweekly-mortgage" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
                   Biweekly Mortgage
                 </Link>

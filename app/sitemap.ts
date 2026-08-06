@@ -22,6 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${base}/calculators/mortgage-payoff`,
+      lastModified: new Date('2026-08-06'),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${base}/calculators/car-loan`,
       lastModified: new Date('2026-05-27'),
       changeFrequency: 'monthly',

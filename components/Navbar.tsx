@@ -11,6 +11,7 @@ interface NavbarProps {
 
 const calcLinks = [
   { href: '/calculators/mortgage', label: 'Mortgage Calculator' },
+  { href: '/calculators/mortgage-payoff', label: 'Mortgage Payoff Calculator' },
   { href: '/calculators/biweekly-mortgage', label: 'Biweekly Mortgage' },
   { href: '/calculators/car-loan', label: 'Car Loan Calculator' },
   { href: '/calculators/loan-amortization', label: 'Loan Amortization' },

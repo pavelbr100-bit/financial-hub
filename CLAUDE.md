@@ -71,6 +71,7 @@ public/
 |---|---|---|
 | Mortgage | `app/calculators/mortgage/page.tsx` | Largest (~390 lines prose) |
 | Mortgage Compare | `app/calculators/mortgage/compare/page.tsx` | 15 vs 30 year |
+| Mortgage Payoff | `app/calculators/mortgage-payoff/page.tsx` | Targets "mortgage payoff calculator" + "extra payment mortgage calculator". Engine in `lib/calculators/mortgagePayoff.ts`. Three mutually exclusive strategies (extra monthly / lump sum / biweekly) each compared against the untouched minimum-payment baseline. |
 | Biweekly Mortgage | `app/calculators/biweekly-mortgage/page.tsx` | |
 | Car Loan | `app/calculators/car-loan/page.tsx` | |
 | Compound Interest | `app/calculators/compound-interest/page.tsx` | |
@@ -79,6 +80,13 @@ public/
 | State Mortgages | `app/calculators/mortgage/{nc,sc,ga,fl,tx,va}/page.tsx` | Config-driven via `StateMortgageCalculatorPage` |
 
 Each calculator page has 150–350 lines of surrounding prose (explainer sections, formulas, FAQs, related links).
+
+**Cannibalization boundaries between the three mortgage-acceleration pages** — keep these distinct, do not duplicate content across them:
+- `/calculators/mortgage` owns the full monthly payment (taxes, insurance, PMI, HOA)
+- `/calculators/mortgage-payoff` owns paying down an *existing* balance early (extra payments, lump sums)
+- `/calculators/biweekly-mortgage` owns the biweekly schedule starting from home price and down payment
+
+**Calculator page FAQ rule:** if a page emits `FAQPage` JSON-LD, the same Q&As must be rendered visibly. On `/calculators/mortgage-payoff` both derive from one `faqs` array in the page file, so drift is impossible. Copy that pattern rather than hand-maintaining two lists.
 
 ## JSON-LD (Articles)
 
@@ -140,7 +148,8 @@ All numerical examples in article bodies must be verifiable from first principle
 - **Pinned test cases.** Key article example values are pinned in dedicated test sections labelled "article example values":
   - `lib/calculators/__tests__/compoundInterest.test.ts` — compound interest article examples
   - `lib/calculators/__tests__/debtPayoff.test.ts` — debt avalanche/snowball article examples (single-debt, 3-debt callout, Marcus case)
-  When adding or changing a numerical example in any article, add or update the corresponding test. Run `npm test` before committing.
+  - `lib/calculators/__tests__/mortgagePayoff.test.ts` — every figure quoted in the `/calculators/mortgage-payoff` prose and FAQs (section "page example values")
+  When adding or changing a numerical example in any article **or calculator page**, add or update the corresponding test. Run `npm test` before committing.
 - **Debt payoff examples require stated minimum payments.** Avalanche/snowball timelines and interest totals cannot be verified without knowing minimum payments. Either list explicit minimums or use a "total monthly budget" model (set `minPayment: 0`, pass full budget as `extraMonthly`). Never leave minimum payments implied.
 - **Common error patterns caught in prior audits:**
   - Monthly vs quarterly compounding confusion (e.g. `$10k × (1+r/4)^80` mistakenly labelled monthly)

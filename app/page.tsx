@@ -85,6 +85,18 @@ const tools = [
     ),
   },
   {
+    href: '/calculators/mortgage-payoff',
+    title: 'Mortgage Payoff Calculator',
+    description:
+      'See how an extra payment, a lump sum, or a biweekly schedule moves your payoff date and cuts total interest.',
+    badge: 'New' as const,
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+      </svg>
+    ),
+  },
+  {
     href: '/calculators/biweekly-mortgage',
     title: 'Biweekly Mortgage Calculator',
     description:

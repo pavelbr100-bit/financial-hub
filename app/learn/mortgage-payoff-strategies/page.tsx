@@ -217,7 +217,11 @@ export default function Page() {
       <p>
         The most important thing is to actually run the numbers. The difference between a 30-year
         mortgage with no extra payments and one where you add $200/month can easily exceed $100,000
-        in total interest — money that stays in your pocket instead. Use <Link href="/calculators/mortgage">FinWiser&apos;s free mortgage calculator</Link> to see exactly how each strategy plays out on your specific loan.
+        in total interest — money that stays in your pocket instead. Run your own numbers through the{' '}
+        <Link href="/calculators/mortgage-payoff">mortgage payoff calculator</Link> to see what an
+        extra payment, a lump sum, or a biweekly schedule does to your payoff date, or use{' '}
+        <Link href="/calculators/mortgage">FinWiser&apos;s free mortgage calculator</Link> for the full
+        monthly payment including taxes and insurance.
       </p>
 
       <table>

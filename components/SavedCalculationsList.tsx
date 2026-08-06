@@ -205,13 +205,23 @@ export default function SavedCalculationsList({
 
         const loadUrl = calc.type === 'mortgage'
           ? `/calculators/mortgage?homePrice=${inputs.homePrice}&down=${inputs.down}&downType=${inputs.downType}&rate=${inputs.rate}&term=${inputs.term}&tax=${inputs.tax}&insurance=${inputs.insurance}&pmi=${inputs.pmi}&hoa=${inputs.hoa}`
-          : `/calculators/loan-amortization?amount=${inputs.loanAmount}&rate=${inputs.interestRate}&term=${inputs.loanTerm}&unit=${inputs.termUnit}&start=${inputs.startDate}`
+          : calc.type === 'mortgage-payoff'
+            ? '/calculators/mortgage-payoff'
+            : calc.type === 'biweekly-mortgage'
+              ? '/calculators/biweekly-mortgage'
+              : `/calculators/loan-amortization?amount=${inputs.loanAmount}&rate=${inputs.interestRate}&term=${inputs.loanTerm}&unit=${inputs.termUnit}&start=${inputs.startDate}`
 
         const isMortgage = calc.type === 'mortgage'
-        const thirdLabel = isMortgage ? 'Home Price' : 'Loan Amount'
-        const thirdValue = isMortgage
-          ? parseFloat((inputs.homePrice ?? '0').replace(/,/g, ''))
-          : parseFloat((inputs.loanAmount ?? '0').replace(/,/g, ''))
+        const isPayoff = calc.type === 'mortgage-payoff'
+        const thirdLabel = isMortgage ? 'Home Price' : isPayoff ? 'Balance' : 'Loan Amount'
+        const thirdValue = parseFloat(
+          (isMortgage
+            ? (inputs.homePrice ?? '0')
+            : isPayoff
+              ? (inputs.balance ?? '0')
+              : (inputs.loanAmount ?? '0')
+          ).replace(/,/g, '')
+        )
 
         return (
           <div key={calc.id} className="bg-white rounded-xl border border-slate-100 shadow-card p-5">
