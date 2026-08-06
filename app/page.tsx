@@ -85,6 +85,56 @@ const tools = [
     ),
   },
   {
+    href: '/calculators/debt-avalanche',
+    title: 'Debt Avalanche Calculator',
+    description:
+      'Target your highest-rate debt first — the cheapest order — and see exactly what the snowball would cost instead.',
+    badge: 'New' as const,
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    ),
+  },
+  {
+    href: '/calculators/auto-loan-payoff',
+    title: 'Auto Loan Payoff Calculator',
+    description:
+      'See what extra payments save on your car loan, and when you stop owing more than the car is worth.',
+    badge: 'New' as const,
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l1.293 1.293A1 1 0 005 18h1m7-2h5m0 0l1.293-1.293A1 1 0 0020 14V9.5a1 1 0 00-.293-.707l-2-2A1 1 0 0017 6.5H13" />
+      </svg>
+    ),
+  },
+  {
+    href: '/calculators/student-loan-payoff',
+    title: 'Student Loan Payoff Calculator',
+    description:
+      'See how an extra payment or a lump sum moves your student loan payoff date and cuts total interest.',
+    badge: 'New' as const,
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5a12.083 12.083 0 01-6.16-10.922L12 14z" />
+      </svg>
+    ),
+  },
+  {
+    href: '/calculators/rent-vs-buy',
+    title: 'Rent vs Buy Calculator',
+    description:
+      'Compare renting and buying on net worth, not monthly payment, and find the year buying pulls ahead.',
+    badge: 'New' as const,
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+      </svg>
+    ),
+  },
+  {
     href: '/calculators/compound-interest',
     title: 'Compound Interest Calculator',
     description:

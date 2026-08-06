@@ -366,6 +366,7 @@ export default async function MortgagePage({
       <section className="mt-8 bg-slate-50 rounded-xl border border-slate-100 p-6 sm:p-8">
         <h2 className="text-lg font-bold text-navy-900 mb-4">Related Calculators &amp; Guides</h2>
         <ul className="space-y-2 text-sm text-slate-600">
+          <li><Link href="/calculators/rent-vs-buy" className="text-navy-700 underline hover:text-navy-900">Rent vs Buy Calculator</Link> — still deciding? Compare buying against renting on net worth over your horizon</li>
           <li><Link href="/calculators/biweekly-mortgage" className="text-navy-700 underline hover:text-navy-900">Biweekly Mortgage Calculator</Link> — see how biweekly payments cut your loan term and total interest</li>
           <li><Link href="/calculators/mortgage/compare" className="text-navy-700 underline hover:text-navy-900">Mortgage Comparison Calculator</Link> — compare two loan scenarios side by side</li>
           <li><Link href="/calculators/loan-amortization" className="text-navy-700 underline hover:text-navy-900">Loan Amortization Calculator</Link> — full amortization schedule for any loan type</li>

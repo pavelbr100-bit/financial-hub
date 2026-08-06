@@ -1,3 +1,12 @@
+/**
+ * Generic early-payoff engine for any fixed-rate amortizing loan.
+ *
+ * Shared by /calculators/mortgage-payoff, /calculators/auto-loan-payoff, and
+ * /calculators/student-loan-payoff — the arithmetic is identical for all three;
+ * only the surrounding content differs. Revolving credit-card balances are NOT
+ * modelled here (the minimum recalculates monthly) — see creditCardPayoff.ts.
+ */
+
 export type PayoffStrategy = 'extra-monthly' | 'lump-sum' | 'biweekly'
 
 export interface PayoffRow {

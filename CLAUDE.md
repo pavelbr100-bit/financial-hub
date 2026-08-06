@@ -11,7 +11,7 @@
 
 ```
 app/
-  calculators/          7 calculators + 6 state mortgage variants
+  calculators/          12 calculators + 6 state mortgage variants
   learn/                13 article pages (TSX, not MDX)
   about/                About page — named author, how calculators are built
   contact/              Contact page — mailto links for corrections & feedback
@@ -71,9 +71,13 @@ public/
 |---|---|---|
 | Mortgage | `app/calculators/mortgage/page.tsx` | Largest (~390 lines prose) |
 | Mortgage Compare | `app/calculators/mortgage/compare/page.tsx` | 15 vs 30 year |
-| Mortgage Payoff | `app/calculators/mortgage-payoff/page.tsx` | Targets "mortgage payoff calculator" + "extra payment mortgage calculator". Engine in `lib/calculators/mortgagePayoff.ts`. Three mutually exclusive strategies (extra monthly / lump sum / biweekly) each compared against the untouched minimum-payment baseline. |
+| Mortgage Payoff | `app/calculators/mortgage-payoff/page.tsx` | Targets "mortgage payoff calculator" + "extra payment mortgage calculator". Engine in `lib/calculators/loanPayoff.ts` (shared). Three mutually exclusive strategies (extra monthly / lump sum / biweekly) each compared against the untouched minimum-payment baseline. |
 | Biweekly Mortgage | `app/calculators/biweekly-mortgage/page.tsx` | |
 | Credit Card Payoff | `app/calculators/credit-card-payoff/page.tsx` | Targets "credit card payoff calculator". Engine in `lib/calculators/creditCardPayoff.ts`. Three modes (fixed payment / target date / minimum only), each compared against the minimum-only baseline. Single card only — multi-card ordering belongs to `/calculators/debt-snowball`. |
+| Auto Loan Payoff | `app/calculators/auto-loan-payoff/page.tsx` | Targets "auto loan payoff calculator". Uses the shared `LoanPayoffCalc` component + `lib/calculators/loanPayoff.ts`, plus `lib/calculators/autoLoanPayoff.ts` for the negative-equity check (the one genuinely auto-specific feature). |
+| Student Loan Payoff | `app/calculators/student-loan-payoff/page.tsx` | Targets "student loan payoff calculator". Same shared `LoanPayoffCalc` + `loanPayoff.ts`, no equity panel. Content leads on the forgiveness question, which inverts the whole decision. |
+| Rent vs Buy | `app/calculators/rent-vs-buy/page.tsx` | Targets "rent vs buy calculator". Own engine in `lib/calculators/rentVsBuy.ts` — compares **net worth**, not monthly payment. |
+| Debt Avalanche | `app/calculators/debt-avalanche/page.tsx` | Targets "debt avalanche calculator". Reuses `DebtPayoffCalc` with `initialStrategy='avalanche'`. Saved-calculation `type` is still `'debt-payoff'` (shared with debt-snowball). |
 | Car Loan | `app/calculators/car-loan/page.tsx` | |
 | Compound Interest | `app/calculators/compound-interest/page.tsx` | |
 | Debt Snowball | `app/calculators/debt-snowball/page.tsx` | Renamed from `debt-payoff` to target "debt snowball calculator". Defaults `initialStrategy` to `'snowball'` so the pre-selected mode matches the H1; avalanche remains a toggle. **The saved-calculation `type` in Supabase is still `'debt-payoff'`** — that is a stored row value, not a URL. Do not rename it. |
@@ -87,9 +91,20 @@ Each calculator page has 150–350 lines of surrounding prose (explainer section
 - `/calculators/mortgage-payoff` owns paying down an *existing* balance early (extra payments, lump sums)
 - `/calculators/biweekly-mortgage` owns the biweekly schedule starting from home price and down payment
 
-**Cannibalization boundary between the two debt pages** — keep these distinct:
-- `/calculators/debt-snowball` owns ordering *several* debts (snowball vs avalanche, freed minimums rolling forward)
+**Cannibalization boundaries between the three debt pages** — keep these distinct:
+- `/calculators/debt-snowball` owns ordering several debts by *balance*, and frames the behavioural case (early wins)
+- `/calculators/debt-avalanche` owns ordering several debts by *rate*, and frames the arithmetic case (cheapest total). Same engine and component as debt-snowball, differing only in `initialStrategy` — so the **prose and FAQs must not overlap**. The two pages currently share zero FAQ questions; keep it that way or they compete for the same result.
 - `/calculators/credit-card-payoff` owns a *single* revolving balance — specifically the shrinking-minimum trap, which an installment-loan engine cannot model. `lib/calculators/creditCardPayoff.ts` is deliberately separate from `lib/calculators/debtPayoff.ts` for this reason; do not merge them.
+
+## Shared calculator engines and components
+
+Three payoff pages run on identical arithmetic, so the logic lives in one place:
+
+- **`lib/calculators/loanPayoff.ts`** — generic early-payoff engine for any fixed-rate amortizing loan (extra monthly / lump sum / biweekly, each vs. the untouched baseline). Used by mortgage-payoff, auto-loan-payoff, and student-loan-payoff. Was `mortgagePayoff.ts` until a second consumer arrived; the test file is `loanPayoff.test.ts`.
+- **`components/calculators/LoanPayoffCalc.tsx`** — the shared payoff UI, driven by a `LoanPayoffCalcConfig` object (labels, defaults, ids, save type, optional equity panel). Used by auto-loan-payoff and student-loan-payoff. **`/calculators/mortgage-payoff` still has its own `MortgagePayoffCalc`** because it takes the remaining term as years-plus-months rather than a single month count — migrating it is safe but not yet done.
+- **`lib/calculators/autoLoanPayoff.ts`** — the only auto-specific logic: vehicle depreciation and the month the loan balance drops below the car's value. Everything else on that page comes from `loanPayoff.ts`.
+
+Adding another amortizing-loan payoff page should mean a new config object and page file, not a new engine.
 
 **Calculator page FAQ rule:** if a page emits `FAQPage` JSON-LD, the same Q&As must be rendered visibly. On `/calculators/mortgage-payoff` both derive from one `faqs` array in the page file, so drift is impossible. Copy that pattern rather than hand-maintaining two lists.
 
@@ -153,8 +168,12 @@ All numerical examples in article bodies must be verifiable from first principle
 - **Pinned test cases.** Key article example values are pinned in dedicated test sections labelled "article example values":
   - `lib/calculators/__tests__/compoundInterest.test.ts` — compound interest article examples
   - `lib/calculators/__tests__/debtPayoff.test.ts` — debt avalanche/snowball article examples (single-debt, 3-debt callout, Marcus case)
-  - `lib/calculators/__tests__/mortgagePayoff.test.ts` — every figure quoted in the `/calculators/mortgage-payoff` prose and FAQs (section "page example values")
+  - `lib/calculators/__tests__/loanPayoff.test.ts` — every figure quoted in the `/calculators/mortgage-payoff` prose and FAQs (section "page example values")
   - `lib/calculators/__tests__/creditCardPayoff.test.ts` — every figure quoted in the `/calculators/credit-card-payoff` prose and FAQs (sections "page example values")
+  - `lib/calculators/__tests__/autoLoanPayoff.test.ts` — `/calculators/auto-loan-payoff` figures, incl. the equity crossover months
+  - `lib/calculators/__tests__/studentLoanPayoff.test.ts` — `/calculators/student-loan-payoff` figures
+  - `lib/calculators/__tests__/rentVsBuy.test.ts` — `/calculators/rent-vs-buy` figures, incl. the breakeven sensitivity table
+  - `lib/calculators/__tests__/debtAvalanche.test.ts` — `/calculators/debt-avalanche` figures
   When adding or changing a numerical example in any article **or calculator page**, add or update the corresponding test. Run `npm test` before committing.
 - **Debt payoff examples require stated minimum payments.** Avalanche/snowball timelines and interest totals cannot be verified without knowing minimum payments. Either list explicit minimums or use a "total monthly budget" model (set `minPayment: 0`, pass full budget as `extraMonthly`). Never leave minimum payments implied.
 - **Common error patterns caught in prior audits:**

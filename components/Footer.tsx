@@ -63,6 +63,26 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/calculators/debt-avalanche" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Debt Avalanche Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculators/auto-loan-payoff" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Auto Loan Payoff Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculators/student-loan-payoff" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Student Loan Payoff Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculators/rent-vs-buy" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Rent vs Buy Calculator
+                </Link>
+              </li>
+              <li>
                 <Link href="/calculators/compound-interest" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
                   Compound Interest
                 </Link>

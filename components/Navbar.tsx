@@ -17,6 +17,10 @@ const calcLinks = [
   { href: '/calculators/loan-amortization', label: 'Loan Amortization' },
   { href: '/calculators/debt-snowball', label: 'Debt Snowball Calculator' },
   { href: '/calculators/credit-card-payoff', label: 'Credit Card Payoff Calculator' },
+  { href: '/calculators/debt-avalanche', label: 'Debt Avalanche Calculator' },
+  { href: '/calculators/auto-loan-payoff', label: 'Auto Loan Payoff Calculator' },
+  { href: '/calculators/student-loan-payoff', label: 'Student Loan Payoff Calculator' },
+  { href: '/calculators/rent-vs-buy', label: 'Rent vs Buy Calculator' },
   { href: '/calculators/compound-interest', label: 'Compound Interest' },
   { href: '/calculators/mortgage/compare', label: 'Compare Mortgages' },
 ]

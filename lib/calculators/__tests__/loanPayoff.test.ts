@@ -4,7 +4,7 @@ import {
   monthlyPayment,
   simulatePayoff,
   type PayoffInput,
-} from '../mortgagePayoff'
+} from '../loanPayoff'
 
 // Standard test case: $300k remaining balance at 6.5% with 30 years left
 const BALANCE = 300_000

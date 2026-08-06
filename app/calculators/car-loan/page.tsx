@@ -213,6 +213,7 @@ export default async function CarLoanPage() {
         <section className="mt-8 bg-slate-50 rounded-xl border border-slate-100 p-6 sm:p-8">
           <h2 className="text-lg font-bold text-navy-900 mb-4">Related Calculators</h2>
           <ul className="space-y-2 text-sm text-slate-600">
+            <li><Link href="/calculators/auto-loan-payoff" className="text-navy-700 underline hover:text-navy-900">Auto Loan Payoff Calculator</Link> — already financed? See what extra payments save and when you clear negative equity</li>
             <li><Link href="/calculators/loan-amortization" className="text-navy-700 underline hover:text-navy-900">Loan Amortization Calculator</Link> — the same payment schedule for any loan type</li>
             <li><Link href="/calculators/debt-snowball" className="text-navy-700 underline hover:text-navy-900">Debt Snowball Calculator</Link> — fold your car loan into a full payoff plan</li>
             <li><Link href="/calculators/compound-interest" className="text-navy-700 underline hover:text-navy-900">Compound Interest Calculator</Link> — what a larger down payment could earn if invested instead</li>

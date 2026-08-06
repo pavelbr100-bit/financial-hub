@@ -12,6 +12,17 @@ function formatCurrency(n: number) {
   }).format(n)
 }
 
+/**
+ * Saved types whose card shows a remaining balance rather than a purchase price,
+ * and which load without query params. Keys are the `type` stored in Supabase.
+ */
+const PAYOFF_ROUTES: Record<string, string> = {
+  'mortgage-payoff': '/calculators/mortgage-payoff',
+  'credit-card-payoff': '/calculators/credit-card-payoff',
+  'auto-loan-payoff': '/calculators/auto-loan-payoff',
+  'student-loan-payoff': '/calculators/student-loan-payoff',
+}
+
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', {
     month: 'short',
@@ -156,6 +167,67 @@ export default function SavedCalculationsList({
           )
         }
 
+        if (calc.type === 'rent-vs-buy') {
+          // summary reuses the shared shape: totalPayment = buyer net worth,
+          // totalInterest = renter net worth, monthlyPayment = first-month cost of owning.
+          const buyerAhead = summary.totalPayment >= summary.totalInterest
+          return (
+            <div key={calc.id} className="bg-white rounded-xl border border-slate-100 shadow-card p-5">
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 className="font-semibold text-navy-900">{calc.name}</h3>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="text-xs text-slate-400">{formatDate(calc.created_at)}</span>
+                    <span className="text-xs text-slate-300">·</span>
+                    <span className="text-xs text-slate-400">
+                      Rent vs buy · {inputs.years} yr horizon
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Link
+                    href="/calculators/rent-vs-buy"
+                    className="px-3 py-1.5 text-xs font-medium bg-navy-700 hover:bg-navy-600 text-white rounded-md transition-colors"
+                  >
+                    Load
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(calc.id)}
+                    disabled={deleting === calc.id}
+                    className="px-3 py-1.5 text-xs font-medium border border-slate-300 hover:border-red-300 text-slate-500 hover:text-red-500 rounded-md transition-colors disabled:opacity-50"
+                  >
+                    {deleting === calc.id ? 'Deleting…' : 'Delete'}
+                  </button>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-4 bg-slate-50 rounded-lg p-4">
+                <div>
+                  <p className="text-xs text-slate-500 mb-0.5">If you buy</p>
+                  <p
+                    className={`font-semibold tabular-nums ${buyerAhead ? 'text-emerald-700' : 'text-navy-700'}`}
+                  >
+                    {formatCurrency(summary.totalPayment)}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 mb-0.5">If you rent</p>
+                  <p
+                    className={`font-semibold tabular-nums ${buyerAhead ? 'text-navy-700' : 'text-emerald-700'}`}
+                  >
+                    {formatCurrency(summary.totalInterest)}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 mb-0.5">Cost of owning /mo</p>
+                  <p className="font-semibold text-slate-700 tabular-nums">
+                    {formatCurrency(summary.monthlyPayment)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )
+        }
+
         if (calc.type === 'mortgage-compare') {
           let scenarios: { label: string; rate: string; term: number }[] = []
           try {
@@ -207,14 +279,14 @@ export default function SavedCalculationsList({
           ? `/calculators/mortgage?homePrice=${inputs.homePrice}&down=${inputs.down}&downType=${inputs.downType}&rate=${inputs.rate}&term=${inputs.term}&tax=${inputs.tax}&insurance=${inputs.insurance}&pmi=${inputs.pmi}&hoa=${inputs.hoa}`
           : calc.type === 'mortgage-payoff'
             ? '/calculators/mortgage-payoff'
-            : calc.type === 'credit-card-payoff'
-              ? '/calculators/credit-card-payoff'
+            : PAYOFF_ROUTES[calc.type]
+              ? PAYOFF_ROUTES[calc.type]
               : calc.type === 'biweekly-mortgage'
                 ? '/calculators/biweekly-mortgage'
                 : `/calculators/loan-amortization?amount=${inputs.loanAmount}&rate=${inputs.interestRate}&term=${inputs.loanTerm}&unit=${inputs.termUnit}&start=${inputs.startDate}`
 
         const isMortgage = calc.type === 'mortgage'
-        const isPayoff = calc.type === 'mortgage-payoff' || calc.type === 'credit-card-payoff'
+        const isPayoff = calc.type in PAYOFF_ROUTES
         const thirdLabel = isMortgage ? 'Home Price' : isPayoff ? 'Balance' : 'Loan Amount'
         const thirdValue = parseFloat(
           (isMortgage

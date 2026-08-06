@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 /**
  * Single source for the visible FAQ and the FAQPage schema below — the two can
  * never drift apart. Every dollar figure here is pinned in
- * lib/calculators/__tests__/mortgagePayoff.test.ts.
+ * lib/calculators/__tests__/loanPayoff.test.ts.
  */
 const faqs: { question: string; answer: string }[] = [
   {

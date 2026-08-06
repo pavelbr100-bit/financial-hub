@@ -138,9 +138,9 @@ const related = [
     blurb: 'The same compounding that works against you here, running in your favour instead.',
   },
   {
-    href: '/calculators/car-loan',
-    label: 'Car Payment Calculator',
-    blurb: 'Check what an auto loan payment leaves you each month before committing to a card payoff.',
+    href: '/calculators/debt-avalanche',
+    label: 'Debt Avalanche Calculator',
+    blurb: 'Several cards? Order them by interest rate — the cheapest sequence to clear them all.',
   },
 ]
 

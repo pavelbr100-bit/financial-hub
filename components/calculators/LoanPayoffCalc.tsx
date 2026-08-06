@@ -4,11 +4,49 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
 import { comparePayoff, type PayoffStrategy } from '@/lib/calculators/loanPayoff'
+import { equityPosition, DEFAULT_DEPRECIATION } from '@/lib/calculators/autoLoanPayoff'
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 
+/**
+ * Shared early-payoff UI for any fixed-rate amortizing loan with a whole-months
+ * remaining term. Used by /calculators/auto-loan-payoff and
+ * /calculators/student-loan-payoff.
+ *
+ * /calculators/mortgage-payoff keeps its own component (MortgagePayoffCalc) — it
+ * takes the remaining term as years plus months rather than a single month count.
+ */
+export interface LoanPayoffCalcConfig {
+  /** Prefixes every input id so two instances could coexist on one page. */
+  idPrefix: string
+  /** Value stored as `type` on saved calculations. */
+  saveType: string
+  heading: string
+  balanceLabel: string
+  balanceHelp: string
+  balanceDefault: string
+  rateLabel: string
+  rateDefault: string
+  termLabel: string
+  termDefault: string
+  /** Upper bound on the remaining term, in months. */
+  termMax: number
+  extraDefault: string
+  lumpDefault: string
+  savePlaceholder: string
+  biweeklyNote: string
+  emptyState: string
+  /** Adds the collateral-value input and the underwater panel. Auto loans only. */
+  equity?: {
+    label: string
+    help: string
+    valueDefault: string
+  }
+}
+
 interface Props {
   user: { email?: string | null } | null
+  config: LoanPayoffCalcConfig
 }
 
 const STRATEGIES: { id: PayoffStrategy; label: string; short: string }[] = [
@@ -54,21 +92,20 @@ function scheduleDate(monthOffset: number): string {
   return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
-export default function MortgagePayoffCalc({ user }: Props) {
-  const [balance, setBalance] = useState('300,000')
-  const [rate, setRate] = useState('6.5')
-  const [years, setYears] = useState('30')
-  const [months, setMonths] = useState('0')
+export default function LoanPayoffCalc({ user, config }: Props) {
+  const [balance, setBalance] = useState(config.balanceDefault)
+  const [rate, setRate] = useState(config.rateDefault)
+  const [monthsLeft, setMonthsLeft] = useState(config.termDefault)
   const [strategy, setStrategy] = useState<PayoffStrategy>('extra-monthly')
-  const [extraMonthly, setExtraMonthly] = useState('200')
-  const [lumpSum, setLumpSum] = useState('10,000')
+  const [extraMonthly, setExtraMonthly] = useState(config.extraDefault)
+  const [lumpSum, setLumpSum] = useState(config.lumpDefault)
   const [lumpDelay, setLumpDelay] = useState('0')
+  const [carValue, setCarValue] = useState(config.equity?.valueDefault ?? '')
   const [showFullTable, setShowFullTable] = useState(false)
   const [calcName, setCalcName] = useState('')
   const [saveState, setSaveState] = useState<SaveState>('idle')
 
-  const remainingMonths =
-    (parseInt(years || '0', 10) || 0) * 12 + (parseInt(months || '0', 10) || 0)
+  const remainingMonths = parseInt(monthsLeft || '0', 10) || 0
 
   const results = useMemo(() => {
     const bal = parseAmount(balance)
@@ -76,7 +113,7 @@ export default function MortgagePayoffCalc({ user }: Props) {
 
     if (!bal || bal <= 0) return null
     if (!rate || isNaN(r) || r < 0 || r > 100) return null
-    if (remainingMonths <= 0 || remainingMonths > 600) return null
+    if (remainingMonths <= 0 || remainingMonths > config.termMax) return null
 
     return comparePayoff({
       balance: bal,
@@ -87,7 +124,21 @@ export default function MortgagePayoffCalc({ user }: Props) {
       lumpSum: parseAmount(lumpSum),
       lumpSumMonth: (parseInt(lumpDelay || '0', 10) || 0) + 1,
     })
-  }, [balance, rate, remainingMonths, strategy, extraMonthly, lumpSum, lumpDelay])
+  }, [balance, rate, remainingMonths, strategy, extraMonthly, lumpSum, lumpDelay, config.termMax])
+
+  const equity = useMemo(() => {
+    const value = parseAmount(carValue)
+    if (!config.equity || !results || !value) return null
+    return {
+      current: equityPosition(results.baseline, parseAmount(balance), value, DEFAULT_DEPRECIATION),
+      accelerated: equityPosition(
+        results.accelerated,
+        parseAmount(balance),
+        value,
+        DEFAULT_DEPRECIATION
+      ),
+    }
+  }, [results, carValue, balance, config.equity])
 
   async function handleSave() {
     if (!calcName.trim() || !results) return
@@ -95,16 +146,16 @@ export default function MortgagePayoffCalc({ user }: Props) {
     try {
       await saveCalculation({
         name: calcName.trim(),
-        type: 'mortgage-payoff',
+        type: config.saveType,
         inputs: {
           balance,
           rate,
-          years,
-          months,
+          monthsLeft,
           strategy,
           extraMonthly,
           lumpSum,
           lumpDelay,
+          carValue,
         },
         summary: {
           monthlyPayment: results.accelerated.monthlyPI,
@@ -126,41 +177,42 @@ export default function MortgagePayoffCalc({ user }: Props) {
     <div className="space-y-6">
       {/* Inputs */}
       <div className="bg-white rounded-xl shadow-card border border-slate-100 p-6">
-        <h2 className="text-lg font-semibold text-navy-900 mb-5">Your Current Mortgage</h2>
+        <h2 className="text-lg font-semibold text-navy-900 mb-5">{config.heading}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
             <label
-              htmlFor="payoff-balance"
+              htmlFor={`${config.idPrefix}-balance`}
               className="block text-sm font-medium text-slate-700 mb-1.5"
             >
-              Remaining Loan Balance
+              {config.balanceLabel}
             </label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">
                 $
               </span>
               <input
-                id="payoff-balance"
+                id={`${config.idPrefix}-balance`}
                 type="text"
                 inputMode="numeric"
                 value={balance}
                 onChange={(e) => setBalance(formatCommas(e.target.value))}
                 className="w-full pl-7 pr-4 py-2.5 rounded-lg border border-slate-300 hover:border-slate-400 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 transition-colors"
-                placeholder="300,000"
+                placeholder={config.balanceDefault}
               />
             </div>
-            <p className="mt-1 text-xs text-slate-400">
-              What you still owe today — not the original loan amount.
-            </p>
+            <p className="mt-1 text-xs text-slate-400">{config.balanceHelp}</p>
           </div>
 
           <div>
-            <label htmlFor="payoff-rate" className="block text-sm font-medium text-slate-700 mb-1.5">
-              Interest Rate
+            <label
+              htmlFor={`${config.idPrefix}-rate`}
+              className="block text-sm font-medium text-slate-700 mb-1.5"
+            >
+              {config.rateLabel}
             </label>
             <div className="relative">
               <input
-                id="payoff-rate"
+                id={`${config.idPrefix}-rate`}
                 type="number"
                 step="0.01"
                 min="0"
@@ -168,7 +220,7 @@ export default function MortgagePayoffCalc({ user }: Props) {
                 value={rate}
                 onChange={(e) => setRate(e.target.value)}
                 className="w-full pl-4 pr-9 py-2.5 rounded-lg border border-slate-300 hover:border-slate-400 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 transition-colors"
-                placeholder="6.5"
+                placeholder={config.rateDefault}
               />
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
                 %
@@ -176,41 +228,56 @@ export default function MortgagePayoffCalc({ user }: Props) {
             </div>
           </div>
 
-          <div className="sm:col-span-2">
-            <span className="block text-sm font-medium text-slate-700 mb-1.5">Time Remaining</span>
-            <div className="flex gap-3">
-              <div className="relative flex-1">
-                <input
-                  aria-label="Years remaining"
-                  type="number"
-                  min="0"
-                  max="50"
-                  value={years}
-                  onChange={(e) => setYears(e.target.value)}
-                  className="w-full pl-4 pr-16 py-2.5 rounded-lg border border-slate-300 hover:border-slate-400 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 transition-colors"
-                  placeholder="30"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
-                  years
-                </span>
-              </div>
-              <div className="relative flex-1">
-                <input
-                  aria-label="Additional months remaining"
-                  type="number"
-                  min="0"
-                  max="11"
-                  value={months}
-                  onChange={(e) => setMonths(e.target.value)}
-                  className="w-full pl-4 pr-20 py-2.5 rounded-lg border border-slate-300 hover:border-slate-400 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 transition-colors"
-                  placeholder="0"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
-                  months
-                </span>
-              </div>
+          <div>
+            <label
+              htmlFor={`${config.idPrefix}-months`}
+              className="block text-sm font-medium text-slate-700 mb-1.5"
+            >
+              {config.termLabel}
+            </label>
+            <div className="relative">
+              <input
+                id={`${config.idPrefix}-months`}
+                type="number"
+                min="1"
+                max={config.termMax}
+                value={monthsLeft}
+                onChange={(e) => setMonthsLeft(e.target.value)}
+                className="w-full pl-4 pr-20 py-2.5 rounded-lg border border-slate-300 hover:border-slate-400 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 transition-colors"
+                placeholder={config.termDefault}
+              />
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
+                months
+              </span>
             </div>
           </div>
+
+          {config.equity && (
+            <div>
+              <label
+                htmlFor={`${config.idPrefix}-value`}
+                className="block text-sm font-medium text-slate-700 mb-1.5"
+              >
+                {config.equity.label}{' '}
+                <span className="text-slate-400 font-normal">(optional)</span>
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">
+                  $
+                </span>
+                <input
+                  id={`${config.idPrefix}-value`}
+                  type="text"
+                  inputMode="numeric"
+                  value={carValue}
+                  onChange={(e) => setCarValue(formatCommas(e.target.value))}
+                  className="w-full pl-7 pr-4 py-2.5 rounded-lg border border-slate-300 hover:border-slate-400 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 transition-colors"
+                  placeholder={config.equity.valueDefault}
+                />
+              </div>
+              <p className="mt-1 text-xs text-slate-400">{config.equity.help}</p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -247,10 +314,7 @@ export default function MortgagePayoffCalc({ user }: Props) {
 
         {strategy === 'extra-monthly' && (
           <div className="sm:max-w-xs">
-            <label
-              htmlFor="payoff-extra"
-              className="block text-sm font-medium text-slate-700 mb-1.5"
-            >
+            <label htmlFor={`${config.idPrefix}-extra`} className="block text-sm font-medium text-slate-700 mb-1.5">
               Extra Principal Each Month
             </label>
             <div className="relative">
@@ -258,13 +322,13 @@ export default function MortgagePayoffCalc({ user }: Props) {
                 $
               </span>
               <input
-                id="payoff-extra"
+                id={`${config.idPrefix}-extra`}
                 type="text"
                 inputMode="numeric"
                 value={extraMonthly}
                 onChange={(e) => setExtraMonthly(formatCommas(e.target.value))}
                 className="w-full pl-7 pr-4 py-2.5 rounded-lg border border-slate-300 hover:border-slate-400 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 transition-colors"
-                placeholder="200"
+                placeholder={config.extraDefault}
               />
             </div>
           </div>
@@ -273,10 +337,7 @@ export default function MortgagePayoffCalc({ user }: Props) {
         {strategy === 'lump-sum' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label
-                htmlFor="payoff-lump"
-                className="block text-sm font-medium text-slate-700 mb-1.5"
-              >
+              <label htmlFor={`${config.idPrefix}-lump`} className="block text-sm font-medium text-slate-700 mb-1.5">
                 Lump Sum Toward Principal
               </label>
               <div className="relative">
@@ -284,29 +345,29 @@ export default function MortgagePayoffCalc({ user }: Props) {
                   $
                 </span>
                 <input
-                  id="payoff-lump"
+                  id={`${config.idPrefix}-lump`}
                   type="text"
                   inputMode="numeric"
                   value={lumpSum}
                   onChange={(e) => setLumpSum(formatCommas(e.target.value))}
                   className="w-full pl-7 pr-4 py-2.5 rounded-lg border border-slate-300 hover:border-slate-400 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 transition-colors"
-                  placeholder="10,000"
+                  placeholder={config.lumpDefault}
                 />
               </div>
             </div>
             <div>
               <label
-                htmlFor="payoff-lump-delay"
+                htmlFor={`${config.idPrefix}-lump-delay`}
                 className="block text-sm font-medium text-slate-700 mb-1.5"
               >
                 Paid In
               </label>
               <div className="relative">
                 <input
-                  id="payoff-lump-delay"
+                  id={`${config.idPrefix}-lump-delay`}
                   type="number"
                   min="0"
-                  max="120"
+                  max={Math.max(1, config.termMax - 1)}
                   value={lumpDelay}
                   onChange={(e) => setLumpDelay(e.target.value)}
                   className="w-full pl-4 pr-24 py-2.5 rounded-lg border border-slate-300 hover:border-slate-400 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-navy-500 transition-colors"
@@ -326,8 +387,8 @@ export default function MortgagePayoffCalc({ user }: Props) {
             <strong className="tabular-nums">
               {formatCurrency(results.accelerated.monthlyPI / 2)}
             </strong>{' '}
-            every two weeks makes 26 half-payments a year — one extra full payment annually. No
-            input needed.
+            every two weeks makes 26 half-payments a year — one extra full payment annually.{' '}
+            {config.biweeklyNote}
           </div>
         )}
       </div>
@@ -373,7 +434,11 @@ export default function MortgagePayoffCalc({ user }: Props) {
                 strokeWidth={2}
                 aria-hidden="true"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                />
               </svg>
               <h3 className="font-semibold text-emerald-800">
                 {strategyLabel} savings vs. your current plan
@@ -400,6 +465,65 @@ export default function MortgagePayoffCalc({ user }: Props) {
             )}
           </div>
 
+          {/* Equity position */}
+          {equity && (
+            <div
+              className={`rounded-xl p-5 border ${
+                equity.current.equityNow < 0
+                  ? 'bg-amber-50 border-amber-200'
+                  : 'bg-white border-slate-100 shadow-card'
+              }`}
+            >
+              <h3
+                className={`font-semibold mb-2 ${
+                  equity.current.equityNow < 0 ? 'text-amber-800' : 'text-navy-900'
+                }`}
+              >
+                {equity.current.equityNow < 0
+                  ? 'You owe more than the car is worth'
+                  : 'You have equity in the car'}
+              </h3>
+              {equity.current.equityNow < 0 ? (
+                <div className="text-sm text-amber-900 space-y-2 leading-relaxed">
+                  <p>
+                    You are{' '}
+                    <strong className="tabular-nums">
+                      {formatCurrency(Math.abs(equity.current.equityNow))}
+                    </strong>{' '}
+                    underwater today. Assuming the car loses about {DEFAULT_DEPRECIATION}% of its
+                    value a year, sticking to your current payment puts you above water around{' '}
+                    <strong>
+                      {equity.current.crossoverMonth
+                        ? `month ${equity.current.crossoverMonth}`
+                        : 'the final payment'}
+                    </strong>
+                    .
+                  </p>
+                  {equity.accelerated.crossoverMonth !== null &&
+                    equity.current.crossoverMonth !== null &&
+                    equity.accelerated.crossoverMonth < equity.current.crossoverMonth && (
+                      <p>
+                        Your {strategyLabel.toLowerCase()} plan gets you there at{' '}
+                        <strong>month {equity.accelerated.crossoverMonth}</strong> instead —{' '}
+                        {equity.current.crossoverMonth - equity.accelerated.crossoverMonth} months
+                        sooner. Until that point, totalling the car or selling it would leave you
+                        paying the difference out of pocket.
+                      </p>
+                    )}
+                </div>
+              ) : (
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  The car is worth about{' '}
+                  <strong className="tabular-nums text-slate-800">
+                    {formatCurrency(equity.current.equityNow)}
+                  </strong>{' '}
+                  more than you owe, so selling or trading it would clear the loan with money left
+                  over. Extra payments here are purely an interest decision, not a risk one.
+                </p>
+              )}
+            </div>
+          )}
+
           {/* Comparison */}
           <div className="bg-white rounded-xl shadow-card border border-slate-100 overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-100">
@@ -423,7 +547,7 @@ export default function MortgagePayoffCalc({ user }: Props) {
                 <tbody className="divide-y divide-slate-100">
                   {[
                     {
-                      label: 'Scheduled Payment (P&I)',
+                      label: 'Monthly Payment',
                       current: formatCurrency(results.baseline.monthlyPI),
                       accel:
                         strategy === 'biweekly'
@@ -570,16 +694,16 @@ export default function MortgagePayoffCalc({ user }: Props) {
               ) : (
                 <div className="space-y-2">
                   <label
-                    htmlFor="payoff-save-name"
+                    htmlFor={`${config.idPrefix}-save-name`}
                     className="block text-sm font-medium text-slate-700"
                   >
                     Save this calculation
                   </label>
                   <div className="flex gap-3">
                     <input
-                      id="payoff-save-name"
+                      id={`${config.idPrefix}-save-name`}
                       type="text"
-                      placeholder="e.g. Payoff plan 2026"
+                      placeholder={config.savePlaceholder}
                       value={calcName}
                       onChange={(e) => setCalcName(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && handleSave()}
@@ -600,9 +724,7 @@ export default function MortgagePayoffCalc({ user }: Props) {
               )
             ) : (
               <div className="flex items-center justify-between">
-                <p className="text-sm text-slate-600">
-                  Sign in to save and revisit this payoff plan.
-                </p>
+                <p className="text-sm text-slate-600">Sign in to save and revisit this payoff plan.</p>
                 <Link
                   href="/auth/login"
                   className="text-sm font-medium text-navy-600 hover:text-navy-800 transition-colors"
@@ -616,7 +738,7 @@ export default function MortgagePayoffCalc({ user }: Props) {
       ) : (
         <div className="bg-white rounded-xl border border-slate-100 shadow-card p-8 text-center">
           <p className="text-slate-400 text-sm">
-            Enter your remaining balance, rate, and time left to see your payoff date.
+            {config.emptyState}
           </p>
         </div>
       )}

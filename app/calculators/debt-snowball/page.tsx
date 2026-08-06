@@ -198,6 +198,7 @@ export default async function DebtPayoffPage({
         <section className="mt-8 bg-slate-50 rounded-xl border border-slate-100 p-6 sm:p-8">
           <h2 className="text-lg font-bold text-navy-900 mb-4">Related Calculators</h2>
           <ul className="space-y-2 text-sm text-slate-600">
+            <li><Link href="/calculators/debt-avalanche" className="text-navy-700 underline hover:text-navy-900">Debt Avalanche Calculator</Link> — the same debts ordered by interest rate instead of balance</li>
             <li><Link href="/calculators/credit-card-payoff" className="text-navy-700 underline hover:text-navy-900">Credit Card Payoff Calculator</Link> — work a single card, including what minimum payments really cost</li>
             <li><Link href="/calculators/loan-amortization" className="text-navy-700 underline hover:text-navy-900">Loan Amortization Calculator</Link> — break a single debt down into a full payment schedule</li>
             <li><Link href="/calculators/car-loan" className="text-navy-700 underline hover:text-navy-900">Car Loan Calculator</Link> — model an auto loan before adding it to your payoff plan</li>
