@@ -157,6 +157,11 @@ export default function Footer() {
                   What Is Amortization?
                 </Link>
               </li>
+              <li>
+                <Link href="/learn/first-time-home-buyer-programs" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  First-Time Home Buyer Programs
+                </Link>
+              </li>
             </ul>
           </div>
 
