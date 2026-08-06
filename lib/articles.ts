@@ -198,8 +198,8 @@ export const articles: ArticleMeta[] = [
     readMinutes: 5,
     category: 'Auto Loans',
     categoryColor: 'blue',
-    calculatorHref: '/calculators/car-loan',
-    calculatorLabel: 'Calculate your car loan amortization',
+    calculatorHref: '/calculators/auto-loan-payoff',
+    calculatorLabel: 'See what extra payments save on your car loan',
   },
   {
     slug: 'how-to-pay-off-credit-card-debt',
