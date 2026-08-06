@@ -201,6 +201,54 @@ export const articles: ArticleMeta[] = [
     calculatorHref: '/calculators/car-loan',
     calculatorLabel: 'Calculate your car loan amortization',
   },
+  {
+    slug: 'how-to-pay-off-credit-card-debt',
+    title: 'How to Pay Off Credit Card Debt When the Minimum Keeps Shrinking',
+    description:
+      'The minimum payment falls as your balance does, which is why a card can take twenty years to clear. Here is what that costs and how to pick a payment that actually works.',
+    metaTitle: 'How to Pay Off Credit Card Debt',
+    metaDescription:
+      'Why minimum payments keep a card alive for decades, what the shrinking minimum really costs, and how to choose a payment that clears the balance.',
+    date: 'June 12, 2026',
+    updated: 'August 1, 2026',
+    readMinutes: 7,
+    category: 'Debt',
+    categoryColor: 'amber',
+    calculatorHref: '/calculators/credit-card-payoff',
+    calculatorLabel: 'See what your card costs at each payment',
+  },
+  {
+    slug: 'should-you-pay-off-student-loans-early',
+    title: 'Should You Pay Off Student Loans Early? Work Through It in Order',
+    description:
+      'Paying student loans early is the right move for some borrowers and a costly mistake for others. The deciding factor is forgiveness — so check that before you send a dollar extra.',
+    metaTitle: 'Should You Pay Off Student Loans Early?',
+    metaDescription:
+      'Forgiveness and income-driven repayment can make paying student loans early a mistake. Work through the decision in order, with the numbers at each step.',
+    date: 'June 20, 2026',
+    updated: 'July 31, 2026',
+    readMinutes: 8,
+    category: 'Student Loans',
+    categoryColor: 'purple',
+    calculatorHref: '/calculators/student-loan-payoff',
+    calculatorLabel: 'See what extra payments would save',
+  },
+  {
+    slug: 'is-renting-throwing-money-away',
+    title: 'Is Renting Throwing Money Away? What Buying Actually Costs',
+    description:
+      'Rent buys you housing, and a large share of a mortgage payment does the same without building anything. Here is where an owner’s money actually goes.',
+    metaTitle: 'Is Renting Throwing Money Away?',
+    metaDescription:
+      'A mortgage payment is not savings. Here is how much of an owner’s money goes to interest, tax, and upkeep, and what buying costs before anyone moves in.',
+    date: 'July 1, 2026',
+    updated: 'July 30, 2026',
+    readMinutes: 7,
+    category: 'Mortgage',
+    categoryColor: 'emerald',
+    calculatorHref: '/calculators/rent-vs-buy',
+    calculatorLabel: 'Compare renting and buying on net worth',
+  },
 ]
 
 export function getArticle(slug: string): ArticleMeta | undefined {

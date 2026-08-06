@@ -481,6 +481,16 @@ export default async function RentVsBuyPage() {
             ))}
           </ul>
           <p className="text-slate-600 text-sm leading-relaxed mt-5">
+            For where an owner&apos;s money actually goes each month, read{' '}
+            <Link
+              href="/learn/is-renting-throwing-money-away"
+              className="text-navy-600 hover:text-navy-800 underline"
+            >
+              is renting throwing money away
+            </Link>
+            .
+          </p>
+          <p className="text-slate-600 text-sm leading-relaxed mt-3">
             For the reasoning behind the numbers rather than the arithmetic, read{' '}
             <Link
               href="/learn/how-much-house-can-you-afford"

@@ -444,6 +444,16 @@ export default async function StudentLoanPayoffPage() {
             ))}
           </ul>
           <p className="text-slate-600 text-sm leading-relaxed mt-5">
+            Before sending anything extra, work through{' '}
+            <Link
+              href="/learn/should-you-pay-off-student-loans-early"
+              className="text-navy-600 hover:text-navy-800 underline"
+            >
+              should you pay off student loans early
+            </Link>{' '}
+            — forgiveness can invert the whole decision.
+          </p>
+          <p className="text-slate-600 text-sm leading-relaxed mt-3">
             For the reasoning behind ordering several debts rather than the arithmetic on one, read{' '}
             <Link
               href="/learn/debt-avalanche-vs-snowball"

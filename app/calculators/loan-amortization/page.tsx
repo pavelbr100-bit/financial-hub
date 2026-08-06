@@ -5,9 +5,9 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Loan Amortization Calculator — Free Schedule | FinWiser' },
+  title: { absolute: 'Amortization Calculator — Free Loan Schedule | FinWiser' },
   description:
-    'Free loan amortization calculator. Enter any loan amount, rate, and term to see your monthly payment, full payment schedule, and total interest cost.',
+    'Free amortization calculator. Enter any loan amount, rate, and term to see your monthly payment, full payment schedule, and total interest cost.',
   alternates: { canonical: 'https://finwiser.net/calculators/loan-amortization' },
   openGraph: {
     title: 'Free Loan Amortization Calculator — Payment Schedule & Total Interest',
@@ -138,7 +138,9 @@ export default async function LoanAmortizationPage({
           Loan Amortization Calculator
         </h1>
         <p className="text-slate-500 max-w-2xl">
-          Enter your loan details to calculate your monthly payment and see a complete amortization schedule showing exactly how each payment is split between principal and interest.
+          This amortization calculator works on any fixed-rate loan. Enter the amount, rate, and term
+          to get your monthly payment and a complete schedule showing exactly how each payment is
+          split between principal and interest.
         </p>
       </div>
 

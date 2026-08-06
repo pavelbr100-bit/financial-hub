@@ -421,6 +421,16 @@ export default async function CreditCardPayoffPage() {
             ))}
           </ul>
           <p className="text-slate-600 text-sm leading-relaxed mt-5">
+            For why the required payment falls as the balance does, and what to do about it, read{' '}
+            <Link
+              href="/learn/how-to-pay-off-credit-card-debt"
+              className="text-navy-600 hover:text-navy-800 underline"
+            >
+              how to pay off credit card debt
+            </Link>
+            .
+          </p>
+          <p className="text-slate-600 text-sm leading-relaxed mt-3">
             For the reasoning behind each approach rather than the numbers, read{' '}
             <Link
               href="/learn/debt-avalanche-vs-snowball"

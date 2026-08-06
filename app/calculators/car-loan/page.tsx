@@ -6,9 +6,9 @@ import Link from 'next/link'
 import { articles } from '@/lib/articles'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Car Loan Calculator — Payment & Total Interest | FinWiser' },
+  title: { absolute: 'Car Payment Calculator — Free Auto Loan Tool | FinWiser' },
   description:
-    'Free car loan calculator — enter vehicle price, down payment, and rate to see your monthly payment, total interest, and full amortization schedule.',
+    'Free car payment calculator — enter vehicle price, down payment, and rate to see your monthly payment, total interest, and full amortization schedule.',
   alternates: { canonical: 'https://finwiser.net/calculators/car-loan' },
   openGraph: {
     title: 'Free Car Loan Calculator — Monthly Payment & Total Interest',
@@ -125,7 +125,8 @@ export default async function CarLoanPage() {
             Car Loan Calculator
           </h1>
           <p className="text-slate-500 max-w-2xl">
-            Enter your vehicle price, down payment, trade-in, and loan details to see your exact monthly payment, total interest, and true cost of the car — including sales tax.
+            This car payment calculator turns a vehicle price, down payment, trade-in, and rate into
+            your exact monthly payment, total interest, and true cost of the car — including sales tax.
           </p>
         </div>
 

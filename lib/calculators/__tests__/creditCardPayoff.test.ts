@@ -212,3 +212,67 @@ describe('page example values — $5,000 at 24% APR', () => {
     expect(Math.round(plan.totalInterest)).toBe(1_449)
   })
 })
+
+// ---------------------------------------------------------------------------
+// article example values — every figure quoted in
+// /learn/how-to-pay-off-credit-card-debt. The article's whole argument is the
+// gap between a recalculated minimum and the same amount held fixed, so these
+// pin both sides of that comparison.
+// ---------------------------------------------------------------------------
+
+describe('article example values — how-to-pay-off-credit-card-debt', () => {
+  it('$5,000 at 24%: minimum-only takes 234 months and costs $8,887', () => {
+    const r = simulateMinimumOnly(5_000, 24)
+    expect(r.months).toBe(234)
+    expect(r.totalInterest).toBeCloseTo(8_887, -1)
+    expect(r.firstPayment).toBeCloseTo(150, 2)
+  })
+
+  it('$5,000 at 24%: the same $150 held fixed takes 56 months and costs $3,322', () => {
+    const r = simulateFixedPayment(5_000, 24, 150)
+    expect(r.months).toBe(56)
+    expect(r.totalInterest).toBeCloseTo(3_322, -1)
+  })
+
+  it('$5,000 at 24%: letting the minimum shrink costs $5,565 and ~15 years', () => {
+    const shrinking = simulateMinimumOnly(5_000, 24)
+    const fixed = simulateFixedPayment(5_000, 24, 150)
+    expect(shrinking.totalInterest - fixed.totalInterest).toBeCloseTo(5_565, -1)
+    expect(shrinking.months - fixed.months).toBe(178)
+  })
+
+  it('$6,000 at 22%: minimum-only takes 249 months, costs $9,933, opens at $170', () => {
+    const r = simulateMinimumOnly(6_000, 22)
+    expect(r.months).toBe(249)
+    expect(r.totalInterest).toBeCloseTo(9_933, -1)
+    expect(r.firstPayment).toBeCloseTo(170, 2)
+  })
+
+  it('$6,000 at 22%: the payment table rows are correct', () => {
+    const rows: Array<[number, number, number]> = [
+      // [payment, months, totalInterest]
+      [170, 58, 3_746],
+      [200, 44, 2_791],
+      [250, 32, 1_979],
+      [300, 26, 1_543],
+    ]
+    for (const [payment, months, interest] of rows) {
+      const r = simulateFixedPayment(6_000, 22, payment)
+      expect(r.months, `payment ${payment} months`).toBe(months)
+      expect(r.totalInterest, `payment ${payment} interest`).toBeCloseTo(interest, -1)
+    }
+  })
+
+  it('$6,000 at 22%: holding $170 fixed saves $6,187 over the shrinking minimum', () => {
+    const shrinking = simulateMinimumOnly(6_000, 22)
+    const fixed = simulateFixedPayment(6_000, 22, 170)
+    expect(shrinking.totalInterest - fixed.totalInterest).toBeCloseTo(6_187, -1)
+  })
+
+  it('$6,000 at 22%: moving $170 to $200 saves a further $955 and 14 months', () => {
+    const at170 = simulateFixedPayment(6_000, 22, 170)
+    const at200 = simulateFixedPayment(6_000, 22, 200)
+    expect(at170.totalInterest - at200.totalInterest).toBeCloseTo(955, -1)
+    expect(at170.months - at200.months).toBe(14)
+  })
+})

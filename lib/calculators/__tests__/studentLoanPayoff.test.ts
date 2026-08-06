@@ -76,3 +76,49 @@ describe('page example values — $35,000 at 6.5%, 10-year standard plan', () =>
     expect(Math.round(current.totalInterest - refinanced.totalInterest)).toBe(4_162)
   })
 })
+
+// ---------------------------------------------------------------------------
+// article example values — every figure quoted in
+// /learn/should-you-pay-off-student-loans-early.
+// ---------------------------------------------------------------------------
+
+describe('article example values — should-you-pay-off-student-loans-early', () => {
+  const BASE = { balance: 35_000, annualRate: 6.5, remainingMonths: 120 }
+
+  it('$35,000 at 6.5% over 10 years: $397/mo and $12,690 of interest', () => {
+    expect(monthlyPayment(35_000, 6.5, 120)).toBeCloseTo(397.42, 2)
+    const c = comparePayoff({ ...BASE, strategy: 'extra-monthly', extraMonthly: 100 })
+    expect(c.baseline.months).toBe(120)
+    expect(c.baseline.totalInterest).toBeCloseTo(12_690, -1)
+  })
+
+  it('the extra-payment table rows are correct', () => {
+    const rows: Array<[number, number, number, number]> = [
+      // [extraMonthly, months, totalInterest, interestSaved]
+      [100, 89, 9_186, 3_504],
+      [200, 71, 7_219, 5_471],
+      [300, 59, 5_955, 6_735],
+    ]
+    for (const [extra, months, interest, saved] of rows) {
+      const c = comparePayoff({ ...BASE, strategy: 'extra-monthly', extraMonthly: extra })
+      expect(c.accelerated.months, `extra ${extra} months`).toBe(months)
+      expect(c.accelerated.totalInterest, `extra ${extra} interest`).toBeCloseTo(interest, -1)
+      expect(c.interestSaved, `extra ${extra} saved`).toBeCloseTo(saved, -1)
+    }
+  })
+
+  it('a $5,000 lump sum in month 1 cuts 22 months and saves $3,966', () => {
+    const c = comparePayoff({
+      ...BASE, strategy: 'lump-sum', lumpSum: 5_000, lumpSumMonth: 1,
+    })
+    expect(c.monthsSaved).toBe(22)
+    expect(c.interestSaved).toBeCloseTo(3_966, -1)
+  })
+
+  it('the early lump sum roughly matches $100/mo sustained for the whole term', () => {
+    const lump = comparePayoff({ ...BASE, strategy: 'lump-sum', lumpSum: 5_000, lumpSumMonth: 1 })
+    const drip = comparePayoff({ ...BASE, strategy: 'extra-monthly', extraMonthly: 100 })
+    // article claims "close to" — within $500 of each other
+    expect(Math.abs(lump.interestSaved - drip.interestSaved)).toBeLessThan(500)
+  })
+})

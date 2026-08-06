@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { compareRentVsBuy, type RentVsBuyInput } from '../rentVsBuy'
+import { buildSchedule } from '../mortgage'
 
 // Standard test case: $400,000 home at 6.5% with 20% down, against $2,200 rent
 const base: RentVsBuyInput = {
@@ -179,5 +180,85 @@ describe('page example values — $400,000 home at 6.5% vs $2,200 rent', () => {
     const r = compareRentVsBuy(base)
     expect(Math.round(r.years[9].buyerCashOut)).toBe(455_569)
     expect(Math.round(r.years[9].renterCashOut)).toBe(304_446)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// article example values — every figure quoted in
+// /learn/is-renting-throwing-money-away. The article's argument rests on the
+// split between the equity and non-equity parts of an owner's monthly cost.
+// ---------------------------------------------------------------------------
+
+describe('article example values — is-renting-throwing-money-away', () => {
+  const ARTICLE: RentVsBuyInput = {
+    homePrice: 400_000,
+    downPaymentPercent: 20,
+    mortgageRate: 6.5,
+    mortgageTermYears: 30,
+    closingCostPercent: 3,
+    propertyTaxRate: 1.1,
+    homeInsuranceRate: 0.5,
+    maintenanceRate: 1,
+    hoaMonthly: 0,
+    homeAppreciation: 3,
+    sellingCostPercent: 6,
+    monthlyRent: 2_200,
+    rentGrowth: 3,
+    rentersInsuranceMonthly: 15,
+    investmentReturn: 6,
+    years: 30,
+  }
+
+  it('the $320,000 loan at 6.5% costs $2,022.62 a month in P&I', () => {
+    expect(compareRentVsBuy(ARTICLE).monthlyPI).toBeCloseTo(2022.62, 2)
+  })
+
+  it('true first-month cost of owning is about $2,889 against $2,200 rent', () => {
+    const r = compareRentVsBuy(ARTICLE)
+    expect(r.firstMonthBuyCost).toBeCloseTo(2_889, 0)
+  })
+
+  it('buying requires $92,000 up front — 20% down plus 3% closing', () => {
+    expect(compareRentVsBuy(ARTICLE).upfrontCost).toBeCloseTo(92_000, 0)
+  })
+
+  it('month 1 splits $1,733.33 interest against $289.28 principal', () => {
+    const i = (320_000 * (6.5 / 100)) / 12
+    expect(i).toBeCloseTo(1733.33, 2)
+    expect(compareRentVsBuy(ARTICLE).monthlyPI - i).toBeCloseTo(289.28, 2)
+  })
+
+  it('only ~$289 of the $2,889 builds equity, leaving ~$2,600 gone', () => {
+    const r = compareRentVsBuy(ARTICLE)
+    const principal = r.monthlyPI - (320_000 * (6.5 / 100)) / 12
+    expect(principal).toBeCloseTo(289.28, 2)
+    expect(r.firstMonthBuyCost - principal).toBeCloseTo(2_600, 0)
+  })
+
+  it('the quoted monthly tax, insurance, and maintenance figures are right', () => {
+    expect((400_000 * 0.011) / 12).toBeCloseTo(367, 0)
+    expect((400_000 * 0.005) / 12).toBeCloseTo(167, 0)
+    expect((400_000 * 0.01) / 12).toBeCloseTo(333, 0)
+  })
+})
+
+describe('article example values — amortization figures quoted in the same article', () => {
+  const { schedule } = buildSchedule(320_000, 6.5, 360)
+
+  it('year one is $20,695 interest against $3,577 principal — 85% interest', () => {
+    const y1 = schedule.slice(0, 12)
+    const interest = y1.reduce((s, r) => s + r.interest, 0)
+    const principal = y1.reduce((s, r) => s + r.principal, 0)
+    expect(interest).toBeCloseTo(20_695, -1)
+    expect(principal).toBeCloseTo(3_577, -1)
+    expect((interest / (interest + principal)) * 100).toBeCloseTo(85, 0)
+  })
+
+  it('principal first exceeds interest in month 233', () => {
+    expect(schedule.findIndex(r => r.principal > r.interest) + 1).toBe(233)
+  })
+
+  it('the loan costs $408,142 in interest over the full term', () => {
+    expect(schedule.reduce((s, r) => s + r.interest, 0)).toBeCloseTo(408_142, -1)
   })
 })

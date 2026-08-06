@@ -13,7 +13,7 @@
 app/
   calculators/          13 calculators + 6 state mortgage variants
                         page.tsx = the /calculators hub, generated from lib/calculators.ts
-  learn/                13 article pages (TSX, not MDX)
+  learn/                16 article pages (TSX, not MDX)
   about/                About page — named author, how calculators are built
   contact/              Contact page — mailto links for corrections & feedback
   page.tsx              homepage
@@ -38,16 +38,16 @@ public/
 
 ## Learn Articles
 
-- **Location:** `app/learn/<slug>/page.tsx` — 13 articles, each a TSX file
+- **Location:** `app/learn/<slug>/page.tsx` — 16 articles, each a TSX file
 - **Metadata schema:** `lib/articles.ts` — `ArticleMeta` interface + `articles[]` array
 - **Fields per article:** `slug`, `title`, `description`, `metaTitle?`, `metaDescription?`, `date`, `updated?` (both human-readable strings e.g. "March 3, 2026"), `readMinutes`, `category`, `categoryColor`, `calculatorHref`, `calculatorLabel`
 - **No MDX, no frontmatter** — all metadata lives in `lib/articles.ts`; article bodies are TSX/JSX
 - **Date rendering:** `ArticleLayout.tsx` renders "Published {meta.date} · Reviewed {meta.updated}" in the byline. Dates are never hardcoded in article body files.
 - **Date format in articles.ts:** Human-readable string e.g. `"March 3, 2026"`. Converted to ISO for JSON-LD via `toISODate()`. `updated` falls back to `date` in JSON-LD `dateModified`.
 - **Metadata title rule:** Every `page.tsx` must use `` title: { absolute: `${meta.metaTitle ?? meta.title} | FinWiser` } `` and `description: meta.metaDescription ?? meta.description` — never a hardcoded string. The suffix is always `| FinWiser`, never `| FinWiser Learn`.
-- **`title`/`description` are reader-facing; `metaTitle`/`metaDescription` are SERP-facing.** `title` renders as the H1 and `description` as the visible subtitle under it (and on the `/learn` index cards), so both are written for humans and run long. The optional overrides exist purely to fit search-result limits: **titles ≤ 60 characters including the ` | FinWiser` suffix** (so ≤ 49 in `metaTitle` itself) and **descriptions ≤ 160**. All 13 articles currently set both. When adding an article, check the lengths and add overrides if either limit is exceeded — do not shorten the visible `title`/`description` to fit.
+- **`title`/`description` are reader-facing; `metaTitle`/`metaDescription` are SERP-facing.** `title` renders as the H1 and `description` as the visible subtitle under it (and on the `/learn` index cards), so both are written for humans and run long. The optional overrides exist purely to fit search-result limits: **titles ≤ 60 characters including the ` | FinWiser` suffix** (so ≤ 49 in `metaTitle` itself) and **descriptions ≤ 160**. All 16 articles currently set both. When adding an article, check the lengths and add overrides if either limit is exceeded — do not shorten the visible `title`/`description` to fit.
 
-### 13 surviving article slugs (in date order)
+### 16 article slugs (in date order)
 
 | Slug | Date | Category |
 |---|---|---|
@@ -64,6 +64,9 @@ public/
 | `new-vs-used-car-loan` | May 12, 2026 | Auto Loans |
 | `how-to-get-best-car-loan-rate` | May 16, 2026 | Auto Loans |
 | `how-to-pay-off-car-loan-early` | May 23, 2026 | Auto Loans |
+| `how-to-pay-off-credit-card-debt` | June 12, 2026 | Debt |
+| `should-you-pay-off-student-loans-early` | June 20, 2026 | Student Loans |
+| `is-renting-throwing-money-away` | July 1, 2026 | Mortgage |
 
 11 slugs were deleted and replaced with permanent redirects in `next.config.mjs` (see Redirects section).
 
@@ -119,6 +122,33 @@ All calculator `WebApplication` blocks carry `isAccessibleForFree`, `offers`, an
 - `/calculators/debt-snowball` owns ordering several debts by *balance*, and frames the behavioural case (early wins)
 - `/calculators/debt-avalanche` owns ordering several debts by *rate*, and frames the arithmetic case (cheapest total). Same engine and component as debt-snowball, differing only in `initialStrategy` — so the **prose and FAQs must not overlap**. The two pages currently share zero FAQ questions; keep it that way or they compete for the same result.
 - `/calculators/credit-card-payoff` owns a *single* revolving balance — specifically the shrinking-minimum trap, which an installment-loan engine cannot model. `lib/calculators/creditCardPayoff.ts` is deliberately separate from `lib/calculators/debtPayoff.ts` for this reason; do not merge them.
+
+### Calculator ↔ article pairing
+
+Each calculator that has a supporting `/learn` article links to it from the
+related block, and the article links back in body prose. The pairing targets two
+different SERPs — the calculator the transactional query, the article the
+informational one — so **their FAQ questions must not overlap**:
+
+| Calculator | Supporting article | Article owns |
+|---|---|---|
+| `/calculators/credit-card-payoff` | `how-to-pay-off-credit-card-debt` | why the minimum shrinks, and picking a fixed payment |
+| `/calculators/student-loan-payoff` | `should-you-pay-off-student-loans-early` | the forgiveness decision that inverts the whole question |
+| `/calculators/rent-vs-buy` | `is-renting-throwing-money-away` | where an owner's monthly money actually goes |
+| `/calculators/auto-loan-payoff` | `how-to-pay-off-car-loan-early` | the five practical routes to early payoff |
+
+`/calculators/auto-loan-payoff` is already served by `how-to-pay-off-car-loan-early`
+— **do not add a fifth Auto Loans article**, the category has four and another
+would compete with the ones that exist.
+
+### Head terms vs H1s
+
+`/calculators/car-loan` and `/calculators/loan-amortization` keep their
+descriptive H1s ("Car Loan Calculator", "Loan Amortization Calculator") while
+carrying the higher-volume head terms ("car payment calculator", "amortization
+calculator") in the `<title>` and the intro paragraph. This is a deliberate
+deviation from the SEO brief's section 3.2 table, which wanted the H1s changed.
+Keep both signals present if you edit either page.
 
 ## Shared calculator engines and components
 
@@ -198,6 +228,10 @@ All numerical examples in article bodies must be verifiable from first principle
   - `lib/calculators/__tests__/studentLoanPayoff.test.ts` — `/calculators/student-loan-payoff` figures
   - `lib/calculators/__tests__/rentVsBuy.test.ts` — `/calculators/rent-vs-buy` figures, incl. the breakeven sensitivity table
   - `lib/calculators/__tests__/debtAvalanche.test.ts` — `/calculators/debt-avalanche` figures
+  - `lib/calculators/__tests__/mortgageCompare.test.ts` — `/calculators/mortgage/compare` FAQ figures
+    (section "page example values")
+  - article example values also live in `creditCardPayoff.test.ts`, `studentLoanPayoff.test.ts`,
+    and `rentVsBuy.test.ts` for the three 2026 articles paired with those calculators
   When adding or changing a numerical example in any article **or calculator page**, add or update the corresponding test. Run `npm test` before committing.
 - **Debt payoff examples require stated minimum payments.** Avalanche/snowball timelines and interest totals cannot be verified without knowing minimum payments. Either list explicit minimums or use a "total monthly budget" model (set `minPayment: 0`, pass full budget as `extraMonthly`). Never leave minimum payments implied.
 - **Common error patterns caught in prior audits:**
@@ -226,7 +260,7 @@ npm run check:seo
 
 ## Article Dates
 
-All 13 articles have `date` (March–May 2026) and `updated` (May–June 2026). Both are human-readable strings. `updated` is staggered across articles — no two share the same value. Dates render from `meta.date` / `meta.updated` only; no article body hardcodes a date string.
+All 16 articles have `date` (March–July 2026) and `updated` (May–August 2026). Both are human-readable strings. `updated` is staggered across articles — no two share the same value. Dates render from `meta.date` / `meta.updated` only; no article body hardcodes a date string.
 
 When editing an article, update its `updated` field in `lib/articles.ts` to today's date.
 
