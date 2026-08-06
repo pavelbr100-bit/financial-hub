@@ -4,7 +4,7 @@ import { articles } from '@/lib/articles'
 import LearnArticles from '@/components/LearnArticles'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Personal Finance Guides | FinWiser Learn' },
+  title: { absolute: 'Personal Finance Guides | FinWiser' },
   description: 'Free personal finance guides on mortgages, loans, debt, and investing. Written clearly so you can understand your numbers, not just calculate them.',
   alternates: { canonical: 'https://finwiser.net/learn' },
   openGraph: {
@@ -21,9 +21,41 @@ export const metadata: Metadata = {
   },
 }
 
+// ItemList mirrors the article grid rendered by <LearnArticles> below — same source
+// array, same order — so the markup never claims content a visitor cannot see.
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'FinWiser Learn — Personal Finance Guides',
+  description: 'Free personal finance guides on mortgages, loans, debt, and investing.',
+  url: 'https://finwiser.net/learn',
+  isPartOf: { '@type': 'WebSite', name: 'FinWiser', url: 'https://finwiser.net' },
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: articles.length,
+    itemListElement: articles.map((a, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `https://finwiser.net/learn/${a.slug}`,
+      name: a.title,
+    })),
+  },
+}
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
+    { '@type': 'ListItem', position: 2, name: 'Learn', item: 'https://finwiser.net/learn' },
+  ],
+}
+
 export default function LearnPage() {
   return (
     <div className="min-h-screen bg-slate-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       {/* Hero */}
       <div className="bg-navy-900 py-14 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
@@ -51,7 +83,7 @@ export default function LearnPage() {
               { href: '/calculators/biweekly-mortgage', label: 'Biweekly Mortgage' },
               { href: '/calculators/car-loan', label: 'Car Loan' },
               { href: '/calculators/compound-interest', label: 'Compound Interest' },
-              { href: '/calculators/debt-payoff', label: 'Debt Payoff' },
+              { href: '/calculators/debt-snowball', label: 'Debt Snowball' },
               { href: '/calculators/loan-amortization', label: 'Loan Amortization' },
             ].map(c => (
               <Link

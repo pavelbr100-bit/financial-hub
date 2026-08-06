@@ -124,7 +124,7 @@ export default function SavedCalculationsList({
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <Link
-                    href={`/calculators/debt-payoff?saved=${calc.id}`}
+                    href={`/calculators/debt-snowball?saved=${calc.id}`}
                     className="px-3 py-1.5 text-xs font-medium bg-navy-700 hover:bg-navy-600 text-white rounded-md transition-colors"
                   >
                     Load

@@ -62,7 +62,7 @@ export const articles: ArticleMeta[] = [
     readMinutes: 8,
     category: 'Debt',
     categoryColor: 'amber',
-    calculatorHref: '/calculators/debt-payoff',
+    calculatorHref: '/calculators/debt-snowball',
     calculatorLabel: 'Build your payoff plan',
   },
   {
@@ -129,7 +129,7 @@ export const articles: ArticleMeta[] = [
     readMinutes: 6,
     category: 'Debt',
     categoryColor: 'amber',
-    calculatorHref: '/calculators/debt-payoff',
+    calculatorHref: '/calculators/debt-snowball',
     calculatorLabel: 'Build your personalized debt payoff plan',
   },
   {

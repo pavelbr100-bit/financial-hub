@@ -6,36 +6,37 @@ import type { DebtPayoffStrategy } from '@/lib/calculators/debtPayoff'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Debt Payoff Calculator — Avalanche & Snowball | FinWiser' },
+  title: { absolute: 'Debt Snowball Calculator — Free, No Signup | FinWiser' },
   description:
-    'Free debt payoff calculator. Compare avalanche and snowball side by side — enter your debts, add an extra payment, and see your debt-free date.',
-  alternates: { canonical: 'https://finwiser.net/calculators/debt-payoff' },
+    'Free debt snowball calculator. Enter your debts and see your debt-free date, total interest, and how extra payments speed it up. Avalanche mode included.',
+  alternates: { canonical: 'https://finwiser.net/calculators/debt-snowball' },
   openGraph: {
-    title: 'Free Debt Payoff Calculator — Avalanche & Snowball Planner',
-    description: 'Compare debt avalanche vs snowball strategies. See your payoff date and total interest for each approach.',
+    title: 'Free Debt Snowball Calculator — See Your Debt-Free Date',
+    description: 'Pay off debt smallest balance first with the snowball method. Switch to avalanche to compare total interest. Free, instant, no account required.',
     type: 'website',
-    url: 'https://finwiser.net/calculators/debt-payoff',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Free Debt Payoff Calculator — FinWiser' }],
+    url: 'https://finwiser.net/calculators/debt-snowball',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Free Debt Snowball Calculator — FinWiser' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Debt Payoff Calculator | FinWiser',
-    description: 'Compare debt avalanche vs snowball strategies. See your payoff date and total interest for each approach.',
+    title: 'Free Debt Snowball Calculator | FinWiser',
+    description: 'Pay off debt smallest balance first with the snowball method. Switch to avalanche to compare total interest.',
   },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Debt Payoff Planner',
-  url: 'https://finwiser.net/calculators/debt-payoff',
-  description: 'Compare avalanche vs snowball debt payoff strategies. See your payoff date, total interest, and how extra payments accelerate your debt-free date.',
+  name: 'Debt Snowball Calculator',
+  url: 'https://finwiser.net/calculators/debt-snowball',
+  description: 'Pay off debt with the snowball method — smallest balance first. See your payoff date, total interest, and how extra payments accelerate your debt-free date. Avalanche mode included.',
   applicationCategory: 'FinanceApplication',
   operatingSystem: 'Any',
   browserRequirements: 'Requires JavaScript',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   featureList: [
-    'Avalanche and snowball strategy comparison',
+    'Snowball payoff order (smallest balance first)',
+    'Avalanche comparison mode',
     'Up to 6 debts',
     'Extra payment savings calculator',
     'Payoff date per debt',
@@ -49,7 +50,7 @@ const breadcrumbLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
-    { '@type': 'ListItem', position: 2, name: 'Debt Payoff Planner', item: 'https://finwiser.net/calculators/debt-payoff' },
+    { '@type': 'ListItem', position: 2, name: 'Debt Snowball Calculator', item: 'https://finwiser.net/calculators/debt-snowball' },
   ],
 }
 
@@ -101,7 +102,9 @@ export default async function DebtPayoffPage({
   // Load saved plan if ?saved=<id>
   type DebtInput = { id: string; name: string; balance: string; rate: string; minPayment: string }
   let initialDebts: DebtInput[] | undefined
-  let initialStrategy: DebtPayoffStrategy | undefined
+  // Defaults to snowball so the pre-selected strategy matches the page's H1.
+  // A saved plan overrides this below with whichever strategy it was saved with.
+  let initialStrategy: DebtPayoffStrategy = 'snowball'
   let initialExtra: string | undefined
 
   if (params.saved) {
@@ -131,19 +134,19 @@ export default async function DebtPayoffPage({
           <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
             <Link href="/" className="hover:text-navy-600 transition-colors">Home</Link>
             <span>/</span>
-            <span className="text-slate-700 font-medium">Debt Payoff Planner</span>
+            <span className="text-slate-700 font-medium">Debt Snowball Calculator</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">
-            Debt Payoff Planner
+            Debt Snowball Calculator
           </h1>
           <p className="text-slate-500 max-w-2xl">
-            Enter your debts and choose a strategy. See exactly when each debt is paid off, how much interest you owe, and how extra payments accelerate your debt-free date.
+            Enter your debts and the snowball method targets the smallest balance first, rolling each cleared payment into the next debt. See exactly when each one is paid off, how much interest you owe, and how extra payments accelerate your debt-free date — or switch to avalanche to compare.
           </p>
         </div>
 
         <div className="flex flex-wrap gap-2 mb-6">
           {[
-            'Avalanche & snowball strategies',
+            'Snowball & avalanche strategies',
             'Up to 6 debts',
             'Extra payment savings',
           ].map(f => (

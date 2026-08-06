@@ -74,7 +74,7 @@ public/
 | Biweekly Mortgage | `app/calculators/biweekly-mortgage/page.tsx` | |
 | Car Loan | `app/calculators/car-loan/page.tsx` | |
 | Compound Interest | `app/calculators/compound-interest/page.tsx` | |
-| Debt Payoff | `app/calculators/debt-payoff/page.tsx` | |
+| Debt Snowball | `app/calculators/debt-snowball/page.tsx` | Renamed from `debt-payoff` to target "debt snowball calculator". Defaults `initialStrategy` to `'snowball'` so the pre-selected mode matches the H1; avalanche remains a toggle. **The saved-calculation `type` in Supabase is still `'debt-payoff'`** — that is a stored row value, not a URL. Do not rename it. |
 | Loan Amortization | `app/calculators/loan-amortization/page.tsx` | |
 | State Mortgages | `app/calculators/mortgage/{nc,sc,ga,fl,tx,va}/page.tsx` | Config-driven via `StateMortgageCalculatorPage` |
 
@@ -95,7 +95,13 @@ Injected via `<script type="application/ld+json" dangerouslySetInnerHTML>`.
 
 ## Redirects
 
-11 permanent (308) redirects live in `next.config.mjs`. These cover deleted slugs from the Phase 1 consolidation:
+12 permanent (308) redirects live in `next.config.mjs`: one route rename plus 11 deleted slugs from the Phase 1 consolidation.
+
+| Old path | Redirects to |
+|---|---|
+| `/calculators/debt-payoff` | `/calculators/debt-snowball` |
+
+The 11 article-slug redirects:
 
 | Old slug | Redirects to |
 |---|---|
@@ -142,6 +148,19 @@ All numerical examples in article bodies must be verifiable from first principle
   - Quoting the 15-year loan's own interest cost instead of the savings vs the 30-year alternative
   - Credit card growth figures that imply ~17% APR while the surrounding text says 20–29%
   - Debt payoff timelines stated without minimum payments (unverifiable; corrected in `debt-avalanche-vs-snowball`)
+
+## SEO regression guard
+
+`scripts/check-seo.mjs` (`npm run check:seo`) crawls every URL in the sitemap against a running server and fails on: a `<title>` over 60 chars, a meta description over 160, a missing or mismatched canonical, anything other than exactly one `<h1>`, or a JSON-LD block that doesn't parse.
+
+It checks **rendered HTML**, not source — metadata is assembled from template literals, `??` fallbacks in `lib/articles.ts`, and `generateStateMortgageMetadata()`, so the source is not authoritative. Because it reads the sitemap, new pages are covered with no change to the script.
+
+Run it after any metadata change:
+
+```
+npm run build && npm run start &   # then
+npm run check:seo
+```
 
 ## Sitemap
 

@@ -20,6 +20,9 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Route rename — the page targets "debt snowball calculator" as its primary keyword
+      { source: '/calculators/debt-payoff', destination: '/calculators/debt-snowball', permanent: true },
+
       // Cluster A — mortgage payoff consolidation
       { source: '/learn/extra-mortgage-payments-how-much-can-you-save', destination: '/learn/mortgage-payoff-strategies', permanent: true },
       { source: '/learn/how-to-save-on-mortgage-interest',               destination: '/learn/mortgage-payoff-strategies', permanent: true },

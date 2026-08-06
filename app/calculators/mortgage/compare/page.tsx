@@ -48,7 +48,7 @@ const breadcrumbLd = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
     { '@type': 'ListItem', position: 2, name: 'Mortgage Calculator', item: 'https://finwiser.net/calculators/mortgage' },
-    { '@type': 'ListItem', position: 3, name: 'Compare Mortgages', item: 'https://finwiser.net/calculators/mortgage/compare' },
+    { '@type': 'ListItem', position: 3, name: 'Mortgage Comparison Calculator', item: 'https://finwiser.net/calculators/mortgage/compare' },
   ],
 }
 
@@ -132,7 +132,7 @@ export default async function MortgageComparePage({
           <span className="text-slate-700 font-medium">Compare</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">
-          Compare Mortgages
+          Mortgage Comparison Calculator
         </h1>
         <p className="text-slate-500 max-w-2xl">
           Compare up to 3 mortgage scenarios side by side. Edit any field to

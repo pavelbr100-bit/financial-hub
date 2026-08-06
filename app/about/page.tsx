@@ -138,7 +138,7 @@ export default function AboutPage() {
                 { href: '/calculators/mortgage', label: 'Mortgage Calculator', desc: 'Full PITI payment with PMI, extra payments, and amortization schedule.' },
                 { href: '/calculators/car-loan', label: 'Car Loan Calculator', desc: 'Monthly payment, total interest, sales tax, trade-in, and affordability check.' },
                 { href: '/calculators/loan-amortization', label: 'Loan Amortization Calculator', desc: 'Complete amortization schedule for any loan amount, rate, and term.' },
-                { href: '/calculators/debt-payoff', label: 'Debt Payoff Planner', desc: 'Avalanche vs. snowball comparison with custom extra payment.' },
+                { href: '/calculators/debt-snowball', label: 'Debt Snowball Calculator', desc: 'Avalanche vs. snowball comparison with custom extra payment.' },
                 { href: '/calculators/compound-interest', label: 'Compound Interest Calculator', desc: 'Investment growth with monthly contributions and configurable compounding.' },
                 { href: '/calculators/mortgage/compare', label: 'Compare Mortgages', desc: 'Side-by-side comparison of up to three mortgage scenarios.' },
                 { href: '/calculators/biweekly-mortgage', label: 'Biweekly Mortgage Calculator', desc: 'See how biweekly payments reduce your mortgage term and total interest.' },

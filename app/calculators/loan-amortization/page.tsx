@@ -188,7 +188,7 @@ export default async function LoanAmortizationPage({
         <ul className="space-y-2 text-sm text-slate-600">
           <li><Link href="/calculators/mortgage" className="text-navy-700 underline hover:text-navy-900">Mortgage Calculator</Link> — adds property tax, insurance, and PMI to the amortization above</li>
           <li><Link href="/calculators/car-loan" className="text-navy-700 underline hover:text-navy-900">Car Loan Calculator</Link> — the same schedule with sales tax and trade-in built in</li>
-          <li><Link href="/calculators/debt-payoff" className="text-navy-700 underline hover:text-navy-900">Debt Payoff Calculator</Link> — schedule several loans at once instead of one</li>
+          <li><Link href="/calculators/debt-snowball" className="text-navy-700 underline hover:text-navy-900">Debt Snowball Calculator</Link> — schedule several loans at once instead of one</li>
         </ul>
       </section>
     </div>

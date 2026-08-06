@@ -179,7 +179,7 @@ export default async function CompoundInterestPage({
           <h2 className="text-lg font-bold text-navy-900 mb-4">Related Calculators</h2>
           <ul className="space-y-2 text-sm text-slate-600">
             <li><Link href="/calculators/loan-amortization" className="text-navy-700 underline hover:text-navy-900">Loan Amortization Calculator</Link> — see how the same compounding math works against you on a loan</li>
-            <li><Link href="/calculators/debt-payoff" className="text-navy-700 underline hover:text-navy-900">Debt Payoff Calculator</Link> — pay down high-interest debt before investing the difference</li>
+            <li><Link href="/calculators/debt-snowball" className="text-navy-700 underline hover:text-navy-900">Debt Snowball Calculator</Link> — pay down high-interest debt before investing the difference</li>
             <li><Link href="/calculators/mortgage" className="text-navy-700 underline hover:text-navy-900">Mortgage Calculator</Link> — weigh extra mortgage payments against investing that money instead</li>
           </ul>
         </section>

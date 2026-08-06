@@ -9,6 +9,7 @@
     "start": "next start",
     "test": "vitest run",
     "test:watch": "vitest",
+    "check:seo": "node scripts/check-seo.mjs",
     "lint": "next lint",
     "pages:deploy": "opennextjs-cloudflare build && wrangler pages deploy",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",

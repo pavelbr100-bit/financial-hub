@@ -34,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${base}/calculators/debt-payoff`,
+      url: `${base}/calculators/debt-snowball`,
       lastModified: new Date('2026-05-01'),
       changeFrequency: 'monthly',
       priority: 0.9,

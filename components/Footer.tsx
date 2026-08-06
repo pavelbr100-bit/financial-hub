@@ -48,8 +48,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/calculators/debt-payoff" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
-                  Debt Payoff Planner
+                <Link href="/calculators/debt-snowball" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Debt Snowball Calculator
                 </Link>
               </li>
               <li>

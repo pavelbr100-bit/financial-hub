@@ -210,7 +210,7 @@ export default function Page() {
         behavioral risk of having no buffer usually outweighs it.
       </p>
       <p>
-        Use <Link href="/calculators/debt-payoff">FinWiser&apos;s free debt payoff calculator</Link> to run both methods against your actual debts
+        Use <Link href="/calculators/debt-snowball">FinWiser&apos;s free debt snowball calculator</Link> to run both methods against your actual debts
         in seconds — see the total interest and payoff date for each approach side by side.
       </p>
 

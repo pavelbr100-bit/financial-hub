@@ -146,7 +146,7 @@ export default function Page() {
         the early months before your first debt is fully eliminated.
       </p>
       <p>
-        Use <Link href="/calculators/debt-payoff">FinWiser&apos;s free debt payoff calculator</Link> to
+        Use <Link href="/calculators/debt-snowball">FinWiser&apos;s free debt snowball calculator</Link> to
         map your timeline — enter your debts and extra payment amount to see when each balance
         hits zero and how much total interest you&apos;ll pay under the avalanche or snowball method.
       </p>

@@ -61,8 +61,8 @@ const tools = [
     ),
   },
   {
-    href: '/calculators/debt-payoff',
-    title: 'Debt Payoff Planner',
+    href: '/calculators/debt-snowball',
+    title: 'Debt Snowball Calculator',
     description:
       'Enter your debts, pick avalanche or snowball, add an extra payment — and see the exact month each debt disappears.',
     badge: 'New' as const,
