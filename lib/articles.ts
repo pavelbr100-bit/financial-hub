@@ -276,7 +276,7 @@ export const articles: ArticleMeta[] = [
     readMinutes: 8,
     category: 'Home Buying',
     categoryColor: 'sky',
-    calculatorHref: '/calculators/mortgage/nc',
+    calculatorHref: '/calculators/mortgage/north-carolina',
     calculatorLabel: 'Run the numbers with NC tax rates',
   },
   {
@@ -291,7 +291,7 @@ export const articles: ArticleMeta[] = [
     readMinutes: 8,
     category: 'Home Buying',
     categoryColor: 'sky',
-    calculatorHref: '/calculators/mortgage/ga',
+    calculatorHref: '/calculators/mortgage/georgia',
     calculatorLabel: 'Run the numbers with GA tax rates',
   },
   {
@@ -306,7 +306,7 @@ export const articles: ArticleMeta[] = [
     readMinutes: 8,
     category: 'Home Buying',
     categoryColor: 'sky',
-    calculatorHref: '/calculators/mortgage/sc',
+    calculatorHref: '/calculators/mortgage/south-carolina',
     calculatorLabel: 'Run the numbers with SC tax rates',
   },
 ]

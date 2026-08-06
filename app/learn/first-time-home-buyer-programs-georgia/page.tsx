@@ -144,7 +144,7 @@ export default function Page() {
       <p>
         Before you lean on the maximum the program allows, check what the payment actually looks
         like: the{' '}
-        <Link href="/calculators/mortgage/ga">Georgia mortgage calculator</Link> has the
+        <Link href="/calculators/mortgage/georgia">Georgia mortgage calculator</Link> has the
         state&apos;s property tax and insurance figures pre-loaded, so you can see the full monthly
         cost — not just principal and interest — for any price and rate you are considering.
       </p>

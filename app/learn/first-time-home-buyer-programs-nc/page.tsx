@@ -140,7 +140,7 @@ export default function Page() {
         buyer is really taking an interest-free loan, which is still a good deal, but a different
         one. To see what any of these homes costs per month with North Carolina&apos;s property
         taxes and insurance built in, the{' '}
-        <Link href="/calculators/mortgage/nc">North Carolina mortgage calculator</Link> is
+        <Link href="/calculators/mortgage/north-carolina">North Carolina mortgage calculator</Link> is
         pre-loaded with the state&apos;s figures.
       </p>
 

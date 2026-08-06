@@ -134,7 +134,7 @@ export default function Page() {
       </p>
       <p>
         And before the assistance decides anything, look at the whole payment. The{' '}
-        <Link href="/calculators/mortgage/sc">South Carolina mortgage calculator</Link> carries the
+        <Link href="/calculators/mortgage/south-carolina">South Carolina mortgage calculator</Link> carries the
         state&apos;s property tax and insurance defaults, so you can see what a $450,000-limit
         house actually costs per month versus the smaller one that leaves room to breathe.
       </p>

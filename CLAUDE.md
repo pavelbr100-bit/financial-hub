@@ -91,7 +91,7 @@ public/
 | Compound Interest | `app/calculators/compound-interest/page.tsx` | |
 | Debt Snowball | `app/calculators/debt-snowball/page.tsx` | Renamed from `debt-payoff` to target "debt snowball calculator". Defaults `initialStrategy` to `'snowball'` so the pre-selected mode matches the H1; avalanche remains a toggle. **The saved-calculation `type` in Supabase is still `'debt-payoff'`** — that is a stored row value, not a URL. Do not rename it. |
 | Loan Amortization | `app/calculators/loan-amortization/page.tsx` | |
-| State Mortgages | `app/calculators/mortgage/{nc,sc,ga,fl,tx,va}/page.tsx` | Config-driven via `StateMortgageCalculatorPage` |
+| State Mortgages | `app/calculators/mortgage/{north-carolina,south-carolina,georgia,florida,texas,virginia}/page.tsx` | Config-driven via `StateMortgageCalculatorPage` — routes use full state names, never `/nc`-style abbreviations |
 
 Each calculator page has 150–350 lines of surrounding prose (explainer sections, formulas, FAQs, related links).
 
