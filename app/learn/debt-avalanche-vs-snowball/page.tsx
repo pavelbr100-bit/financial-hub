@@ -211,7 +211,10 @@ export default function Page() {
       </p>
       <p>
         Use <Link href="/calculators/debt-snowball">FinWiser&apos;s free debt snowball calculator</Link> to run both methods against your actual debts
-        in seconds — see the total interest and payoff date for each approach side by side.
+        in seconds — see the total interest and payoff date for each approach side by side. If you are
+        working a single card rather than ordering several, the{' '}
+        <Link href="/calculators/credit-card-payoff">credit card payoff calculator</Link> shows what
+        the minimum payment costs you against a fixed monthly amount.
       </p>
 
     </ArticleLayout>

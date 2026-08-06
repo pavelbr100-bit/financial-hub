@@ -73,6 +73,18 @@ const tools = [
     ),
   },
   {
+    href: '/calculators/credit-card-payoff',
+    title: 'Credit Card Payoff Calculator',
+    description:
+      'See what minimum payments really cost, and how fast a fixed monthly amount clears the same balance.',
+    badge: 'New' as const,
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+      </svg>
+    ),
+  },
+  {
     href: '/calculators/compound-interest',
     title: 'Compound Interest Calculator',
     description:

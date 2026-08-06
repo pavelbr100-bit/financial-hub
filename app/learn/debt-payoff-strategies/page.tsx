@@ -149,6 +149,9 @@ export default function Page() {
         Use <Link href="/calculators/debt-snowball">FinWiser&apos;s free debt snowball calculator</Link> to
         map your timeline — enter your debts and extra payment amount to see when each balance
         hits zero and how much total interest you&apos;ll pay under the avalanche or snowball method.
+        For a single card, the{' '}
+        <Link href="/calculators/credit-card-payoff">credit card payoff calculator</Link> compares a
+        fixed monthly payment against the shrinking minimum your issuer asks for.
       </p>
 
     </ArticleLayout>

@@ -207,12 +207,14 @@ export default function SavedCalculationsList({
           ? `/calculators/mortgage?homePrice=${inputs.homePrice}&down=${inputs.down}&downType=${inputs.downType}&rate=${inputs.rate}&term=${inputs.term}&tax=${inputs.tax}&insurance=${inputs.insurance}&pmi=${inputs.pmi}&hoa=${inputs.hoa}`
           : calc.type === 'mortgage-payoff'
             ? '/calculators/mortgage-payoff'
-            : calc.type === 'biweekly-mortgage'
-              ? '/calculators/biweekly-mortgage'
-              : `/calculators/loan-amortization?amount=${inputs.loanAmount}&rate=${inputs.interestRate}&term=${inputs.loanTerm}&unit=${inputs.termUnit}&start=${inputs.startDate}`
+            : calc.type === 'credit-card-payoff'
+              ? '/calculators/credit-card-payoff'
+              : calc.type === 'biweekly-mortgage'
+                ? '/calculators/biweekly-mortgage'
+                : `/calculators/loan-amortization?amount=${inputs.loanAmount}&rate=${inputs.interestRate}&term=${inputs.loanTerm}&unit=${inputs.termUnit}&start=${inputs.startDate}`
 
         const isMortgage = calc.type === 'mortgage'
-        const isPayoff = calc.type === 'mortgage-payoff'
+        const isPayoff = calc.type === 'mortgage-payoff' || calc.type === 'credit-card-payoff'
         const thirdLabel = isMortgage ? 'Home Price' : isPayoff ? 'Balance' : 'Loan Amount'
         const thirdValue = parseFloat(
           (isMortgage
@@ -231,7 +233,7 @@ export default function SavedCalculationsList({
                 <div className="flex items-center gap-2 mt-0.5">
                   <span className="text-xs text-slate-400">{formatDate(calc.created_at)}</span>
                   <span className="text-xs text-slate-300">·</span>
-                  <span className="text-xs text-slate-400 capitalize">{calc.type.replace('-', ' ')}</span>
+                  <span className="text-xs text-slate-400 capitalize">{calc.type.replace(/-/g, ' ')}</span>
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">

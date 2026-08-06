@@ -16,6 +16,7 @@ const calcLinks = [
   { href: '/calculators/car-loan', label: 'Car Loan Calculator' },
   { href: '/calculators/loan-amortization', label: 'Loan Amortization' },
   { href: '/calculators/debt-snowball', label: 'Debt Snowball Calculator' },
+  { href: '/calculators/credit-card-payoff', label: 'Credit Card Payoff Calculator' },
   { href: '/calculators/compound-interest', label: 'Compound Interest' },
   { href: '/calculators/mortgage/compare', label: 'Compare Mortgages' },
 ]

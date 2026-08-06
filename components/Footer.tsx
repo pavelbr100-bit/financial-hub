@@ -58,6 +58,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/calculators/credit-card-payoff" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  Credit Card Payoff Calculator
+                </Link>
+              </li>
+              <li>
                 <Link href="/calculators/compound-interest" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
                   Compound Interest
                 </Link>
