@@ -28,6 +28,11 @@ export default function Footer() {
             <h3 className="text-white font-medium text-sm mb-3">Calculators</h3>
             <ul className="space-y-2">
               <li>
+                <Link href="/calculators" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
+                  All Calculators
+                </Link>
+              </li>
+              <li>
                 <Link href="/calculators/mortgage" className="text-navy-400 hover:text-emerald-400 text-sm transition-colors">
                   Mortgage Calculator
                 </Link>

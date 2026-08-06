@@ -32,6 +32,12 @@ const jsonLd = {
   applicationCategory: 'FinanceApplication',
   operatingSystem: 'Any',
   browserRequirements: 'Requires JavaScript',
+  isAccessibleForFree: true,
+  publisher: {
+    '@type': 'Organization',
+    name: 'FinWiser',
+    url: 'https://finwiser.net',
+  },
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   featureList: [
     'Monthly payment calculation',
@@ -48,7 +54,8 @@ const breadcrumbLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
-    { '@type': 'ListItem', position: 2, name: 'Loan Amortization Calculator', item: 'https://finwiser.net/calculators/loan-amortization' },
+    { '@type': 'ListItem', position: 2, name: 'Calculators', item: 'https://finwiser.net/calculators' },
+    { '@type': 'ListItem', position: 3, name: 'Loan Amortization Calculator', item: 'https://finwiser.net/calculators/loan-amortization' },
   ],
 }
 
@@ -114,11 +121,19 @@ export default async function LoanAmortizationPage({
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       {/* Page header */}
       <div className="mb-8">
-        <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
-          <Link href="/" className="hover:text-navy-600 transition-colors">Home</Link>
-          <span>/</span>
-          <span className="text-slate-700 font-medium">Loan Amortization</span>
-        </div>
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+          <Link href="/" className="hover:text-navy-600 transition-colors">
+            Home
+          </Link>
+          <span aria-hidden="true">/</span>
+          <Link href="/calculators" className="hover:text-navy-600 transition-colors">
+            Calculators
+          </Link>
+          <span aria-hidden="true">/</span>
+          <span className="text-slate-700 font-medium" aria-current="page">
+            Loan Amortization Calculator
+          </span>
+        </nav>
         <h1 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">
           Loan Amortization Calculator
         </h1>

@@ -11,7 +11,8 @@
 
 ```
 app/
-  calculators/          12 calculators + 6 state mortgage variants
+  calculators/          13 calculators + 6 state mortgage variants
+                        page.tsx = the /calculators hub, generated from lib/calculators.ts
   learn/                13 article pages (TSX, not MDX)
   about/                About page — named author, how calculators are built
   contact/              Contact page — mailto links for corrections & feedback
@@ -23,6 +24,7 @@ components/
   calculators/          interactive calculator components
 lib/
   articles.ts           SINGLE SOURCE OF TRUTH for all article metadata
+  calculators.ts        SINGLE SOURCE OF TRUTH for calculator routes — feeds the hub page AND the sitemap
   author.ts             siteAuthor constant (name, bio, url) — imported by ArticleLayout & About
   calculators/          calculator logic
   data/                 state-specific mortgage configs
@@ -85,6 +87,28 @@ public/
 | State Mortgages | `app/calculators/mortgage/{nc,sc,ga,fl,tx,va}/page.tsx` | Config-driven via `StateMortgageCalculatorPage` |
 
 Each calculator page has 150–350 lines of surrounding prose (explainer sections, formulas, FAQs, related links).
+
+### Calculator hub and route registry
+
+`lib/calculators.ts` is the single source of truth for calculator routes. It feeds
+both `/calculators` (the hub page) and `app/sitemap.ts`, so a new calculator cannot
+be added to the site and silently left out of the sitemap. State variants are
+derived from `stateConfigs`, so a quoted tax rate can never drift from the rate the
+calculator loads.
+
+`lib/__tests__/calculators.test.ts` walks `app/calculators/` on disk and fails if
+the registry and the filesystem disagree in either direction. **Adding a calculator
+means adding it to the registry first** — the test will tell you if you forget.
+
+### Breadcrumbs
+
+Every calculator page renders `Home > Calculators > <Tool>` (state and compare
+pages add a `Mortgage Calculator` rung), as a visible `<nav aria-label="Breadcrumb">`
+whose labels match the `BreadcrumbList` JSON-LD exactly. Google wants the markup to
+correspond to visible navigation, so if you change one, change the other.
+
+All calculator `WebApplication` blocks carry `isAccessibleForFree`, `offers`, and a
+`publisher` Organization. Keep new pages consistent.
 
 **Cannibalization boundaries between the three mortgage-acceleration pages** — keep these distinct, do not duplicate content across them:
 - `/calculators/mortgage` owns the full monthly payment (taxes, insurance, PMI, HOA)
@@ -198,7 +222,7 @@ npm run check:seo
 
 ## Sitemap
 
-`app/sitemap.ts` — programmatic Next.js sitemap. Pulls article slugs from `lib/articles.ts` and calculator paths statically. Automatically reflects the 13-article set.
+`app/sitemap.ts` — programmatic Next.js sitemap. Article slugs come from `lib/articles.ts`; calculator routes come from `allCalculatorHrefs()` in `lib/calculators.ts`. Neither is hand-maintained, so new pages are picked up automatically. Only the handful of standalone pages (home, /learn, /about, /contact, /how-it-works, /privacy, /terms) are listed literally.
 
 ## Article Dates
 

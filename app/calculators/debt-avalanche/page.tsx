@@ -103,12 +103,8 @@ const breadcrumbLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: 'Debt Avalanche Calculator',
-      item: 'https://finwiser.net/calculators/debt-avalanche',
-    },
+    { '@type': 'ListItem', position: 2, name: 'Calculators', item: 'https://finwiser.net/calculators' },
+    { '@type': 'ListItem', position: 3, name: 'Debt Avalanche Calculator', item: 'https://finwiser.net/calculators/debt-avalanche' },
   ],
 }
 
@@ -144,12 +140,13 @@ export default async function DebtAvalanchePage() {
       />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8">
-          <nav
-            aria-label="Breadcrumb"
-            className="flex items-center gap-2 text-sm text-slate-500 mb-3"
-          >
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-slate-500 mb-3">
             <Link href="/" className="hover:text-navy-600 transition-colors">
               Home
+            </Link>
+            <span aria-hidden="true">/</span>
+            <Link href="/calculators" className="hover:text-navy-600 transition-colors">
+              Calculators
             </Link>
             <span aria-hidden="true">/</span>
             <span className="text-slate-700 font-medium" aria-current="page">

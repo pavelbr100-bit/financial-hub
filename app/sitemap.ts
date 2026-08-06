@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { articles } from '@/lib/articles'
+import { allCalculatorHrefs } from '@/lib/calculators'
 
 function parseDate(dateStr: string): Date {
   return new Date(dateStr)
@@ -16,118 +17,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${base}/calculators/mortgage`,
-      lastModified: new Date('2026-05-01'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/mortgage-payoff`,
+      url: `${base}/calculators`,
       lastModified: new Date('2026-08-06'),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/credit-card-payoff`,
-      lastModified: new Date('2026-08-06'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/auto-loan-payoff`,
-      lastModified: new Date('2026-08-06'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/student-loan-payoff`,
-      lastModified: new Date('2026-08-06'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/rent-vs-buy`,
-      lastModified: new Date('2026-08-06'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/debt-avalanche`,
-      lastModified: new Date('2026-08-06'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/car-loan`,
-      lastModified: new Date('2026-05-27'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/loan-amortization`,
-      lastModified: new Date('2026-05-01'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/debt-snowball`,
-      lastModified: new Date('2026-05-01'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/compound-interest`,
-      lastModified: new Date('2026-05-01'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/biweekly-mortgage`,
-      lastModified: new Date('2026-05-27'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/calculators/mortgage/compare`,
-      lastModified: new Date('2026-05-01'),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${base}/calculators/mortgage/north-carolina`,
-      lastModified: new Date('2026-05-30'),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${base}/calculators/mortgage/south-carolina`,
-      lastModified: new Date('2026-05-30'),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${base}/calculators/mortgage/georgia`,
-      lastModified: new Date('2026-05-30'),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${base}/calculators/mortgage/florida`,
-      lastModified: new Date('2026-05-30'),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${base}/calculators/mortgage/texas`,
-      lastModified: new Date('2026-05-30'),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${base}/calculators/mortgage/virginia`,
-      lastModified: new Date('2026-05-30'),
-      changeFrequency: 'monthly',
-      priority: 0.8,
     },
     {
       url: `${base}/learn`,
@@ -167,6 +60,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
+  // Generated from lib/calculators.ts so a new calculator cannot be added to the
+  // site and silently left out of the sitemap.
+  const calculatorPages: MetadataRoute.Sitemap = allCalculatorHrefs().map(href => ({
+    url: `${base}${href}`,
+    lastModified: new Date('2026-08-06'),
+    changeFrequency: 'monthly' as const,
+    priority: href.startsWith('/calculators/mortgage/') ? 0.8 : 0.9,
+  }))
+
   const articlePages: MetadataRoute.Sitemap = articles.map(article => ({
     url: `${base}/learn/${article.slug}`,
     lastModified: parseDate(article.updated ?? article.date),
@@ -174,5 +76,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  return [...staticPages, ...articlePages]
+  return [...staticPages, ...calculatorPages, ...articlePages]
 }

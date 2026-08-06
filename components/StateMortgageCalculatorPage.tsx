@@ -50,6 +50,12 @@ export default async function StateMortgageCalculatorPage({ config }: Props) {
     applicationCategory: 'FinanceApplication',
     operatingSystem: 'Any',
     browserRequirements: 'Requires JavaScript',
+  isAccessibleForFree: true,
+  publisher: {
+    '@type': 'Organization',
+    name: 'FinWiser',
+    url: 'https://finwiser.net',
+  },
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     featureList: [
       `${stateAbbr} property tax rate pre-loaded`,
@@ -65,7 +71,7 @@ export default async function StateMortgageCalculatorPage({ config }: Props) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://finwiser.net' },
-      { '@type': 'ListItem', position: 2, name: 'Calculators', item: 'https://finwiser.net/calculators/mortgage' },
+      { '@type': 'ListItem', position: 2, name: 'Calculators', item: 'https://finwiser.net/calculators' },
       { '@type': 'ListItem', position: 3, name: 'Mortgage Calculator', item: 'https://finwiser.net/calculators/mortgage' },
       { '@type': 'ListItem', position: 4, name: `${stateName} Mortgage Calculator`, item: `https://finwiser.net/calculators/mortgage/${slug}` },
     ],
@@ -117,13 +123,20 @@ export default async function StateMortgageCalculatorPage({ config }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
 
-        <div className="flex items-center gap-2 text-sm text-slate-500 mb-3 flex-wrap">
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-2 text-sm text-slate-500 mb-3 flex-wrap"
+        >
           <Link href="/" className="hover:text-navy-600 transition-colors">Home</Link>
-          <span>/</span>
+          <span aria-hidden="true">/</span>
+          <Link href="/calculators" className="hover:text-navy-600 transition-colors">Calculators</Link>
+          <span aria-hidden="true">/</span>
           <Link href="/calculators/mortgage" className="hover:text-navy-600 transition-colors">Mortgage Calculator</Link>
-          <span>/</span>
-          <span className="text-slate-700 font-medium">{stateName}</span>
-        </div>
+          <span aria-hidden="true">/</span>
+          <span className="text-slate-700 font-medium" aria-current="page">
+            {stateName} Mortgage Calculator
+          </span>
+        </nav>
 
         <div className="mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">

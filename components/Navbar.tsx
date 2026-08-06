@@ -10,6 +10,7 @@ interface NavbarProps {
 }
 
 const calcLinks = [
+  { href: '/calculators', label: 'All Calculators' },
   { href: '/calculators/mortgage', label: 'Mortgage Calculator' },
   { href: '/calculators/mortgage-payoff', label: 'Mortgage Payoff Calculator' },
   { href: '/calculators/biweekly-mortgage', label: 'Biweekly Mortgage' },
@@ -24,6 +25,19 @@ const calcLinks = [
   { href: '/calculators/compound-interest', label: 'Compound Interest' },
   { href: '/calculators/mortgage/compare', label: 'Compare Mortgages' },
 ]
+
+/**
+ * `/calculators` and `/calculators/mortgage` are both prefixes of other entries,
+ * so a plain startsWith would light them up on every nested page. Those two match
+ * exactly; everything else may also match its own sub-routes.
+ */
+const EXACT_MATCH_ONLY = ['/calculators', '/calculators/mortgage']
+
+function isNavLinkActive(pathname: string, href: string): boolean {
+  if (pathname === href) return true
+  if (EXACT_MATCH_ONLY.includes(href)) return false
+  return pathname.startsWith(`${href}/`)
+}
 
 export default function Navbar({ user }: NavbarProps) {
   const pathname = usePathname()
@@ -125,7 +139,7 @@ export default function Navbar({ user }: NavbarProps) {
                       href={link.href}
                       onClick={() => setCalcOpen(false)}
                       className={`block px-4 py-2.5 text-sm transition-colors ${
-                        pathname === link.href || (link.href !== '/calculators/mortgage' && pathname.startsWith(link.href))
+                        isNavLinkActive(pathname, link.href)
                           ? 'text-white bg-navy-700'
                           : 'text-navy-200 hover:text-white hover:bg-navy-700/60'
                       }`}
