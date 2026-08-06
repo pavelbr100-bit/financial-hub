@@ -5,9 +5,9 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Free Compound Interest Calculator — Savings & Investment Growth | FinWiser' },
+  title: { absolute: 'Compound Interest Calculator — Savings Growth | FinWiser' },
   description:
-    'Free compound interest calculator. Enter your initial investment, monthly contributions, and interest rate to see how your money grows over time. Compare daily, monthly, quarterly, and annual compounding.',
+    'Free compound interest calculator. Enter your initial investment, monthly contributions, and rate to see how your money grows over time.',
   alternates: { canonical: 'https://finwiser.net/calculators/compound-interest' },
   openGraph: {
     title: 'Free Compound Interest Calculator — Savings & Investment Growth',
@@ -173,6 +173,15 @@ export default async function CompoundInterestPage({
               <strong className="text-slate-800">Time is your most powerful lever.</strong> Starting 10 years earlier can double your final balance, even with no extra contributions. A common rule of thumb is the Rule of 72: divide 72 by your annual rate to estimate how many years it takes to double your money. At 7%, your money doubles roughly every 10 years.
             </p>
           </div>
+        </section>
+
+        <section className="mt-8 bg-slate-50 rounded-xl border border-slate-100 p-6 sm:p-8">
+          <h2 className="text-lg font-bold text-navy-900 mb-4">Related Calculators</h2>
+          <ul className="space-y-2 text-sm text-slate-600">
+            <li><Link href="/calculators/loan-amortization" className="text-navy-700 underline hover:text-navy-900">Loan Amortization Calculator</Link> — see how the same compounding math works against you on a loan</li>
+            <li><Link href="/calculators/debt-payoff" className="text-navy-700 underline hover:text-navy-900">Debt Payoff Calculator</Link> — pay down high-interest debt before investing the difference</li>
+            <li><Link href="/calculators/mortgage" className="text-navy-700 underline hover:text-navy-900">Mortgage Calculator</Link> — weigh extra mortgage payments against investing that money instead</li>
+          </ul>
         </section>
       </div>
     </>

@@ -38,11 +38,12 @@ public/
 
 - **Location:** `app/learn/<slug>/page.tsx` — 13 articles, each a TSX file
 - **Metadata schema:** `lib/articles.ts` — `ArticleMeta` interface + `articles[]` array
-- **Fields per article:** `slug`, `title`, `description`, `date`, `updated?` (both human-readable strings e.g. "March 3, 2026"), `readMinutes`, `category`, `categoryColor`, `calculatorHref`, `calculatorLabel`
+- **Fields per article:** `slug`, `title`, `description`, `metaTitle?`, `metaDescription?`, `date`, `updated?` (both human-readable strings e.g. "March 3, 2026"), `readMinutes`, `category`, `categoryColor`, `calculatorHref`, `calculatorLabel`
 - **No MDX, no frontmatter** — all metadata lives in `lib/articles.ts`; article bodies are TSX/JSX
 - **Date rendering:** `ArticleLayout.tsx` renders "Published {meta.date} · Reviewed {meta.updated}" in the byline. Dates are never hardcoded in article body files.
 - **Date format in articles.ts:** Human-readable string e.g. `"March 3, 2026"`. Converted to ISO for JSON-LD via `toISODate()`. `updated` falls back to `date` in JSON-LD `dateModified`.
-- **Metadata title rule:** Every `page.tsx` must use `` title: { absolute: `${meta.title} | FinWiser` } `` — never a hardcoded string. The H1 is rendered by `ArticleLayout` from `meta.title`; keeping the `<title>` tag in sync prevents drift.
+- **Metadata title rule:** Every `page.tsx` must use `` title: { absolute: `${meta.metaTitle ?? meta.title} | FinWiser` } `` and `description: meta.metaDescription ?? meta.description` — never a hardcoded string. The suffix is always `| FinWiser`, never `| FinWiser Learn`.
+- **`title`/`description` are reader-facing; `metaTitle`/`metaDescription` are SERP-facing.** `title` renders as the H1 and `description` as the visible subtitle under it (and on the `/learn` index cards), so both are written for humans and run long. The optional overrides exist purely to fit search-result limits: **titles ≤ 60 characters including the ` | FinWiser` suffix** (so ≤ 49 in `metaTitle` itself) and **descriptions ≤ 160**. All 13 articles currently set both. When adding an article, check the lengths and add overrides if either limit is exceeded — do not shorten the visible `title`/`description` to fit.
 
 ### 13 surviving article slugs (in date order)
 
@@ -114,7 +115,7 @@ Do not add `public/_redirects` — use `next.config.mjs` redirects only.
 
 ## Key Patterns
 
-- **Adding a new article:** Add entry to `lib/articles.ts` array, create `app/learn/<slug>/page.tsx` that calls `getArticle(slug)` and returns `<ArticleLayout>`. Use `` title: { absolute: `${meta.title} | FinWiser` } `` in metadata — never hardcode.
+- **Adding a new article:** Add entry to `lib/articles.ts` array, create `app/learn/<slug>/page.tsx` that calls `getArticle(slug)` and returns `<ArticleLayout>`. Use `` title: { absolute: `${meta.metaTitle ?? meta.title} | FinWiser` } `` in metadata — never hardcode. Add `metaTitle`/`metaDescription` if the visible title exceeds 49 chars or the description exceeds 160.
 - **Adding a new state mortgage page:** Add state config to `lib/data/`, create `app/calculators/mortgage/<state>/page.tsx` that renders `<StateMortgageCalculatorPage>`. Export `metadata` via `generateStateMortgageMetadata(config)` (in `lib/data/state-mortgage-configs.ts`) — it builds title/description/canonical/OG/Twitter from the `StateConfig`. In `contentBlurbs`, write `taxFaq`/`priceFaq` with phrasing distinct from `taxContext`/`marketOverview` — FAQ answers must not repeat body sentences verbatim.
 - **No content schema file** (not Astro) — the TypeScript `ArticleMeta` interface in `lib/articles.ts` IS the schema.
 - **`public/ads.txt` exists** — do not modify; contains the AdSense publisher line.

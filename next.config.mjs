@@ -1,5 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async headers() {
+    return [
+      {
+        // Prevent browsers from caching HTML — stale HTML breaks client-side nav after a deploy.
+        // Excludes /_next/ so hashed assets keep the immutable header below instead of
+        // receiving both (every matching rule contributes, so an unscoped /(.*) would
+        // emit two conflicting Cache-Control values on every static asset).
+        source: '/((?!_next/).*)',
+        headers: [{ key: 'Cache-Control', value: 'no-cache' }],
+      },
+      {
+        // Hashed static assets are safe to cache forever. Mirrors public/_headers,
+        // which is what Cloudflare actually serves these with.
+        source: '/_next/static/(.*)',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+    ]
+  },
   async redirects() {
     return [
       // Cluster A — mortgage payoff consolidation

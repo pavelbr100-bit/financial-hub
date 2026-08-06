@@ -2,6 +2,13 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
+  const isProtectedRoute = request.nextUrl.pathname.startsWith('/saved')
+
+  // Only hit Supabase for protected routes — avoids a network round-trip on every public page
+  if (!isProtectedRoute) {
+    return NextResponse.next({ request })
+  }
+
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(
@@ -25,11 +32,8 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  // Refresh session — keeps Supabase auth tokens from expiring
   const { data: { user } } = await supabase.auth.getUser()
 
-  // Redirect unauthenticated users away from protected routes
-  const isProtectedRoute = request.nextUrl.pathname.startsWith('/saved')
   if (isProtectedRoute && !user) {
     const url = request.nextUrl.clone()
     url.pathname = '/auth/login'

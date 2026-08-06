@@ -6,9 +6,9 @@ import type { DebtPayoffStrategy } from '@/lib/calculators/debtPayoff'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Free Debt Payoff Calculator — Avalanche & Snowball Planner | FinWiser' },
+  title: { absolute: 'Debt Payoff Calculator — Avalanche & Snowball | FinWiser' },
   description:
-    'Free debt payoff calculator. Compare the avalanche and snowball strategies side by side. Enter your debts, add an extra monthly payment, and see exactly when each debt is paid off and how much interest you save.',
+    'Free debt payoff calculator. Compare avalanche and snowball side by side — enter your debts, add an extra payment, and see your debt-free date.',
   alternates: { canonical: 'https://finwiser.net/calculators/debt-payoff' },
   openGraph: {
     title: 'Free Debt Payoff Calculator — Avalanche & Snowball Planner',
@@ -190,6 +190,15 @@ export default async function DebtPayoffPage({
               </p>
             </div>
           </div>
+        </section>
+
+        <section className="mt-8 bg-slate-50 rounded-xl border border-slate-100 p-6 sm:p-8">
+          <h2 className="text-lg font-bold text-navy-900 mb-4">Related Calculators</h2>
+          <ul className="space-y-2 text-sm text-slate-600">
+            <li><Link href="/calculators/loan-amortization" className="text-navy-700 underline hover:text-navy-900">Loan Amortization Calculator</Link> — break a single debt down into a full payment schedule</li>
+            <li><Link href="/calculators/car-loan" className="text-navy-700 underline hover:text-navy-900">Car Loan Calculator</Link> — model an auto loan before adding it to your payoff plan</li>
+            <li><Link href="/calculators/compound-interest" className="text-navy-700 underline hover:text-navy-900">Compound Interest Calculator</Link> — see what the same monthly payment earns once the debt is gone</li>
+          </ul>
         </section>
       </div>
     </>

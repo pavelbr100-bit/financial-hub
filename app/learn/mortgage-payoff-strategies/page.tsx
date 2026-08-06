@@ -11,8 +11,8 @@ const related = [
 ]
 
 export const metadata: Metadata = {
-  title: { absolute: `${meta.title} | FinWiser` },
-  description: meta.description,
+  title: { absolute: `${meta.metaTitle ?? meta.title} | FinWiser` },
+  description: meta.metaDescription ?? meta.description,
   alternates: { canonical: `https://finwiser.net/learn/${meta.slug}` },
   openGraph: {
     title: meta.title,

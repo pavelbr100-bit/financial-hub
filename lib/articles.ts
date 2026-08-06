@@ -1,7 +1,20 @@
 export interface ArticleMeta {
   slug: string
+  /** Rendered as the article H1 and the breadcrumb/JSON-LD headline. Written for readers, so it runs long. */
   title: string
+  /** Rendered as the visible subtitle under the H1 and on the /learn index cards. */
   description: string
+  /**
+   * Optional `<title>` override. Google truncates around 60 characters including
+   * the ` | FinWiser` suffix, so anything over ~49 here gets cut in the SERP.
+   * Falls back to `title` when omitted.
+   */
+  metaTitle?: string
+  /**
+   * Optional meta-description override, kept at or under 160 characters.
+   * Falls back to `description` when omitted.
+   */
+  metaDescription?: string
   date: string
   updated?: string
   readMinutes: number
@@ -16,6 +29,7 @@ export const articles: ArticleMeta[] = [
     slug: 'mortgage-payoff-strategies',
     title: 'How to Pay Off Your Mortgage Early: 7 Strategies That Actually Work',
     description: 'From biweekly payments to lump sum contributions — see the 7 most effective ways to pay off your mortgage early and save thousands in interest.',
+    metaTitle: 'How to Pay Off Your Mortgage Early: 7 Strategies',
     date: 'March 3, 2026',
     updated: 'June 9, 2026',
     readMinutes: 7,
@@ -28,6 +42,8 @@ export const articles: ArticleMeta[] = [
     slug: 'compound-interest-guide',
     title: 'How Compound Interest Works — and Why Starting Early Always Wins',
     description: 'Compound interest turns small, regular savings into large sums over time. Learn exactly how it works, why starting early beats starting big, and how to calculate your own growth.',
+    metaTitle: 'How Compound Interest Works (And Why Time Wins)',
+    metaDescription: 'Compound interest turns small, regular savings into large sums. Learn how it works, why starting early beats starting big, and how to project your growth.',
     date: 'March 7, 2026',
     updated: 'June 8, 2026',
     readMinutes: 6,
@@ -39,6 +55,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: 'debt-avalanche-vs-snowball',
     title: 'Avalanche vs Snowball Method: Which Pays Off Debt Faster? (With Calculator)',
+    metaTitle: 'Debt Avalanche vs Snowball: Which Is Faster?',
     description: 'Compare the avalanche and snowball debt payoff methods side by side. See which saves more interest and which gets you debt-free faster — with a free calculator.',
     date: 'March 12, 2026',
     updated: 'May 31, 2026',
@@ -51,6 +68,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: 'what-is-amortization',
     title: 'What Is a Loan Amortization Schedule? (And How to Read One)',
+    metaTitle: 'What Is a Loan Amortization Schedule?',
     description: 'Amortization explained in plain English. Learn why you pay mostly interest at first, how to read an amortization schedule, and how to use it to pay less.',
     date: 'March 17, 2026',
     updated: 'May 24, 2026',
@@ -63,6 +81,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: 'mortgage-amortization-explained',
     title: 'Why Your Mortgage Pays Mostly Interest at First — And How to Use That',
+    metaTitle: 'Why Your Mortgage Pays Mostly Interest at First',
     description: 'In year one of a 30-year mortgage, barely 12% of your payment reduces your balance. Here\'s why that happens — and how to use it to pay off your mortgage faster.',
     date: 'March 21, 2026',
     updated: 'May 27, 2026',
@@ -76,6 +95,8 @@ export const articles: ArticleMeta[] = [
     slug: 'how-much-house-can-you-afford',
     title: 'How Much House Can I Afford? The 28/36 Rule Explained',
     description: 'The 28/36 rule is the most widely used guideline for home affordability. Here\'s how to apply it to your income and debts — and what to do if you\'re close to the limit.',
+    metaTitle: 'How Much House Can I Afford? The 28/36 Rule',
+    metaDescription: 'The 28/36 rule is the standard guideline for home affordability. Here\'s how to apply it to your income and debts — and what to do if you\'re near the limit.',
     date: 'April 1, 2026',
     updated: 'May 29, 2026',
     readMinutes: 6,
@@ -87,6 +108,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: '15-year-vs-30-year-mortgage',
     title: '15-Year vs 30-Year Mortgage: True Cost Comparison With Calculator',
+    metaTitle: '15-Year vs 30-Year Mortgage: True Cost Compared',
     description: 'See the real difference between a 15 and 30-year mortgage — monthly payments, total interest, and break-even point. Free side-by-side calculator.',
     date: 'April 14, 2026',
     updated: 'June 1, 2026',
@@ -100,6 +122,8 @@ export const articles: ArticleMeta[] = [
     slug: 'debt-payoff-strategies',
     title: 'How to Pay Off Debt Fast: 5 Proven Strategies With Real Numbers',
     description: 'From the debt avalanche to balance transfers and income boosts — five practical strategies for paying off debt faster, with real numbers showing exactly how much each saves.',
+    metaTitle: 'How to Pay Off Debt Fast: 5 Proven Strategies',
+    metaDescription: 'From the debt avalanche to balance transfers and income boosts — five practical strategies for paying off debt faster, with real numbers for each.',
     date: 'April 23, 2026',
     updated: 'June 2, 2026',
     readMinutes: 6,
@@ -112,6 +136,8 @@ export const articles: ArticleMeta[] = [
     slug: 'fixed-vs-variable-interest-rate',
     title: 'Fixed vs Variable Interest Rate: Which Is Better for Your Loan?',
     description: 'Fixed rates give you payment certainty for the life of the loan. Variable rates start lower but can rise. Here\'s how to decide which fits your loan, timeline, and risk tolerance.',
+    metaTitle: 'Fixed vs Variable Interest Rate: Which Is Better?',
+    metaDescription: 'Fixed rates give you payment certainty. Variable rates start lower but can rise. Here\'s how to decide which fits your loan, timeline, and risk tolerance.',
     date: 'April 28, 2026',
     updated: 'June 3, 2026',
     readMinutes: 5,
@@ -123,6 +149,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: 'how-car-loan-interest-works',
     title: 'How Car Loan Interest Works: What You\'re Actually Paying Each Month',
+    metaTitle: 'How Car Loan Interest Works, Month by Month',
     description: 'See exactly how your car loan interest is calculated each month, why early payments are mostly interest, and how to reduce your total cost.',
     date: 'May 7, 2026',
     updated: 'June 4, 2026',
@@ -136,6 +163,8 @@ export const articles: ArticleMeta[] = [
     slug: 'new-vs-used-car-loan',
     title: 'New vs Used Car Loan: Which Costs More in the Long Run?',
     description: 'New car loans have lower rates. Used cars cost less upfront but come with higher financing costs. Here\'s how to compare the true total cost and decide which makes more sense.',
+    metaTitle: 'New vs Used Car Loan: Which Costs More?',
+    metaDescription: 'New car loans have lower rates; used cars cost less upfront but finance higher. Here\'s how to compare true total cost and decide which makes more sense.',
     date: 'May 12, 2026',
     updated: 'June 5, 2026',
     readMinutes: 5,
@@ -148,6 +177,8 @@ export const articles: ArticleMeta[] = [
     slug: 'how-to-get-best-car-loan-rate',
     title: 'How to Get the Best Car Loan Rate: 7 Steps Before You Sign',
     description: 'Car loan rates are negotiable — and the difference between a good and bad rate can cost thousands. Here are 7 steps to take before signing to get the lowest rate you qualify for.',
+    metaTitle: 'How to Get the Best Car Loan Rate: 7 Steps',
+    metaDescription: 'Car loan rates are negotiable, and a bad rate can cost thousands. Here are 7 steps to take before you sign to get the lowest rate you qualify for.',
     date: 'May 16, 2026',
     updated: 'June 6, 2026',
     readMinutes: 6,
@@ -160,6 +191,8 @@ export const articles: ArticleMeta[] = [
     slug: 'how-to-pay-off-car-loan-early',
     title: 'How to Pay Off a Car Loan Early: 5 Ways to Save on Interest',
     description: 'Paying off your car loan early can save hundreds to thousands in interest charges. Here are 5 practical ways to do it — including one you can start with your next payment.',
+    metaTitle: 'How to Pay Off a Car Loan Early: 5 Ways',
+    metaDescription: 'Paying off your car loan early can save hundreds to thousands in interest. Here are 5 practical ways to do it, including one you can start next payment.',
     date: 'May 23, 2026',
     updated: 'June 7, 2026',
     readMinutes: 5,

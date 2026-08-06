@@ -5,7 +5,7 @@ import { siteAuthor } from '@/lib/author'
 export const metadata: Metadata = {
   title: { absolute: 'About FinWiser — Free Financial Calculators & Guides' },
   description:
-    'FinWiser provides free, accurate financial calculators and plain-English guides for mortgages, car loans, debt payoff, and investing. Learn who built the tools and how they work.',
+    'FinWiser provides free, accurate financial calculators and plain-English guides for mortgages, car loans, debt payoff, and investing.',
   alternates: { canonical: 'https://finwiser.net/about' },
   openGraph: {
     title: 'About FinWiser — Free Financial Calculators & Guides',

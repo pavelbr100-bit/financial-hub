@@ -6,9 +6,9 @@ import Link from 'next/link'
 import { articles } from '@/lib/articles'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Free Car Loan Calculator — Monthly Payment, Total Interest & Affordability | FinWiser' },
+  title: { absolute: 'Car Loan Calculator — Payment & Total Interest | FinWiser' },
   description:
-    'Free car loan calculator — enter your vehicle price, down payment, and interest rate to see your monthly payment, total interest, and full amortization schedule.',
+    'Free car loan calculator — enter vehicle price, down payment, and rate to see your monthly payment, total interest, and full amortization schedule.',
   alternates: { canonical: 'https://finwiser.net/calculators/car-loan' },
   openGraph: {
     title: 'Free Car Loan Calculator — Monthly Payment & Total Interest',
@@ -209,6 +209,15 @@ export default async function CarLoanPage() {
             </section>
           )
         })()}
+
+        <section className="mt-8 bg-slate-50 rounded-xl border border-slate-100 p-6 sm:p-8">
+          <h2 className="text-lg font-bold text-navy-900 mb-4">Related Calculators</h2>
+          <ul className="space-y-2 text-sm text-slate-600">
+            <li><Link href="/calculators/loan-amortization" className="text-navy-700 underline hover:text-navy-900">Loan Amortization Calculator</Link> — the same payment schedule for any loan type</li>
+            <li><Link href="/calculators/debt-payoff" className="text-navy-700 underline hover:text-navy-900">Debt Payoff Calculator</Link> — fold your car loan into a full payoff plan</li>
+            <li><Link href="/calculators/compound-interest" className="text-navy-700 underline hover:text-navy-900">Compound Interest Calculator</Link> — what a larger down payment could earn if invested instead</li>
+          </ul>
+        </section>
       </div>
     </>
   )

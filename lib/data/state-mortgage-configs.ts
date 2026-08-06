@@ -179,9 +179,9 @@ export const flConfig: StateConfig = {
     priceFaq:
       "Florida's population growth — fueled by no state income tax, warm weather, and job growth in Tampa, Orlando, and Miami — has pushed home prices up sharply since 2020. Coastal markets like Miami now commonly exceed $500,000, while inland cities such as Orlando and Jacksonville remain comparatively accessible. The calculator above is pre-loaded with Florida's higher insurance costs so your estimate reflects the real cost of owning here.",
   },
-  metaTitle: 'Florida Mortgage Calculator — FL Tax & Insurance Rates | FinWiser',
+  metaTitle: 'Florida Mortgage Calculator — FL Tax & Insurance | FinWiser',
   metaDescription:
-    'Free Florida mortgage calculator with FL average property tax and hurricane insurance costs pre-loaded. Estimate your true monthly payment including taxes, insurance, and PMI.',
+    'Free Florida mortgage calculator with FL property tax and hurricane insurance costs pre-loaded. Estimate your true monthly payment including PMI.',
   topCallout: {
     heading: 'Florida Homeowners Insurance: Budget for the Real Cost',
     body: "Florida homeowners pay some of the highest insurance premiums in the country — typically $2,000–$4,000 per year for a standard home, and significantly more for coastal or older properties. Hurricane risk, a high-litigation environment, and reinsurance losses have pushed more than a dozen private carriers out of the state in recent years. The calculator is pre-loaded with $2,400/year, but get an actual insurance quote early — it's the line item most likely to diverge from the default.",
@@ -245,9 +245,9 @@ export const txConfig: StateConfig = {
     priceFaq:
       "Texas has one of the largest, most varied housing markets in the country. Austin's prices climbed sharply through 2022 and have since leveled off, while Dallas, Houston, and San Antonio remain relatively affordable for their size — a draw for the steady stream of relocations from higher-tax states. Whichever market you're considering, Texas's high property tax rate (above) has an outsized effect on the monthly payment estimate.",
   },
-  metaTitle: 'Texas Mortgage Calculator — High Property Tax Rates Included | FinWiser',
+  metaTitle: 'Texas Mortgage Calculator — High Property Taxes | FinWiser',
   metaDescription:
-    "Free Texas mortgage calculator with TX property tax rates pre-loaded. Texas has some of the highest property taxes in the US — see how they affect your monthly payment.",
+    "Free Texas mortgage calculator with TX property tax rates pre-loaded. Texas has some of the highest property taxes in the US — see the monthly impact.",
   topCallout: {
     heading: 'Texas Property Tax Warning',
     body: "Texas has no state income tax but property taxes average 1.60% — one of the highest rates in the US. On a $340,000 home that's roughly $453/month added to your mortgage payment. Make sure you include taxes in your estimate or you'll significantly underestimate your true monthly cost.",
@@ -276,7 +276,7 @@ export const vaConfig: StateConfig = {
     priceFaq:
       "Home prices in Virginia vary enormously by region. Northern Virginia's DC suburbs are among the most competitive markets in the country, with prices routinely topping $600,000, while Richmond, Virginia Beach, and Charlottesville offer considerably more moderate price points. If you're an eligible veteran or active-duty service member, see the VA loan section below — Virginia has one of the highest concentrations of VA-eligible buyers in the country.",
   },
-  metaTitle: 'Virginia Mortgage Calculator — VA Loan & Local Rates | FinWiser',
+  metaTitle: 'Virginia Mortgage Calculator — VA Loan & Rates | FinWiser',
   metaDescription:
     'Free Virginia mortgage calculator with VA average property tax rates pre-loaded. Includes info on VA loans and Northern Virginia home prices.',
   extraSections: [
@@ -306,8 +306,10 @@ export const stateConfigs: StateConfig[] = [
 ]
 
 export function generateStateMortgageMetadata(config: StateConfig): Metadata {
-  const title = config.metaTitle ?? `${config.stateName} Mortgage Calculator — ${config.stateAbbr} Tax Rates Included | FinWiser`
-  const description = config.metaDescription ?? `Free ${config.stateName} mortgage calculator with ${config.stateAbbr} average property tax rates pre-loaded. Estimate your full monthly payment including taxes, insurance, and PMI.`
+  // Both fallbacks are kept short enough that the longest state name ("North Carolina")
+  // still lands under 60 chars for the title and 160 for the description.
+  const title = config.metaTitle ?? `${config.stateName} Mortgage Calculator — ${config.stateAbbr} Tax Rates | FinWiser`
+  const description = config.metaDescription ?? `Free ${config.stateName} mortgage calculator with ${config.stateAbbr} property tax rates pre-loaded. Estimate your full monthly payment with taxes, insurance, and PMI.`
   const url = `https://finwiser.net/calculators/mortgage/${config.slug}`
   return {
     title: { absolute: title },

@@ -4,9 +4,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Mortgage Comparison Calculator — Compare Up to 3 Loan Scenarios | FinWiser' },
+  title: { absolute: 'Mortgage Comparison Calculator — 3 Scenarios | FinWiser' },
   description:
-    'Free mortgage comparison tool. Compare up to 3 scenarios side by side — different rates, terms, or down payments. See exactly which option costs less over the life of your loan.',
+    'Free mortgage comparison tool. Compare up to 3 scenarios side by side — different rates, terms, or down payments — and see which costs less overall.',
   alternates: { canonical: 'https://finwiser.net/calculators/mortgage/compare' },
   openGraph: {
     title: 'Mortgage Comparison Calculator — Compare Up to 3 Loan Scenarios',

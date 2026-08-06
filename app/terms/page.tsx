@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: { absolute: 'Terms of Use | FinWiser' },
   description: 'Terms and conditions for using FinWiser financial calculators.',
+  alternates: { canonical: 'https://finwiser.net/terms' },
   openGraph: {
     title: 'Terms of Use | FinWiser',
     description: 'Terms and conditions for using FinWiser financial calculators.',

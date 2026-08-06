@@ -5,9 +5,9 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Free Loan Amortization Calculator — Payment Schedule & Total Interest | FinWiser' },
+  title: { absolute: 'Loan Amortization Calculator — Free Schedule | FinWiser' },
   description:
-    'Free loan amortization calculator. Enter any loan amount, interest rate, and term to see your monthly payment, full payment schedule, and total interest. Add extra payments to see how much you can save.',
+    'Free loan amortization calculator. Enter any loan amount, rate, and term to see your monthly payment, full payment schedule, and total interest cost.',
   alternates: { canonical: 'https://finwiser.net/calculators/loan-amortization' },
   openGraph: {
     title: 'Free Loan Amortization Calculator — Payment Schedule & Total Interest',
@@ -181,6 +181,15 @@ export default async function LoanAmortizationPage({
             <strong className="text-slate-800">Tip:</strong> The total interest you pay is heavily influenced by the loan term. A 15-year mortgage typically costs significantly less in total interest than a 30-year mortgage on the same amount, even if the monthly payment is higher.
           </p>
         </div>
+      </section>
+
+      <section className="mt-8 bg-slate-50 rounded-xl border border-slate-100 p-6 sm:p-8">
+        <h2 className="text-lg font-bold text-navy-900 mb-4">Related Calculators</h2>
+        <ul className="space-y-2 text-sm text-slate-600">
+          <li><Link href="/calculators/mortgage" className="text-navy-700 underline hover:text-navy-900">Mortgage Calculator</Link> — adds property tax, insurance, and PMI to the amortization above</li>
+          <li><Link href="/calculators/car-loan" className="text-navy-700 underline hover:text-navy-900">Car Loan Calculator</Link> — the same schedule with sales tax and trade-in built in</li>
+          <li><Link href="/calculators/debt-payoff" className="text-navy-700 underline hover:text-navy-900">Debt Payoff Calculator</Link> — schedule several loans at once instead of one</li>
+        </ul>
       </section>
     </div>
     </>

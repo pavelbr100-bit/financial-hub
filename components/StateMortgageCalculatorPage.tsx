@@ -41,6 +41,25 @@ export default async function StateMortgageCalculatorPage({ config }: Props) {
 
   const otherStates = stateConfigs.filter(c => c.slug !== slug)
 
+  const webAppLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: `${stateName} Mortgage Calculator`,
+    url: `https://finwiser.net/calculators/mortgage/${slug}`,
+    description: `Estimate a ${stateName} mortgage payment with ${stateAbbr} property tax and insurance defaults pre-loaded, including principal, interest, and PMI.`,
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    featureList: [
+      `${stateAbbr} property tax rate pre-loaded`,
+      `${stateAbbr} average home insurance pre-loaded`,
+      'Monthly payment breakdown',
+      'Full amortization schedule',
+      'PMI calculation',
+    ],
+  }
+
   const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -93,6 +112,7 @@ export default async function StateMortgageCalculatorPage({ config }: Props) {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">

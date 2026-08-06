@@ -5,9 +5,9 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Mortgage Calculator with Taxes, Insurance, PMI & Extra Payments | FinWiser' },
+  title: { absolute: 'Mortgage Calculator with Taxes, Insurance & PMI | FinWiser' },
   description:
-    'Free mortgage calculator. Estimate your full monthly payment including principal, interest, property tax, home insurance, and PMI. See how extra payments reduce your interest and shorten your loan.',
+    'Free mortgage calculator. Estimate your full monthly payment including principal, interest, property tax, home insurance, and PMI — plus extra payments.',
   alternates: { canonical: 'https://finwiser.net/calculators/mortgage' },
   openGraph: {
     title: 'Free Mortgage Calculator — Monthly Payment, PMI & Amortization',

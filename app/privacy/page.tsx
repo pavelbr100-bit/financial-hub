@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: { absolute: 'Privacy Policy | FinWiser' },
   description: 'How FinWiser collects, uses, and protects your information.',
+  alternates: { canonical: 'https://finwiser.net/privacy' },
   openGraph: {
     title: 'Privacy Policy | FinWiser',
     description: 'How FinWiser collects, uses, and protects your information.',

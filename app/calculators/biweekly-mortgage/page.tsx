@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Free Biweekly Mortgage Calculator — How Much Can You Save? | FinWiser' },
+  title: { absolute: 'Biweekly Mortgage Calculator — See Your Savings | FinWiser' },
   description:
     'See exactly how much interest and time you save by switching to biweekly mortgage payments. Free calculator — no signup required.',
   alternates: { canonical: 'https://finwiser.net/calculators/biweekly-mortgage' },

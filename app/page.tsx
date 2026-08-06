@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { articles } from '@/lib/articles'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Free Mortgage & Loan Calculators — No Signup Required | FinWiser' },
+  title: { absolute: 'Free Mortgage & Loan Calculators — No Signup | FinWiser' },
   description:
     'Free calculators for mortgage payments, car loans, debt payoff, compound interest, and biweekly mortgage savings. Instant results, no account required.',
   alternates: { canonical: 'https://finwiser.net' },
