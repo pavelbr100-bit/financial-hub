@@ -349,9 +349,21 @@ export default function HomePage() {
 
       {/* Tools grid */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-        <div className="mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">What do you want to figure out?</h2>
-          <p className="text-slate-500">Six calculators, instant results, no account needed.</p>
+        <div className="flex items-end justify-between mb-10 gap-4">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-navy-900 mb-2">What do you want to figure out?</h2>
+            {/* Count derives from the array so it cannot go stale when a tool is added. */}
+            <p className="text-slate-500">{tools.length} calculators, instant results, no account needed.</p>
+          </div>
+          <Link
+            href="/calculators"
+            className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-700 hover:text-navy-900 transition-colors"
+          >
+            All calculators
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

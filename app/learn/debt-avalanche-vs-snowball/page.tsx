@@ -61,7 +61,9 @@ export default function Page() {
       <p>
         The avalanche is mathematically optimal. You eliminate the most expensive debt first, which
         reduces the total interest you pay across all debts. Over a multi-year payoff timeline, the
-        savings can be substantial.
+        savings can be substantial. The{' '}
+        <Link href="/calculators/debt-avalanche">debt avalanche calculator</Link> orders your debts
+        by rate and shows the exact interest total that ordering produces.
       </p>
       <p>
         <em>Debt payoff calculations depend on minimum payments, monthly interest accrual, and

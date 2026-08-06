@@ -73,6 +73,14 @@ export default function Page() {
         the two credit cards charge 7 to 11 times the student loan&apos;s rate — meaning most of
         each minimum payment goes to interest, not balance reduction.
       </p>
+      <p>
+        Student loans are the one line in an inventory like this that deserves its own look before
+        you commit extra dollars to it, because forgiveness and income-driven repayment can make
+        paying it down early the wrong move. The{' '}
+        <Link href="/calculators/student-loan-payoff">student loan payoff calculator</Link> works
+        through that question and shows what extra payments would save if the answer is to
+        accelerate.
+      </p>
 
       <h2>Build the Emergency Buffer First</h2>
       <p>

@@ -129,9 +129,13 @@ export default function Page() {
         payment, the more the savings compound through the remaining months.
       </p>
       <p>
-        Use <Link href="/calculators/car-loan">FinWiser&apos;s free car loan calculator</Link> to model
-        your specific loan — enter your balance, rate, and extra payment amount to see your exact
-        new payoff date and total interest savings.
+        Use FinWiser&apos;s free{' '}
+        <Link href="/calculators/auto-loan-payoff">auto loan payoff calculator</Link> to model your
+        specific loan — enter your balance, rate, and extra payment amount to see your exact new
+        payoff date and total interest savings. It also flags the month your balance finally drops
+        below what the car is worth. If you are still shopping rather than paying one down, the{' '}
+        <Link href="/calculators/car-loan">car loan calculator</Link> estimates the payment from a
+        purchase price, sales tax, and trade-in.
       </p>
 
     </ArticleLayout>

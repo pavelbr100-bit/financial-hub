@@ -60,37 +60,84 @@ const breadcrumbLd = {
 }
 
 
+// Single source for both the visible FAQ section and the FAQPage JSON-LD below,
+// so the two can never drift apart.
+const faqs = [
+  {
+    question: 'What is the difference between a 15-year and 30-year mortgage?',
+    answer:
+      'A 15-year mortgage has higher monthly payments but builds equity faster and costs dramatically less in total interest. On a $300,000 loan, a 30-year at 7% runs $1,996 a month and $418,527 in interest, while a 15-year at 6.375% — shorter terms usually price about 0.625% lower — runs $2,593 a month and $166,695 in interest. That is roughly $597 more per month to save about $251,800 over the life of the loan.',
+  },
+  {
+    question: 'Which mortgage term saves the most money overall?',
+    answer:
+      'Shorter terms always save the most total interest. At the same rate, a 15-year mortgage costs about 44% of the total interest of a 30-year — less than half — and 15-year loans usually carry rates 0.5–0.75% lower, compounding the savings. The trade-off is a higher monthly payment that leaves less room for other financial goals.',
+  },
+  {
+    question: 'How much difference does .25% make on a mortgage?',
+    answer:
+      'Less per month than most buyers expect, but a lot over 30 years. On a $300,000 30-year loan, moving from 6.50% to 6.75% raises the payment from $1,896.20 to $1,945.79 — about $50 a month — but adds roughly $17,850 in total interest. On a $400,000 loan the same quarter point costs about $66 a month and $23,800 overall. It is worth shopping several lenders for.',
+  },
+  {
+    question: 'How much is a $350,000 mortgage at 6% for 30 years?',
+    answer:
+      'Principal and interest come to $2,098.43 a month. Over 360 payments that totals $755,434, of which $405,434 is interest — more than the amount borrowed. Property taxes, homeowners insurance, PMI, and any HOA dues sit on top of that figure and are not included in it.',
+  },
+  {
+    question: 'Which mortgage calculator is most accurate?',
+    answer:
+      'Any calculator using the standard amortization formula returns the same principal and interest payment — accuracy differences come from what a tool leaves out, not the math. A P&I-only result understates your real monthly cost because it omits property taxes, insurance, PMI, and HOA dues. This page compares principal and interest across scenarios; for a full monthly payment estimate use the main mortgage calculator, which includes those escrow items.',
+  },
+  {
+    question: 'What factors should I compare when evaluating mortgage offers?',
+    answer:
+      'Compare the interest rate, loan term, APR (which includes lender fees and points), required down payment, and total cost over the full loan term. Two loans with the same rate can have very different total costs once origination fees and discount points are factored in. Use the APR and a side-by-side amortization comparison as your primary benchmarks.',
+  },
+  {
+    question: 'Should I choose a fixed-rate or adjustable-rate mortgage?',
+    answer:
+      "A fixed-rate mortgage locks your rate for the life of the loan — ideal for long-term owners who want payment certainty. An ARM starts with a lower introductory rate for 3, 5, or 7 years, then adjusts periodically based on market rates. ARMs make sense if you're confident you'll sell or refinance before the fixed period ends and current fixed rates are high.",
+  },
+  {
+    question: 'How do I calculate the total cost of a mortgage?',
+    answer:
+      'Multiply your monthly principal and interest payment by the total number of payments (years × 12), then add your down payment. On a $360,000 home with $60,000 down, the $300,000 balance at 7% over 30 years costs $1,995.91 a month — $718,528 across 360 payments. Add the down payment and the home has cost $778,528 against a $360,000 purchase price. This is why comparing total costs, not just monthly payments, matters.',
+  },
+]
+
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What is the difference between a 15-year and 30-year mortgage?',
-      acceptedAnswer: { '@type': 'Answer', text: 'A 15-year mortgage has higher monthly payments but builds equity faster and costs dramatically less in total interest. A 30-year mortgage has lower payments that give you more monthly flexibility. On a $300,000 loan at the same interest rate, the 30-year option typically costs over $200,000 more in total interest compared to the 15-year — while the monthly payment difference is often $400–$600.' },
-    },
-    {
-      '@type': 'Question',
-      name: 'Which mortgage term saves the most money overall?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Shorter terms always save the most total interest. A 15-year mortgage typically costs less than half the total interest of a 30-year at the same rate — and 15-year loans usually carry rates 0.5–0.75% lower than 30-year loans, compounding the savings. The trade-off is a higher monthly payment that leaves less room for other financial goals.' },
-    },
-    {
-      '@type': 'Question',
-      name: 'What factors should I compare when evaluating mortgage offers?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Compare the interest rate, loan term, APR (which includes lender fees and points), required down payment, and total cost over the full loan term. Two loans with the same rate can have very different total costs once origination fees and discount points are factored in. Use the APR and a side-by-side amortization comparison as your primary benchmarks.' },
-    },
-    {
-      '@type': 'Question',
-      name: 'Should I choose a fixed-rate or adjustable-rate mortgage?',
-      acceptedAnswer: { '@type': 'Answer', text: 'A fixed-rate mortgage locks your rate for the life of the loan — ideal for long-term owners who want payment certainty. An ARM starts with a lower introductory rate for 3, 5, or 7 years, then adjusts periodically based on market rates. ARMs make sense if you\'re confident you\'ll sell or refinance before the fixed period ends and current fixed rates are high.' },
-    },
-    {
-      '@type': 'Question',
-      name: 'How do I calculate the total cost of a mortgage?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Multiply your monthly principal and interest payment by the total number of payments (years × 12), then add your down payment. For example: $1,996/month × 360 payments = $718,560 in total P&I payments. Add a $60,000 down payment and the home\'s total purchase cost is $778,560 — even though the purchase price was $360,000. This is why comparing total costs, not just monthly payments, matters.' },
-    },
-  ],
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
 }
+
+const related = [
+  {
+    href: '/calculators/mortgage',
+    label: 'Mortgage Calculator',
+    blurb: 'Full monthly payment including property taxes, insurance, PMI, and HOA dues.',
+  },
+  {
+    href: '/calculators/mortgage-payoff',
+    label: 'Mortgage Payoff Calculator',
+    blurb:
+      'Once you have picked a loan, see what extra payments or a lump sum do to the payoff date.',
+  },
+  {
+    href: '/calculators/biweekly-mortgage',
+    label: 'Biweekly Mortgage Calculator',
+    blurb: 'Compare a biweekly schedule against standard monthly payments from a home price.',
+  },
+  {
+    href: '/calculators/loan-amortization',
+    label: 'Amortization Calculator',
+    blurb: 'See the principal and interest split of every payment on any fixed-rate loan.',
+  },
+]
 
 export default async function MortgageComparePage({
   searchParams,
@@ -158,6 +205,55 @@ export default async function MortgageComparePage({
         initialScenarios={initialScenarios}
         user={user ? { email: user.email } : null}
       />
+
+      <section
+        aria-labelledby="faq-heading"
+        className="mt-12 bg-white rounded-xl border border-slate-100 shadow-card p-6 sm:p-8"
+      >
+        <h2 id="faq-heading" className="text-xl font-bold text-navy-900 mb-4">
+          Frequently Asked Questions
+        </h2>
+        <div className="space-y-5">
+          {faqs.map((f) => (
+            <div key={f.question}>
+              <h3 className="font-semibold text-navy-800 text-sm mb-1">{f.question}</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">{f.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="related-heading"
+        className="mt-8 bg-white rounded-xl border border-slate-100 shadow-card p-6 sm:p-8"
+      >
+        <h2 id="related-heading" className="text-xl font-bold text-navy-900 mb-4">
+          Related Calculators
+        </h2>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {related.map((r) => (
+            <li key={r.href}>
+              <Link
+                href={r.href}
+                className="font-medium text-navy-700 hover:text-navy-900 text-sm underline"
+              >
+                {r.label}
+              </Link>
+              <p className="text-slate-500 text-sm mt-1 leading-relaxed">{r.blurb}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="text-slate-600 text-sm leading-relaxed mt-5">
+          For the reasoning behind the term choice rather than the numbers, read{' '}
+          <Link
+            href="/learn/15-year-vs-30-year-mortgage"
+            className="text-navy-600 hover:text-navy-800 underline"
+          >
+            15-year vs 30-year mortgage
+          </Link>
+          .
+        </p>
+      </section>
     </div>
     </>
   )

@@ -184,6 +184,14 @@ export default function Page() {
         enter your numbers and see the exact monthly payment, total interest, and equity timeline
         for both options side by side.
       </p>
+      <p>
+        If you already hold a 30-year loan, the choice is no longer 15 against 30 — it is whether
+        to pay the one you have down faster. The{' '}
+        <Link href="/calculators/mortgage-payoff">mortgage payoff calculator</Link> takes your
+        remaining balance and shows what an extra monthly amount or a one-time lump sum does to the
+        payoff date, which is often most of the 15-year benefit without committing to the higher
+        required payment.
+      </p>
 
     </ArticleLayout>
   )

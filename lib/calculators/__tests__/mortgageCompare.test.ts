@@ -170,3 +170,105 @@ describe('computeScenario — zero interest rate', () => {
     expect(r.totalPaid).toBeCloseTo(BASE.principal, 0)
   })
 })
+
+// ---------------------------------------------------------------------------
+// page example values — every figure quoted in the /calculators/mortgage/compare
+// FAQ prose. If one of these fails, the page copy is wrong, not the engine.
+// ---------------------------------------------------------------------------
+
+const NO_ESCROW = {
+  homePrice: 0,
+  propertyTaxRate: 0,
+  annualInsurance: 0,
+  pmiRate: 0,
+  monthlyHOA: 0,
+}
+
+describe('page example values — /calculators/mortgage/compare FAQs', () => {
+  it('FAQ 1: $300k 30yr at 7% is $1,996/mo and $418,527 interest', () => {
+    const r = computeScenario({
+      ...NO_ESCROW,
+      principal: 300_000,
+      annualRate: 7,
+      termMonths: 360,
+    })
+    expect(r.monthlyPI).toBeCloseTo(1996, 0)
+    expect(r.totalInterest).toBeCloseTo(418_527, -1)
+  })
+
+  it('FAQ 1: $300k 15yr at 6.375% is $2,593/mo and $166,695 interest', () => {
+    const r = computeScenario({
+      ...NO_ESCROW,
+      principal: 300_000,
+      annualRate: 6.375,
+      termMonths: 180,
+    })
+    expect(r.monthlyPI).toBeCloseTo(2593, 0)
+    expect(r.totalInterest).toBeCloseTo(166_695, -1)
+  })
+
+  it('FAQ 1: the 15yr costs ~$597 more per month and saves ~$251,800', () => {
+    const yr30 = computeScenario({
+      ...NO_ESCROW, principal: 300_000, annualRate: 7, termMonths: 360,
+    })
+    const yr15 = computeScenario({
+      ...NO_ESCROW, principal: 300_000, annualRate: 6.375, termMonths: 180,
+    })
+    expect(yr15.monthlyPI - yr30.monthlyPI).toBeCloseTo(597, 0)
+    expect(yr30.totalInterest - yr15.totalInterest).toBeCloseTo(251_800, -2)
+  })
+
+  it('FAQ 2: at the same rate a 15yr costs about 44% of the 30yr interest', () => {
+    const yr30 = computeScenario({
+      ...NO_ESCROW, principal: 300_000, annualRate: 7, termMonths: 360,
+    })
+    const yr15 = computeScenario({
+      ...NO_ESCROW, principal: 300_000, annualRate: 7, termMonths: 180,
+    })
+    const ratio = yr15.totalInterest / yr30.totalInterest
+    expect(ratio).toBeGreaterThan(0.43)
+    expect(ratio).toBeLessThan(0.45)
+  })
+
+  it('FAQ 3: a quarter point on $300k 30yr costs ~$50/mo and ~$17,850 total', () => {
+    const lo = computeScenario({
+      ...NO_ESCROW, principal: 300_000, annualRate: 6.5, termMonths: 360,
+    })
+    const hi = computeScenario({
+      ...NO_ESCROW, principal: 300_000, annualRate: 6.75, termMonths: 360,
+    })
+    expect(lo.monthlyPI).toBeCloseTo(1896.2, 1)
+    expect(hi.monthlyPI).toBeCloseTo(1945.79, 1)
+    expect(hi.totalInterest - lo.totalInterest).toBeCloseTo(17_850, -2)
+  })
+
+  it('FAQ 3: the same quarter point on $400k costs ~$66/mo and ~$23,800 total', () => {
+    const lo = computeScenario({
+      ...NO_ESCROW, principal: 400_000, annualRate: 6.5, termMonths: 360,
+    })
+    const hi = computeScenario({
+      ...NO_ESCROW, principal: 400_000, annualRate: 6.75, termMonths: 360,
+    })
+    expect(hi.monthlyPI - lo.monthlyPI).toBeCloseTo(66, 0)
+    expect(hi.totalInterest - lo.totalInterest).toBeCloseTo(23_800, -2)
+  })
+
+  it('FAQ 4: $350k at 6% for 30yr is $2,098.43/mo, $755,434 paid, $405,434 interest', () => {
+    const r = computeScenario({
+      ...NO_ESCROW, principal: 350_000, annualRate: 6, termMonths: 360,
+    })
+    expect(r.monthlyPI).toBeCloseTo(2098.43, 2)
+    expect(r.totalPaid).toBeCloseTo(755_434, -1)
+    expect(r.totalInterest).toBeCloseTo(405_434, -1)
+  })
+
+  it('FAQ 8: $300k at 7% over 30yr totals $718,528 in P&I payments', () => {
+    const r = computeScenario({
+      ...NO_ESCROW, principal: 300_000, annualRate: 7, termMonths: 360,
+    })
+    expect(r.monthlyPI).toBeCloseTo(1995.91, 2)
+    expect(r.monthlyPI * 360).toBeCloseTo(718_528, -2)
+    // plus the $60,000 down payment on a $360,000 home
+    expect(r.monthlyPI * 360 + 60_000).toBeCloseTo(778_528, -2)
+  })
+})

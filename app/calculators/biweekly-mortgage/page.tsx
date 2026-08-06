@@ -115,6 +115,30 @@ const faqLd = {
   ],
 }
 
+const related = [
+  {
+    href: '/calculators/mortgage-payoff',
+    label: 'Mortgage Payoff Calculator',
+    blurb:
+      'Already have a balance? Compare extra monthly payments and one-time lump sums against your current schedule.',
+  },
+  {
+    href: '/calculators/mortgage',
+    label: 'Mortgage Calculator',
+    blurb: 'Full monthly payment including property taxes, insurance, PMI, and HOA dues.',
+  },
+  {
+    href: '/calculators/mortgage/compare',
+    label: 'Mortgage Comparison Calculator',
+    blurb: 'Weigh up to three rate, term, and down payment combinations side by side.',
+  },
+  {
+    href: '/calculators/loan-amortization',
+    label: 'Amortization Calculator',
+    blurb: 'See the principal and interest split of every payment on any fixed-rate loan.',
+  },
+]
+
 export default async function BiweeklyMortgagePage() {
   const supabase = await createClient()
   const {
@@ -246,6 +270,38 @@ export default async function BiweeklyMortgagePage() {
               </p>
             </div>
           </div>
+        </section>
+
+        <section
+          aria-labelledby="related-heading"
+          className="mt-8 bg-white rounded-xl border border-slate-100 shadow-card p-6 sm:p-8"
+        >
+          <h2 id="related-heading" className="text-xl font-bold text-navy-900 mb-4">
+            Related Calculators
+          </h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {related.map((r) => (
+              <li key={r.href}>
+                <Link
+                  href={r.href}
+                  className="font-medium text-navy-700 hover:text-navy-900 text-sm underline"
+                >
+                  {r.label}
+                </Link>
+                <p className="text-slate-500 text-sm mt-1 leading-relaxed">{r.blurb}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="text-slate-600 text-sm leading-relaxed mt-5">
+            For the reasoning behind each approach rather than the numbers, read{' '}
+            <Link
+              href="/learn/mortgage-payoff-strategies"
+              className="text-navy-600 hover:text-navy-800 underline"
+            >
+              mortgage payoff strategies
+            </Link>
+            .
+          </p>
         </section>
       </div>
     </>
