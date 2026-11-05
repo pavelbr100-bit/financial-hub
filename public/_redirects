@@ -26,3 +26,8 @@
 
 # Malformed URL crawled by Googlebot
 /&                                                       /                                         308
+
+# Search Console HTML-file verification must answer 200 at this exact URL.
+# Cloudflare's html_handling would otherwise 307 it to the extensionless path;
+# a 200 rule serves the file in place instead.
+/googlec37c7deb2993535b.html                             /googlec37c7deb2993535b                   200

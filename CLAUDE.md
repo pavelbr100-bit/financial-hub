@@ -2,7 +2,7 @@
 
 ## Stack
 - **Framework:** Next.js 16 (App Router, Turbopack build), React 19, TypeScript
-- **Deployment:** fully static site on Cloudflare Workers **static assets** — `next.config.mjs` sets `output: 'export'`, `next build` writes `out/`, and `wrangler.jsonc` is an assets-only Worker (no `main`). No Worker script runs for any request, so there is no CPU limit to hit and asset requests are free and unlimited. Production deploys come from **Cloudflare's Git integration** (Workers Builds) on push to `main`: build command `npm ci && npm run build:cf` (an alias for `next build` — keep it, the dashboard calls it), deploy command `npx wrangler deploy`; `NEXT_PUBLIC_*` build vars are set in the Cloudflare dashboard. GitHub Actions (`.github/workflows/ci.yml`) only runs test/lint/build — it does not deploy. Manual deploy: `npm run deploy`; local preview of `out/`: `npm run preview`.
+- **Deployment:** fully static site on Cloudflare Workers **static assets** — `next.config.mjs` sets `output: 'export'`, `next build` writes `out/`, and `wrangler.jsonc` is an assets-only Worker (no `main`). No Worker script runs for any request, so there is no CPU limit to hit and asset requests are free and unlimited. Production deploys come from **Cloudflare's Git integration** (Workers Builds) on push to `main`: build command `npm ci && npm run build:cf` (an alias for `next build` — keep it, the dashboard calls it), deploy command `npx wrangler deploy`; `NEXT_PUBLIC_SUPABASE_*` are build variables in the Cloudflare dashboard; the public AdSense ID is in the committed `.env.production`. A Cloudflare *runtime* variable never reaches a static page — anything a page needs must exist at build time (this is how ads silently disappeared on the first static deploy). GitHub Actions (`.github/workflows/ci.yml`) only runs test/lint/build — it does not deploy. Manual deploy: `npm run deploy`; local preview of `out/`: `npm run preview`.
   - OpenNext was removed in Nov 2026: server-rendered pages exceeded the free-tier 10 ms CPU limit, and every page view plus every link prefetch was a billable Worker request.
   - `NEXT_PUBLIC_*` env vars are inlined at build time — they must exist wherever `next build` runs (`.env.local` locally, workflow `env:` in CI).
 - **Lint:** ESLint 9 flat config (`eslint.config.mjs`), run with `npm run lint` (`next lint` was removed in Next 16). The React Compiler rules flag `setState` inside effects — use `useSyncExternalStore` or adjust-state-during-render instead.
@@ -212,7 +212,7 @@ Injected via `<script type="application/ld+json" dangerouslySetInnerHTML>`.
 
 ## Redirects
 
-13 permanent (308) redirects live in `public/_redirects`, applied by Cloudflare static assets: one route rename, 11 deleted slugs from the Phase 1 consolidation, and `/&` → `/` (a malformed URL Googlebot crawled).
+13 permanent (308) redirects live in `public/_redirects`, applied by Cloudflare static assets: one route rename, 11 deleted slugs from the Phase 1 consolidation, and `/&` → `/` (a malformed URL Googlebot crawled). One extra `200` rule serves `/googlec37c7deb2993535b.html` in place — Cloudflare's `html_handling` would otherwise redirect it to the extensionless path and break Search Console verification.
 
 | Old path | Redirects to |
 |---|---|
