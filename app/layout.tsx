@@ -11,7 +11,6 @@ const inter = Inter({
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import CookieConsent from '@/components/CookieConsent'
-import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://finwiser.net'),
@@ -48,16 +47,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
   const adSenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
 
   return (
@@ -70,7 +64,7 @@ export default async function RootLayout({
             strategy="afterInteractive"
           />
         )}
-        <Navbar user={user ? { email: user.email } : null} />
+        <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
         <CookieConsent />

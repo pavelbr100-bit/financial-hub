@@ -1,15 +1,12 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useUser } from '@/lib/supabase/useUser'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
 import { compareRentVsBuy } from '@/lib/calculators/rentVsBuy'
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
-
-interface Props {
-  user: { email?: string | null } | null
-}
 
 function formatCurrency(n: number) {
   return new Intl.NumberFormat('en-US', {
@@ -115,7 +112,8 @@ function MoneyField({
   )
 }
 
-export default function RentVsBuyCalc({ user }: Props) {
+export default function RentVsBuyCalc() {
+  const user = useUser()
   // Buying
   const [homePrice, setHomePrice] = useState('400,000')
   const [downPercent, setDownPercent] = useState('20')

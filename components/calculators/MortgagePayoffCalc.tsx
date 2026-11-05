@@ -1,15 +1,12 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useUser } from '@/lib/supabase/useUser'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
 import { comparePayoff, type PayoffStrategy } from '@/lib/calculators/loanPayoff'
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
-
-interface Props {
-  user: { email?: string | null } | null
-}
 
 const STRATEGIES: { id: PayoffStrategy; label: string; short: string }[] = [
   { id: 'extra-monthly', label: 'Extra monthly payment', short: 'Extra monthly' },
@@ -54,7 +51,8 @@ function scheduleDate(monthOffset: number): string {
   return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
-export default function MortgagePayoffCalc({ user }: Props) {
+export default function MortgagePayoffCalc() {
+  const user = useUser()
   const [balance, setBalance] = useState('300,000')
   const [rate, setRate] = useState('6.5')
   const [years, setYears] = useState('30')

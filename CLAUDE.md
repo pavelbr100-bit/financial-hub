@@ -1,8 +1,11 @@
 # FinWiser — CLAUDE.md
 
 ## Stack
-- **Framework:** Next.js 15 (App Router), TypeScript
-- **Deployment:** Cloudflare Workers via OpenNext (`open-next.config.ts`, `wrangler.jsonc`)
+- **Framework:** Next.js 16 (App Router, Turbopack build), React 19, TypeScript
+- **Deployment:** fully static site on Cloudflare Workers **static assets** — `next.config.mjs` sets `output: 'export'`, `next build` writes `out/`, and `wrangler.jsonc` is an assets-only Worker (no `main`). No Worker script runs for any request, so there is no CPU limit to hit and asset requests are free and unlimited. Production deploys come from **Cloudflare's Git integration** (Workers Builds) on push to `main`: build command `npm ci && npm run build:cf` (an alias for `next build` — keep it, the dashboard calls it), deploy command `npx wrangler deploy`; `NEXT_PUBLIC_*` build vars are set in the Cloudflare dashboard. GitHub Actions (`.github/workflows/ci.yml`) only runs test/lint/build — it does not deploy. Manual deploy: `npm run deploy`; local preview of `out/`: `npm run preview`.
+  - OpenNext was removed in Nov 2026: server-rendered pages exceeded the free-tier 10 ms CPU limit, and every page view plus every link prefetch was a billable Worker request.
+  - `NEXT_PUBLIC_*` env vars are inlined at build time — they must exist wherever `next build` runs (`.env.local` locally, workflow `env:` in CI).
+- **Lint:** ESLint 9 flat config (`eslint.config.mjs`), run with `npm run lint` (`next lint` was removed in Next 16). The React Compiler rules flag `setState` inside effects — use `useSyncExternalStore` or adjust-state-during-render instead.
 - **Styling:** Tailwind CSS
 - **Backend:** Supabase (auth + saved calculations)
 - **Ads:** Google AdSense (ca-pub-5438252770961085, slot 2503689657)
@@ -33,7 +36,7 @@ public/
   og-image.png          shared OG image
   googlec37c7deb2993535b.html  Search Console verification
   ads.txt               AdSense publisher verification (pub-5438252770961085)
-  # _redirects does NOT exist — use next.config.mjs redirects only
+  _redirects            ALL redirects (static export ignores next.config redirects())
 ```
 
 ## Learn Articles
@@ -72,7 +75,7 @@ public/
 | `first-time-home-buyer-programs-georgia` | August 5, 2026 | Home Buying |
 | `first-time-home-buyer-programs-south-carolina` | August 6, 2026 | Home Buying |
 
-11 slugs were deleted and replaced with permanent redirects in `next.config.mjs` (see Redirects section).
+11 slugs were deleted and replaced with permanent redirects in `public/_redirects` (see Redirects section).
 
 ## Calculators
 
@@ -209,7 +212,7 @@ Injected via `<script type="application/ld+json" dangerouslySetInnerHTML>`.
 
 ## Redirects
 
-12 permanent (308) redirects live in `next.config.mjs`: one route rename plus 11 deleted slugs from the Phase 1 consolidation.
+13 permanent (308) redirects live in `public/_redirects`, applied by Cloudflare static assets: one route rename, 11 deleted slugs from the Phase 1 consolidation, and `/&` → `/` (a malformed URL Googlebot crawled).
 
 | Old path | Redirects to |
 |---|---|
@@ -231,7 +234,7 @@ The 11 article-slug redirects:
 | `dealer-financing-vs-bank-loan` | `how-to-get-best-car-loan-rate` |
 | `new-car-vs-used-car-loan` | `new-vs-used-car-loan` |
 
-Do not add `public/_redirects` — use `next.config.mjs` redirects only.
+`public/_redirects` is the only place redirects can live: with `output: 'export'`, `next.config.mjs` `redirects()`/`headers()` are not applied. Headers likewise live in `public/_headers`.
 
 ## Key Patterns
 
@@ -241,7 +244,8 @@ Do not add `public/_redirects` — use `next.config.mjs` redirects only.
 - **`public/ads.txt` exists** — do not modify; contains the AdSense publisher line.
 - **No `keywords` metadata field anywhere** — removed site-wide (Google ignores it, and a long stuffed list reads as a spam signal to AdSense reviewers). Do not re-add it to any page.
 - **`robots` and `google-adsense-account`** are set once in the root `app/layout.tsx` `metadata` export and inherit to every route via Next's metadata merging. Only set `robots` per-page when a route needs to deviate (e.g. `/auth/*` noindex) — don't duplicate the defaults on every page.
-- **Auth pages are noindexed** via `app/auth/layout.tsx` (server component, sets `robots: { index: false, follow: false }` for the whole `/auth/` tree). Auth routes are also disallowed in `app/robots.ts`. Do not add auth pages to the sitemap.
+- **Auth pages are noindexed** via `app/auth/layout.tsx` (sets `robots: { index: false, follow: false }` for the whole `/auth/` tree). Auth routes are also disallowed in `app/robots.ts`. Do not add auth pages to the sitemap.
+- **There is no server at request time (static export).** No `cookies()`, `headers()`, `searchParams`, middleware/proxy, route handlers, server actions, or `next/image` optimization — `next build` fails on most of these. Everything per-user happens in the browser: the session via `useUser()` (`lib/supabase/useUser.ts`), query params via `useQueryParams()` (`lib/useQueryParams.ts`), `/saved` via `SavedCalculationsLoader`, and the email-link landing via `app/auth/callback/page.tsx` (the Supabase browser client exchanges the PKCE `?code=` itself on startup — don't call `exchangeCodeForSession` again). Row Level Security on `saved_calculations` is the only thing keeping rows private. Calculators that reload saved inputs remount their form via `key` once params/saved rows arrive. Metadata routes (`robots.ts`, `sitemap.ts`) need `export const dynamic = 'force-static'`.
 - **Calculator strategy/mode switches must pass the new value explicitly.** `DebtPayoffCalc` uses `runCalc(strat)` instead of reading `strategy` from closure — calling a calculation function from inside an `onClick` that just called `setStrategy()` will see the old state value. Pattern: extract `runCalc(strat: StrategyType)`, call it from both the Calculate button and the mode-switch handler. The mode-switch auto-recalculates only when `results !== null` (i.e. a prior run exists).
 
 ## Article Math Accuracy
@@ -282,8 +286,8 @@ It checks **rendered HTML**, not source — metadata is assembled from template 
 Run it after any metadata change:
 
 ```
-npm run build && npm run start &   # then
-npm run check:seo
+npm run preview &                             # next build + wrangler dev on :8787
+BASE_URL=http://localhost:8787 npm run check:seo
 ```
 
 ## Sitemap

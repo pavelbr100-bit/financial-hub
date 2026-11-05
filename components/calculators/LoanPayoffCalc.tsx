@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useUser } from '@/lib/supabase/useUser'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
 import { comparePayoff, type PayoffStrategy } from '@/lib/calculators/loanPayoff'
@@ -45,7 +46,6 @@ export interface LoanPayoffCalcConfig {
 }
 
 interface Props {
-  user: { email?: string | null } | null
   config: LoanPayoffCalcConfig
 }
 
@@ -92,7 +92,8 @@ function scheduleDate(monthOffset: number): string {
   return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
-export default function LoanPayoffCalc({ user, config }: Props) {
+export default function LoanPayoffCalc({ config }: Props) {
+  const user = useUser()
   const [balance, setBalance] = useState(config.balanceDefault)
   const [rate, setRate] = useState(config.rateDefault)
   const [monthsLeft, setMonthsLeft] = useState(config.termDefault)

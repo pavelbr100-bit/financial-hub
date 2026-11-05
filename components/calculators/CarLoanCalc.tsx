@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import { useUser } from '@/lib/supabase/useUser'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
 
@@ -39,11 +40,8 @@ const LOAN_TERMS = [24, 36, 48, 60, 72, 84]
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 
-interface Props {
-  user: { email?: string | null } | null
-}
-
-export default function CarLoanCalc({ user }: Props) {
+export default function CarLoanCalc() {
+  const user = useUser()
   const [vehiclePrice, setVehiclePrice] = useState('35,000')
   const [downPayment, setDownPayment] = useState('5,000')
   const [tradeIn, setTradeIn] = useState('0')

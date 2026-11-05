@@ -1,7 +1,6 @@
 import MortgageCalc from '@/components/calculators/MortgageCalc'
 import AdBanner from '@/components/AdBanner'
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase/server'
 import type { StateConfig } from '@/lib/data/state-mortgage-configs'
 import { stateConfigs } from '@/lib/data/state-mortgage-configs'
 
@@ -18,10 +17,7 @@ function fmtPrice(n: number): string {
 
 type Props = { config: StateConfig }
 
-export default async function StateMortgageCalculatorPage({ config }: Props) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
+export default function StateMortgageCalculatorPage({ config }: Props) {
   const {
     stateName, stateAbbr, slug,
     avgPropertyTaxRate, avgHomeInsurance, avgHomePrice,
@@ -166,7 +162,7 @@ export default async function StateMortgageCalculatorPage({ config }: Props) {
           <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
-        <MortgageCalc user={user ? { email: user.email } : null} initialValues={initialValues} />
+        <MortgageCalc initialValues={initialValues} />
 
         <div className="mt-8">
           <AdBanner slot="2503689657" format="horizontal" />

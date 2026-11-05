@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { useUser } from '@/lib/supabase/useUser'
+import { useQueryParams } from '@/lib/useQueryParams'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
 import dynamic from 'next/dynamic'
@@ -45,7 +47,6 @@ interface Results {
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 
 interface Props {
-  user: { email?: string | null } | null
   initialValues?: Record<string, string>
 }
 
@@ -71,7 +72,8 @@ function addDates(schedule: { payment: number; paymentAmount: number; principal:
   })
 }
 
-export default function MortgageCalc({ user, initialValues }: Props) {
+function MortgageCalcForm({ initialValues }: Props) {
+  const user = useUser()
   const [homePrice, setHomePrice] = useState(initialValues?.homePrice ?? '400,000')
   const [downPayment, setDownPayment] = useState(initialValues?.down ?? '20')
   const [downType, setDownType] = useState<'%' | '$'>((initialValues?.downType as '%' | '$') ?? '%')
@@ -607,5 +609,21 @@ function SummaryCard({ label, value, accent }: { label: string; value: string; a
       <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">{label}</p>
       <p className={`text-2xl font-bold ${textMap[accent]} tabular-nums`}>{value}</p>
     </div>
+  )
+}
+
+/**
+ * Saved mortgage calculations reload via query params (`?homePrice=…`). Those are
+ * read client-side so the page stays statically prerendered; when present, the form
+ * remounts with them as its initial state.
+ */
+export default function MortgageCalc({ initialValues }: Props) {
+  const query = useQueryParams()
+  const fromQuery = query?.homePrice ? query : undefined
+  return (
+    <MortgageCalcForm
+      key={fromQuery ? 'query' : 'default'}
+      initialValues={fromQuery ?? initialValues}
+    />
   )
 }

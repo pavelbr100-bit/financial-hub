@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import { useUser } from '@/lib/supabase/useUser'
+import { useQueryParams } from '@/lib/useQueryParams'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
 import dynamic from 'next/dynamic'
@@ -86,7 +88,6 @@ function calculateAmortization(
 }
 
 interface Props {
-  user: { email?: string | null } | null
   initialValues?: {
     loanAmount: string
     interestRate: string
@@ -98,7 +99,8 @@ interface Props {
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 
-export default function LoanAmortizationCalc({ user, initialValues }: Props) {
+function LoanAmortizationCalcForm({ initialValues }: Props) {
+  const user = useUser()
   const defaultDate = () => {
     const d = new Date()
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
@@ -635,4 +637,19 @@ function ResultCard({
       <p className={`text-2xl font-bold ${textMap[accent]} tabular-nums`}>{value}</p>
     </div>
   )
+}
+
+/** Saved calculations reload via `?amount=…`, read client-side (see useQueryParams). */
+export default function LoanAmortizationCalc() {
+  const query = useQueryParams()
+  const initialValues = query?.amount
+    ? {
+        loanAmount: query.amount,
+        interestRate: query.rate ?? '6.5',
+        loanTerm: query.term ?? '30',
+        termUnit: (query.unit as 'years' | 'months') ?? 'years',
+        startDate: query.start ?? '',
+      }
+    : undefined
+  return <LoanAmortizationCalcForm key={initialValues ? 'query' : 'default'} initialValues={initialValues} />
 }

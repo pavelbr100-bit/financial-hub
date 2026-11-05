@@ -7,11 +7,11 @@ type Tab = 'architecture' | 'technologies' | 'features'
 
 const technologies = [
   {
-    name: 'Next.js 15',
+    name: 'Next.js 16',
     category: 'Frontend',
-    why: 'Full-stack React framework with server-side rendering built in. The App Router lets us render pages on the server (so the user gets HTML immediately) while keeping interactive parts as client components.',
-    how: 'Each calculator page is a server component that fetches the current user from Supabase, then passes it as a prop to the client-side calculator component. This means auth is verified server-side before any data is sent to the browser.',
-    detail: 'We use async/await in page components, the cookies() API for session reading, and searchParams (as a Promise in Next.js 15) to pre-populate calculators from saved calculations.',
+    why: 'Full-stack React framework with static prerendering and server rendering built in. The App Router lets us ship full HTML for every page (so the user — and search engines — see content immediately) while keeping interactive parts as client components.',
+    how: 'The whole site is a static export (output: \'export\'): next build writes every page — calculators, articles, even /saved and the auth pages — to plain HTML, JS, and RSC payload files. There is no server at request time. Interactive parts are client components that read the signed-in user from the Supabase browser client after the page loads.',
+    detail: 'Static export rules out cookies(), headers(), searchParams, middleware, and route handlers. We moved there on purpose: rendering pages per request in a Worker exceeded the Cloudflare free-tier CPU limit, and every page view and link prefetch counted as a Worker request.',
     color: 'bg-black text-white',
     icon: '▲',
   },
@@ -46,26 +46,26 @@ const technologies = [
     name: 'Supabase',
     category: 'Backend',
     why: 'Managed PostgreSQL with a built-in auth system. We get email/password auth, session management, and a real database without running our own servers.',
-    how: 'Two integration points: (1) @supabase/ssr for server-side session reading in Next.js middleware and server components — cookies are read and refreshed on every request. (2) The browser client is used inside client components (calculators) to save and delete calculations.',
+    how: 'Everything goes through the @supabase/ssr browser client inside client components: it reads the session for the navbar and the Save box, completes email sign-in on /auth/callback, and saves, loads, lists, and deletes calculations. There is no server-side Supabase code at all.',
     detail: 'Row Level Security (RLS) is enabled on the saved_calculations table. A policy ensures auth.uid() = user_id on every read/write — even if someone bypassed the app and hit the database API directly, they could only see their own rows.',
     color: 'bg-emerald-800 text-white',
     icon: '🔋',
   },
   {
-    name: '@opennextjs/cloudflare',
+    name: 'Static export',
     category: 'Infrastructure',
-    why: 'Next.js is designed for Node.js servers. Cloudflare Workers run a different JavaScript runtime (workerd). This adapter re-bundles the Next.js output into a format the Workers runtime understands.',
-    how: 'The build command (opennextjs-cloudflare build) runs next build first, then post-processes the output into .open-next/worker.js (the server function) and .open-next/assets (static files). Wrangler then uploads both to Cloudflare.',
-    detail: 'We switched from @cloudflare/next-on-pages to @opennextjs/cloudflare because the older package required every route to explicitly export runtime = "edge", and had a known bug with the Next.js 15 /_not-found route.',
+    why: 'A calculator site has no per-request server work: the math runs in the browser and auth goes straight to Supabase. Shipping plain files means no server to run, scale, or pay for, and nothing that can hit a CPU limit.',
+    how: 'next build writes the site to out/ — one .html file per route plus the .txt RSC payloads that client-side navigation fetches. Redirects live in public/_redirects and cache headers in public/_headers, which Cloudflare applies before serving a file.',
+    detail: 'We started on @cloudflare/next-on-pages, moved to @opennextjs/cloudflare (which runs the Next.js server inside a Worker), and finally dropped the server entirely once every page could be prerendered.',
     color: 'bg-orange-500 text-white',
     icon: '⚡',
   },
   {
     name: 'Cloudflare Workers',
     category: 'Infrastructure',
-    why: 'Edge computing — the server runs in the datacenter closest to the user, not in a fixed region. A user in Tokyo and a user in London both get low-latency responses.',
-    how: 'Every page request hits a Worker that runs the Next.js server logic, reads the session cookie, queries Supabase if needed, and returns rendered HTML. Static assets (JS, CSS, images) are served directly from Cloudflare\'s CDN.',
-    detail: 'The free tier covers 100,000 requests per day. Deployments are triggered automatically by every push to the main GitHub branch via the Cloudflare Git integration.',
+    why: 'Global edge network — files are served from the datacenter closest to the user, not a fixed region. A user in Tokyo and a user in London both get low-latency responses.',
+    how: 'The site is deployed as an assets-only Worker: wrangler.jsonc points at out/ and has no script, so Cloudflare answers every request — HTML, JS, CSS, images — straight from its edge without running any code.',
+    detail: 'Static asset requests are free and unlimited on every plan and never count against Worker CPU time. Every push to main is built and deployed by Cloudflare\'s Git integration: next build, then wrangler deploy.',
     color: 'bg-orange-600 text-white',
     icon: '☁️',
   },
@@ -93,13 +93,13 @@ const features = [
   },
   {
     name: 'Save & Load Calculations',
-    how: 'When a logged-in user clicks Save, the calculator inputs (not the full schedule) and the key result summary are written to the saved_calculations table in Supabase. The schedule is not stored — it\'s recalculated from the inputs when loaded. Load links use URL search params (?amount=250000&rate=6.5…) that the page reads via Next.js searchParams and passes as initialValues props to the calculator component.',
+    how: 'When a logged-in user clicks Save, the calculator inputs (not the full schedule) and the key result summary are written to the saved_calculations table in Supabase. The schedule is not stored — it\'s recalculated from the inputs when loaded. Load links use URL search params (?amount=250000&rate=6.5…) or a saved-row id (?saved=…). The calculator reads them in the browser after the static page loads, fetching the saved row through RLS when needed, and remounts its form with those values.',
     decisions: 'Storing inputs rather than the full schedule keeps rows small (under 1KB each) and means the schedule is always recalculated fresh — no stale data.',
   },
   {
     name: 'Auth Flow',
-    how: 'Signup calls supabase.auth.signUp() with emailRedirectTo pointing at /auth/callback. Supabase sends a confirmation email. The callback route exchanges the one-time code for a session using supabase.auth.exchangeCodeForSession(). Sessions are stored in cookies and refreshed by middleware on every request. Forgot password follows the same pattern: resetPasswordForEmail() → email link → callback → /auth/reset-password → supabase.auth.updateUser().',
-    decisions: 'All auth logic uses @supabase/ssr rather than the plain JS client. The SSR package correctly handles cookies in both server components (via next/headers) and middleware (via NextRequest.cookies).',
+    how: 'Signup calls supabase.auth.signUp() with emailRedirectTo pointing at /auth/callback. Supabase sends a confirmation email. The /auth/callback page loads in the browser, where the Supabase client exchanges the one-time code for a session automatically (PKCE: the code verifier was stored when the email was requested). Sessions live in cookies and the browser client refreshes them automatically. Forgot password follows the same pattern: resetPasswordForEmail() → email link → callback → /auth/reset-password → supabase.auth.updateUser().',
+    decisions: 'Auth is entirely client-side because the site has no server. That is safe because the browser only ever holds the user\'s own session: Row Level Security on saved_calculations (auth.uid() = user_id) is what keeps one user from reading another\'s rows, not any page logic.',
   },
   {
     name: 'Charts',
@@ -235,7 +235,7 @@ export default function TechPageContent() {
       {tab === 'architecture' && (
         <div className="space-y-6">
           <p className="text-slate-600 text-sm leading-relaxed">
-            A request from a user&apos;s browser flows through three layers before returning HTML: Cloudflare&apos;s edge network, the Next.js server (running in a Worker), and Supabase for auth and data.
+            Pages are plain files on Cloudflare&apos;s edge network, built ahead of time by Next.js. The browser talks to Supabase directly for auth and saved data — there is no application server in between.
           </p>
 
           {/* Diagram */}
@@ -250,14 +250,14 @@ export default function TechPageContent() {
             <div className="flex justify-center">
               <div className="bg-orange-50 border border-orange-200 rounded-lg px-6 py-3 text-sm font-medium text-orange-800 text-center">
                 ☁️ Cloudflare Edge Network
-                <p className="text-xs font-normal text-orange-500 mt-0.5">CDN + Workers runtime · global PoPs</p>
+                <p className="text-xs font-normal text-orange-500 mt-0.5">Static assets · global PoPs · no server code</p>
               </div>
             </div>
             <div className="flex justify-center"><div className="w-px h-6 bg-slate-300" /></div>
             <div className="flex justify-center">
               <div className="bg-black text-white rounded-lg px-6 py-3 text-sm font-medium text-center">
-                ▲ Next.js 15 Worker
-                <p className="text-xs font-normal text-slate-300 mt-0.5">Server components · middleware · API routes</p>
+                ▲ Next.js 16 static export
+                <p className="text-xs font-normal text-slate-300 mt-0.5">Prebuilt HTML · client components · RSC payloads</p>
               </div>
             </div>
             <div className="flex justify-center gap-12">
@@ -284,12 +284,11 @@ export default function TechPageContent() {
           <div className="space-y-3">
             <h2 className="font-semibold text-navy-900">Request flow — loading /saved</h2>
             {[
-              { step: '1', text: 'Browser requests /saved. Request hits the nearest Cloudflare PoP.' },
-              { step: '2', text: 'Cloudflare routes the request to the FinWiser Worker.' },
-              { step: '3', text: 'Next.js middleware reads the session cookie and calls supabase.auth.getUser() to verify it.' },
-              { step: '4', text: 'The /saved page (server component) awaits createClient(), then queries saved_calculations filtered by user_id via RLS.' },
-              { step: '5', text: 'Next.js renders the full HTML server-side and streams it back through Cloudflare to the browser.' },
-              { step: '6', text: 'React hydrates the page. The delete buttons become interactive client-side without a full page reload.' },
+              { step: '1', text: 'Browser requests /saved. The nearest Cloudflare PoP returns the prebuilt saved.html file — no code runs.' },
+              { step: '2', text: 'React hydrates the page shell (heading, loading message).' },
+              { step: '3', text: 'The Supabase browser client reads the session from its cookie. No session → redirect to /auth/login.' },
+              { step: '4', text: 'With a session, the browser queries saved_calculations directly; Row Level Security returns only rows where user_id matches.' },
+              { step: '5', text: 'The list renders. Load links open the calculator with the saved inputs; delete calls Supabase and updates the list in place.' },
             ].map((item) => (
               <div key={item.step} className="flex gap-3">
                 <div className="w-6 h-6 rounded-full bg-navy-700 text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -304,10 +303,10 @@ export default function TechPageContent() {
             <h2 className="font-semibold text-navy-900">Deploy flow</h2>
             {[
               { step: '1', text: 'Developer pushes to the main branch on GitHub.' },
-              { step: '2', text: 'Cloudflare Git integration detects the push and starts a build.' },
-              { step: '3', text: 'Build runs: npm ci → opennextjs-cloudflare build (which runs next build internally) → opennextjs-cloudflare deploy.' },
-              { step: '4', text: 'The .open-next/worker.js bundle and .open-next/assets are uploaded to Cloudflare\'s global network.' },
-              { step: '5', text: 'New Worker version is deployed with zero downtime. Old version handles requests until the new one is live.' },
+              { step: '2', text: 'Cloudflare\'s Git integration starts a build (GitHub Actions separately runs tests, lint, and a build check).' },
+              { step: '3', text: 'next build writes the static export to out/ (HTML, JS, RSC payloads, _redirects, _headers).' },
+              { step: '4', text: 'wrangler deploy uploads only the files that changed to Cloudflare\'s global network.' },
+              { step: '5', text: 'The new version goes live atomically with zero downtime.' },
             ].map((item) => (
               <div key={item.step} className="flex gap-3">
                 <div className="w-6 h-6 rounded-full bg-emerald-600 text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5">

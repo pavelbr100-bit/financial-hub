@@ -1,6 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useUser } from '@/lib/supabase/useUser'
+import { useQueryParams } from '@/lib/useQueryParams'
+import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import {
   LineChart, Line,
@@ -22,7 +25,6 @@ interface DebtInput {
 }
 
 interface Props {
-  user: { email?: string | null } | null
   initialDebts?: DebtInput[]
   initialStrategy?: DebtPayoffStrategy
   initialExtra?: string
@@ -73,7 +75,8 @@ function payoffDate(months: number): string {
   return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
-export default function DebtPayoffCalc({ user, initialDebts, initialStrategy, initialExtra }: Props) {
+function DebtPayoffCalcForm({ initialDebts, initialStrategy, initialExtra }: Props) {
+  const user = useUser()
   const [debts, setDebts] = useState<DebtInput[]>(initialDebts ?? DEFAULT_DEBTS)
   const [strategy, setStrategy] = useState<DebtPayoffStrategy>(initialStrategy ?? 'avalanche')
   const [extraMonthly, setExtraMonthly] = useState(initialExtra ?? DEFAULT_EXTRA)
@@ -618,5 +621,52 @@ function ResultCard({
       <p className={`text-2xl font-bold ${textMap[accent]} tabular-nums`}>{value}</p>
       {sub && <p className="text-xs text-slate-400 mt-0.5">{sub}</p>}
     </div>
+  )
+}
+
+type LoadedPlan = { debts: DebtInput[]; strategy: DebtPayoffStrategy; extra: string }
+
+/**
+ * A saved plan reloads via `?saved=<id>`. It is fetched client-side (RLS limits the
+ * row to its owner) so the page stays statically prerendered; once loaded, the form
+ * remounts with it. `initialStrategy` is the page default (snowball vs avalanche).
+ */
+export default function DebtPayoffCalc({ initialStrategy }: { initialStrategy?: DebtPayoffStrategy }) {
+  const query = useQueryParams()
+  const savedId = query?.saved
+  const [plan, setPlan] = useState<LoadedPlan | null>(null)
+
+  useEffect(() => {
+    if (!savedId) return
+    let cancelled = false
+    createClient()
+      .from('saved_calculations')
+      .select('inputs')
+      .eq('id', savedId)
+      .single()
+      .then(({ data }) => {
+        if (cancelled || !data?.inputs?.debts) return
+        try {
+          setPlan({
+            debts: JSON.parse(data.inputs.debts) as DebtInput[],
+            strategy: (data.inputs.strategy as DebtPayoffStrategy) ?? 'avalanche',
+            extra: data.inputs.extraMonthly ?? '',
+          })
+        } catch {
+          // malformed — keep defaults
+        }
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [savedId])
+
+  return (
+    <DebtPayoffCalcForm
+      key={plan ? 'saved' : 'default'}
+      initialDebts={plan?.debts}
+      initialStrategy={plan?.strategy ?? initialStrategy}
+      initialExtra={plan?.extra}
+    />
   )
 }

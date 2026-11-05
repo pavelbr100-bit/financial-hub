@@ -1,7 +1,6 @@
 import MortgageCalc from '@/components/calculators/MortgageCalc'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -112,19 +111,7 @@ const faqLd = {
   ],
 }
 
-export default async function MortgagePage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string>>
-}) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  const params = await searchParams
-  const initialValues = params.homePrice ? params : undefined
-
+export default function MortgagePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -185,7 +172,7 @@ export default async function MortgagePage({
         <AdBanner slot="2503689657" format="horizontal" />
       </div>
 
-      <MortgageCalc user={user ? { email: user.email } : null} initialValues={initialValues} />
+      <MortgageCalc />
 
       <div className="mt-8">
         <AdBanner slot="2503689657" format="horizontal" />

@@ -1,4 +1,7 @@
 # https://developers.cloudflare.com/workers/static-assets/headers
-# https://opennext.js.org/cloudflare/caching#static-assets-caching
+# HTML needs no rule: Cloudflare serves static assets with
+# `Cache-Control: public, max-age=0, must-revalidate` plus an ETag, so browsers
+# revalidate HTML on every load and pick up a new deploy immediately.
+# Hashed build output never changes, so it can be cached forever.
 /_next/static/*
   Cache-Control: public,max-age=31536000,immutable

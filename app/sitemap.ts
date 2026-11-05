@@ -1,4 +1,7 @@
 import { MetadataRoute } from 'next'
+
+// Required by `output: 'export'` — generated once at build time.
+export const dynamic = 'force-static'
 import { articles } from '@/lib/articles'
 import { allCalculatorHrefs } from '@/lib/calculators'
 

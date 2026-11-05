@@ -1,7 +1,6 @@
 import CompoundInterestCalc from '@/components/calculators/CompoundInterestCalc'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -92,27 +91,7 @@ const faqLd = {
   ],
 }
 
-export default async function CompoundInterestPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string>>
-}) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  const params = await searchParams
-  const initialValues = params.principal
-    ? {
-        principal: params.principal,
-        contribution: params.contribution ?? '200',
-        rate: params.rate ?? '7',
-        freq: params.freq ?? 'monthly',
-        years: params.years ?? '20',
-      }
-    : undefined
-
+export default function CompoundInterestPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -160,7 +139,7 @@ export default async function CompoundInterestPage({
           <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
-        <CompoundInterestCalc user={user ? { email: user.email } : null} initialValues={initialValues} />
+        <CompoundInterestCalc />
 
         <div className="mt-8">
           <AdBanner slot="2503689657" format="horizontal" />

@@ -1,6 +1,9 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useEffect, useState, useMemo } from 'react'
+import { useUser } from '@/lib/supabase/useUser'
+import { useQueryParams } from '@/lib/useQueryParams'
+import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import { computeScenario } from '@/lib/calculators/mortgageCompare'
 import { saveCalculation } from '@/lib/supabase/calculations'
@@ -148,10 +151,10 @@ type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 interface Props {
   initialParams: Record<string, string>
   initialScenarios?: Scenario[]
-  user: { email?: string | null } | null
 }
 
-export default function MortgageCompare({ initialParams, initialScenarios, user }: Props) {
+function MortgageCompareForm({ initialParams, initialScenarios }: Props) {
+  const user = useUser()
   const [scenarios, setScenarios] = useState<Scenario[]>(() => {
     if (initialScenarios && initialScenarios.length > 0) {
       return initialScenarios.slice(0, 3).map((s, i) => ({ ...s, id: IDS[i] }))
@@ -876,5 +879,46 @@ function ComparisonTable({
         </p>
       </div>
     </div>
+  )
+}
+
+/**
+ * Inputs arrive as query params (`?price=…`) or a saved comparison (`?saved=<id>`).
+ * Both are read client-side so the page stays statically prerendered; the form
+ * remounts once they are available.
+ */
+export default function MortgageCompare() {
+  const query = useQueryParams()
+  const savedId = query?.saved
+  const [savedScenarios, setSavedScenarios] = useState<Scenario[] | null>(null)
+
+  useEffect(() => {
+    if (!savedId) return
+    let cancelled = false
+    createClient()
+      .from('saved_calculations')
+      .select('inputs')
+      .eq('id', savedId)
+      .single()
+      .then(({ data }) => {
+        if (cancelled || !data?.inputs?.scenarios) return
+        try {
+          setSavedScenarios(JSON.parse(data.inputs.scenarios) as Scenario[])
+        } catch {
+          // malformed JSON — keep defaults
+        }
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [savedId])
+
+  const key = savedScenarios ? 'saved' : query?.price ? 'query' : 'default'
+  return (
+    <MortgageCompareForm
+      key={key}
+      initialParams={query ?? {}}
+      initialScenarios={savedScenarios ?? undefined}
+    />
   )
 }

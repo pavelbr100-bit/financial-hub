@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useUser } from '@/lib/supabase/useUser'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
 import { buildSchedule } from '@/lib/calculators/mortgage'
@@ -29,10 +30,6 @@ interface BiweeklyResults {
 }
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
-
-interface Props {
-  user: { email?: string | null } | null
-}
 
 function formatCurrency(n: number) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n)
@@ -64,7 +61,8 @@ function payoffDate(monthsFromNow: number): string {
   return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
 }
 
-export default function BiweeklyMortgageCalc({ user }: Props) {
+export default function BiweeklyMortgageCalc() {
+  const user = useUser()
   const [homePrice, setHomePrice] = useState('400,000')
   const [downPayment, setDownPayment] = useState('20')
   const [downType, setDownType] = useState<'%' | '$'>('%')

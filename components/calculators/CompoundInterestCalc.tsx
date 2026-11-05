@@ -1,6 +1,8 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useUser } from '@/lib/supabase/useUser'
+import { useQueryParams } from '@/lib/useQueryParams'
 import Link from 'next/link'
 import {
   AreaChart, Area,
@@ -13,7 +15,6 @@ import {
 import { saveCalculation } from '@/lib/supabase/calculations'
 
 interface Props {
-  user: { email?: string | null } | null
   initialValues?: {
     principal: string
     contribution: string
@@ -55,7 +56,8 @@ function formatMoney(raw: string): string {
   return isNaN(n) ? '' : new Intl.NumberFormat('en-US').format(n)
 }
 
-export default function CompoundInterestCalc({ user, initialValues }: Props) {
+function CompoundInterestCalcForm({ initialValues }: Props) {
+  const user = useUser()
   const [principal, setPrincipal] = useState(
     initialValues?.principal ? formatMoney(initialValues.principal) : '10,000'
   )
@@ -484,4 +486,19 @@ function ResultCard({
       <p className={`text-2xl font-bold ${textMap[accent]} tabular-nums`}>{value}</p>
     </div>
   )
+}
+
+/** Saved calculations reload via `?principal=…`, read client-side (see useQueryParams). */
+export default function CompoundInterestCalc() {
+  const query = useQueryParams()
+  const initialValues = query?.principal
+    ? {
+        principal: query.principal,
+        contribution: query.contribution ?? '200',
+        rate: query.rate ?? '7',
+        freq: query.freq ?? 'monthly',
+        years: query.years ?? '20',
+      }
+    : undefined
+  return <CompoundInterestCalcForm key={initialValues ? 'query' : 'default'} initialValues={initialValues} />
 }

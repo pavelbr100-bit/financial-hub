@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useUser } from '@/lib/supabase/useUser'
 import Link from 'next/link'
 import { saveCalculation } from '@/lib/supabase/calculations'
 import {
@@ -11,10 +12,6 @@ import {
 } from '@/lib/calculators/creditCardPayoff'
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
-
-interface Props {
-  user: { email?: string | null } | null
-}
 
 const MODES: { id: CardPayoffMode; label: string; short: string }[] = [
   { id: 'fixed-payment', label: 'A set amount each month', short: 'Fixed payment' },
@@ -59,7 +56,8 @@ function scheduleDate(monthOffset: number): string {
   return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
-export default function CreditCardPayoffCalc({ user }: Props) {
+export default function CreditCardPayoffCalc() {
+  const user = useUser()
   const [balance, setBalance] = useState('6,000')
   const [apr, setApr] = useState('22')
   const [mode, setMode] = useState<CardPayoffMode>('fixed-payment')

@@ -1,19 +1,37 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 
 const CONSENT_KEY = 'finwiser_consent'
+const CONSENT_EVENT = 'finwiser_consent_updated'
+
+function subscribeConsent(onChange: () => void) {
+  window.addEventListener(CONSENT_EVENT, onChange)
+  window.addEventListener('storage', onChange)
+  return () => {
+    window.removeEventListener(CONSENT_EVENT, onChange)
+    window.removeEventListener('storage', onChange)
+  }
+}
+
+function needsConsentSnapshot() {
+  try {
+    return !localStorage.getItem(CONSENT_KEY)
+  } catch {
+    return true
+  }
+}
 
 export default function CookieConsent() {
-  const [visible, setVisible] = useState(false)
+  // Banner shows only once the browser confirms no choice is stored; the
+  // prerendered HTML (server snapshot) never includes it.
+  const visible = useSyncExternalStore(subscribeConsent, needsConsentSnapshot, () => false)
   const [showModal, setShowModal] = useState(false)
   const [analytics, setAnalytics] = useState(true)
   const [advertising, setAdvertising] = useState(true)
 
   useEffect(() => {
-    if (!localStorage.getItem(CONSENT_KEY)) setVisible(true)
-
     function openPreferences() { setShowModal(true) }
     window.addEventListener('finwiser_open_preferences', openPreferences)
     return () => window.removeEventListener('finwiser_open_preferences', openPreferences)
@@ -21,7 +39,6 @@ export default function CookieConsent() {
 
   function save(value: string) {
     localStorage.setItem(CONSENT_KEY, value)
-    setVisible(false)
     setShowModal(false)
     window.dispatchEvent(new Event('finwiser_consent_updated'))
   }

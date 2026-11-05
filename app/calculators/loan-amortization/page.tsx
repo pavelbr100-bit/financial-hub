@@ -1,7 +1,6 @@
 import LoanAmortizationCalc from '@/components/calculators/LoanAmortizationCalc'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -92,27 +91,7 @@ const faqLd = {
   ],
 }
 
-export default async function LoanAmortizationPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ amount?: string; rate?: string; term?: string; unit?: string; start?: string }>
-}) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  const params = await searchParams
-  const initialValues = params.amount
-    ? {
-        loanAmount: params.amount,
-        interestRate: params.rate ?? '6.5',
-        loanTerm: params.term ?? '30',
-        termUnit: (params.unit as 'years' | 'months') ?? 'years',
-        startDate: params.start ?? '',
-      }
-    : undefined
-
+export default function LoanAmortizationPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -165,10 +144,7 @@ export default async function LoanAmortizationPage({
       </div>
 
       {/* Calculator */}
-      <LoanAmortizationCalc
-        user={user ? { email: user.email } : null}
-        initialValues={initialValues}
-      />
+      <LoanAmortizationCalc />
 
       {/* Bottom AdSense slot */}
       <div className="mt-8">

@@ -1,7 +1,6 @@
 import MortgagePayoffCalc from '@/components/calculators/MortgagePayoffCalc'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -140,12 +139,7 @@ const related = [
   },
 ]
 
-export default async function MortgagePayoffPage() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
+export default function MortgagePayoffPage() {
   return (
     <>
       <script
@@ -235,7 +229,7 @@ export default async function MortgagePayoffPage() {
           <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
-        <MortgagePayoffCalc user={user ? { email: user.email } : null} />
+        <MortgagePayoffCalc />
 
         <div className="mt-8">
           <AdBanner slot="2503689657" format="horizontal" />

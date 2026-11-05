@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Technical Deep Dive',
   description:
-    'How FinWiser is built — Next.js 15, Supabase, Cloudflare Workers, Recharts, and Vitest. Architecture diagrams, technology choices, and implementation details.',
+    'How FinWiser is built — Next.js 16, Supabase, Cloudflare Workers, Recharts, and Vitest. Architecture diagrams, technology choices, and implementation details.',
   robots: { index: false, follow: false },
 }
 

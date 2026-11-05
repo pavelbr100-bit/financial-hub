@@ -1,7 +1,6 @@
 import BiweeklyMortgageCalc from '@/components/calculators/BiweeklyMortgageCalc'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -139,12 +138,7 @@ const related = [
   },
 ]
 
-export default async function BiweeklyMortgagePage() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
+export default function BiweeklyMortgagePage() {
   return (
     <>
       <script
@@ -234,7 +228,7 @@ export default async function BiweeklyMortgagePage() {
           <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
-        <BiweeklyMortgageCalc user={user ? { email: user.email } : null} />
+        <BiweeklyMortgageCalc />
 
         <div className="mt-8">
           <AdBanner slot="2503689657" format="horizontal" />

@@ -1,8 +1,6 @@
 import DebtPayoffCalc from '@/components/calculators/DebtPayoffCalc'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
-import type { DebtPayoffStrategy } from '@/lib/calculators/debtPayoff'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -94,43 +92,7 @@ const faqLd = {
   ],
 }
 
-export default async function DebtPayoffPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string>>
-}) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  const params = await searchParams
-
-  // Load saved plan if ?saved=<id>
-  type DebtInput = { id: string; name: string; balance: string; rate: string; minPayment: string }
-  let initialDebts: DebtInput[] | undefined
-  // Defaults to snowball so the pre-selected strategy matches the page's H1.
-  // A saved plan overrides this below with whichever strategy it was saved with.
-  let initialStrategy: DebtPayoffStrategy = 'snowball'
-  let initialExtra: string | undefined
-
-  if (params.saved) {
-    const { data } = await supabase
-      .from('saved_calculations')
-      .select('inputs')
-      .eq('id', params.saved)
-      .single()
-    if (data?.inputs?.debts) {
-      try {
-        initialDebts = JSON.parse(data.inputs.debts) as DebtInput[]
-        initialStrategy = (data.inputs.strategy as DebtPayoffStrategy) ?? 'avalanche'
-        initialExtra = data.inputs.extraMonthly ?? ''
-      } catch {
-        // malformed — fall through to defaults
-      }
-    }
-  }
-
+export default function DebtPayoffPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -178,12 +140,9 @@ export default async function DebtPayoffPage({
           <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
-        <DebtPayoffCalc
-          user={user ? { email: user.email } : null}
-          initialDebts={initialDebts}
-          initialStrategy={initialStrategy}
-          initialExtra={initialExtra}
-        />
+        {/* Defaults to snowball so the pre-selected strategy matches the H1. A saved
+            plan (?saved=<id>) overrides it client-side with its own strategy. */}
+        <DebtPayoffCalc initialStrategy="snowball" />
 
         <div className="mt-8">
           <AdBanner slot="2503689657" format="horizontal" />

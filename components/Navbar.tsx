@@ -4,10 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
-
-interface NavbarProps {
-  user: { email?: string | null } | null
-}
+import { useUser } from '@/lib/supabase/useUser'
 
 const calcLinks = [
   { href: '/calculators', label: 'All Calculators' },
@@ -39,7 +36,8 @@ function isNavLinkActive(pathname: string, href: string): boolean {
   return pathname.startsWith(`${href}/`)
 }
 
-export default function Navbar({ user }: NavbarProps) {
+export default function Navbar() {
+  const user = useUser()
   const pathname = usePathname()
   const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -57,8 +55,12 @@ export default function Navbar({ user }: NavbarProps) {
     return () => document.removeEventListener('mousedown', handleClick)
   }, [calcOpen])
 
-  // Close dropdown on route change
-  useEffect(() => { setCalcOpen(false) }, [pathname])
+  // Close dropdown on route change (state adjusted during render, not in an effect)
+  const [prevPathname, setPrevPathname] = useState(pathname)
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname)
+    setCalcOpen(false)
+  }
 
   async function handleSignOut() {
     const supabase = createClient()

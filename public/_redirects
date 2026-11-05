@@ -1,0 +1,28 @@
+# Permanent redirects, applied by Cloudflare Workers static assets before any file
+# is served. https://developers.cloudflare.com/workers/static-assets/redirects/
+# (Static export ignores next.config redirects(), so this file is the only source.)
+
+# Route rename — the page targets "debt snowball calculator" as its primary keyword
+/calculators/debt-payoff                                 /calculators/debt-snowball                308
+
+# Cluster A — mortgage payoff consolidation
+/learn/extra-mortgage-payments-how-much-can-you-save     /learn/mortgage-payoff-strategies         308
+/learn/how-to-save-on-mortgage-interest                  /learn/mortgage-payoff-strategies         308
+/learn/biweekly-vs-monthly-mortgage-payments             /learn/mortgage-payoff-strategies         308
+# Cluster D — amortization consolidation
+/learn/what-is-loan-amortization                         /learn/what-is-amortization               308
+# Cluster F — compound interest consolidation
+/learn/what-is-compound-interest                         /learn/compound-interest-guide            308
+# Cluster G — avalanche/snowball consolidation
+/learn/avalanche-vs-snowball-debt-payoff                 /learn/debt-avalanche-vs-snowball         308
+/learn/avalanche-vs-snowball-comparison                  /learn/debt-avalanche-vs-snowball         308
+# Cluster I — car loan mechanics consolidation
+/learn/car-loan-term-length-guide                        /learn/how-car-loan-interest-works        308
+/learn/car-loan-down-payment-guide                       /learn/how-car-loan-interest-works        308
+# Cluster J — car loan rate consolidation
+/learn/dealer-financing-vs-bank-loan                     /learn/how-to-get-best-car-loan-rate      308
+# Cluster K — new vs used consolidation
+/learn/new-car-vs-used-car-loan                          /learn/new-vs-used-car-loan               308
+
+# Malformed URL crawled by Googlebot
+/&                                                       /                                         308

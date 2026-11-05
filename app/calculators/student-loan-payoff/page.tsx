@@ -1,7 +1,6 @@
 import LoanPayoffCalc, { type LoanPayoffCalcConfig } from '@/components/calculators/LoanPayoffCalc'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -160,12 +159,7 @@ const related = [
   },
 ]
 
-export default async function StudentLoanPayoffPage() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
+export default function StudentLoanPayoffPage() {
   return (
     <>
       <script
@@ -255,7 +249,7 @@ export default async function StudentLoanPayoffPage() {
           <AdBanner slot="2503689657" format="horizontal" />
         </div>
 
-        <LoanPayoffCalc user={user ? { email: user.email } : null} config={calcConfig} />
+        <LoanPayoffCalc config={calcConfig} />
 
         <div className="mt-8">
           <AdBanner slot="2503689657" format="horizontal" />

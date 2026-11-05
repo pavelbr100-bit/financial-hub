@@ -1,5 +1,4 @@
-import MortgageCompare, { type Scenario } from '@/components/calculators/MortgageCompare'
-import { createClient } from '@/lib/supabase/server'
+import MortgageCompare from '@/components/calculators/MortgageCompare'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -139,33 +138,7 @@ const related = [
   },
 ]
 
-export default async function MortgageComparePage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string>>
-}) {
-  const params = await searchParams
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  let initialScenarios: Scenario[] | undefined
-  if (params.saved) {
-    const { data } = await supabase
-      .from('saved_calculations')
-      .select('inputs')
-      .eq('id', params.saved)
-      .single()
-    if (data?.inputs?.scenarios) {
-      try {
-        initialScenarios = JSON.parse(data.inputs.scenarios) as Scenario[]
-      } catch {
-        // malformed JSON — fall through to defaults
-      }
-    }
-  }
-
+export default function MortgageComparePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -200,11 +173,7 @@ export default async function MortgageComparePage({
         </p>
       </div>
 
-      <MortgageCompare
-        initialParams={params}
-        initialScenarios={initialScenarios}
-        user={user ? { email: user.email } : null}
-      />
+      <MortgageCompare />
 
       <section
         aria-labelledby="faq-heading"

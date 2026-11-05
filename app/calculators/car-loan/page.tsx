@@ -1,7 +1,6 @@
 import CarLoanCalc from '@/components/calculators/CarLoanCalc'
 import AdBanner from '@/components/AdBanner'
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { articles } from '@/lib/articles'
 
@@ -94,12 +93,7 @@ const faqLd = {
   ],
 }
 
-export default async function CarLoanPage() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
+export default function CarLoanPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -152,7 +146,7 @@ export default async function CarLoanPage() {
         </div>
 
         {/* Calculator */}
-        <CarLoanCalc user={user ? { email: user.email } : null} />
+        <CarLoanCalc />
 
         {/* Bottom AdSense slot */}
         <div className="mt-8">
